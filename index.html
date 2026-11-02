@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mariano Campuzano | Automatización con IA para negocios · Posadas</title>
+<meta name="description" content="Automatización con IA para negocios: asistentes de WhatsApp, flujos y paneles que trabajan solos. Desde Posadas, Misiones. Pedí un diagnóstico gratis.">
+<meta name="theme-color" content="#FF6B2C">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- TODO(Mariano): al publicar poné la URL final: <link rel="canonical" href="https://TU-SITIO.netlify.app/"> y usá URLs absolutas en og:url / og:image (ver README). -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:title" content="Mariano Campuzano | Automatizá tu negocio con IA">
+<meta property="og:description" content="Asistentes de WhatsApp, flujos automáticos y paneles con IA desde Posadas, Misiones. Empezamos con un diagnóstico gratis.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Mariano Campuzano: webs que venden, bots que atienden. Logo de globo de chat naranja con una M.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/schibsted.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css?v=9">
+<script src="assets/js/boot.js?v=7"></script>
+
+<script type="application/json" id="config">
+{
+  "whatsapp": "5493765306244",
+  "brand": { "full": "Mariano Campuzano | Automatización con IA", "short": "Mariano Campuzano" },
+  "tz": "America/Argentina/Cordoba",
+  "_prices_note": "HIPOTESIS de Mariano: editá estos valores (USD). El cotizador del sitio los usa para dar un RANGO orientativo.",
+  "prices": {
+    "web1": 300, "web2": 600, "web3": 1200, "tienda": 600, "bot": 250, "app": 1200,
+    "extraBot": 250, "extraCatalogo": 150, "extraAnim": 600,
+    "mBot": 40, "mApp": 80, "mWeb": 25, "rangeFactor": 1.6
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "name": "Mariano Campuzano · Automatización con IA",
+      "description": "Automatización con IA para negocios: asistentes de WhatsApp, procesos y paneles automáticos, y diseño web. Diagnóstico inicial sin costo.",
+      "telephone": "+5493765306244",
+      "image": "assets/img/og.jpg",
+      "founder": { "@type": "Person", "name": "Mariano Campuzano" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Posadas", "addressRegion": "Misiones", "addressCountry": "AR" },
+      "areaServed": ["Misiones", "Argentina", "Italia", "Europa", "Estados Unidos"],
+      "knowsLanguage": ["es", "it", "en"],
+      "serviceType": ["Diseño web", "Desarrollo de aplicaciones web", "Tiendas online", "Chatbots de WhatsApp", "Automatización con IA"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuánto cuesta una web?", "acceptedAnswer": { "@type": "Answer", "text": "Depende del alcance. En el sitio hay valores «desde» como referencia y un cotizador que da un rango orientativo. El precio cerrado sale del diagnóstico gratis y te llega por escrito, con alcance y plazos." } },
+        { "@type": "Question", "name": "Ya tengo Instagram y WhatsApp, ¿para qué quiero una web?", "acceptedAnswer": { "@type": "Answer", "text": "Instagram y WhatsApp son canales que no controlás. Una web es tu dirección propia: junta en un lugar lo que hacés, tus precios y cómo contactarte, y la ven quienes te buscan. No prometo posiciones en Google ni cantidad de ventas; sí que quede claro, rápida y lista para convertir consultas." } },
+        { "@type": "Question", "name": "No entiendo de tecnología, ¿puedo trabajar con vos?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Hablamos en simple y por WhatsApp. No te pido nada técnico: me alcanza con tu logo, algunas fotos y cómo te escriben hoy tus clientes." } },
+        { "@type": "Question", "name": "No quiero pagar todos los meses, ¿se puede?", "acceptedAnswer": { "@type": "Answer", "text": "En una web, sí: pago único, y el dominio y las cuentas quedan a tu nombre. En asistentes de WhatsApp y apps el abono existe porque son sistemas vivos: cambian las plataformas y hay que ajustarlos. Sin abono, ese mantenimiento queda de tu lado." } },
+        { "@type": "Question", "name": "¿Cuánto tarda?", "acceptedAnswer": { "@type": "Answer", "text": "Una landing puede estar en pocos días; un sitio completo suele llevar entre una y tres semanas; un asistente de WhatsApp, entre dos y cuatro. Son tiempos orientativos que dependen de los textos, las fotos y las respuestas." } },
+        { "@type": "Question", "name": "¿Cómo se paga?", "acceptedAnswer": { "@type": "Answer", "text": "Habitualmente la mitad al empezar y la mitad al entregar, por transferencia o Mercado Pago. Para clientes del exterior, por Wise u otro medio que acordemos." } },
+        { "@type": "Question", "name": "¿El asistente de WhatsApp reemplaza mi atención?", "acceptedAnswer": { "@type": "Answer", "text": "No. Responde lo repetitivo, toma datos y agenda; cuando la consulta lo necesita, te pasa la conversación. Según el uso, WhatsApp Business puede tener costos propios; te los explico antes de empezar." } },
+        { "@type": "Question", "name": "¿Trabajás con clientes de otros países?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, en español, italiano e inglés, desde Posadas (UTC−3). Cotizo en USD o EUR." } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="intro" aria-hidden="true"><i></i><i></i><svg viewBox="0 0 64 64"><path d="M15 46V19l17 19 17-19v27" pathLength="1" fill="none" stroke="#FF6B2C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="prog" aria-hidden="true"></div>
+
+<svg width="0" height="0" class="sr" aria-hidden="true" focusable="false">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+  <symbol id="i-ar" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M3 4h2l2.4 11h10.2L20 8H6.2M9 20h.01M17 20h.01"/></symbol>
+</svg>
+
+<header class="hdr" id="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Mariano Campuzano, Automatización con IA: inicio">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M16 8h34a9 9 0 0 1 9 9v25a9 9 0 0 1-9 9H30l-11 9v-9h-3a9 9 0 0 1-9-9V17a9 9 0 0 1 9-9z" fill="#1C1433"/><path d="M13 5h34a9 9 0 0 1 9 9v25a9 9 0 0 1-9 9H27l-11 9v-9h-3a9 9 0 0 1-9-9V14a9 9 0 0 1 9-9z" fill="#FF6B2C" stroke="#1C1433" stroke-width="3" stroke-linejoin="round"/><path d="M18 39V20l12 13 12-13v19" fill="none" stroke="#fff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="52" cy="11" r="7" fill="#FFC53D" stroke="#1C1433" stroke-width="3"/></svg>
+      <span><b>Mariano Campuzano</b><small>Automatización con IA</small></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a class="l" href="#servicios">Servicios</a>
+      <a class="l" href="#diagnostico">Diagnóstico</a>
+      <a class="l" href="#trabajos">Trabajos</a>
+      <a class="l" href="#portfolio">Portfolio</a>
+      <a class="l" href="#precios">Precios</a>
+      <a class="l" href="#faq">Dudas</a>
+      <a class="btn btn--sm" href="#diagnostico">Diagnóstico gratis</a>
+      <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><i></i></button>
+    </nav>
+  </div>
+</header>
+<div class="menu" id="menu" hidden>
+  <a class="l" href="#servicios">Servicios</a>
+  <a class="l" href="#diagnostico">Diagnóstico</a>
+  <a class="l" href="#trabajos">Trabajos</a>
+  <a class="l" href="#portfolio">Portfolio</a>
+  <a class="l" href="#precios">Precios</a>
+  <a class="l" href="#faq">Dudas</a>
+  <a class="btn" href="#diagnostico">Pedir diagnóstico gratis</a>
+</div>
+
+<main id="main">
+<!-- =============== HERO =============== -->
+<section class="hero" aria-labelledby="t-hero">
+  <canvas class="topo" id="topo-hero" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <h1 id="t-hero" data-kinetic><span class="ln">Automatizá tu negocio</span><span class="ln">con IA.</span></h1>
+      <p class="lead">Soy Mariano, especialista en automatización con IA. Hago que WhatsApp, tus planillas y tus sistemas trabajen solos: respuestas, turnos, pedidos y reportes. Arrancamos con un diagnóstico gratis de tu negocio.</p>
+      <div class="cta">
+        <a class="btn" href="#diagnostico" data-mag data-cursor="Ir">Pedir mi diagnóstico gratis <svg aria-hidden="true"><use href="#i-ar"/></svg></a>
+        <a class="btn btn--soft" data-wa data-mag href="https://wa.me/5493765306244"><svg aria-hidden="true"><use href="#i-wa"/></svg>Escribirme por WhatsApp</a>
+      </div>
+      <dl class="facts">
+        <div><dt class="sr">Ubicación</dt><dd><b>Posadas, Misiones</b><span>Remoto a todo el país</span></dd></div>
+        <div><dt class="sr">Idiomas</dt><dd><b>ES · IT · EN</b><span>Clientes en Argentina y Europa</span></dd></div>
+        <div><dt class="sr">Primer paso</dt><dd><b>Diagnóstico sin costo</b><span>Antes de hablar de precios</span></dd></div>
+      </dl>
+    </div>
+    <div>
+      <div class="bot" id="bot" data-mode="comida">
+        <div class="bot-top"><span class="bot-live"><i></i>Demo en vivo</span><div class="bot-biz" role="group" aria-label="Elegí un negocio de ejemplo"><button type="button" data-biz="comida" aria-pressed="true">Rotisería</button><button type="button" data-biz="turnos" aria-pressed="false">Turnos</button><button type="button" data-biz="tienda" aria-pressed="false">Tienda</button></div></div>
+        <div class="bot-ph">
+          <div class="bot-hd"><span class="av" id="bot-av" aria-hidden="true">F</span><div><b id="bot-name">Rotisería El Fogón</b><small id="bot-st">en línea</small></div><svg class="bot-wa" aria-hidden="true"><use href="#i-wa"/></svg></div>
+          <div class="bot-log" id="bot-log" role="log" aria-live="polite" aria-label="Conversación con el asistente" data-lenis-prevent tabindex="0">
+            <div class="bm u"><p>¿Hacen envíos?</p><time>20:41 ✓✓</time></div>
+            <div class="bm b"><p>Sí, en Posadas: hasta 3 km es gratis. ¿Te tomo el pedido?</p><time>20:41</time></div>
+          </div>
+          <div class="bot-quick" id="bot-quick"></div>
+          <form class="bot-in" id="bot-form" autocomplete="off"><label class="sr" for="bot-q">Escribile al asistente</label><input id="bot-q" name="q" maxlength="200" placeholder="Escribile al asistente…" enterkeyhint="send"><button type="submit" aria-label="Enviar mensaje"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20.5 21 12 3 3.5l2.5 8.5zM5.5 12H13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button></form>
+        </div>
+        <p class="bot-cap"><span id="bot-stat">Probá escribirle: pedí, sacá un turno o preguntá por stock.</span> Negocios y datos de ejemplo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Banda cinética: se mueve solo con el scroll -->
+<div class="band" aria-hidden="true">
+  <div class="band-row" data-band="-1"><span>Sitios web</span><span>Tiendas</span><span>Apps a medida</span><span>Bots de WhatsApp</span></div>
+  <div class="band-row" data-band="1"><span>Automatización con IA</span><span>Diseño</span><span>Código</span><span>Mantenimiento</span></div>
+</div>
+
+<!-- =============== SERVICIOS · capítulos con viñeta fijada =============== -->
+<section class="sec" id="servicios" aria-labelledby="t-serv">
+  <div class="wrap">
+    <div class="sechead">
+      <h2 class="h2" id="t-serv" data-fx="rise">Primero, la automatización.</h2>
+      <p class="lead rv">Arranco por lo que más tiempo te quita: las consultas repetidas y las tareas manuales. La web y la tienda suman cuando el negocio ya trabaja solo.</p>
+    </div>
+    <div class="chapters" id="chapters">
+      <div class="chap-list">
+        <article class="chap act" data-chap="0">
+          <h3>Bots de WhatsApp con IA.</h3>
+          <p>Responden lo repetitivo, toman datos y agendan. Cuando la consulta lo necesita, te pasan la conversación para que sigas vos.</p>
+          <ul class="tags"><li>Respuestas frecuentes</li><li>Turnos y reservas</li><li>Pase a una persona</li></ul>
+          <a class="more" href="#top">Probalo arriba, en vivo <svg aria-hidden="true"><use href="#i-ar"/></svg></a>
+          <a class="more" href="#rubros">Ver cómo queda en tu rubro <svg aria-hidden="true"><use href="#i-ar"/></svg></a>
+          <div class="vig v-bot" aria-hidden="true"><p class="m u">Hola, ¿tienen turno esta semana?</p><p class="m b b1">Hola. Tengo jueves 16:30 o viernes 10:00.</p><p class="m b b2">Listo, te anoté el jueves. Te escribo el día anterior.</p></div>
+        </article>
+        <article class="chap" data-chap="1">
+          <h3>Automatizaciones y paneles con IA.</h3>
+          <p>Tareas que hoy hacés a mano pasan a hacerse solas: planillas que se completan, reportes que llegan armados y paneles de pedidos, turnos o stock hechos para tu forma de trabajar.</p>
+          <ul class="tags"><li>Procesos automáticos</li><li>Reportes solos</li><li>Paneles a medida</li></ul>
+          <div class="vig v-app" aria-hidden="true"><i class="col c1"></i><i class="col c2"></i><i class="col c3"></i><i class="k m"></i><i class="k a"></i><i class="k b"></i><i class="k d"></i></div>
+        </article>
+        <article class="chap" data-chap="2">
+          <h3>Tiendas y landings pensadas para vender.</h3>
+          <p>Catálogo con carrito que arma el pedido y te lo manda por WhatsApp, o tienda con cobro online si tu caso lo necesita.</p>
+          <ul class="tags"><li>Catálogo</li><li>Carrito por WhatsApp</li><li>Cobro online</li></ul>
+          <div class="vig v-shop" aria-hidden="true"><i class="tl t1"></i><i class="tl t2"></i><i class="tl t3"></i><span class="ct"><svg><use href="#i-cart"/></svg></span><span class="ok">Pedido recibido</span></div>
+        </article>
+        <article class="chap" data-chap="3">
+          <h3>Sitios pensados para el celular.</h3>
+          <p>Un sitio claro, rápido de leer y con una acción visible: que te escriban. Textos, diseño, programación y publicación, con el dominio a tu nombre.</p>
+          <ul class="tags"><li>Landing</li><li>Sitio de varias secciones</li><li>Animaciones a medida</li></ul>
+          <div class="vig v-web" aria-hidden="true"><i class="r r1"></i><i class="r r2"></i><i class="r r3"></i><i class="bt"></i><i class="im"></i><i class="sc"></i></div>
+        </article>
+      </div>
+      <div class="pin" id="pin" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== CALCULADORA DE HORAS AHORRADAS =============== -->
+<section class="sec" id="ahorro" aria-labelledby="t-ah">
+  <div class="wrap">
+    <div class="sechead">
+      <h2 class="h2" id="t-ah" data-fx="rise">¿Cuántas horas te devuelve la IA?</h2>
+      <p class="lead rv">Mové los valores según tu negocio y mirá cuánto tiempo por mes podrías dejar de perder en tareas repetitivas.</p>
+    </div>
+    <div class="ah rv" id="ah">
+      <form class="ah-in" id="ah-form" aria-label="Datos de tu negocio">
+        <div class="ah-f">
+          <label for="ah-msg"><span>Mensajes que recibís por día</span><output id="ah-msg-o" for="ah-msg">40</output></label>
+          <input type="range" id="ah-msg" min="0" max="300" value="40" step="5" data-unit="">
+          <small>WhatsApp, Instagram, mail…</small>
+        </div>
+        <div class="ah-f">
+          <label for="ah-min"><span>Minutos que te lleva cada respuesta</span><output id="ah-min-o" for="ah-min">3 min</output></label>
+          <input type="range" id="ah-min" min="1" max="15" value="3" step="1" data-unit=" min">
+          <small>Leer, buscar el dato y contestar.</small>
+        </div>
+        <div class="ah-f">
+          <label for="ah-rep"><span>Preguntas que se repiten</span><output id="ah-rep-o" for="ah-rep">60 %</output></label>
+          <input type="range" id="ah-rep" min="10" max="90" value="60" step="5" data-unit=" %">
+          <small>Precios, horarios, stock, turnos.</small>
+        </div>
+        <div class="ah-f">
+          <label for="ah-man"><span>Horas por semana en tareas manuales</span><output id="ah-man-o" for="ah-man">5 h</output></label>
+          <input type="range" id="ah-man" min="0" max="40" value="5" step="1" data-unit=" h">
+          <small>Pasar datos, armar planillas y reportes.</small>
+        </div>
+        <div class="ah-f ah-val">
+          <label for="ah-hr"><span>¿Cuánto vale tu hora? <em>(opcional, en pesos)</em></span></label>
+          <input type="number" id="ah-hr" min="0" max="10000000" step="500" inputmode="numeric" placeholder="Ej.: 8000">
+        </div>
+      </form>
+      <div class="ah-out" aria-live="polite">
+        <p class="ah-k">Podrías recuperar</p>
+        <p class="ah-big"><b id="ah-h">0</b><span>horas por mes</span></p>
+        <p class="ah-days" id="ah-d">≈ 0 jornadas de 8 horas</p>
+        <div class="ah-bars" aria-hidden="true"><div class="ah-bar b1"><i id="ah-b1"></i></div><div class="ah-bar b2"><i id="ah-b2"></i></div></div>
+        <ul class="ah-leg"><li class="l1"><span id="ah-h1">0 h</span> respondiendo consultas</li><li class="l2"><span id="ah-h2">0 h</span> en tareas manuales</li></ul>
+        <p class="ah-money" id="ah-m" hidden></p>
+        <a class="btn" id="ah-cta" data-mag data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para automatizar mi negocio." href="https://wa.me/5493765306244">Quiero recuperar esas horas <svg aria-hidden="true"><use href="#i-ar"/></svg></a>
+        <p class="ah-note">Estimación orientativa. Supone que el asistente resuelve el 80 % de las preguntas repetidas y que la automatización ahorra el 60 % de las tareas manuales, con 26 días hábiles por mes. El número real sale del diagnóstico.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== DIAGNÓSTICO + RANGO =============== -->
+<section class="sec deep" id="diagnostico" aria-labelledby="t-diag">
+  <div class="wrap diag">
+    <div class="diag-l">
+      <div class="sechead">
+        <h2 class="h2" id="t-diag" data-fx="wipe">Diagnóstico gratis.</h2>
+        <p class="lead rv">Antes de hablar de precios, entiendo cómo funciona tu negocio. Así no pagás por algo que no necesitás.</p>
+      </div>
+      <dl class="promise">
+        <div class="rv-l"><dt>Qué hacemos</dt><dd>Una charla corta por WhatsApp o videollamada. Me contás cómo te escriben tus clientes, qué respondés todo el día y qué se te escapa.</dd></div>
+        <div class="rv-l" data-d="1"><dt>Qué recibís</dt><dd>Un resumen por escrito: qué haría primero, qué dejaría para después y un rango de precio. Sin compromiso.</dd></div>
+        <div class="rv-l" data-d="2"><dt>Qué no hago</dt><dd>No prometo posiciones en Google ni cantidad de ventas. Te digo qué se puede mejorar y cómo lo vamos a medir.</dd></div>
+      </dl>
+    </div>
+    <div class="tool rv" id="tool">
+      <h3>Armá tu rango.</h3>
+      <div class="nojs-note"><p>Con JavaScript activado acá aparece un cotizador de rango orientativo. Sin él, pedime el diagnóstico directo por WhatsApp.</p><p><a href="https://wa.me/5493765306244?text=Hola%20Mariano%2C%20quiero%20el%20diagn%C3%B3stico%20gratis.">Pedir el diagnóstico por WhatsApp</a></p></div>
+      <form class="tool-ui" id="rango" novalidate action="https://wa.me/5493765306244" method="get" target="_blank" aria-describedby="rango-note">
+        <fieldset><legend>1. ¿Cuál es tu rubro?</legend>
+          <div class="opts" data-q="rubro">
+            <label class="opt"><input type="radio" name="rubro" value="Salud"><span>Salud</span></label>
+            <label class="opt"><input type="radio" name="rubro" value="Inmobiliaria"><span>Inmobiliaria</span></label>
+            <label class="opt"><input type="radio" name="rubro" value="Gastronomía"><span>Gastronomía</span></label>
+            <label class="opt"><input type="radio" name="rubro" value="Comercio"><span>Comercio</span></label>
+            <label class="opt"><input type="radio" name="rubro" value="3D / maker"><span>3D / maker</span></label>
+            <label class="opt"><input type="radio" name="rubro" value="Otro"><span>Otro</span></label>
+          </div>
+        </fieldset>
+        <fieldset><legend>2. ¿Qué necesitás primero?</legend>
+          <div class="opts" data-q="need">
+            <label class="opt"><input type="radio" name="need" value="bot"><span>Un asistente de WhatsApp</span></label>
+            <label class="opt"><input type="radio" name="need" value="app"><span>Automatizar procesos o un panel</span></label>
+            <label class="opt"><input type="radio" name="need" value="tienda"><span>Una tienda o catálogo</span></label>
+            <label class="opt"><input type="radio" name="need" value="web2"><span>Un sitio de varias secciones</span></label>
+            <label class="opt"><input type="radio" name="need" value="web1"><span>Una web de una página</span></label>
+            <label class="opt"><input type="radio" name="need" value="nose"><span>No sé todavía</span></label>
+          </div>
+        </fieldset>
+        <fieldset><legend>3. ¿Qué sumamos?</legend>
+          <div class="opts" data-q="extras">
+            <label class="opt"><input type="checkbox" name="x" value="extraBot"><span>Asistente de WhatsApp</span></label>
+            <label class="opt"><input type="checkbox" name="x" value="extraCatalogo"><span>Catálogo con carrito</span></label>
+            <label class="opt"><input type="checkbox" name="x" value="extraAnim"><span>Animaciones a medida</span></label>
+            <label class="opt"><input type="checkbox" name="x" value="mant"><span>Mantenimiento mensual</span></label>
+          </div>
+        </fieldset>
+        <div class="result" id="result" role="status" aria-live="polite" aria-busy="false">
+          <p class="empty">Elegí qué necesitás y te muestro un rango de referencia.</p>
+        </div>
+        <input type="hidden" name="text" id="rango-text" value="Hola Mariano, quiero el diagnóstico gratis.">
+        <button class="btn" type="submit" data-mag><svg aria-hidden="true"><use href="#i-wa"/></svg><span id="rango-cta">Pedir diagnóstico por WhatsApp</span></button>
+        <p class="fnote" id="rango-note">Es una referencia para conversar, no un presupuesto. El número real sale del diagnóstico. Se abre WhatsApp con tu resumen; acá no se guarda nada.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- =============== RUBROS =============== -->
+<section class="sec" id="rubros" aria-labelledby="t-rub">
+  <div class="wrap">
+    <div class="sechead">
+      <h2 class="h2" id="t-rub" data-fx="rise">Armado para tu rubro.</h2>
+      <p class="lead rv">Web, asistente y panel pensados para cómo se atiende en cada negocio. Elegí el tuyo.</p>
+    </div>
+    <div class="packs">
+      <div class="tabs" role="tablist" aria-label="Rubros" aria-orientation="vertical">
+        <button class="tab" role="tab" id="tab-1" aria-controls="p-1" aria-selected="true" type="button">Clínicas y consultorios <svg aria-hidden="true"><use href="#i-ar"/></svg></button>
+        <button class="tab" role="tab" id="tab-2" aria-controls="p-2" aria-selected="false" tabindex="-1" type="button">Inmobiliarias <svg aria-hidden="true"><use href="#i-ar"/></svg></button>
+        <button class="tab" role="tab" id="tab-3" aria-controls="p-3" aria-selected="false" tabindex="-1" type="button">Gastronomía <svg aria-hidden="true"><use href="#i-ar"/></svg></button>
+        <button class="tab" role="tab" id="tab-4" aria-controls="p-4" aria-selected="false" tabindex="-1" type="button">Comercios <svg aria-hidden="true"><use href="#i-ar"/></svg></button>
+        <button class="tab" role="tab" id="tab-5" aria-controls="p-5" aria-selected="false" tabindex="-1" type="button">3D y makers <svg aria-hidden="true"><use href="#i-ar"/></svg></button>
+      </div>
+      <div class="panels">
+        <div class="panel" role="tabpanel" id="p-1" aria-labelledby="tab-1">
+          <h3>Salud: clínicas y consultorios</h3>
+          <div class="pcols">
+            <div><h4>Web</h4><ul><li>Servicios, equipo y cómo llegar</li><li>Botón de turno por WhatsApp</li><li>Preguntas frecuentes</li></ul></div>
+            <div><h4>Asistente de WhatsApp</h4><ul><li>Responde horarios, ubicación y cobertura</li><li>Toma el pedido de turno y lo agenda</li><li>Recordatorio el día anterior</li></ul></div>
+            <div><h4>Panel</h4><ul><li>Agenda del día en una pantalla</li><li>Lista de consultas pendientes</li><li>Pasa a una persona cuando hace falta</li></ul></div>
+          </div>
+          <div class="pfoot"><p class="ex">Conversación tipo: <q>Hola, ¿tienen turno para esta semana?</q></p><a class="btn btn--sm" data-wa data-text="Hola Mariano, me interesa el pack para clínicas / consultorios." href="https://wa.me/5493765306244">Pedir este pack <svg aria-hidden="true"><use href="#i-ar"/></svg></a></div>
+        </div>
+        <div class="panel" role="tabpanel" id="p-2" aria-labelledby="tab-2">
+          <h3>Inmobiliarias</h3>
+          <div class="pcols">
+            <div><h4>Web</h4><ul><li>Fichas de propiedades con fotos y mapa</li><li>Filtros por zona, tipo y precio</li><li>Cargás vos las propiedades, sin tocar código</li></ul></div>
+            <div><h4>Asistente de WhatsApp</h4><ul><li>Pregunta zona, presupuesto y plazo</li><li>Envía las fichas que coinciden</li><li>Deriva al asesor con los datos ya cargados</li></ul></div>
+            <div><h4>Panel</h4><ul><li>Consultas por propiedad</li><li>Responsable y seguimiento</li><li>Recordatorios de visitas</li></ul></div>
+          </div>
+          <div class="pfoot"><p class="ex">Conversación tipo: <q>Busco un departamento de dos ambientes en el centro.</q></p><a class="btn btn--sm" data-wa data-text="Hola Mariano, me interesa el pack para inmobiliarias." href="https://wa.me/5493765306244">Pedir este pack <svg aria-hidden="true"><use href="#i-ar"/></svg></a></div>
+        </div>
+        <div class="panel" role="tabpanel" id="p-3" aria-labelledby="tab-3">
+          <h3>Gastronomía y deliveries</h3>
+          <div class="pcols">
+            <div><h4>Web</h4><ul><li>Carta digital con QR</li><li>Ubicación, horarios y fotos</li><li>Reserva o pedido por WhatsApp</li></ul></div>
+            <div><h4>Asistente de WhatsApp</h4><ul><li>Responde carta, horarios y promos</li><li>Toma reservas con día, hora y personas</li><li>Arma el pedido y lo confirma</li></ul></div>
+            <div><h4>Panel</h4><ul><li>Reservas del día y por sector</li><li>Listado imprimible</li><li>Bloqueo de fechas y horarios</li></ul></div>
+          </div>
+          <div class="pfoot"><p class="ex">Conversación tipo: <q>¿Tienen mesa para cuatro el sábado a la noche?</q></p><a class="btn btn--sm" data-wa data-text="Hola Mariano, me interesa el pack para gastronomía." href="https://wa.me/5493765306244">Pedir este pack <svg aria-hidden="true"><use href="#i-ar"/></svg></a></div>
+        </div>
+        <div class="panel" role="tabpanel" id="p-4" aria-labelledby="tab-4">
+          <h3>Comercios y tiendas</h3>
+          <div class="pcols">
+            <div><h4>Web</h4><ul><li>Catálogo con categorías y buscador</li><li>Carrito que arma el pedido por WhatsApp</li><li>Opción de tienda con cobro online</li></ul></div>
+            <div><h4>Asistente de WhatsApp</h4><ul><li>Responde stock, precios y envíos</li><li>Toma el pedido con los datos de entrega</li><li>Avisa cuando vuelve un producto</li></ul></div>
+            <div><h4>Panel</h4><ul><li>Pedidos y estados en un lugar</li><li>Stock con alertas de faltantes</li><li>Reporte simple de ventas</li></ul></div>
+          </div>
+          <div class="pfoot"><p class="ex">Conversación tipo: <q>¿Hacen envíos a Oberá? ¿Cuánto sale?</q></p><a class="btn btn--sm" data-wa data-text="Hola Mariano, me interesa el pack para comercios / tiendas." href="https://wa.me/5493765306244">Pedir este pack <svg aria-hidden="true"><use href="#i-ar"/></svg></a></div>
+        </div>
+        <div class="panel" role="tabpanel" id="p-5" aria-labelledby="tab-5">
+          <h3>3D, makers y talleres</h3>
+          <div class="pcols">
+            <div><h4>Web</h4><ul><li>Catálogo de piezas con fotos reales</li><li>Calculadora de precio por cantidad</li><li>Animaciones que muestran el oficio</li></ul></div>
+            <div><h4>Asistente de WhatsApp</h4><ul><li>Cotiza por cantidad con tus tramos</li><li>Pide foto o medidas de la pieza</li><li>Pasa el pedido armado a tu WhatsApp</li></ul></div>
+            <div><h4>Panel</h4><ul><li>Pedidos por estado: diseño, impresión, entrega</li><li>Lista de materiales y colores</li><li>Historial por cliente</li></ul></div>
+          </div>
+          <div class="pfoot"><p class="ex">Es el rubro que mejor conozco: <a href="#trabajos">mirá el caso M3DINA</a>.</p><a class="btn btn--sm" data-wa data-text="Hola Mariano, me interesa el pack para 3D / makers." href="https://wa.me/5493765306244">Pedir este pack <svg aria-hidden="true"><use href="#i-ar"/></svg></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== CASO M3DINA =============== -->
+<section class="sec deep" id="trabajos" aria-labelledby="t-trab">
+  <div class="wrap">
+    <div class="sechead">
+      <h2 class="h2" id="t-trab" data-fx="weight">Un caso real, el mío.</h2>
+      <p class="lead rv">Arrastrá para ver el antes y el después de mi taller de impresión 3D.</p>
+    </div>
+    <article class="case">
+      <div class="ba rv-c" id="ba" data-cursor="Arrastrá">
+        <img src="assets/img/m3dina-antes.jpg" width="1280" height="800" alt="Sitio original de M3DINA Impresiones: logo centrado y titular «Impresión 3D en Posadas»." loading="lazy" decoding="async">
+        <img class="af" src="assets/img/m3dina-despues.jpg" width="1280" height="800" alt="Rediseño de M3DINA Impresiones: hero con pieza 3D que se imprime capa por capa y fotos de productos." loading="lazy" decoding="async">
+        <span class="lbl l1">Antes: sitio original</span><span class="lbl l2">Después: rediseño</span>
+        <div class="hd"></div>
+        <input type="range" min="0" max="100" value="50" step="1" aria-label="Comparar el sitio original con el rediseño">
+      </div>
+      <div class="case-body">
+        <div class="rv">
+          <h3>M3DINA, capa por capa.</h3>
+          <p class="lead">Mi propio taller de impresión 3D en Posadas. Rediseñé el sitio para que se vea el oficio: una pieza 3D que se construye sola, un proceso que avanza con el scroll y un catálogo que arma el pedido por WhatsApp.</p>
+          <div class="cta">
+            <a class="btn btn--soft" href="https://m3dinaimpresiones.netlify.app" target="_blank" rel="noopener noreferrer">Ver el sitio actual <svg aria-hidden="true"><use href="#i-ar"/></svg></a>
+            <a class="btn btn--wa" data-wa data-text="Hola Mariano, vi el caso M3DINA y quiero algo así para mi negocio." href="https://wa.me/5493765306244"><svg aria-hidden="true"><use href="#i-wa"/></svg>Quiero algo así</a>
+          </div>
+        </div>
+        <dl class="facts2 rv">
+          <div><dt>Desafío</dt><dd>Un sitio correcto pero genérico, que no mostraba lo que hace un taller de impresión 3D.</dd></div>
+          <div><dt>Idea</dt><dd>Un solo gesto en todo el sitio: todo se imprime capa por capa. Hero, proceso y tipografía lo repiten.</dd></div>
+          <div><dt>Qué incluye</dt><dd>Pieza 3D procedural en el hero, proceso de 5 pasos fijado al scroll, catálogo, calculadora de precio por mayor y pedido por WhatsApp.</dd></div>
+          <div><dt>Herramientas</dt><dd>HTML, CSS, JavaScript, three.js, GSAP y Lenis.</dd></div>
+          <div><dt>Estado</dt><dd>Rediseño en versión de prueba. El sitio publicado es la versión original.</dd></div>
+          <!-- TODO(Mariano): actualizá "Estado" cuando publiques el rediseño. No agregues resultados que no puedas respaldar. -->
+        </dl>
+      </div>
+      <div class="shots rv">
+        <figure><img src="assets/img/m3dina-proceso.jpg" width="1280" height="800" alt="Sección «Cómo trabajamos» del rediseño: lista de cinco pasos a la izquierda y la pieza 3D imprimiéndose a la derecha." loading="lazy" decoding="async"><figcaption>El proceso se fija y controla la escena 3D</figcaption></figure>
+        <figure><img src="assets/img/m3dina-movil.jpg" width="375" height="812" alt="El rediseño de M3DINA en un celular: pieza 3D, titular, botones y barra inferior de WhatsApp." loading="lazy" decoding="async"><figcaption>Versión celular</figcaption></figure>
+      </div>
+    </article>
+  </div>
+</section>
+
+
+<!-- =============== PORTFOLIO (proyectos reales, cada uno con ficha y demo) =============== -->
+<section class="sec" id="portfolio" aria-labelledby="t-pf">
+  <div class="wrap">
+    <div class="sechead">
+      <h2 class="h2" id="t-pf" data-fx="rise">61 proyectos para explorar.</h2>
+      <p class="lead rv">Webs, bots, automatizaciones y herramientas de datos. Cada proyecto tiene su ficha y una demo que podés probar en el navegador.</p>
+    </div>
+    <div class="pf-stats rv"><div><b>61</b><span>proyectos con demo</span></div><div><b>5</b><span>entregados a clientes</span></div><div><b>ES · EN</b><span>fichas en dos idiomas</span></div></div>
+    <div class="pf-grid">
+      <a class="pf-card rv-3d" href="portfolio/projects/casa-amin.html"><span class="st">Entregado a cliente</span><h3>Casa Amin</h3><p>Catálogo digital y experiencia de consulta para una tienda de electrónica, con una base de más de 3.400 productos.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
+      <a class="pf-card rv-3d" href="portfolio/projects/habibs.html"><span class="st">Entregado a cliente</span><h3>Habib’s · Web + tótem</h3><p>Experiencia web gastronómica y una interfaz de autoservicio pensada para usarse como tótem.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
+      <a class="pf-card rv-3d" href="portfolio/projects/hotel1609.html"><span class="st">Entregado a cliente</span><h3>Hotel 1609</h3><p>Sitio hotelero con una experiencia de consulta y reservas apoyada en datos e integraciones configurables.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
+      <a class="pf-card rv-3d" href="portfolio/projects/dashboard-facturacion.html"><span class="st">Entregado a cliente</span><h3>Dashboard de Facturación</h3><p>Tablero para visualizar datos de facturación reales y facilitar su análisis por un estudio o profesional contable.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
+      <a class="pf-card rv-3d" href="portfolio/projects/knowbase.html"><span class="st">MVP funcionando</span><h3>KnowBase</h3><p>Base de conocimiento con búsqueda y conversación sobre documentos, diseñada para recuperar información con referencias a sus fuentes.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
+      <a class="pf-card rv-3d" href="portfolio/projects/whatsapp-crm.html"><span class="st">MVP funcionando</span><h3>WhatsApp CRM Startup</h3><p>MVP de gestión de contactos y seguimiento comercial conectado a conversaciones de WhatsApp.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
+    </div>
+    <div class="pf-cta rv"><a class="btn" href="portfolio/" data-cursor="Ver">Ver los 61 proyectos <svg aria-hidden="true"><use href="#i-ar"/></svg></a><a class="btn btn--soft" href="portfolio/en/">English version</a></div>
+  </div>
+</section>
+
+<!-- =============== CÓMO SE TRABAJA · escalera de oferta =============== -->
+<section id="proceso" aria-labelledby="t-proc">
+  <div class="wrap sec">
+    <div class="sechead">
+      <h2 class="h2" id="t-proc" data-fx="rise">Tres pasos, en este orden.</h2>
+      <p class="lead rv">Se empieza por lo gratis y se sigue solo si tiene sentido para vos.</p>
+    </div>
+  </div>
+  <div class="stages">
+    <article class="stage-p">
+      <div class="wrap sp">
+        <div class="sp-in rv-l"><h3>Diagnóstico</h3><span class="tagp">Gratis</span></div>
+        <ul class="rv">
+          <li><b>Charla corta</b>Por WhatsApp o videollamada. Me contás cómo atendés hoy, qué te quita tiempo y qué querés lograr.</li>
+          <li><b>Lectura de tu situación</b>Miro tu Instagram, tu web si la tenés y cómo respondés. Uso tus propias palabras en la propuesta.</li>
+          <li><b>Devolución por escrito</b>Tres opciones (base, recomendada y completa), cada una con alcance, plazo y precio. Sin compromiso.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="stage-p s2">
+      <div class="wrap sp">
+        <div class="sp-in rv-l"><h3>Construcción</h3><span class="tagp">Mitad al empezar, mitad al entregar</span></div>
+        <ul class="rv">
+          <li><b>Diseño que ves antes de programar</b>Te muestro el rumbo visual y lo ajustamos antes de escribir código.</li>
+          <li><b>Versión de prueba online</b>Entrás desde tu celular y me decís qué cambiarías, mientras se arma.</li>
+          <li><b>Pruebas con conversaciones reales</b>En bots, probamos con las preguntas que de verdad te hacen tus clientes.</li>
+          <li><b>Publicación con todo a tu nombre</b>Dominio, cuentas y accesos quedan a tu nombre. Te explico cómo usar todo.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="stage-p s3">
+      <div class="wrap sp">
+        <div class="sp-in rv-l"><h3>Mantenimiento</h3><span class="tagp">Mensual, opcional en webs</span></div>
+        <ul class="rv">
+          <li><b>Cambios menores y soporte</b>Textos, fotos, precios y ajustes chicos, sin que tengas que buscar a nadie.</li>
+          <li><b>Revisión cada tres meses</b>Miramos qué se usa, qué no y qué conviene mejorar, con el alcance por escrito.</li>
+          <li><b>Costos de terceros, separados</b>Hosting, dominio, WhatsApp Business o herramientas de IA se explican aparte y antes de empezar. Mi tiempo y esos costos nunca se mezclan.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- =============== PRECIOS =============== -->
+<section class="sec" id="precios" aria-labelledby="t-pre">
+  <div class="wrap">
+    <div class="sechead">
+      <h2 class="h2" id="t-pre" data-fx="wipe">Desde cuánto.</h2>
+      <p class="lead rv">Valores «desde» en USD, como referencia. El precio cerrado sale del diagnóstico y te llega por escrito.</p>
+      <!-- TODO(Mariano): precios y planes son HIPÓTESIS. Editalos acá y en <script id="config"> para que coincida con el cotizador. -->
+    </div>
+    <div class="pr">
+      <article class="pc feat rv-3d"><div><h3>Asistente de WhatsApp con IA</h3><p class="am"><small>desde USD</small>250<em>+ USD 40/mes</em></p></div><ul><li>Responde lo repetitivo, toma datos y agenda</li><li>Te pasa la conversación cuando hace falta</li><li>Ajustes con las preguntas reales de tus clientes</li></ul><a class="btn btn--ink btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para un asistente de WhatsApp." href="https://wa.me/5493765306244">Pedir diagnóstico</a></article>
+      <article class="pc rv-3d"><div><h3>Automatización y panel a medida</h3><p class="am"><small>etapa 1 desde USD</small>1.200<em>+ USD 80/mes</em></p></div><ul><li>Procesos y reportes que se hacen solos</li><li>Panel de pedidos, turnos o stock</li><li>Primera etapa que podés usar enseguida</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para automatizar procesos de mi negocio." href="https://wa.me/5493765306244">Pedir diagnóstico</a></article>
+      <article class="pc rv-3d"><div><h3>Web profesional</h3><p class="am"><small>desde USD</small>600</p></div><ul><li>Varias secciones, catálogo o servicios</li><li>Formulario que llega a tu WhatsApp</li><li>Textos orientados a que te escriban</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para una web profesional." href="https://wa.me/5493765306244">Pedir diagnóstico</a></article>
+      <article class="pc rv-3d"><div><h3>Web esencial</h3><p class="am"><small>desde USD</small>300</p></div><ul><li>Una página clara con tu oferta y contacto</li><li>Botón de WhatsApp y mapa</li><li>Pensada primero para el celular</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para una web esencial." href="https://wa.me/5493765306244">Pedir diagnóstico</a></article>
+      <article class="pc rv-3d"><div><h3>Web cinematográfica</h3><p class="am"><small>desde USD</small>1.200</p></div><ul><li>Animaciones a medida y escenas con scroll</li><li>Para marcas que quieren destacar</li><li>Ejemplo: el caso M3DINA</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para una web con animaciones a medida." href="https://wa.me/5493765306244">Pedir diagnóstico</a></article>
+      <article class="pc rv-3d"><div><h3>Mantenimiento</h3><p class="am"><small>desde USD</small>25<em>/mes</em></p></div><ul><li>Cambios menores y copias de seguridad</li><li>Soporte por WhatsApp</li><li>Revisión del alcance cada tres meses</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero consultar por el mantenimiento mensual." href="https://wa.me/5493765306244">Consultar</a></article>
+    </div>
+    <div class="pnote rv">
+      <p>Los costos de terceros (hosting, dominio, WhatsApp Business, herramientas de IA) no están incluidos y se explican aparte antes de empezar.</p>
+      <p>Siempre recibís una propuesta con tres opciones: una base, una recomendada y una completa, cada una con alcance, plazo y precio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============== DUDAS (objeciones) =============== -->
+<section class="sec deep" id="faq" aria-labelledby="t-faq">
+  <div class="wrap faq">
+    <div class="faq-l">
+      <h2 class="h2" id="t-faq" data-fx="rise">Dudas razonables.</h2>
+      <p class="lead rv">Las que más escucho antes de empezar. Si falta la tuya, preguntame.</p>
+      <a class="btn btn--wa rv" data-wa data-text="Hola Mariano, tengo una duda antes de empezar." href="https://wa.me/5493765306244"><svg aria-hidden="true"><use href="#i-wa"/></svg>Preguntarme</a>
+    </div>
+    <div class="rv">
+      <details name="faq" open><summary>¿Cuánto cuesta una web? <i aria-hidden="true"></i></summary><div class="ans"><p>Depende del alcance. Arriba tenés valores «desde» y un cotizador de rango. El precio cerrado sale del diagnóstico gratis y te llega por escrito, con alcance y plazos.</p></div></details>
+      <details name="faq"><summary>Ya tengo Instagram y WhatsApp, ¿para qué una web? <i aria-hidden="true"></i></summary><div class="ans"><p>Instagram y WhatsApp son canales que no controlás: cambian las reglas y tu información queda repartida. Una web es tu dirección propia, junta lo que hacés, tus precios y cómo contactarte, y la encuentra quien te busca.</p><p>No prometo posiciones en Google ni cantidad de ventas. Sí que quede claro y listo para convertir consultas en conversaciones.</p></div></details>
+      <details name="faq"><summary>No entiendo de tecnología. ¿Puedo trabajar con vos? <i aria-hidden="true"></i></summary><div class="ans"><p>Sí. Hablamos en simple y por WhatsApp. No te pido nada técnico: me alcanza con tu logo, algunas fotos y cómo te escriben hoy tus clientes. Lo demás lo resuelvo yo y te lo explico con ejemplos.</p></div></details>
+      <details name="faq"><summary>No quiero pagar todos los meses. ¿Se puede? <i aria-hidden="true"></i></summary><div class="ans"><p>En una web, sí: pago único, y el dominio y las cuentas quedan a tu nombre. En asistentes de WhatsApp y apps el abono existe porque son sistemas vivos: cambian las plataformas, las herramientas de IA y tus propias respuestas. Sin abono, ese mantenimiento queda de tu lado.</p></div></details>
+      <details name="faq"><summary>¿Y si no me convence el resultado? <i aria-hidden="true"></i></summary><div class="ans"><p>Por eso el diagnóstico es gratis y la propuesta llega por escrito, con tres opciones. Ves el diseño antes de que programe y probás una versión online mientras se arma. Si algo no funciona como quedó acordado, lo corrijo sin costo adicional.</p><!-- TODO(Mariano): confirmá esta garantía antes de publicar. --></div></details>
+      <details name="faq"><summary>¿Cuánto tarda? <i aria-hidden="true"></i></summary><div class="ans"><p>Una landing puede estar en pocos días; un sitio completo suele llevar entre una y tres semanas; un asistente de WhatsApp, entre dos y cuatro. Son tiempos orientativos: dependen de qué tan rápido tengamos textos, fotos y respuestas.</p></div></details>
+      <details name="faq"><summary>¿Cómo se paga? <i aria-hidden="true"></i></summary><div class="ans"><p>Habitualmente la mitad al empezar y la mitad al entregar, por transferencia o Mercado Pago. Para clientes del exterior, por Wise u otro medio que acordemos. Si necesitás factura, lo vemos según tu situación.</p></div></details>
+      <details name="faq"><summary>¿El asistente de WhatsApp reemplaza mi atención? <i aria-hidden="true"></i></summary><div class="ans"><p>No. Responde lo repetitivo, toma datos y agenda; cuando la consulta lo necesita, te pasa la conversación para que sigas vos. Según el uso, WhatsApp Business puede tener costos propios; te los explico antes de empezar.</p></div></details>
+      <details name="faq"><summary>¿Trabajás con clientes de otros países? <i aria-hidden="true"></i></summary><div class="ans"><p>Sí. Trabajo en español, italiano e inglés, desde Posadas (UTC−3), y acuerdo horarios de reunión que te queden cómodos. Cotizo en USD o EUR.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- =============== SOBRE MÍ =============== -->
+<section class="sec" id="sobre-mi" aria-labelledby="t-sob">
+  <div class="wrap about">
+    <figure class="mono rv-c">
+      <span class="orb" aria-hidden="true"></span>
+      <svg viewBox="0 0 200 160" role="img" aria-label="Monograma M de Mariano Campuzano, trazado en azul"><path class="pth" d="M26 134V30l74 80 74-80v104" pathLength="1" fill="none" stroke="#3E8BFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <!-- TODO(Mariano): reemplazá el monograma por tu foto (assets/img/mariano.jpg) si querés. -->
+    </figure>
+    <div>
+      <h2 class="h2" id="t-sob" data-fx="rise">Soy Mariano, automatizo con IA.</h2>
+      <!-- TODO(Mariano): confirmá y completá tu bio. Solo está lo que sabemos con certeza. -->
+      <p class="lead rv">Diseño asistentes, flujos y paneles con inteligencia artificial para que los negocios dejen de perder horas en tareas repetitivas. Vivo en Posadas, Misiones, y trabajo con clientes de Argentina, Italia y otros países, en español, italiano e inglés.</p>
+      <p class="rv">También diseño las webs que presentan esas soluciones. Y tengo mi propio taller de impresión 3D, M3DINA, donde aplico lo mismo que ofrezco.</p>
+      <p class="creds-h rv">Formación</p>
+      <ul class="creds creds--about rv" aria-label="Formación"><li class="c2"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></i><span><b>Automatización con IA</b></span></li><li class="c1"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></i><span><b>Data Analyst</b></span></li><li class="c3"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 12-12-3-3L4 17zM14 6l3 3"/></svg></i><span><b>Diseñador web</b></span></li><li class="c4"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5M22 9v6"/></svg></i><span><b>Ingeniería en Inteligencia Artificial</b></span></li></ul>
+      <ul class="chips2 rv"><li>Posadas, Misiones</li><li>Español</li><li>Italiano</li><li>English</li><li>Ciudadanía AR + IT</li></ul>
+      <!-- TODO(Mariano): los 3 principios son una propuesta; editalos a tu manera de trabajar. -->
+      <div class="vals rv">
+        <div><h3>Directo</h3><p>Hablamos claro, sin vueltas ni tecnicismos.</p></div>
+        <div><h3>Por etapas</h3><p>Empezamos con lo mínimo que funciona y crecemos con resultados.</p></div>
+        <div><h3>Tuyo</h3><p>Dominio, cuentas y accesos quedan a tu nombre.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== CONTACTO =============== -->
+<section class="sec contact" id="contacto" aria-labelledby="t-con">
+  <canvas class="topo" id="topo-contact" aria-hidden="true"></canvas>
+  <div class="wrap cgrid">
+    <div>
+      <h2 id="t-con" data-fx="rise">Pedí tu diagnóstico.</h2>
+      <p class="lead rv">La forma más rápida es WhatsApp. Escribime tu rubro y qué te gustaría resolver, y te respondo con los próximos pasos.</p>
+      <div class="big-wa rv">
+        <a class="btn btn--wa" data-wa data-mag href="https://wa.me/5493765306244"><svg aria-hidden="true"><use href="#i-wa"/></svg>+54 9 376 530-6244</a>
+      </div>
+      <p class="clock rv">Posadas, Misiones (UTC−3)<span class="jsonly"> · ahora son las <b id="clock">--:--</b></span></p>
+    </div>
+    <!-- Sin JS: el formulario envía el mensaje a wa.me (campo "text"). Con JS valida y arma el texto con nombre y rubro. -->
+    <form class="rv" id="form" action="https://wa.me/5493765306244" method="get" target="_blank" novalidate>
+      <h3>O dejame un mensaje</h3>
+      <label class="jsonly" for="f-nombre">Tu nombre<input type="text" id="f-nombre" autocomplete="name" maxlength="60" placeholder="Nombre" aria-describedby="e-nombre"></label>
+      <p class="err jsonly" id="e-nombre" aria-live="polite"></p>
+      <label class="jsonly" for="f-tipo">¿Qué necesitás?
+        <select id="f-tipo"><option>Asistente de WhatsApp con IA</option><option>Automatizar procesos o un panel</option><option>Tienda o catálogo</option><option>Sitio web</option><option>No sé todavía</option></select>
+      </label>
+      <label for="f-msg">Tu mensaje<textarea name="text" id="f-msg" placeholder="Contame tu rubro y qué necesitás." required minlength="10" maxlength="1200" aria-describedby="e-msg"></textarea></label>
+      <p class="err" id="e-msg" aria-live="polite"></p>
+      <button class="btn btn--wa" type="submit" data-mag><svg aria-hidden="true"><use href="#i-wa"/></svg><span id="f-btn">Enviar por WhatsApp</span></button>
+      <div class="fstate" id="f-ok" role="status" tabindex="-1"><b>Listo: se abrió WhatsApp.</b><p>Si no se abrió, tocá el botón. Tu mensaje:</p><p class="preview" id="f-prev"></p><div class="row"><a class="btn btn--wa btn--sm" id="f-link" href="https://wa.me/5493765306244" target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a><button class="btn btn--soft btn--sm" type="button" id="f-copy">Copiar mensaje</button></div></div>
+      <div class="fstate bad" id="f-bad" role="alert" tabindex="-1"><b>Parece que estás sin conexión.</b><p>No se perdió nada: tu mensaje sigue acá. Cuando vuelva internet, probá de nuevo o abrí WhatsApp con el botón.</p><div class="row"><a class="btn btn--wa btn--sm" id="f-link2" href="https://wa.me/5493765306244" target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a></div></div>
+      <p class="fnote">Se abre WhatsApp con tu mensaje listo para enviar. Este sitio no guarda lo que escribís. <a href="#privacidad">Privacidad</a></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="frow">
+      <div><h4>Mariano Campuzano</h4><p>Automatización con IA y diseño web.<br>Posadas, Misiones, Argentina.</p></div>
+      <nav aria-label="Pie"><h4>Secciones</h4><ul><li><a href="#servicios">Servicios</a></li><li><a href="#diagnostico">Diagnóstico</a></li><li><a href="#trabajos">Trabajos</a></li><li><a href="portfolio/">Portfolio completo</a></li><li><a href="#precios">Precios</a></li><li><a href="#faq">Dudas</a></li></ul></nav>
+      <div><h4>Contacto</h4><ul><li><a data-wa href="https://wa.me/5493765306244">WhatsApp +54 9 376 530-6244</a></li><li>ES · IT · EN</li></ul></div>
+    </div>
+    <div class="word" aria-hidden="true" id="word">Mariano Campuzano</div>
+    <div class="priv" id="privacidad">
+      <h3>Privacidad</h3>
+      <p>Este sitio no usa cookies ni analítica, y no guarda lo que escribís en el formulario o en el cotizador. Al enviar, se abre WhatsApp con tu mensaje; desde ahí rige la política de WhatsApp.</p>
+      <p>Si me escribís, uso tus datos solo para responderte. Podés pedirme en cualquier momento que los borre (en Argentina, la Ley 25.326 reconoce los derechos de acceso, rectificación y supresión). Esto no es asesoramiento legal.</p>
+    </div>
+    <div class="legal"><span>© <span id="yr">2026</span> Mariano Campuzano. Todos los derechos reservados.</span><span>Los precios publicados son orientativos. Tipografías: Bricolage Grotesque y Schibsted Grotesk (SIL OFL).</span></div>
+  </div>
+</footer>
+
+<a class="fab" data-wa href="https://wa.me/5493765306244" aria-label="Escribime por WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp</span></a>
+<div class="cur" aria-hidden="true"><i></i><b></b></div>
+
+<script src="assets/libs/gsap.min.js" defer></script>
+<script src="assets/libs/ScrollTrigger.min.js" defer></script>
+<script src="assets/libs/lenis.min.js" defer></script>
+<script src="assets/js/topo.js?v=7" defer></script>
+<script src="assets/js/app.js?v=8" defer></script>
+<script src="assets/libs/confetti.min.js" defer></script>
+<script src="assets/js/fx.js?v=9" defer></script>
+<script src="assets/js/botdemo.js?v=7" defer></script>
+<script src="assets/js/ahorro.js?v=1" defer></script>
+</body>
+</html>
