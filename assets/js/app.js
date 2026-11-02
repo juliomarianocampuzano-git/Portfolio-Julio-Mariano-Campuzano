@@ -9,7 +9,7 @@ var $=function(s,c){return (c||D).querySelector(s)},$$=function(s,c){return Arra
 var G=window.gsap,ST=window.ScrollTrigger;
 var CFG={};try{CFG=JSON.parse($('#config').textContent)}catch(e){}
 var DEF={web1:300,web2:600,web3:1200,tienda:600,bot:250,app:1200,extraBot:250,extraCatalogo:150,extraAnim:600,mBot:40,mApp:80,mWeb:25,rangeFactor:1.6};
-var PH=/^\d{8,15}$/.test(CFG.whatsapp)?CFG.whatsapp:'5493765306244',P=CFG.prices||{};
+var PH=/^\d{8,15}$/.test(CFG.whatsapp)?CFG.whatsapp:'5493764148342',P=CFG.prices||{};
 Object.keys(DEF).forEach(function(k){if(!(+P[k]>0))P[k]=DEF[k]});
 /* abre WhatsApp dentro del gesto del usuario (Safari bloquea ventanas abiertas despues de un setTimeout) */
 function openWA(t){var a=D.createElement('a');a.href=wa(t);a.target='_blank';a.rel='noopener noreferrer';D.body.appendChild(a);a.click();a.remove()}
@@ -62,7 +62,11 @@ if('IntersectionObserver' in window){
   var links=$$('.nav a.l');
   var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id='#'+e.target.id;links.forEach(function(l){l.setAttribute('aria-current',l.getAttribute('href')===id?'true':'false')})}})},{rootMargin:'-45% 0px -50% 0px'});
   ['servicios','diagnostico','trabajos','portfolio','precios','faq'].forEach(function(id){var s=D.getElementById(id);if(s)so.observe(s)});
-  if(contact&&fab)new IntersectionObserver(function(e){fab.classList.toggle('hide',e[0].isIntersecting)},{threshold:.25}).observe(contact);
+  /* el fab se oculta en el hero (tapa la demo y ya hay boton de WhatsApp) y en contacto */
+  var heroEl=$('.hero'),inHero=false,inContact=false;
+  function fabSync(){fab.classList.toggle('hide',inHero||inContact)}
+  if(contact&&fab)new IntersectionObserver(function(e){inContact=e[0].isIntersecting;fabSync()},{threshold:.25}).observe(contact);
+  if(heroEl&&fab)new IntersectionObserver(function(e){inHero=e[0].intersectionRatio>.35;fabSync()},{threshold:[0,.35,.6]}).observe(heroEl);
 }
 
 /* ---------- reloj y año ---------- */

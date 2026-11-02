@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-# TODO: reemplazar TU-SITIO por tu dominio real al publicar
-Sitemap: https://TU-SITIO.netlify.app/sitemap.xml
+Sitemap: https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/sitemap.xml

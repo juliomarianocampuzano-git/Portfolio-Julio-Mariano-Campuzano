@@ -8,7 +8,7 @@
   var msg=$('ah-msg'),min=$('ah-min'),rep=$('ah-rep'),man=$('ah-man'),hr=$('ah-hr'),
       H=$('ah-h'),Dd=$('ah-d'),h1=$('ah-h1'),h2=$('ah-h2'),b1=$('ah-b1'),b2=$('ah-b2'),M=$('ah-m'),cta=$('ah-cta');
   var G=window.gsap,RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,shown={v:0},tw=null;
-  var num='5493765306244';
+  var num='5493764148342';
   try{num=JSON.parse($('config').textContent).whatsapp||num}catch(e){}
   function fmt(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
   function out(r){var o=$(r.id+'-o');if(o)o.textContent=r.value+(r.getAttribute('data-unit')||'')}
