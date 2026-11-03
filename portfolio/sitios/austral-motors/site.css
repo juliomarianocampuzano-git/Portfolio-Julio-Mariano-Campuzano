@@ -1,9 +1,9 @@
 /* Austral Motors · Concesionaria de autos. Tokens basados en ui-ux-pro-max (#52 Automotive/Car Dealership · Motion-Driven + 3D). */
+@font-face{font-family:'Syncopate';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/syncopate-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Syncopate';font-style:normal;font-weight:700;font-display:swap;src:url(../kit/fonts/syncopate-700-normal.woff2) format('woff2')}
 @font-face{font-family:'Archivo';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/archivo-400-normal.woff2) format('woff2')}
 @font-face{font-family:'Archivo';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/archivo-600-normal.woff2) format('woff2')}
 @font-face{font-family:'Archivo';font-style:normal;font-weight:800;font-display:swap;src:url(../kit/fonts/archivo-800-normal.woff2) format('woff2')}
-@font-face{font-family:'Syncopate';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/syncopate-400-normal.woff2) format('woff2')}
-@font-face{font-family:'Syncopate';font-style:normal;font-weight:700;font-display:swap;src:url(../kit/fonts/syncopate-700-normal.woff2) format('woff2')}
 :root{--bg:#0B0F17;--bg2:#111827;--fg:#E5E7EB;--fg-strong:#FFFFFF;--muted:#9CA3AF;--primary:#E11D2E;--on-primary:#FFFFFF;--primary-text:#FF6B75;--accent:#F5F5F4;--on-accent:#0B0F17;--card:#121826;--line:rgba(255,255,255,.1);--r:6px;--r-lg:14px;--r-btn:4px;--track:.02em;--case:uppercase;--ink-bg:#E11D2E;--ink-fg:#FFFFFF;--mq-bg:#E11D2E;--mq-fg:#FFFFFF;--mq-bw:0;--h1:clamp(2.1rem,6vw,5.6rem);--loader-bg:#E11D2E;--loader-fg:#0B0F17;--fd:'Syncopate',system-ui,sans-serif;--fb:'Archivo',system-ui,-apple-system,sans-serif;--fdw:700}
 .hero--full{min-height:calc(100svh - 40px)}.hero--full .hero-copy{max-width:640px}
 .hero--full .bg-canvas{left:28%;width:72%}.hero--full::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#0B0F17 18%,transparent 62%),linear-gradient(0deg,#0B0F17,transparent 30%)}

@@ -218,7 +218,7 @@ def css_tokens(s):
 FONT_FILES = sorted(os.listdir(os.path.join(HERE, 'kit', 'fonts')))
 def font_faces(s):
     out = []
-    for fam in {s['fonts']['d'], s['fonts']['b']}:
+    for fam in dict.fromkeys([s['fonts']['d'], s['fonts']['b']]):
         fid = fam.lower().replace(' ', '-')
         for f in FONT_FILES:
             m = re.match(r'%s-(\d+)-(normal|italic)\.woff2$' % re.escape(fid), f)
@@ -273,6 +273,7 @@ def page(s):
 %(sections)s
 </main>
 %(footer)s
+<div class="mbar off"><a class="btn mbar-cta" href="#%(mcta)s">%(mctal)s</a></div>
 <a class="hire" data-hire="%(hire)s" href="https://wa.me/5493764148342">%(wa)s<span>Quiero una web así</span></a>
 %(sprite)s
 %(scripts)s<script defer src="site.js?v=1"></script>
@@ -280,7 +281,7 @@ def page(s):
 </html>
 ''' % dict(title=esc(s['title']), desc=esc(s['desc']), theme=s['tokens']['--primary'], url=url, base=BASE, cfg=json.dumps(cfg, ensure_ascii=False),
            fav=urllib.parse.quote(re.sub(r'<a[^>]*>|</a>|<span>.*?</span>', '', logo(s)).replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ').replace('var(--primary)', s['tokens']['--primary']).replace('var(--on-primary)', s['tokens']['--on-primary'])),
-           style=s['style'], loader=loader, header=header(s), hero=hero_html, sections=body_sections, footer=footer(s), hire=esc(hire_txt), wa=WA_ICON, vcss=ver('kit/kit.css'), vsite=hashlib.md5((site_css(s)).encode()).hexdigest()[:8], sprite=sprite, scripts=scripts)
+           style=s['style'], loader=loader, header=header(s), hero=hero_html, sections=body_sections, footer=footer(s), hire=esc(hire_txt), mcta=s['hdrCta'][1], mctal=esc(s['hdrCta'][0]), wa=WA_ICON, vcss=ver('kit/kit.css'), vsite=hashlib.md5((site_css(s)).encode()).hexdigest()[:8], sprite=sprite, scripts=scripts)
     return doc
 
 import urllib.parse
@@ -299,10 +300,10 @@ RUBRO_EN = {'austral-motors': 'Car dealership', 'patita-vet': 'Veterinary softwa
             'habitar-propiedades': 'Real estate', 'lex-norte-abogados': 'Law firm', 'balance-contable': 'Accounting firm', 'navaja-barber-club': 'Barbershop',
             'selva-lodge': 'Boutique lodge', 'ruta-norte-viajes': 'Travel agency', 'telar-moda': 'Fashion store', 'kairos-idiomas': 'Language school',
             'escudo-seguros': 'Insurance broker', 'solaria-energia': 'Solar energy', 'espacio-calma': 'Psychology practice', 'fuego-pizza': 'Pizzeria & delivery'}
-TXT = {'es': dict(eb='Diseño web', h='Sitios web por rubro', p='%d sitios demo completos, cada uno con su propio diseño, colores y funciones: turnos, recetas en PDF, catálogos, carrito y cotizadores.',
-                  note='Negocios ficticios creados para mostrar diseño y funciones. Los formularios no envían datos.', btn='Ver los %d sitios', open='Abrir la demo de'),
-       'en': dict(eb='Web design', h='Websites by industry', p='%d complete demo websites, each with its own design, colors and features: bookings, PDF prescriptions, catalogs, cart and quote builders.',
-                  note='Fictional businesses built to showcase design and features. Forms do not send any data.', btn='See all %d websites', open='Open the demo of')}
+TXT = {'es': dict(eb='Diseño web', h='Sitios web por rubro', p='%d sitios demo completos, cada uno con su propio diseño, colores y funciones: turnos, recetas en PDF, catálogos, carrito y cotizadores. Todos hechos primero para celular.',
+                  note='Negocios ficticios creados para mostrar diseño y funciones. Los formularios no envían datos.', btn='Ver los %d sitios', panel='Panel de gestión (demo)', open='Abrir la demo de'),
+       'en': dict(eb='Web design', h='Websites by industry', p='%d complete demo websites, each with its own design, colors and features: bookings, PDF prescriptions, catalogs, cart and quote builders. All built mobile-first.',
+                  note='Fictional businesses built to showcase design and features. Forms do not send any data.', btn='See all %d websites', panel='Management dashboard (demo)', open='Open the demo of')}
 
 def portfolio_block(lang, pre):
     t = TXT[lang]
@@ -314,8 +315,8 @@ def portfolio_block(lang, pre):
                open=t['open'], name=esc(s['name']), n=i + 1, rubro=esc(s['rubro'] if lang == 'es' else RUBRO_EN[s['slug']])) for i, s in enumerate(SD.SITES))
     n = len(SD.SITES)
     return ('<!--sitios:start--><section class="section wrap" id="sitios-demo"><div class="section-heading"><div><p class="eyebrow">%s</p><h2>%s<span>.</span></h2></div><p>%s</p></div>'
-            '<div class="site-strip">%s</div><div class="site-cta"><a class="btn primary" href="%ssitios/index.html">%s &#8599;</a><p>%s</p></div></section><!--sitios:end-->'
-            % (t['eb'], t['h'], t['p'] % n, tiles, pre, t['btn'] % n, t['note']))
+            '<div class="site-strip">%s</div><div class="site-cta"><a class="btn primary" href="%ssitios/index.html">%s &#8599;</a><a class="btn" href="%ssitios/panel-alba/index.html">%s &#8599;</a><p>%s</p></div></section><!--sitios:end-->'
+            % (t['eb'], t['h'], t['p'] % n, tiles, pre, t['btn'] % n, pre, t['panel'], t['note']))
 
 def inject_portfolio():
     for lang, rel, pre, label in (('es', '../index.html', '', 'Sitios web'), ('en', '../en/index.html', '../', 'Websites')):
@@ -336,8 +337,9 @@ def build():
         open(os.path.join(d, 'site.css'), 'w', encoding='utf-8').write(site_css(s))
         open(os.path.join(d, 'site.js'), 'w', encoding='utf-8').write(SITE_JS)
     open(os.path.join(HERE, 'index.html'), 'w', encoding='utf-8').write(gallery())
+    import panel; panel.build(HERE, icon_svg, BASE)
     inject_portfolio()
-    print('ok', len(SD.SITES), 'sitios')
+    print('ok', len(SD.SITES), 'sitios + panel')
 
 def gallery():
     import galeria

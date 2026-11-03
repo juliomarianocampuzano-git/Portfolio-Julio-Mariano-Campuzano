@@ -1,8 +1,8 @@
 /* Solaria · Energía solar. Tokens basados en ui-ux-pro-max (#47 Renewable Energy · Organic Biophilic + Motion). */
-@font-face{font-family:'Public Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/public-sans-400-normal.woff2) format('woff2')}
-@font-face{font-family:'Public Sans';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/public-sans-600-normal.woff2) format('woff2')}
 @font-face{font-family:'Work Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/work-sans-400-normal.woff2) format('woff2')}
 @font-face{font-family:'Work Sans';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/work-sans-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Public Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/public-sans-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Public Sans';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/public-sans-600-normal.woff2) format('woff2')}
 :root{--bg:#F7FBF3;--bg2:#E8F5E1;--fg:#0F2A1C;--fg-strong:#06190F;--muted:#43604F;--primary:#047857;--on-primary:#FFFFFF;--primary-text:#065F46;--accent:#F2A900;--on-accent:#0F2A1C;--card:#FFFFFF;--line:#D3E8CB;--r:16px;--r-lg:28px;--r-btn:999px;--track:-.045em;--case:none;--ink-bg:#065F46;--ink-fg:#F7FBF3;--mq-bg:#F2A900;--mq-fg:#0F2A1C;--mq-bw:0;--h1:clamp(2.8rem,7.6vw,7rem);--fd:'Work Sans',system-ui,sans-serif;--fb:'Public Sans',system-ui,-apple-system,sans-serif;--fdw:600}
 .hero--full .sol-panel{position:absolute;right:4%;bottom:6%;width:min(40vw,520px);z-index:-1}
 @media(max-width:860px){.hero--full .sol-panel{width:70vw;opacity:.35}}

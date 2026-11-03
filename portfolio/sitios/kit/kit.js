@@ -36,9 +36,9 @@ if(burger){burger.addEventListener('click',function(){var o=D.body.classList.tog
   D.addEventListener('keydown',function(e){if(e.key==='Escape'&&D.body.classList.contains('menu-open')){D.body.classList.remove('menu-open');burger.setAttribute('aria-expanded','false');burger.focus()}})}
 
 /* ---------- header: se esconde al bajar, vuelve al subir ---------- */
-var hdr=$('.hdr'),lastY=0,hire=$('.hire');
+var hdr=$('.hdr'),lastY=0,hire=$('.hire'),mbar=$('.mbar');
 function onScroll(){var y=W.scrollY;if(hdr){hdr.classList.toggle('sc',y>30);hdr.classList.toggle('up',y>lastY&&y>400&&!D.body.classList.contains('menu-open'))}
-  if(hire)hire.classList.toggle('off',y<300);lastY=y}
+  if(hire)hire.classList.toggle('off',y<300);if(mbar)mbar.classList.toggle('off',y<300||D.body.classList.contains('menu-open'));lastY=y}
 addEventListener('scroll',onScroll,{passive:true});onScroll();
 
 /* ---------- FAQ: un solo abierto ---------- */

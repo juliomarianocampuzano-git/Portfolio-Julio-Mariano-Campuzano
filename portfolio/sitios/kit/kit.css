@@ -439,3 +439,17 @@ html.fx .draw path,html.fx path.draw{stroke-dasharray:1200;stroke-dashoffset:120
 .swatches button[aria-pressed="true"]{outline:2px solid var(--fg);outline-offset:3px}
 @media (max-width:640px){.aw-grid{grid-template-rows:28px repeat(4,54px);grid-template-columns:40px repeat(5,minmax(0,1fr));gap:4px;padding:10px}.aw-grid .ev small{display:none}.portal .pt-grid{grid-template-columns:1fr}.portal aside{display:none}.floater{display:none}.dash .dk{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.plane{offset-distance:60%;animation:none}.pole .stripes,.steam,.spin-badge,.floater{animation:none}}
+
+/* ---------- celular: barra de accion fija, inputs sin zoom en iOS, zona segura del notch ---------- */
+.mbar{display:none}
+@media (max-width:760px){
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+  .mbar{position:fixed;left:0;right:0;bottom:0;z-index:69;display:flex;padding:10px 80px calc(10px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .mbar .btn{flex:1;justify-content:center;min-height:52px}
+  .mbar.off{transform:translateY(110%)}
+  .hire{right:max(12px,env(safe-area-inset-right));bottom:calc(10px + env(safe-area-inset-bottom));padding:0;width:56px;justify-content:center}
+  .hire span{display:none}
+  .toast{bottom:calc(88px + env(safe-area-inset-bottom))}
+  .inp,select.inp,textarea.inp{font-size:16px}
+}
+@media (max-width:760px),(pointer:coarse){.swatches{gap:12px}.swatches button{width:44px;height:44px}}

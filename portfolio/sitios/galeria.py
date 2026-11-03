@@ -41,7 +41,8 @@ def render(sites, esc, BASE):
 <div class="g-page"><div class="g-nav"><b>%(name)s</b><span class="g-btn">%(cta)s</span></div><p class="g-h1">%(h1)s</p><div class="g-row"><span class="g-btn">%(cta1)s</span><span class="g-btn ghost">%(cta2)s</span></div></div>
 <span class="g-num">%(num)02d</span></div>
 <div class="g-body"><p class="g-rubro">%(rubro)s</p><h2>%(name)s</h2><p class="g-desc">%(desc)s</p>
-<ul class="g-tags"><li>%(estilo)s</li><li>%(fonts)s</li>%(mods)s</ul><span class="g-go">Ver sitio <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></div></a></article>'''
+<ul class="g-tags"><li>%(estilo)s</li><li>%(fonts)s</li>%(mods)s</ul><span class="g-go">Ver sitio <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></div></a>
+<button class="g-phone" type="button" data-phone="%(slug)s/index.html" data-name="%(name)s"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 18h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Ver en celular</button></article>'''
             % dict(cat=cat_of(s['slug']), bg=t.get('--bg', '#fff'), fg=t.get('--fg', '#111'), p=t['--primary'], op=t['--on-primary'], fd=s['fonts']['d'], fw=s['fonts'].get('dw', '700'),
                    slug=s['slug'], name=esc(s['name']), rubro=esc(s['rubro']), cta=esc(s['hdrCta'][0]), h1=esc(h1), cta1=esc(s['hero']['cta1'][0]), cta2=esc((s['hero'].get('cta2') or ('Más', ''))[0]),
                    num=i + 1, desc=esc(s['desc']), estilo=ESTILOS[s['style']], fonts=esc(s['fonts']['d'] if s['fonts']['d'] == s['fonts']['b'] else s['fonts']['d'] + ' + ' + s['fonts']['b']),
@@ -103,6 +104,39 @@ h1 em{font-style:normal;color:var(--ac)}h1 .ln{display:block;overflow:hidden;pad
 .g-tags li:first-child{background:color-mix(in srgb,var(--p) 26%%,transparent);color:#fff}
 .g-go{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-weight:700;color:#fff}.g-go svg{width:18px;height:18px;transition:transform .3s}.g-card:hover .g-go svg{transform:translate(3px,-3px)}
 .g-card[hidden]{display:none}
+.g-card{position:relative}
+.g-phone{position:absolute;top:44px;right:12px;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border-radius:999px;border:0;background:rgba(11,11,15,.82);color:#fff;font:700 .78rem 'PJS',sans-serif;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;transform:translateY(-4px);transition:opacity .25s,transform .25s}
+.g-phone svg{width:16px;height:16px}
+.g-card:hover .g-phone,.g-phone:focus-visible{opacity:1;transform:none}
+.g-phone:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+@media (hover:none){.g-phone{opacity:1;transform:none}}
+@media (max-width:700px){.g-phone{display:none}}
+.mob{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.mob span{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:.86rem;font-weight:600}
+.mob svg{width:16px;height:16px;color:var(--ac)}
+.phone-dlg{border:0;padding:0;background:transparent;color:var(--fg);max-width:none;max-height:none;overflow:visible}
+.phone-dlg::backdrop{background:rgba(5,5,8,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.phone-wrap{display:grid;justify-items:center;gap:14px}
+.phone{width:402px;height:min(880px,calc(100dvh - 110px));padding:46px 12px 12px;border-radius:52px;background:#1C1C22;box-shadow:0 0 0 2px #3A3A44,0 40px 120px rgba(0,0,0,.6);position:relative}
+.phone::before{content:"";position:absolute;top:13px;left:50%%;width:100px;height:22px;margin-left:-50px;border-radius:20px;background:#000;z-index:2;pointer-events:none}
+.phone iframe{width:378px;height:100%%;border:0;border-radius:8px 8px 40px 40px;background:#fff;display:block}
+.phone-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+.phone-bar b{font-size:.95rem}
+.phone-bar a,.phone-bar button{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:none;color:#fff;font:700 .85rem 'PJS',sans-serif;text-decoration:none;cursor:pointer}
+.feat{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:center;margin:0 0 30px;padding:clamp(22px,4vw,44px);border-radius:28px;background:linear-gradient(135deg,#082129,#0E7490);border:1px solid rgba(255,255,255,.12)}
+.feat .k{margin:0;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#67E8F9}
+.feat h2{margin:8px 0 10px;font:800 clamp(1.6rem,3.4vw,2.6rem)/1.05 'PJS',sans-serif;letter-spacing:-.035em}
+.feat p{margin:0;color:#CFE9EF;max-width:56ch}
+.feat ul{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px;color:#E6F6FA;font-size:.94rem}
+.feat li::before{content:"\2713";color:#67E8F9;font-weight:800;margin-right:8px}
+.feat .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.feat .acts a{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;background:#fff;color:#082129;font-weight:800;text-decoration:none}
+.feat .acts a.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+.mini{justify-self:center;width:min(260px,100%%);aspect-ratio:9/17;border-radius:34px;background:#F3F8FA;border:8px solid #10151A;box-shadow:0 30px 80px -20px rgba(0,0,0,.6);padding:16px 12px;display:grid;align-content:start;gap:8px;color:#0F2F3A;font-size:.72rem}
+.mini b{font-size:1.05rem}.mini .kp{display:grid;grid-template-columns:1fr 1fr;gap:6px}.mini .kp span{background:#fff;border-radius:10px;padding:8px;font-weight:800;font-size:1rem}.mini .kp span:first-child{background:#0E7490;color:#fff}
+.mini .kp small{display:block;font-weight:600;font-size:.62rem;opacity:.75}
+.mini .r{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:10px;padding:8px}.mini .r i{font-style:normal;font-weight:700;padding:2px 8px;border-radius:99px;font-size:.62rem}
+@media (max-width:760px){.feat{grid-template-columns:1fr}.mini{display:none}}
 .how{border-top:1px solid var(--line);padding:56px 0 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%%,260px),1fr));gap:28px}
 .how h3{margin:0 0 6px;font-size:1.1rem}.how p{margin:0;color:var(--mu);font-size:.95rem}
 .cta{margin:20px 0 60px;padding:clamp(28px,5vw,56px);border-radius:28px;background:linear-gradient(120deg,#FF5A1F,#E11D48);color:#fff;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
@@ -123,7 +157,13 @@ html.fx .g-card{opacity:0}
 <h1><span class="ln"><span>Una web distinta</span></span><span class="ln"><span>para cada <em>negocio.</em></span></span></h1>
 <p class="lead">%(n)d sitios completos, cada uno con su diseño, colores, tipografías y animaciones, y con funciones que se pueden probar: turnos online, recetas en PDF, fichas de pacientes, catálogos con filtros, carrito con pedido por WhatsApp, cotizadores y reservas.</p>
 <p class="note">Los negocios son ficticios: nombres, precios y datos son de ejemplo. Los formularios no envían nada.</p>
+<div class="mob" role="list" aria-label="Hechos para celular"><span role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>Hechos primero para celular</span><span role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>Probados de 360 a 430 px</span><span role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>Barra de acción fija en el teléfono</span><span role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>Formularios sin zoom en iPhone</span></div>
 </header>
+<section class="feat" aria-labelledby="feat-h"><div><p class="k">Extra · Lo que hay detrás de la web</p><h2 id="feat-h">Panel de gestión para el consultorio</h2>
+<p>La web pública saca turnos; el panel es lo que usa la recepción desde el celular o la compu. Si sacás un turno en la web de Centro Médico Alba, aparece en el panel al instante.</p>
+<ul><li>Agenda del día con estados: confirmado, en sala, atendido</li><li>Fichas de pacientes con alergias e historia clínica</li><li>Recetas en PDF y recordatorios por WhatsApp</li></ul>
+<div class="acts"><a href="panel-alba/index.html">Abrir el panel</a><a class="ghost" href="centro-medico-alba/index.html#turnos">Sacar un turno en la web</a></div></div>
+<div class="mini" aria-hidden="true"><b>Hoy</b><div class="kp"><span><small>Turnos</small>9</span><span><small>Confirmados</small>5</span></div><div class="r">08:40 Sofía B.<i style="background:#EDE9FE;color:#4C1D95">En sala</i></div><div class="r">09:00 Ana R.<i style="background:#DBEAFE;color:#1E3A8A">Confirmado</i></div><div class="r">10:20 Valentina R.<i style="background:#FEF3C7;color:#78350F">Pendiente</i></div><div class="r">11:40 Lucía F.<i style="background:#FEF3C7;color:#78350F">Pendiente</i></div></div></section>
 <div class="filters" role="group" aria-label="Filtrar por rubro"><button type="button" data-f="" aria-pressed="true">Todos <small>%(n)d</small></button>%(chips)s</div>
 <main class="grid" id="sitios">
 %(cards)s
@@ -132,11 +172,12 @@ html.fx .g-card{opacity:0}
 <div><h3>Diseño por rubro</h3><p>Paletas, tipografías y estilos elegidos con la base de datos de diseño ui-ux-pro-max según el tipo de negocio.</p></div>
 <div><h3>Animaciones con GSAP</h3><p>Textos que se arman letra por letra, scroll suave con Lenis, secciones fijadas, contadores y escenas 3D con three.js.</p></div>
 <div><h3>Funciones reales</h3><p>Turnos con archivo de calendario, recetas en PDF con jsPDF, carrito, simuladores y calendarios hechos a medida.</p></div>
-<div><h3>Rápidos y accesibles</h3><p>Sin frameworks pesados, respetan “reducir movimiento”, se usan con teclado y se adaptan al celular.</p></div>
+<div><h3>Hechos para celular</h3><p>Diseñados primero para el teléfono: menú a pantalla completa, barra de acción fija, botones grandes y formularios que no hacen zoom. Sin frameworks pesados y accesibles con teclado.</p></div>
 </section>
 <section class="cta"><h2>¿Querés una web así para tu negocio?</h2><a href="https://wa.me/5493764148342?text=%(wa)s">Escribime por WhatsApp</a></section>
 <footer><span>© Mariano Campuzano · Diseño y desarrollo web</span><span>Créditos y licencias: <a href="CREDITOS.txt">CREDITOS.txt</a></span></footer>
 </div>
+<dialog class="phone-dlg" aria-label="Vista en celular"><div class="phone-wrap"><div class="phone"><iframe title="Vista del sitio en celular"></iframe></div><div class="phone-bar"><b></b><a target="_blank" rel="noopener">Abrir en pestaña nueva</a><button type="button" data-close>Cerrar</button></div></div></dialog>
 <script src="../../assets/libs/gsap.min.js" defer></script>
 <script src="../../assets/libs/ScrollTrigger.min.js" defer></script>
 <script>
@@ -147,6 +188,10 @@ addEventListener('DOMContentLoaded',function(){
     gsap.from('.eb,.lead,.note,.filters',{y:24,opacity:0,duration:.9,ease:'power3.out',stagger:.08,delay:.3});
     ScrollTrigger.batch(cards,{start:'top 92%%',once:true,onEnter:function(b){gsap.fromTo(b,{opacity:0,y:60,rotate:1.5},{opacity:1,y:0,rotate:0,duration:.9,ease:'power3.out',stagger:.08})}});
   }else cards.forEach(function(c){c.style.opacity=1});
+  var dlg=document.querySelector('.phone-dlg'),ifr=dlg.querySelector('iframe');
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-phone]');if(!b)return;ifr.src=b.dataset.phone+'?nofx';dlg.querySelector('b').textContent=b.dataset.name;dlg.querySelector('a').href=b.dataset.phone;dlg.showModal()});
+  dlg.addEventListener('click',function(e){if(e.target===dlg||e.target.hasAttribute('data-close'))dlg.close()});
+  dlg.addEventListener('close',function(){ifr.src='about:blank'});
   document.querySelector('.filters').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
     [].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',x===b)});
     cards.forEach(function(c){c.hidden=!!b.dataset.f&&c.dataset.cat!==b.dataset.f;c.style.opacity=1});

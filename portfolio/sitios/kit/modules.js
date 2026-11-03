@@ -39,10 +39,14 @@ function agenda(el){
         '<div style="margin-top:18px"><div class="kv"><span class="muted">Servicio</span><b>'+E(sv.n)+'</b></div>'+(p?'<div class="kv"><span class="muted">Profesional</span><b>'+E(p.n)+'</b></div>':'')+(st.extraV?'<div class="kv"><span class="muted">'+E(c.extra)+'</span><b>'+E(st.extraV)+'</b></div>':'')+
         '<div class="kv"><span class="muted">Fecha</span><b>'+fmtDate(day2)+'</b></div><div class="kv"><span class="muted">Hora</span><b>'+st.hour+' h</b></div></div>'+
         '<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px"><a class="btn sm" download="turno.ics" href="'+ics(sv.n+' · '+(c.biz||''),start,sv.m||30,c.addr)+'">'+I('calendar-plus')+'Agregar al calendario</a><button class="btn ghost sm" data-reset>Pedir otro turno</button></div>'+
-        '<p class="note">Demo: en la versión real llega un recordatorio por WhatsApp 24 h antes.</p>';K.burst()}
+        '<p class="note">Demo: en la versión real llega un recordatorio por WhatsApp 24 h antes.</p>';K.burst();save(sv,p,day2)}
     swap(box,s);
   }
   function dayStep(){return c.pros&&c.pros.length>1?2:1}
+  /* el turno queda solo en este navegador, para verlo en el panel de gestion demo (sin telefono) */
+  function save(sv,p,day){try{var L=JSON.parse(localStorage.getItem('demo-turnos')||'[]');
+    L.push({site:location.pathname.split('/').slice(-2,-1)[0],biz:c.biz||'',svc:sv.n,pro:p?p.n:'',date:ymd(day),hour:st.hour,name:st.name,extra:st.extraV||'',at:Date.now()});
+    localStorage.setItem('demo-turnos',JSON.stringify(L.slice(-30)))}catch(e){}}
   box.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;
     if(b.dataset.i!==undefined){st.svc=+b.dataset.i;st.step=1;st.hour=null;render()}
     else if(b.dataset.p!==undefined){st.pro=+b.dataset.p;st.step=2;st.hour=null;render()}

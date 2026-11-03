@@ -1,8 +1,8 @@
 /* Pulso · Gimnasio. Tokens basados en ui-ux-pro-max (#35 Fitness/Gym · Vibrant & Block-based + Dark OLED). */
-@font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/barlow-400-normal.woff2) format('woff2')}
-@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/barlow-600-normal.woff2) format('woff2')}
 @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/barlow-condensed-600-normal.woff2) format('woff2')}
 @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:800;font-display:swap;src:url(../kit/fonts/barlow-condensed-800-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/barlow-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/barlow-600-normal.woff2) format('woff2')}
 :root{--bg:#0E0E10;--bg2:#17171A;--fg:#F4F4F5;--fg-strong:#FFFFFF;--muted:#A1A1AA;--primary:#FF5A1F;--on-primary:#0E0E10;--primary-text:#FF7A45;--accent:#FFFFFF;--on-accent:#0E0E10;--card:#18181B;--line:rgba(255,255,255,.12);--r:0px;--r-lg:0px;--r-btn:0px;--track:-.01em;--case:uppercase;--ink-bg:#FF5A1F;--ink-fg:#0E0E10;--mq-bg:#FF5A1F;--mq-fg:#0E0E10;--mq-bw:0;--loader-bg:#FF5A1F;--loader-fg:#0E0E10;--fd:'Barlow Condensed',system-ui,sans-serif;--fb:'Barlow',system-ui,-apple-system,sans-serif;--fdw:800}
 .hero--kinetic h1{color:#fff}.hero--kinetic .k-row:nth-child(2){color:var(--primary);padding-left:12vw}.hero--kinetic .k-row:nth-child(3){-webkit-text-stroke:2px #fff;color:transparent}
 .stack-card{border:0!important}.sec.ink .eyebrow{color:#0E0E10}

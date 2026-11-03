@@ -1,8 +1,8 @@
 /* Kairos · Instituto de idiomas. Tokens basados en ui-ux-pro-max (#16 Education/Language · Claymorphism + Playful). */
-@font-face{font-family:'Source Sans 3';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/source-sans-3-400-normal.woff2) format('woff2')}
-@font-face{font-family:'Source Sans 3';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/source-sans-3-600-normal.woff2) format('woff2')}
 @font-face{font-family:'Lexend';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/lexend-400-normal.woff2) format('woff2')}
 @font-face{font-family:'Lexend';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/lexend-600-normal.woff2) format('woff2')}
 @font-face{font-family:'Lexend';font-style:normal;font-weight:800;font-display:swap;src:url(../kit/fonts/lexend-800-normal.woff2) format('woff2')}
+@font-face{font-family:'Source Sans 3';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/source-sans-3-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Source Sans 3';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/source-sans-3-600-normal.woff2) format('woff2')}
 :root{--bg:#F5F3FF;--bg2:#EDE9FE;--fg:#1E1B4B;--fg-strong:#110E35;--muted:#4C4A73;--primary:#4F46E5;--on-primary:#FFFFFF;--primary-text:#4338CA;--accent:#F59E0B;--on-accent:#1E1B4B;--card:#FFFFFF;--line:#DDD6FE;--r:20px;--r-lg:30px;--r-btn:999px;--track:-.04em;--case:none;--ink-bg:#4F46E5;--ink-fg:#FFFFFF;--mq-bg:#F59E0B;--mq-fg:#1E1B4B;--mq-bw:0;--h1:clamp(2.8rem,7.4vw,6.8rem);--fd:'Lexend',system-ui,sans-serif;--fb:'Source Sans 3',system-ui,-apple-system,sans-serif;--fdw:800}
 .hero--full{min-height:calc(100svh - 40px)}.hero--full .hero-copy{max-width:760px}.hero--full::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(55% 60% at 30% 55%,#F5F3FF 40%,transparent)}

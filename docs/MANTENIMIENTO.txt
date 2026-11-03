@@ -1,10 +1,11 @@
-MARIANO CAMPUZANO - SITIO v4 (marca alegre + portfolio)
-=======================================================
-Sitio estatico de una pagina. La v1 sigue intacta en /workspace/mariano-web/.
+NOTAS DE MANTENIMIENTO (para mi) - web, portfolio y sitios demo
+===============================================================
+La presentacion publica del repo esta en README.md. Este archivo es la guia para editar y publicar.
 Publicado en GitHub Pages (ver DONDE ESTA PUBLICADO).
 
 QUE HAY
   index.html                       la pagina
+  portfolio/sitios/                20 sitios demo + panel de gestion: python portfolio/sitios/build-sitios.py
   portfolio/  (y portfolio/en/)    67 proyectos con ficha y demo, ES/EN
   assets/brand                     LOGO e ICONO (SVG + PNG) y build-brand.py
   assets/css, assets/js, assets/libs   estilos, logica, GSAP/ScrollTrigger/Lenis (locales)

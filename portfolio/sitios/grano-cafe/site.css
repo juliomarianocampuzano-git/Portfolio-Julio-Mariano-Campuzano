@@ -1,6 +1,6 @@
 /* Grano · Cafetería de especialidad. Tokens basados en ui-ux-pro-max (#63 Bakery/Cafe · Vibrant & Block-based). */
+@font-face{font-family:'Abril Fatface';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/abril-fatface-400-normal.woff2) format('woff2')}
 @font-face{font-family:'Work Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/work-sans-400-normal.woff2) format('woff2')}
 @font-face{font-family:'Work Sans';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/work-sans-600-normal.woff2) format('woff2')}
-@font-face{font-family:'Abril Fatface';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/abril-fatface-400-normal.woff2) format('woff2')}
 :root{--bg:#FFF4D6;--bg2:#FFE7A8;--fg:#2A160B;--fg-strong:#1A0D05;--muted:#6B4A33;--primary:#6B2E0E;--on-primary:#FFF4D6;--primary-text:#6B2E0E;--accent:#2F7D5B;--on-accent:#FFFFFF;--card:#FFFBEF;--line:#2A160B;--r:14px;--r-lg:22px;--r-btn:999px;--track:0;--case:none;--h1:clamp(3rem,8vw,7rem);--mq-bg:#2F7D5B;--mq-fg:#FFF4D6;--mq-bw:3px;--card-bw:3px;--fd:'Abril Fatface',system-ui,sans-serif;--fb:'Work Sans',system-ui,-apple-system,sans-serif;--fdw:400}
 .marquee-track span{font-family:"Abril Fatface"}
