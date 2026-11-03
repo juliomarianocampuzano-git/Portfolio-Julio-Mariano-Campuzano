@@ -1,0 +1,9 @@
+/* Telar · Tienda de ropa. Tokens basados en ui-ux-pro-max (#21 Fashion/E-commerce · Editorial Luxury + Exaggerated Minimalism). */
+@font-face{font-family:'Jost';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/jost-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Jost';font-style:normal;font-weight:500;font-display:swap;src:url(../kit/fonts/jost-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Bodoni Moda';font-style:italic;font-weight:500;font-display:swap;src:url(../kit/fonts/bodoni-moda-500-italic.woff2) format('woff2')}
+@font-face{font-family:'Bodoni Moda';font-style:normal;font-weight:500;font-display:swap;src:url(../kit/fonts/bodoni-moda-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Bodoni Moda';font-style:normal;font-weight:800;font-display:swap;src:url(../kit/fonts/bodoni-moda-800-normal.woff2) format('woff2')}
+:root{--bg:#FFFFFF;--bg2:#F7F1F0;--fg:#111111;--fg-strong:#000000;--muted:#5E5A58;--primary:#111111;--on-primary:#FFFFFF;--primary-text:#111111;--accent:#E8A0B4;--on-accent:#111111;--card:#FFFFFF;--line:#E7E1DF;--r:0px;--r-lg:0px;--r-btn:0px;--track:-.03em;--case:none;--ink-bg:#111111;--ink-fg:#FFFFFF;--mq-bg:#F7F1F0;--mq-fg:#111111;--h1:clamp(3.4rem,11vw,11rem);--fd:'Bodoni Moda',Georgia,serif;--fb:'Jost',system-ui,-apple-system,sans-serif;--fdw:500}
+.hero--editorial h1{font-style:italic;letter-spacing:-.05em;line-height:.88}.ed-looks{display:grid;grid-template-columns:1fr 1fr;gap:14px}.ed-looks>div:nth-child(2){margin-top:48px}
+.item .art{aspect-ratio:3/4!important}.item .art svg{width:70%}

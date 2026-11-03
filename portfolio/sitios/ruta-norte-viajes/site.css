@@ -1,0 +1,10 @@
+/* Ruta Norte · Agencia de viajes. Tokens basados en ui-ux-pro-max (#30 Travel/Tourism · Aurora UI + Glassmorphism). */
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/dm-sans-400-normal.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/dm-sans-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/outfit-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/outfit-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:800;font-display:swap;src:url(../kit/fonts/outfit-800-normal.woff2) format('woff2')}
+:root{--bg:#071526;--bg2:#0C2038;--fg:#E6EEF8;--fg-strong:#FFFFFF;--muted:#9FB3CC;--primary:#38BDF8;--on-primary:#04111F;--primary-text:#7DD3FC;--accent:#FB923C;--on-accent:#04111F;--card:#0F2744;--line:rgba(255,255,255,.14);--r:18px;--r-lg:28px;--r-btn:999px;--track:-.04em;--case:none;--ink-bg:#38BDF8;--ink-fg:#04111F;--mq-bg:transparent;--mq-fg:#7DD3FC;--inp-bg:#0A1B30;--h1:clamp(2.8rem,7.6vw,7rem);--fd:'Outfit',system-ui,sans-serif;--fb:'DM Sans',system-ui,-apple-system,sans-serif;--fdw:800}
+.hero--full .route{position:absolute;right:2%;top:16%;width:min(46vw,640px);z-index:-1;opacity:.9}
+@media(max-width:860px){.hero--full .route{width:90vw;top:auto;bottom:4%;opacity:.45}}
+.s-glass .card,.s-glass .panel,.s-glass .item{border-color:rgba(255,255,255,.14)}.item .art{background:rgba(255,255,255,.06)!important}

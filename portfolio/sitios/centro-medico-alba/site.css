@@ -1,0 +1,6 @@
+/* Centro Médico Alba · Consultorio médico. Tokens basados en ui-ux-pro-max (#58 Medical Clinic · Accessible & Ethical + Swiss). */
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/figtree-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/figtree-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:800;font-display:swap;src:url(../kit/fonts/figtree-800-normal.woff2) format('woff2')}
+:root{--bg:#F7FBFC;--bg2:#E6F4F7;--fg:#0F2F3A;--fg-strong:#082129;--muted:#4B6670;--primary:#0E7490;--on-primary:#FFFFFF;--primary-text:#0E7490;--accent:#16A34A;--on-accent:#FFFFFF;--card:#FFFFFF;--line:#D5E7EC;--r:12px;--r-lg:20px;--r-btn:12px;--track:-.035em;--case:none;--ink-bg:#0E7490;--ink-fg:#FFFFFF;--h1:clamp(2.6rem,6.6vw,5.8rem);--maxw:1180px;--fd:'Figtree',system-ui,sans-serif;--fb:'Figtree',system-ui,-apple-system,sans-serif;--fdw:800}
+.hero--center{background:radial-gradient(60% 50% at 50% 0%,#D7EEF3,transparent)}.hero--center h1{max-width:14ch;margin-inline:auto}

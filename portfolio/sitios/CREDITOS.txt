@@ -1,0 +1,50 @@
+CREDITOS Y LICENCIAS · Sitios web demo por rubro
+Julio Mariano Campuzano · https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/
+
+Los 20 sitios de esta carpeta son DEMOS. Los negocios, nombres, precios, horarios
+y datos de contacto son ficticios. Los formularios no envian datos a ningun
+servidor; las calculadoras y cotizadores son orientativos.
+
+Diseno, codigo y textos: Julio Mariano Campuzano (con asistencia de IA).
+No se usaron fotos de stock: las imagenes son ilustraciones SVG, canvas y 3D
+generadas por codigo.
+
+
+LIBRERIAS (copias locales en /assets/libs)
+-------------------------------------------
+GSAP 3 + ScrollTrigger, Flip, SplitText   https://github.com/greensock/GSAP
+  Licencia estandar de GreenSock (uso gratuito, incluidos los plugins)
+  https://gsap.com/standard-license
+Lenis (scroll suave)                       https://github.com/darkroomengineering/lenis
+  MIT
+three.js r149                              https://github.com/mrdoob/three.js
+  MIT · ver assets/libs/LICENSE-three.txt
+vanilla-tilt.js                            https://github.com/micku7zu/vanilla-tilt.js
+  MIT · ver assets/libs/LICENSE-vanilla-tilt.txt
+jsPDF                                      https://github.com/parallax/jsPDF
+  MIT · ver assets/libs/LICENSE-jspdf.txt
+canvas-confetti                            https://github.com/catdad/canvas-confetti
+  ISC · ver assets/libs/LICENSE-canvas-confetti.txt
+
+
+ICONOS
+------
+Lucide 0.460                               https://github.com/lucide-icons/lucide
+  ISC
+
+
+TIPOGRAFIAS (via Fontsource, archivos .woff2 en kit/fonts)
+-----------------------------------------------------------
+https://github.com/fontsource/fontsource · todas bajo SIL Open Font License 1.1
+Abril Fatface, Anton, Archivo, Baloo 2, Barlow, Barlow Condensed, Bodoni Moda,
+Cinzel, Cormorant, DM Sans, EB Garamond, Epilogue, Figtree, IBM Plex Sans,
+Josefin Sans, Jost, Karla, Lato, Lexend, Lexend Mega, Lora, Montserrat,
+Nunito Sans, Outfit, Playfair Display, Plus Jakarta Sans, Public Sans, Raleway,
+Rubik, Source Sans 3, Syncopate, Work Sans.
+
+
+REFERENCIAS DE DISENO
+---------------------
+ui-ux-pro-max-skill                        https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+  Paletas, pares tipograficos y estilos por rubro usados como punto de partida.
+  No se copio codigo del repositorio.

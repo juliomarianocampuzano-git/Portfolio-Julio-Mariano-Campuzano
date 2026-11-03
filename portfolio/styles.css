@@ -316,3 +316,18 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .7s var(--out),transf
 @media (max-width:560px){.creds{gap:9px}.creds li{padding-right:12px}.creds b{font-size:.9375rem}}
 .creds-h{margin:24px 0 0;font:700 .8125rem/1 "Schibsted",system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .profile-grid .creds{margin:12px 0 22px}
+
+/* Sitios web por rubro (generado por sitios/build-sitios.py): cada tarjeta usa la paleta de su sitio */
+.site-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:14px}
+.site-tile{display:flex;flex-direction:column;gap:4px;min-height:136px;padding:14px 16px 16px;border:var(--bd);border-radius:var(--radius);background:var(--sb);color:var(--sf);box-shadow:var(--pop-s);text-decoration:none;transition:transform .2s var(--out),box-shadow .2s var(--out)}
+.site-tile:hover{transform:translate(-2px,-3px) rotate(-.6deg);box-shadow:6px 7px 0 var(--ink)}
+.site-tile:focus-visible{outline:3px solid var(--mango);outline-offset:3px}
+.st-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:auto}
+.st-n{font:800 .78rem/1 var(--f-m);opacity:.7}
+.st-dots{display:flex;gap:4px}.st-dots i{width:12px;height:12px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--sf) 35%,transparent);background:var(--sp)}
+.st-dots i:nth-child(2){background:var(--sa)}.st-dots i:nth-child(3){background:var(--sb)}
+.site-tile b{margin-top:22px;font:800 1.15rem/1.1 var(--f-d);letter-spacing:-.02em}
+.site-tile small{font-size:.84rem;opacity:.78}
+.site-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:26px}.site-cta p{margin:0;color:var(--muted);font-size:.92rem;max-width:52ch}
+@media (max-width:520px){.site-strip{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.site-tile{min-height:118px;padding:12px}.site-tile b{font-size:1rem}}
+@media (prefers-reduced-motion:reduce){.site-tile{transition:none}.site-tile:hover{transform:none}}

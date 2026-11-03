@@ -1,0 +1,9 @@
+/* Habitar · Inmobiliaria. Tokens basados en ui-ux-pro-max (#50 Real Estate · Glassmorphism + Trust & Authority). */
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/josefin-sans-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/josefin-sans-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:500;font-display:swap;src:url(../kit/fonts/cinzel-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:700;font-display:swap;src:url(../kit/fonts/cinzel-700-normal.woff2) format('woff2')}
+:root{--bg:#EEF6F4;--bg2:#D8ECE7;--fg:#10302B;--fg-strong:#071E1A;--muted:#3F5F59;--primary:#0F766E;--on-primary:#FFFFFF;--primary-text:#0F5F58;--accent:#C08A2E;--on-accent:#FFFFFF;--card:#FFFFFF;--line:rgba(16,48,43,.14);--r:18px;--r-lg:26px;--r-btn:999px;--track:.01em;--case:none;--ink-bg:#0F766E;--ink-fg:#FFFFFF;--h1:clamp(2.3rem,5.6vw,5rem);--fd:'Cinzel',Georgia,serif;--fb:'Josefin Sans',system-ui,-apple-system,sans-serif;--fdw:700}
+body{background:radial-gradient(40% 40% at 10% 10%,#9EE6DA,transparent 70%),radial-gradient(35% 40% at 95% 30%,#F5D9A8,transparent 70%),radial-gradient(40% 40% at 50% 100%,#B7E4F5,transparent 70%),#EEF6F4;background-attachment:fixed}
+.glass-stage{position:relative;padding:32px;border-radius:32px;background:rgba(255,255,255,.45);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.6);box-shadow:0 30px 80px -30px rgba(15,118,110,.45)}
+.sec.alt{background:rgba(255,255,255,.35)}.hdr.sc{background:rgba(238,246,244,.7)}

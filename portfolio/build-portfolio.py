@@ -71,7 +71,7 @@ def patch_details(lang):
         s=s.replace(g.group(0),grid)
         s=re.sub(r'<p class="scope-note">.*?</p>','<p class="scope-note">%s</p>'%('Demo with sample data: it shows the result, not the internal implementation.' if E else 'Demo con datos de ejemplo: muestra el resultado, no la implementación interna.'),s,count=1)
         for h in C.OCULTOS:s=re.sub(r'<a class="btn" href="%s\.html">[^<]*</a>'%re.escape(h),'',s)
-        s=s.replace('<meta name="theme-color" content="#0a192f">','<meta name="theme-color" content="#FF6B2C">').replace('href="../styles.css">','href="../styles.css?v=7">').replace('href="../../styles.css">','href="../../styles.css?v=7">')
+        s=s.replace('<meta name="theme-color" content="#0a192f">','<meta name="theme-color" content="#FF6B2C">').replace('href="../styles.css">','href="../styles.css?v=8">').replace('href="../../styles.css">','href="../../styles.css?v=8">')
         s=re.sub(r'<a class="brand" href="([^"]+)">JMC<span>\.</span></a>',lambda m:brand(m.group(1),lang=='en'),s)
         home='<a class="home-link" href="%sindex.html">%s</a>'%(up,'Web principal' if lang=='es' else 'Main site')
         s=s.replace('<nav aria-label="Navegación">','<nav aria-label="Navegación">'+home).replace('<nav aria-label="Navigation">','<nav aria-label="Navigation">'+home)
@@ -147,7 +147,7 @@ def build_index(lang):
     ticker=''.join('<span>%s</span>'%w for w in tick*2)
     doc='''<!doctype html><html lang="%(lang)s"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#FF6B2C">
 <title>%(title)s</title><meta name="description" content="%(desc)s"><meta property="og:title" content="%(title)s"><meta property="og:description" content="%(desc)s"><meta property="og:type" content="website"><meta property="og:image" content="%(up)sassets/img/og.jpg">
-<link rel="icon" href="%(fav)sfavicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="%(up)sapple-touch-icon.png"><link rel="preload" href="%(up)sassets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="%(fav)sstyles.css?v=7"></head>
+<link rel="icon" href="%(fav)sfavicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="%(up)sapple-touch-icon.png"><link rel="preload" href="%(up)sassets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="%(fav)sstyles.css?v=8"></head>
 <body data-lang="%(lang)s"><a class="skip" href="#main">%(skip)s</a>
 <header><div class="nav">%(brand)s<nav aria-label="%(navl)s"><a href="#destacados">%(n1)s</a><a href="#catalogo">%(n2)s</a><a href="#perfil">%(n3)s</a><a class="home-link" href="%(up)sindex.html">%(n5)s</a><a class="nav-contact" href="#contacto">%(n4)s</a></nav><a class="language" href="%(other)s" lang="%(olang)s">%(olab)s<span>%(oname)s</span></a></div></header>
 <main id="main">

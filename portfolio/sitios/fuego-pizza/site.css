@@ -1,0 +1,8 @@
+/* Fuego Pizza · Pizzería y delivery. Tokens basados en ui-ux-pro-max (#33 Food Delivery · Neubrutalism + Playful). */
+@font-face{font-family:'Lexend Mega';font-style:normal;font-weight:700;font-display:swap;src:url(../kit/fonts/lexend-mega-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Lexend Mega';font-style:normal;font-weight:900;font-display:swap;src:url(../kit/fonts/lexend-mega-900-normal.woff2) format('woff2')}
+@font-face{font-family:'Public Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/public-sans-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Public Sans';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/public-sans-600-normal.woff2) format('woff2')}
+:root{--bg:#FFF5E6;--bg2:#FFE3B8;--fg:#1A1208;--fg-strong:#000000;--muted:#5A4630;--primary:#E63E1C;--on-primary:#FFFFFF;--primary-text:#B42A0E;--accent:#2563EB;--on-accent:#FFFFFF;--card:#FFFFFF;--line:#1A1208;--r:12px;--r-lg:20px;--r-btn:12px;--track:-.06em;--case:none;--ink-bg:#E63E1C;--ink-fg:#FFFFFF;--mq-bg:#2563EB;--mq-fg:#FFFFFF;--mq-bw:3px;--card-bw:3px;--h1:clamp(2.2rem,6.2vw,5.6rem);--fd:'Lexend Mega',system-ui,sans-serif;--fb:'Public Sans',system-ui,-apple-system,sans-serif;--fdw:900}
+.pz-hero{max-width:440px;margin:auto;animation:spin 40s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.pz-hero{animation:none}}.hero h1{line-height:1}

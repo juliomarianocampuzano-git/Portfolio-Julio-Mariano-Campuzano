@@ -1,0 +1,10 @@
+/* Espacio Calma · Consultorio de psicología. Tokens basados en ui-ux-pro-max (#55 Mental Health · Soft UI + Accessible & Ethical). */
+@font-face{font-family:'Lora';font-style:italic;font-weight:500;font-display:swap;src:url(../kit/fonts/lora-500-italic.woff2) format('woff2')}
+@font-face{font-family:'Lora';font-style:normal;font-weight:500;font-display:swap;src:url(../kit/fonts/lora-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Raleway';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/raleway-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Raleway';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/raleway-600-normal.woff2) format('woff2')}
+:root{--bg:#FAF8FF;--bg2:#F1ECFE;--fg:#2A2342;--fg-strong:#1A1530;--muted:#5C5675;--primary:#6D28D9;--on-primary:#FFFFFF;--primary-text:#5B21B6;--accent:#10B981;--on-accent:#063B2B;--card:#FFFFFF;--line:#E6DEFB;--r:20px;--r-lg:32px;--r-btn:999px;--track:-.02em;--case:none;--ink-bg:#6D28D9;--ink-fg:#FFFFFF;--h1:clamp(2.6rem,6.4vw,5.8rem);--fd:'Lora',Georgia,serif;--fb:'Raleway',system-ui,-apple-system,sans-serif;--fdw:500}
+.hero--center h1{font-style:italic;font-weight:500;max-width:16ch;margin-inline:auto}
+.calm1{animation:calm 9s ease-in-out infinite;transform-origin:center;transform-box:fill-box}.calm2{animation:calm 9s ease-in-out infinite reverse;transform-origin:center;transform-box:fill-box}
+@keyframes calm{50%{transform:scale(1.12)}}@media(prefers-reduced-motion:reduce){.calm1,.calm2{animation:none}}
+.crisis{border-left:4px solid var(--accent);padding:14px 18px;background:var(--card);border-radius:12px;margin-top:22px}

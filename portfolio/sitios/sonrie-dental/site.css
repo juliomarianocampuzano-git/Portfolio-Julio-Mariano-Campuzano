@@ -1,0 +1,6 @@
+/* Sonríe · Odontología. Tokens basados en ui-ux-pro-max (#60 Dental Practice · Soft UI + Swiss). */
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/plus-jakarta-sans-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/plus-jakarta-sans-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:swap;src:url(../kit/fonts/plus-jakarta-sans-800-normal.woff2) format('woff2')}
+:root{--bg:#F5FAFF;--bg2:#E0F2FE;--fg:#0C2D48;--fg-strong:#071E31;--muted:#45607A;--primary:#0284C7;--on-primary:#FFFFFF;--primary-text:#0369A1;--accent:#14B8A6;--on-accent:#042F2E;--card:#FFFFFF;--line:#D3E6F5;--r:16px;--r-lg:28px;--r-btn:999px;--track:-.04em;--case:none;--h1:clamp(2.6rem,6.2vw,5.4rem);--fd:'Plus Jakarta Sans',system-ui,sans-serif;--fb:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;--fdw:800}
+.hero{background:radial-gradient(50% 60% at 80% 40%,#DBEFFF,transparent)}

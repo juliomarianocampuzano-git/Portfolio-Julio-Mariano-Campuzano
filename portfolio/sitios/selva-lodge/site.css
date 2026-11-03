@@ -1,0 +1,9 @@
+/* Selva Lodge · Hotel boutique en la selva. Tokens basados en ui-ux-pro-max (#29 Hotel/Resort · Liquid Luxury + Nature). */
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/montserrat-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/montserrat-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Cormorant';font-style:italic;font-weight:500;font-display:swap;src:url(../kit/fonts/cormorant-500-italic.woff2) format('woff2')}
+@font-face{font-family:'Cormorant';font-style:normal;font-weight:500;font-display:swap;src:url(../kit/fonts/cormorant-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Cormorant';font-style:normal;font-weight:700;font-display:swap;src:url(../kit/fonts/cormorant-700-normal.woff2) format('woff2')}
+:root{--bg:#0F1D16;--bg2:#15271E;--fg:#E9E2D0;--fg-strong:#FFF9EA;--muted:#B3AC98;--primary:#C9A96E;--on-primary:#0F1D16;--primary-text:#D9BC86;--accent:#7FA77A;--on-accent:#0F1D16;--card:#16291F;--line:rgba(233,226,208,.16);--r:0px;--r-lg:0px;--r-btn:0px;--track:-.01em;--case:none;--ink-bg:#C9A96E;--ink-fg:#0F1D16;--mq-bg:transparent;--mq-fg:#C9A96E;--loader-bg:#0F1D16;--loader-fg:#C9A96E;--inp-bg:#0F1D16;--h1:clamp(3rem,8.6vw,8rem);--fd:'Cormorant',Georgia,serif;--fb:'Montserrat',system-ui,-apple-system,sans-serif;--fdw:500}
+.hero--full h1{font-style:italic;font-weight:500}.hero--full::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 70% at 30% 60%,rgba(15,29,22,.85),transparent)}
+.cal button.edge{color:#0F1D16}

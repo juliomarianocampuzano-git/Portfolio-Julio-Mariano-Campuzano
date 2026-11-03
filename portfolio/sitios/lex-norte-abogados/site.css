@@ -1,0 +1,9 @@
+/* Lex Norte · Estudio jurídico. Tokens basados en ui-ux-pro-max (#45 Legal Services · Trust & Authority + Editorial). */
+@font-face{font-family:'EB Garamond';font-style:italic;font-weight:500;font-display:swap;src:url(../kit/fonts/eb-garamond-500-italic.woff2) format('woff2')}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:500;font-display:swap;src:url(../kit/fonts/eb-garamond-500-normal.woff2) format('woff2')}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:700;font-display:swap;src:url(../kit/fonts/eb-garamond-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Lato';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/lato-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Lato';font-style:normal;font-weight:700;font-display:swap;src:url(../kit/fonts/lato-700-normal.woff2) format('woff2')}
+:root{--bg:#FBF8F2;--bg2:#F1EBDD;--fg:#1F2433;--fg-strong:#0E1220;--muted:#555C6E;--primary:#1E3A8A;--on-primary:#FFFFFF;--primary-text:#1E3A8A;--accent:#B45309;--on-accent:#FFFFFF;--card:#FFFFFF;--line:#E2D9C6;--r:2px;--r-lg:2px;--r-btn:0px;--track:-.02em;--case:none;--ink-bg:#1E3A8A;--ink-fg:#FFFFFF;--h1:clamp(3rem,8vw,7.6rem);--fd:'EB Garamond',Georgia,serif;--fb:'Lato',system-ui,-apple-system,sans-serif;--fdw:500}
+.hero--editorial h1{font-style:italic;font-weight:500}.hero--editorial .ed-title{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:12px}
+.hero--editorial .ed-art{width:min(380px,100%);justify-self:end}.feat-list h3{font-family:var(--fd);font-size:1.6rem;font-weight:500}

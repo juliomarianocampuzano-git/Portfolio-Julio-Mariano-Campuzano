@@ -1,0 +1,6 @@
+/* Escudo · Productor de seguros. Tokens basados en ui-ux-pro-max (#14 Insurance · Trust & Authority + Soft UI). */
+@font-face{font-family:'Rubik';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/rubik-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/rubik-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:800;font-display:swap;src:url(../kit/fonts/rubik-800-normal.woff2) format('woff2')}
+:root{--bg:#F6FAFD;--bg2:#E5F1FA;--fg:#0B2540;--fg-strong:#06182B;--muted:#46607A;--primary:#0369A1;--on-primary:#FFFFFF;--primary-text:#075985;--accent:#16A34A;--on-accent:#FFFFFF;--card:#FFFFFF;--line:#D3E4F1;--r:14px;--r-lg:24px;--r-btn:12px;--track:-.03em;--case:none;--ink-bg:#0369A1;--ink-fg:#FFFFFF;--h1:clamp(2.6rem,6.4vw,5.6rem);--fd:'Rubik',system-ui,sans-serif;--fb:'Rubik',system-ui,-apple-system,sans-serif;--fdw:800}
+.hero{background:radial-gradient(50% 60% at 80% 40%,#DCEEFB,transparent)}.cta-big{background:linear-gradient(135deg,#0369A1,#075985)}

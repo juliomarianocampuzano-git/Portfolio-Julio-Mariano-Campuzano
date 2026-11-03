@@ -1,0 +1,7 @@
+/* Navaja · Barbería. Tokens basados en ui-ux-pro-max (#38 Barbershop · Neubrutalism + Kinetic Typography). */
+@font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/anton-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Epilogue';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/epilogue-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Epilogue';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/epilogue-600-normal.woff2) format('woff2')}
+:root{--bg:#F2EDE4;--bg2:#E6DECF;--fg:#111111;--fg-strong:#000000;--muted:#4A4A4A;--primary:#111111;--on-primary:#F2EDE4;--primary-text:#111111;--accent:#D62828;--on-accent:#FFFFFF;--card:#FFFFFF;--line:#111111;--r:0px;--r-lg:0px;--r-btn:0px;--track:.01em;--case:uppercase;--ink-bg:#D62828;--ink-fg:#FFFFFF;--mq-bg:#D62828;--mq-fg:#FFFFFF;--mq-bw:3px;--card-bw:3px;--fd:'Anton',system-ui,sans-serif;--fb:'Epilogue',system-ui,-apple-system,sans-serif;--fdw:400}
+.hero--kinetic .k-row:nth-child(2){color:var(--accent);padding-left:10vw}.hero--kinetic .k-row:nth-child(3){padding-left:20vw}
+.hero--kinetic .k-sub .pole{justify-self:end}.stack-card .tag{background:rgba(255,255,255,.2);color:inherit}

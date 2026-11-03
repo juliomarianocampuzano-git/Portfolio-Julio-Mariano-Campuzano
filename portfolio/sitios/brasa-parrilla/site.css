@@ -1,0 +1,8 @@
+/* Brasa · Parrilla y restaurante. Tokens basados en ui-ux-pro-max (#34 Restaurant/Food · Vibrant + Motion-Driven). */
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600;font-display:swap;src:url(../kit/fonts/playfair-display-600-italic.woff2) format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/playfair-display-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:800;font-display:swap;src:url(../kit/fonts/playfair-display-800-normal.woff2) format('woff2')}
+@font-face{font-family:'Karla';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/karla-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Karla';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/karla-600-normal.woff2) format('woff2')}
+:root{--bg:#140D0A;--bg2:#1E1410;--fg:#F5E9DC;--fg-strong:#FFF7EE;--muted:#BFA894;--primary:#E8590C;--on-primary:#140D0A;--primary-text:#FF8A3D;--accent:#FFD166;--on-accent:#140D0A;--card:#1F1612;--line:rgba(255,230,200,.13);--r:6px;--r-lg:10px;--r-btn:4px;--track:-.02em;--case:none;--ink-bg:#E8590C;--ink-fg:#140D0A;--mq-bg:transparent;--mq-fg:#FFD166;--loader-bg:#E8590C;--loader-fg:#140D0A;--inp-bg:#140D0A;--h1:clamp(2.8rem,8vw,7.4rem);--fd:'Playfair Display',system-ui,sans-serif;--fb:'Karla',system-ui,-apple-system,sans-serif;--fdw:800}
+.hero--full h1{font-style:italic}.hero--full .hero-copy{max-width:980px}

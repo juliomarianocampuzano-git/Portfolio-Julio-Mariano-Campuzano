@@ -1,0 +1,7 @@
+/* Patita · Software para veterinarias. Tokens basados en ui-ux-pro-max (#61 Veterinary Clinic · Claymorphism + Accessible). */
+@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../kit/fonts/nunito-sans-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:700;font-display:swap;src:url(../kit/fonts/nunito-sans-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Baloo 2';font-style:normal;font-weight:600;font-display:swap;src:url(../kit/fonts/baloo-2-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Baloo 2';font-style:normal;font-weight:800;font-display:swap;src:url(../kit/fonts/baloo-2-800-normal.woff2) format('woff2')}
+:root{--bg:#F0FDFA;--bg2:#CCFBF1;--fg:#134E4A;--fg-strong:#042F2E;--muted:#3F6B66;--primary:#0D9488;--on-primary:#FFFFFF;--primary-text:#0F766E;--accent:#EA580C;--on-accent:#FFFFFF;--card:#FFFFFF;--line:#B5E4DD;--r:18px;--r-lg:28px;--r-btn:999px;--track:-.01em;--case:none;--ink-bg:#134E4A;--ink-fg:#F0FDFA;--mq-bg:#EA580C;--mq-fg:#FFFFFF;--mq-bw:0;--inp-bg:#F7FFFD;--fd:'Baloo 2',system-ui,sans-serif;--fb:'Nunito Sans',system-ui,-apple-system,sans-serif;--fdw:800}
+.hero--split .stage{padding:20px}.cta-big{background:linear-gradient(135deg,#0D9488,#0F766E)}
