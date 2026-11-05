@@ -14,6 +14,7 @@ function safe(fn){try{fn()}catch(e){if(window.console)console.warn('fx:',e)}}
 
 /* ---------- hero: al salir, las dos lineas se abren ---------- */
 safe(function(){
+  if(!FINE||innerWidth<1025)return; /* en celular/tablet el titulo no se abre: se veria cortado */
   var lns=$$('.hero h1 .ln');if(lns.length<2)return; /* el chat no se inclina: se usa mientras se scrollea */
   var tl=G.timeline({scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:.5}});
   tl.to(lns[0],{xPercent:-28,ease:'none'},0).to(lns[1],{xPercent:28,ease:'none'},0);
