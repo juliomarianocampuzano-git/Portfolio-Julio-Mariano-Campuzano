@@ -360,3 +360,22 @@ setTimeout(function(){root.classList.add('ready')},1500);
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)go(e.target);else e.target.pause()})},{threshold:.25});
   Array.prototype.forEach.call(vs,function(v){io.observe(v)});
 })();
+
+/* titulo del hero: se achica solo si una linea no entra en su columna (pasa en EN e IT,
+   que tienen frases mas largas). Deja un margen para cuando las letras engordan con el puntero. */
+(function(){
+  var h=document.querySelector('.hero h1');if(!h)return;
+  function fit(){
+    h.style.fontSize='';
+    var lns=h.querySelectorAll('.ln');if(!lns.length)return;
+    var room=h.clientWidth*0.9,need=0;
+    Array.prototype.forEach.call(lns,function(l){
+      var w=l.querySelectorAll('.wd');if(!w.length){need=Math.max(need,l.scrollWidth);return}
+      var a=w[0],z=w[w.length-1];need=Math.max(need,z.offsetLeft+z.offsetWidth-a.offsetLeft);
+    });
+    if(need>room){var fs=parseFloat(getComputedStyle(h).fontSize);h.style.fontSize=(fs*room/need).toFixed(1)+'px'}
+  }
+  fit();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+  var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fit,120)});
+})();

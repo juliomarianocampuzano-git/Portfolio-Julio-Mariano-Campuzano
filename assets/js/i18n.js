@@ -59,7 +59,7 @@ var T={
 "Te paso con una persona del equipo.":["I’ll put you through to someone on the team.","Ti passo a una persona del team."],
 "Listo, lo cancelé. ¿Te ayudo con otra cosa?":["Done, I’ve cancelled it. Anything else?","Fatto, l’ho annullato. Ti aiuto con altro?"],
 "Llega mañana entre las 9 y las 13. Te aviso por acá cuando el repartidor esté cerca.":["It arrives tomorrow between 9 am and 1 pm. I’ll let you know here when the courier is close.","Arriva domani tra le 9 e le 13. Ti avviso qui quando il corriere è vicino."],
-"Mmm, no estoy seguro de entenderte. Puedo ayudarte con esto:":["Hmm, I’m not sure I understand (this demo bot speaks Spanish). I can help with:","Mmm, non sono sicuro di capirti (questo bot di prova parla spagnolo). Posso aiutarti con:"],
+"Mmm, no estoy seguro de entenderte. Puedo ayudarte con esto:":["Hmm, I’m not sure I understand. I can help with:","Mmm, non sono sicuro di capirti. Posso aiutarti con:"],
 "Pasame el número de pedido (está en el mail de compra). Por ejemplo: 2210.":["Send me your order number (it’s in the purchase email). For example: 2210.","Mandami il numero d’ordine (è nella mail d’acquisto). Per esempio: 2210."],
 "Pasame el número de pedido y te digo dónde está.":["Send me the order number and I’ll tell you where it is.","Mandami il numero d’ordine e ti dico dov’è."],
 "Se paga en el local: efectivo, transferencia o tarjeta. No pedimos seña.":["You pay at the salon: cash, transfer or card. No deposit needed.","Si paga in sede: contanti, bonifico o carta. Nessun anticipo."],
@@ -481,19 +481,40 @@ var T={
 var LANGS={es:-1,en:0,it:1},HTML_LANG={es:'es-AR',en:'en',it:'it'};
 var ATTRS=['alt','aria-label','placeholder','title','data-text','data-cursor'];
 var SKIP={SCRIPT:1,STYLE:1,CODE:1,NOSCRIPT:1,TEXTAREA:1};
-var orig=new WeakMap(),origAttr=new WeakMap(),cur='es',busy=false;
+var orig=new WeakMap(),origAttr=new WeakMap(),mine=new WeakMap(),cur='es',busy=false;
 function norm(s){return s.replace(/\s+/g,' ').trim()}
-function tr(es){if(cur==='es')return null;var r=T[norm(es)];return r?r[LANGS[cur]]:null}
+/* textos con numeros que arma la pagina (ej.: contador de la demo del bot) */
+var P=[[/^(\d+) respuestas? · ([\d,]+) s la última$/,function(m){var n=+m[1];return [n+(n===1?' reply':' replies')+' · last one '+m[2].replace(',','.')+' s',n+(n===1?' risposta':' risposte')+' · ultima in '+m[2]+' s']}]];
+function look(k){if(T[k])return T[k];for(var i=0;i<P.length;i++){var m=k.match(P[i][0]);if(m)return P[i][1](m)}return null}
+function tr(es){if(cur==='es')return null;var r=look(norm(es));return r?r[LANGS[cur]]:null}
+/* mensajes que la demo del bot arma con numeros y nombres: se traducen por partes */
+var F=[["Hoy tenemos:","Today we have:","Oggi abbiamo:"],["Pollo entero","Whole chicken","Pollo intero"],["Medio pollo","Half chicken","Mezzo pollo"],["Empanadas","Empanadas","Empanadas"],[" c/u"," each"," cad."],["Papas fritas","Fries","Patatine fritte"],["Gaseosa 1,5 L","Soda 1.5 L","Bibita 1,5 L"],
+["Hacemos envíos en Posadas: hasta 3 km es gratis, más lejos ","We deliver in Posadas: free up to 3 km, further away ","Consegniamo a Posadas: gratis fino a 3 km, più lontano "],[". Tarda entre 35 y 45 minutos.",". It takes 35 to 45 minutes.",". Ci vogliono 35-45 minuti."],
+["Nuestros servicios:","Our services:","I nostri servizi:"],["Corte","Haircut","Taglio"],["Color","Colour","Colore"],["Manicura","Manicure","Manicure"],["Perfilado de cejas","Eyebrow shaping","Definizione sopracciglia"],
+["Algunos productos:","Some products:","Alcuni prodotti:"],[" (sin stock)"," (out of stock)"," (esaurito)"],["Auriculares bluetooth","Bluetooth headphones","Cuffie bluetooth"],["Cargador rápido","Fast charger","Caricatore rapido"],["Lámpara LED","LED lamp","Lampada LED"],["Mouse inalámbrico","Wireless mouse","Mouse wireless"],["Parlante portátil","Portable speaker","Cassa portatile"],
+["3 cuotas sin interés con tarjeta en compras desde ","3 interest-free card instalments on purchases over ","3 rate senza interessi con carta per acquisti da "],
+["Anotado: ","Noted: ","Annotato: "],[". Total: ",". Total: ",". Totale: "],["Pedido #","Order #","Ordine #"],[" confirmado: "," confirmed: "," confermato: "],[". Te esperamos en el local en 25 minutos.",". See you at the shop in 25 minutes.",". Ti aspettiamo nel locale tra 25 minuti."],[". Llega a \""," . Arriving at \"",". Arriva a \""],["\" en 35 a 45 minutos.","\" in 35 to 45 minutes.","\" tra 35 e 45 minuti."],[": está en camino.",": it’s on its way.",": è in viaggio."],
+[" tengo estos horarios:",", I have these times:",", ho questi orari:"],["Perfecto, ","Perfect, ","Perfetto, "],[". ¿A nombre de quién lo agendo?",". Under what name should I book it?",". A che nome lo prenoto?"],["Listo, ","Done, ","Fatto, "],[" el "," on "," il "],[" a las "," at "," alle "],
+[". ¿Qué día te queda bien?",". Which day works for you?",". Che giorno ti va bene?"],[". Tenemos ",". We have ",". Ne abbiamo "],[" en stock. ¿Querés que te lo reserve?"," in stock. Shall I reserve one for you?"," disponibili. Vuoi che te lo tenga da parte?"],[". Ahora no hay stock; entra la semana que viene. ¿Te aviso cuando llegue?",". Out of stock right now; more arrives next week. Shall I let you know?",". Ora non è disponibile; arriva la settimana prossima. Ti avviso quando arriva?"],[". ¿Te saco un turno?",". Shall I book you in?",". Ti prenoto un appuntamento?"],["El ","On ","Il "],["Lun","Mon","Lun"],["Mar","Tue","Mar"],["Mié","Wed","Mer"],["Jue","Thu","Gio"],["Vie","Fri","Ven"],["Sáb","Sat","Sab"],["Dom","Sun","Dom"]];
+function frag(o){
+  if(cur==='es')return null;var i=LANGS[cur]+1,t=o,hit=false;
+  F.forEach(function(f,k){if(t.indexOf(f[0])>-1){t=t.split(f[0]).join('{{'+k+'}}');hit=true}});
+  if(!hit)return null;
+  return t.replace(/\{\{(\d+)\}\}/g,function(_,k){return F[+k][i]});
+}
 function doText(n){
-  if(!orig.has(n)){var k=norm(n.nodeValue);if(!k||!T[k])return;orig.set(n,n.nodeValue)}
+  var bot=n.parentElement&&n.parentElement.closest&&n.parentElement.closest('.bot-log,.bot-quick,.bot-top');
+  if(!orig.has(n)){var k=norm(n.nodeValue);if(!k)return;if(!look(k)&&!(bot&&frag(n.nodeValue)!=null&&cur!=='es'))return;orig.set(n,n.nodeValue)}
   var o=orig.get(n),t=tr(o);
-  var v=t==null?o:o.replace(/^(\s*)[\s\S]*?(\s*)$/,function(_,a,b){return a+t+b});
+  if(t==null&&bot)t=frag(o);
+  var v=t==null?o:(look(norm(o))?o.replace(/^(\s*)[\s\S]*?(\s*)$/,function(_,a,b){return a+t+b}):t);
   if(n.nodeValue!==v)n.nodeValue=v;
+  mine.set(n,v);
 }
 function doAttrs(el){
   var m=origAttr.get(el);
   for(var i=0;i<ATTRS.length;i++){var a=ATTRS[i],v=el.getAttribute(a);if(v==null)continue;
-    if(!m||!(a in m)){if(!T[norm(v)])continue;if(!m){m={};origAttr.set(el,m)}m[a]=v}
+    if(!m||!(a in m)){if(!look(norm(v)))continue;if(!m){m={};origAttr.set(el,m)}m[a]=v}
     var t=tr(m[a]);el.setAttribute(a,t==null?m[a]:t)}
 }
 function walk(root){
@@ -536,7 +557,7 @@ window.addEventListener('load',function(){
 if('MutationObserver' in window)new MutationObserver(function(ms){
   if(busy||cur==='es')return;busy=true;
   ms.forEach(function(m){
-    if(m.type==='characterData'){var n=m.target;if(orig.has(n)&&norm(n.nodeValue)!==norm(tr(orig.get(n))||'')){orig.delete(n)}doText(n)}
+    if(m.type==='characterData'){var n=m.target;if(mine.get(n)===n.nodeValue)return;orig.delete(n);doText(n)}
     else m.addedNodes.forEach(function(n){walk(n)});
   });
   busy=false;

@@ -8,7 +8,38 @@
   var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var busy=false,state=null,ctx={},misses=0,answered=0,mode='comida',started=false;
 
-  function norm(t){return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9ñ:\s]/g,' ').replace(/\s+/g,' ').trim()}
+  function norm0(t){return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9ñ:\s]/g,' ').replace(/\s+/g,' ').trim()}
+  /* con el sitio en ingles o italiano, el bot entiende las palabras clave en esos idiomas:
+     se pasan a su equivalente en español antes de buscar la respuesta */
+  var SYN={'see the menu':'menu','i want':'quiero','i d like':'quiero','id like':'quiero','vorrei':'quiero','voglio':'quiero','how much':'cuanto','pick up':'retiro','where is':'donde esta','book an appointment':'sacar un turno',
+    order:'pedido',ordine:'pedido',ordinare:'pedir',buy:'comprar',comprare:'comprar',menu:'menu',food:'comida',cibo:'comida',
+    hours:'horarios',hour:'hora',open:'abren',opening:'horario',orari:'horarios',orario:'horario',aperti:'abierto',
+    delivery:'envio',deliver:'envio',shipping:'envio',ship:'envio',consegna:'envio',consegne:'envios',spedizione:'envio',spedite:'mandan',
+    price:'precio',prices:'precios',cost:'cuesta',prezzo:'precio',prezzi:'precios',quanto:'cuanto',costa:'cuesta',
+    where:'donde',address:'direccion',location:'ubicacion',dove:'donde',indirizzo:'direccion',
+    pay:'pagar',payment:'pago',card:'tarjeta',cash:'efectivo',transfer:'transferencia',pagare:'pagar',pagamento:'pago',carta:'tarjeta',contanti:'efectivo',bonifico:'transferencia',
+    chicken:'pollo',chickens:'pollos',half:'medio',mezzo:'medio',fries:'papas',chips:'papas',patatine:'papas',soda:'gaseosa',drink:'gaseosa',coke:'coca',bibita:'gaseosa',
+    one:'un',a:'un',two:'2',three:'3',four:'4',six:'6',dozen:'docena',due:'2',tre:'3',quattro:'4',sei:'6',dozzina:'docena',and:'y',e:'y',
+    appointment:'turno',book:'reservar',booking:'turno',schedule:'agendar',appuntamento:'turno',prenota:'reservar',prenotare:'reservar',prenotazione:'turno',
+    haircut:'corte',cut:'corte',hair:'pelo',colour:'color',dye:'tintura',nails:'unas',manicure:'manicura',eyebrows:'cejas',brows:'cejas',taglio:'corte',capelli:'pelo',colore:'color',unghie:'unas',sopracciglia:'cejas',
+    change:'cambiar',reschedule:'reprogramar',cambiare:'cambiar',spostare:'mover',cancel:'cancelar',annulla:'cancelar',annullare:'cancelar',
+    products:'productos',product:'productos',catalog:'catalogo',prodotti:'productos',catalogo:'catalogo',
+    instalments:'cuotas',installments:'cuotas',rate:'cuotas',finance:'financiar',
+    track:'seguir',tracking:'tracking',traccia:'seguir',seguire:'seguir',
+    warranty:'garantia',garanzia:'garantia',return:'devolucion',exchange:'cambio',reso:'devolucion',
+    headphones:'auriculares',earphones:'auriculares',cuffie:'auriculares',charger:'cargador',caricatore:'cargador',lamp:'lampara',lampada:'lampara',light:'luz',speaker:'parlante',cassa:'parlante',mouse:'mouse',
+    stock:'stock',available:'stock',disponibile:'stock',
+    pickup:'retiro',collect:'retiro',ritiro:'retiro',ritirare:'retiro',
+    thanks:'gracias','thank you':'gracias',grazie:'gracias',hello:'hola',hi:'hola',hey:'hola',ciao:'hola',salve:'hola',
+    yes:'si',ok:'dale',okay:'dale',si:'si',today:'hoy',oggi:'hoy',tomorrow:'manana',domani:'manana',
+    monday:'lunes',tuesday:'martes',wednesday:'miercoles',thursday:'jueves',friday:'viernes',saturday:'sabado',
+    lunedi:'lunes',martedi:'martes',mercoledi:'miercoles',giovedi:'jueves',venerdi:'viernes',sabato:'sabado',
+    mon:'lun',tue:'mar',wed:'mie',thu:'jue',fri:'vie',sat:'sab',mer:'mie',gio:'jue',ven:'vie',sab:'sab',person:'persona',human:'humano',agent:'asesor',operatore:'persona'};
+  function norm(t){
+    var n=norm0(t),L=(document.documentElement.lang||'es').slice(0,2);if(L==='es')return n;
+    Object.keys(SYN).forEach(function(k){if(k.indexOf(' ')>-1&&n.indexOf(k)>-1)n=n.split(k).join(SYN[k])});
+    return n.split(' ').map(function(w){return Object.prototype.hasOwnProperty.call(SYN,w)?SYN[w]:w}).join(' ');
+  }
   function has(t,words){return words.some(function(w){return (' '+t+' ').indexOf(' '+w)>-1})}
   function money(n){return '$'+String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
   function now(){var d=new Date();return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
@@ -94,8 +125,9 @@
       }
     });return out;
   }
+  var N=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
   function days(){
-    var N=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],out=[],d=new Date();
+    var out=[],d=new Date();
     while(out.length<3){d.setDate(d.getDate()+1);if(d.getDay()!==0)out.push({lab:N[d.getDay()]+' '+d.getDate(),dw:d.getDay()})}
     return out;
   }
@@ -120,7 +152,7 @@
     }
     if(state==='day'){
       var N=['dom','lun','mar','mie','jue','vie','sab'],dd=null;
-      ctx.days.forEach(function(d,i){var l=norm(d.lab);if(!dd&&(t.indexOf(l)>-1||t.indexOf(N[d.dw])>-1||(i===0&&has(t,['manana']))))dd=d});
+      ctx.days.forEach(function(d,i){var l=norm(d.lab);if(!dd&&(t.indexOf(l)>-1||t.indexOf(norm0(N[d.dw]))>-1||(i===0&&has(t,['manana']))))dd=d});
       if(!dd)return say('Tengo lugar estos días:',ctx.days.map(function(d){return d.lab}).concat('Cancelar'));
       ctx.day=dd;var all=['9:30','11:00','14:30','16:00','17:30'];ctx.slots=all.filter(function(s,i){return (i+dd.dw)%4!==0});state='slot';
       return say('El '+dd.lab+' tengo estos horarios:',ctx.slots.concat('Cancelar'));

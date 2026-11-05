@@ -1019,3 +1019,10 @@ html.nofx .hero .bot{opacity:1!important;transform:none!important}
 @media (min-width:1081px){.bx--hero{grid-row:auto}.bx--neon{grid-column:1/-1}}
 @media (max-width:420px){.logo small{display:none}.logo b{font-size:.95rem}}
 @media (min-width:1081px){.bx--term{grid-column:span 2}.bx--neon figure{width:56%}.bx--neon .bx-t{align-content:center}}
+
+/* ---------- arreglos de desborde (todos los idiomas) ---------- */
+@media (max-width:900px){.hero-grid{grid-template-columns:minmax(0,1fr)}.hero-grid>*{min-width:0}}
+.bot-top{flex-wrap:wrap;row-gap:8px}
+.bot-quick{flex-wrap:wrap}
+.term code{white-space:pre-wrap;overflow-wrap:anywhere}
+@media (max-width:1080px){.bx--wide{flex-direction:column}.bx--wide figure{width:auto!important;border-right:0;border-bottom:1px solid rgba(255,255,255,.08)}.bx--term{grid-column:auto}}
