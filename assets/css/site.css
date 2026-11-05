@@ -944,3 +944,78 @@ html.nofx .hero .bot{opacity:1!important;transform:none!important}
 .bx-t{align-content:start}
 .bx--hero .bx-t{flex:0 0 auto}
 @media (max-width:700px){.bx--hero figure,.bx--wide figure{flex:none}}
+
+/* ---------- capturas de casos: marco de navegador + celular, sin recortes ---------- */
+.shots{grid-template-columns:minmax(0,2.6fr) minmax(0,1fr);align-items:center;gap:clamp(18px,3vw,40px)}
+.shots figure.dev{overflow:hidden;background:var(--ink);box-shadow:var(--pop)}
+.shots .dev video,.shots .dev img{display:block;width:100%;height:auto;object-fit:contain;will-change:auto}
+.dev--web{border-radius:14px}
+.dev-bar{display:flex;align-items:center;gap:7px;height:34px;padding:0 14px;background:#1C1433;color:#CFC6E8;font:600 .75rem/1 var(--f-b)}
+.dev-bar i{width:10px;height:10px;border-radius:50%;background:#FF5F57}.dev-bar i+i{background:#FEBC2E}.dev-bar i+i+i{background:#28C840}
+.dev-bar span{margin-left:12px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.08);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dev--phone{justify-self:center;width:min(100%,250px);padding:9px;border-radius:36px;rotate:2.5deg}
+.dev--phone img{border-radius:28px}
+.shots .dev figcaption{left:auto;right:12px;bottom:12px}
+.dev--phone figcaption{right:50%!important;translate:50% 0;bottom:20px!important}
+@media (max-width:760px){.shots{grid-template-columns:1fr}.dev--phone{width:min(70%,240px);rotate:0deg}.dev-bar{height:28px}}
+.case--hab .case-tag{background:#A30D0D;color:#FFD86B}
+
+/* ---------- bento GitHub: cada repo con su propia personalidad ---------- */
+.bx figure{aspect-ratio:16/10!important;flex:none!important;min-height:0!important}
+.bx figure img{object-fit:cover;object-position:top center}
+.bx--hero .bx-t{flex:1 1 auto}
+/* 1. registro de gastos: cuaderno contable */
+.bx--ledger{animation:none;border:0;background:#F4EEDD;color:#2B2418;border-radius:6px 22px 22px 6px;box-shadow:0 1px 0 #d9cfb4,0 28px 60px -28px rgba(0,0,0,.8);--ink:#2B2418}
+.bx--ledger::before{background:radial-gradient(420px circle at var(--mx) var(--my),rgba(220,60,40,.10),transparent 45%)}
+.bx--ledger::after{display:none}
+.bx--ledger figure{margin:18px 18px 0 46px;border:1px solid #d6cba9;border-radius:4px;box-shadow:4px 4px 0 #e3d9bd;rotate:-.6deg}
+.bx--ledger .bx-t{padding-left:46px;background:linear-gradient(90deg,transparent 30px,#E46A5A 30px,#E46A5A 32px,transparent 32px),repeating-linear-gradient(#F4EEDD 0 31px,#cfdcec 31px 32px)}
+.bx--ledger .bx-k{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#B0412E;letter-spacing:.02em;text-transform:none}
+.bx--ledger h3{color:#1E1810;font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:2rem;font-weight:700}
+.bx--ledger p{color:#4A4030}
+.bx--ledger .go{color:#B0412E}
+/* 2. búsqueda laboral: brutalista */
+.bx--brut{background:#FFC53D;color:#111;border:3px solid #111;border-radius:4px;box-shadow:8px 8px 0 #111;rotate:-1deg}
+.bx--brut::before,.bx--brut::after{display:none}
+.bx--brut figure{border-bottom:3px solid #111}
+.bx--brut figure img{filter:grayscale(1) contrast(1.1)}
+.bx--brut .bx-k{color:#111;background:#fff;border:2px solid #111;padding:4px 8px;width:fit-content}
+.bx--brut h3{color:#111;text-transform:uppercase;font-weight:900;letter-spacing:-.02em}
+.bx--brut p{color:#222}.bx--brut .go{color:#111;text-decoration:underline 3px;text-underline-offset:4px}
+/* 3. reportes CSV: plano técnico */
+.bx--plano{background-color:#0D2C66;background-image:linear-gradient(rgba(140,200,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(140,200,255,.13) 1px,transparent 1px);background-size:18px 18px;border:1px solid #6FB7FF;border-radius:2px;color:#CFE6FF}
+.bx--plano::after{background:radial-gradient(300px circle at var(--mx) var(--my),#7FD3FF,transparent 60%)}
+.bx--plano figure{margin:16px;border:1px dashed #7FC4FF;border-radius:0}
+.bx--plano figure img{filter:hue-rotate(-10deg) saturate(.7)}
+.bx--plano .bx-k{font-family:ui-monospace,Consolas,monospace;color:#7FD3FF}
+.bx--plano .bx-k::before{content:"// "}
+.bx--plano h3{font-family:ui-monospace,Consolas,monospace;color:#fff;font-size:1.35rem}
+.bx--plano p{color:#B9D6F5}.bx--plano .go{color:#7FD3FF}
+/* 4. pendientes: terminal (ya existente), con fósforo verde */
+.bx--term{background:#050806;border-color:#1f3b27;border-radius:10px}
+.bx--term .bx-k{color:#3CFF8B;font-family:ui-monospace,Consolas,monospace}
+.bx--term h3{font-family:ui-monospace,Consolas,monospace;color:#3CFF8B}
+/* 5. kestrel: neón */
+.bx--neon{background:#06040C;border:1px solid transparent;background:linear-gradient(#06040C,#06040C) padding-box,linear-gradient(120deg,#00F0FF,#7A5CFF 50%,#FF3EA5) border-box;border-radius:28px;box-shadow:0 0 50px -12px rgba(0,240,255,.45)}
+.bx--neon h3{background:linear-gradient(90deg,#00F0FF,#B79CFF,#FF3EA5);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:2rem}
+.bx--neon .bx-k{color:#00F0FF}
+.bx--neon figure img{filter:saturate(1.1)}
+@media (hover:hover) and (pointer:fine){
+  .bx--brut:hover{transform:translate(-4px,-4px);box-shadow:12px 12px 0 #111}
+  .bx--ledger:hover{transform:translateY(-6px) rotate(.4deg)}
+  .bx--plano:hover{border-color:#fff}
+}
+@media (max-width:700px){.bx--brut{rotate:0deg}.bx--ledger figure{margin-left:18px}.bx--ledger .bx-t{padding-left:46px}}
+
+/* ---------- selector de idioma IT / ENG / ES ---------- */
+.lng{display:inline-flex;align-items:center;gap:2px;padding:3px;border:2px solid var(--ink);border-radius:999px;background:#fff;box-shadow:3px 3px 0 var(--ink);margin-left:6px;flex:none}
+.lng button{min-width:40px;min-height:32px;padding:0 9px;border:0;border-radius:999px;background:transparent;color:var(--ink);font:700 .8125rem/1 var(--f-b);letter-spacing:.04em;cursor:pointer;transition:background .2s,color .2s}
+.lng button[aria-pressed="true"]{background:var(--ink);color:var(--sun)}
+.lng button:focus-visible{outline:2px solid #2F7BFF;outline-offset:2px}
+@media (hover:hover){.lng button[aria-pressed="false"]:hover{background:var(--sun)}}
+@media (max-width:1240px){.nav .btn--sm{display:none}}
+@media (max-width:420px){.lng button{min-width:34px;padding:0 6px}.lng{margin-left:0;box-shadow:2px 2px 0 var(--ink)}}
+/* bento: tarjeta principal de una sola fila y Kestrel a lo ancho */
+@media (min-width:1081px){.bx--hero{grid-row:auto}.bx--neon{grid-column:1/-1}}
+@media (max-width:420px){.logo small{display:none}.logo b{font-size:.95rem}}
+@media (min-width:1081px){.bx--term{grid-column:span 2}.bx--neon figure{width:56%}.bx--neon .bx-t{align-content:center}}

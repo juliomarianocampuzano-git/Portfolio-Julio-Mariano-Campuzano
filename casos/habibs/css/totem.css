@@ -1,0 +1,1956 @@
+/* =====================================================================
+   HABIB'S · TOTEM DE PEDIDOS (totem.html) — Joog Android 14, vertical
+   ---------------------------------------------------------------------
+   - Escala proporcional: 1rem = 2.2% del ancho (≈ 23.8px en 1080 px,
+     16px en 720 px). Así se ve igual en paneles 1080x1920 o 720x1280.
+   - Área táctil mínima: --toque (64px o más).
+   - Sin :hover. Feedback con :active.
+   - Sin scroll de página; solo listas internas con scroll vertical.
+   ===================================================================== */
+
+html.kiosco {
+  font-size: clamp(14px, 2.2vw, 28px);
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* En la vista previa (pantalla horizontal) el totem se dibuja a 1080x1920 */
+html.kiosco.vista-previa {
+  font-size: 23.76px;
+}
+
+.kiosco body {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: manipulation; /* sin doble-tap zoom */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none; /* sin menú al mantener presionado */
+  background: var(--papel);
+}
+
+.kiosco img {
+  pointer-events: none; /* evita "guardar imagen" con long-press */
+}
+
+.kiosco {
+  --toque: max(64px, 3.6rem);       /* mínimo táctil */
+  --toque-xl: max(76px, 4.5rem);    /* botones principales */
+  --margen: 0.9rem;
+  --r-hoja: max(40px, 1.8rem);
+  --reserva-barra: 7.8rem;          /* espacio que ocupa la barra del pedido */
+}
+
+/* Botones escalados para el totem */
+.kiosco .btn {
+  --btn-alto: var(--toque);
+  font-size: 1.1rem;
+  padding: 0 1.6rem;
+  gap: 0.6rem;
+}
+
+.kiosco .btn--grande {
+  --btn-alto: var(--toque-xl);
+  font-size: 1.3rem;
+  padding: 0 2rem;
+}
+
+.kiosco .btn svg {
+  width: 1.35em;
+  height: 1.35em;
+}
+
+.kiosco .btn-redondo {
+  width: var(--toque);
+  height: var(--toque);
+}
+
+.kiosco .badge {
+  font-size: 0.8rem;
+  padding: 0.5rem 0.9rem;
+}
+
+.kiosco .badge svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.kiosco .kicker {
+  font-size: 0.8rem;
+}
+
+.kicker--rojo {
+  color: var(--rojo);
+}
+
+/* Anula cualquier hover heredado (por si el equipo reporta puntero fino) */
+.kiosco .card:hover {
+  transform: none;
+  box-shadow: var(--sombra-1);
+}
+
+.kiosco .card:hover .card__media img {
+  transform: none;
+}
+
+/* Listas con scroll interno */
+.desliza {
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.desliza::-webkit-scrollbar {
+  display: none;
+}
+
+/* =====================================================================
+   ESCENARIO / VISTA PREVIA
+   ===================================================================== */
+.escenario {
+  position: fixed;
+  inset: 0;
+}
+
+.escenario__rotulo {
+  display: none;
+}
+
+.app {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--papel);
+  isolation: isolate;
+}
+
+.vista-previa .escenario {
+  background-color: var(--tinta);
+  background-image: var(--patron-blanco);
+  background-size: 72px 72px;
+  background-blend-mode: soft-light;
+}
+
+.vista-previa .escenario::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(163, 13, 13, 0.35), rgba(18, 18, 18, 0.96) 70%);
+}
+
+.vista-previa .escenario__rotulo {
+  display: block;
+  position: absolute;
+  left: 24px;
+  top: 20px;
+  z-index: 2;
+  margin: 0;
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--niebla);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.vista-previa .app {
+  inset: auto;
+  left: 50%;
+  top: 50%;
+  width: 1080px;
+  height: 1920px;
+  transform: translate(-50%, -50%) scale(var(--escala, 0.4));
+  border-radius: 64px;
+  box-shadow: 0 0 0 18px var(--tinta-suave), 0 0 0 20px rgba(255, 255, 255, 0.08), 0 60px 140px rgba(0, 0, 0, 0.6);
+}
+
+/* =====================================================================
+   PANTALLAS
+   ===================================================================== */
+.pantalla {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate3d(0, 1.5%, 0);
+  transition: opacity 300ms var(--ease-out), transform 420ms var(--ease-out), visibility 0s linear 420ms;
+}
+
+.pantalla.is-activa {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition: opacity 300ms var(--ease-out), transform 420ms var(--ease-out), visibility 0s;
+}
+
+/* =====================================================================
+   BARRA SUPERIOR (categorías, menú y pedido)
+   ===================================================================== */
+.barra-sup {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: var(--margen) var(--margen) 0;
+  min-height: 5.4rem;
+  padding: 0.6rem 0.7rem 0.6rem 1.6rem;
+  border-radius: var(--r-pill);
+  background: var(--grad-rojo);
+  color: var(--blanco);
+  box-shadow: var(--sombra-roja);
+}
+
+.barra-sup .brand {
+  min-height: var(--toque);
+  justify-content: center;
+}
+
+.barra-sup .brand__word {
+  font-size: 2.3rem;
+  color: var(--blanco);
+}
+
+.barra-sup .brand__tag {
+  font-size: 0.6rem;
+}
+
+.barra-sup .brand__logo {
+  height: 3.2rem;
+}
+
+.barra-sup__pasos {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--blanco-80);
+}
+
+.paso {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.8rem 0.35rem 0.35rem;
+  border-radius: var(--r-pill);
+}
+
+.paso__n {
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--blanco-14);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.paso.is-activo {
+  background: var(--blanco-14);
+  color: var(--blanco);
+}
+
+.paso.is-activo .paso__n {
+  background: var(--oro);
+  color: var(--tinta);
+}
+
+.kiosco .barra-sup__cancelar {
+  font-size: 1rem;
+}
+
+/* =====================================================================
+   1. BIENVENIDA
+   ===================================================================== */
+.pantalla--bienvenida {
+  background: var(--rojo-profundo);
+  color: var(--blanco);
+}
+
+.bienvenida__fotos img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  will-change: opacity, transform;
+}
+
+.bienvenida__fotos img.is-activa {
+  opacity: 1;
+  animation: kenburns 9s ease-out forwards;
+}
+
+/* La foto saliente conserva su movimiento mientras se desvanece */
+.bienvenida__fotos img.is-saliendo {
+  opacity: 0;
+  animation: kenburns 9s ease-out forwards;
+}
+
+.bienvenida__velo {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 18, 18, 0.6) 0%,
+    rgba(18, 18, 18, 0) 20%,
+    rgba(139, 0, 0, 0) 36%,
+    rgba(139, 0, 0, 0.86) 60%,
+    rgba(139, 0, 0, 0.98) 100%
+  );
+}
+
+.bienvenida__velo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--patron-blanco);
+  background-size: 96px 96px;
+  opacity: 0.08;
+  -webkit-mask-image: linear-gradient(0deg, #000 0%, #000 35%, transparent 60%);
+  mask-image: linear-gradient(0deg, #000 0%, #000 35%, transparent 60%);
+}
+
+.bienvenida__top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2rem 0;
+}
+
+.bienvenida__marca .brand__word {
+  font-size: 3.6rem;
+}
+
+.bienvenida__marca .brand__tag {
+  font-size: 0.8rem;
+}
+
+.bienvenida__marca .brand__logo {
+  height: 5rem;
+}
+
+.bienvenida__contenido {
+  position: relative;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+  padding: 0 2rem 2.4rem;
+}
+
+.bienvenida__slogan {
+  font-size: 5.7rem;
+  max-width: 7.6em;
+  text-shadow: 0 0.3rem 2rem rgba(18, 18, 18, 0.3);
+}
+
+.bienvenida__sub {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--blanco-80);
+}
+
+.kiosco .bienvenida__cta {
+  --btn-alto: 6.4rem;
+  width: 100%;
+  margin-top: 0.8rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2.7rem;
+  letter-spacing: 0.04em;
+  animation: latido 2.2s ease-out infinite;
+}
+
+.kiosco .bienvenida__cta svg {
+  width: 1em;
+  height: 1em;
+}
+
+.bienvenida__modos {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2.2rem;
+  width: 100%;
+  margin: 0.3rem 0 0;
+  padding: 0;
+  color: var(--blanco-80);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.bienvenida__modos li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bienvenida__modos .ico {
+  width: 1.4em;
+  height: 1.4em;
+  color: var(--oro);
+}
+
+/* =====================================================================
+   2. CATEGORÍAS
+   ===================================================================== */
+.inicio__cuerpo {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.4rem var(--margen) var(--reserva-barra);
+}
+
+.inicio__saludo {
+  padding: 0 0.5rem;
+}
+
+.inicio__titulo {
+  margin-top: 0.3rem;
+  font-size: 3.8rem;
+}
+
+.cats {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--margen);
+}
+
+.cat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 1.3rem;
+  border-radius: var(--r-hoja);
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--blanco);
+  text-align: left;
+  box-shadow: var(--sombra-2);
+  transition: transform var(--t-rapido) var(--ease-out);
+  animation: subir 520ms var(--ease-out) both;
+}
+
+.cat:active {
+  transform: scale(0.97);
+}
+
+.cat img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.cat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0) 35%, rgba(18, 18, 18, 0.82) 100%);
+}
+
+.cat__icono {
+  position: absolute;
+  top: 1.1rem;
+  left: 1.1rem;
+  display: grid;
+  place-items: center;
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 50%;
+  background: var(--blanco);
+  color: var(--rojo);
+  box-shadow: var(--sombra-2);
+}
+
+.cat__icono svg {
+  width: 55%;
+  height: 55%;
+}
+
+.cat__nombre {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.cat__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--blanco-80);
+}
+
+.cat__flecha {
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  background: var(--rojo);
+  color: var(--blanco);
+  flex: none;
+}
+
+.cat__flecha svg {
+  width: 50%;
+  height: 50%;
+}
+
+.favs__titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0.5rem 0.7rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.favs__titulo svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--oro);
+}
+
+.favs__grilla {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.fav {
+  display: flex;
+  flex-direction: column;
+  padding: 0.45rem;
+  border-radius: var(--r-xl);
+  background: var(--blanco);
+  box-shadow: var(--sombra-1);
+  text-align: left;
+  transition: transform var(--t-rapido) var(--ease-out);
+}
+
+.fav:active {
+  transform: scale(0.96);
+}
+
+.fav img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: calc(var(--r-xl) - 0.45rem);
+}
+
+.fav__nombre {
+  margin: 0.55rem 0.4rem 0;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.4em;
+}
+
+.fav__pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.3rem 0.4rem 0.3rem;
+}
+
+.fav__pie .precio {
+  font-size: 1.45rem;
+}
+
+.fav__mas {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: var(--rojo-08);
+  color: var(--rojo);
+}
+
+.fav__mas svg {
+  width: 60%;
+  height: 60%;
+}
+
+/* =====================================================================
+   3. MENÚ POR CATEGORÍA
+   ===================================================================== */
+.menu__cuerpo {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: var(--margen);
+  padding: var(--margen) var(--margen) 0;
+}
+
+.riel {
+  flex: none;
+  width: 9.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-bottom: var(--reserva-barra);
+}
+
+.riel__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 8.4rem;
+  padding: 0.9rem 0.5rem;
+  border-radius: var(--r-xl);
+  background: var(--blanco);
+  box-shadow: var(--sombra-1);
+  color: var(--tinta);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.15;
+  text-align: center;
+  transition: background-color var(--t-medio) var(--ease-out), color var(--t-medio), box-shadow var(--t-medio),
+    transform var(--t-rapido);
+}
+
+.riel__btn:active {
+  transform: scale(0.95);
+}
+
+.riel__icono {
+  display: grid;
+  place-items: center;
+  width: 3.7rem;
+  height: 3.7rem;
+  border-radius: 50%;
+  background: var(--rojo-08);
+  color: var(--rojo);
+  transition: background-color var(--t-medio), color var(--t-medio);
+}
+
+.riel__icono svg {
+  width: 55%;
+  height: 55%;
+}
+
+.riel__btn.is-activo {
+  background: var(--grad-rojo);
+  color: var(--blanco);
+  box-shadow: var(--sombra-roja);
+}
+
+.riel__btn.is-activo .riel__icono {
+  background: var(--blanco);
+  color: var(--rojo);
+}
+
+.riel__btn--volver {
+  min-height: 5.6rem;
+  flex-direction: row;
+  gap: 0.4rem;
+  background: var(--arena);
+  box-shadow: none;
+  font-size: 0.95rem;
+}
+
+.riel__btn--volver svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.menu__productos {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu__cabeza {
+  padding: 0.3rem 0.4rem 1rem;
+}
+
+.menu__titulo {
+  font-size: 3.3rem;
+  margin-top: 0.2rem;
+}
+
+.menu__sub {
+  margin-top: 0.3rem;
+  font-size: 1rem;
+  color: var(--tierra);
+}
+
+.menu__grilla {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: var(--margen);
+  padding: 0.2rem 0.2rem calc(var(--reserva-barra) + 0.6rem);
+}
+
+/* Tarjeta de producto en versión totem */
+.card--t {
+  border-radius: var(--r-xl);
+  animation: subir 460ms var(--ease-out) both;
+}
+
+.card--t .card__media {
+  margin: 0.5rem 0.5rem 0;
+  border-radius: calc(var(--r-xl) - 0.5rem);
+}
+
+.card--t .card__body {
+  padding: 0.8rem 1rem 1rem;
+  gap: 0.35rem;
+}
+
+.card--t .card__titulo {
+  font-size: 1.6rem;
+}
+
+.card--t .card__desc {
+  font-size: 0.92rem;
+}
+
+.card--t .card__pie {
+  padding-top: 0.5rem;
+}
+
+.card--t .card__pie .precio {
+  font-size: 1.9rem;
+}
+
+.card--t .btn-mas {
+  width: var(--toque);
+  height: var(--toque);
+  background: var(--grad-rojo);
+  color: var(--blanco);
+  box-shadow: var(--sombra-roja);
+}
+
+/* =====================================================================
+   BARRA DEL PEDIDO (flotante)
+   ===================================================================== */
+.barra-pedido {
+  position: absolute;
+  left: var(--margen);
+  right: var(--margen);
+  bottom: var(--margen);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 6.2rem;
+  padding: 0.7rem;
+  border-radius: var(--r-pill);
+  background: var(--blanco);
+  color: var(--tinta);
+  box-shadow: var(--sombra-3);
+  opacity: 0;
+  transform: translate3d(0, 130%, 0);
+  pointer-events: none;
+  transition: transform 460ms var(--ease-out), opacity 300ms, background-color 300ms;
+}
+
+.app[data-pantalla="inicio"] .barra-pedido,
+.app[data-pantalla="menu"] .barra-pedido {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.barra-pedido.is-llena {
+  background: var(--grad-rojo);
+  color: var(--blanco);
+}
+
+.barra-pedido__icono {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  background: var(--rojo-08);
+  color: var(--rojo);
+  flex: none;
+}
+
+.is-llena .barra-pedido__icono {
+  background: var(--blanco);
+}
+
+.barra-pedido__icono svg {
+  width: 48%;
+  height: 48%;
+}
+
+.barra-pedido__n {
+  position: absolute;
+  top: -0.2rem;
+  right: -0.3rem;
+  display: grid;
+  place-items: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.45rem;
+  border-radius: var(--r-pill);
+  background: var(--oro);
+  color: var(--tinta);
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 0 0 3px var(--blanco);
+}
+
+.barra-pedido:not(.is-llena) .barra-pedido__n {
+  display: none;
+}
+
+.barra-pedido__texto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.barra-pedido__texto span {
+  font-size: 1rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.barra-pedido__texto strong {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2.3rem;
+  letter-spacing: 0.02em;
+}
+
+.kiosco .barra-pedido__btn {
+  --btn-alto: 4.8rem;
+  font-size: 1.3rem;
+}
+
+.barra-pedido:not(.is-llena) .barra-pedido__btn {
+  display: none;
+}
+
+/* =====================================================================
+   HOJA DE PRODUCTO
+   ===================================================================== */
+.velo-t {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  background: rgba(18, 18, 18, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms var(--ease-out);
+}
+
+.velo-t.is-abierto {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hoja-t {
+  position: absolute;
+  left: var(--margen);
+  right: var(--margen);
+  bottom: var(--margen);
+  z-index: 41;
+  max-height: calc(100% - 4.5rem);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r-hoja);
+  background: var(--papel);
+  box-shadow: var(--sombra-3);
+  overflow: hidden;
+  transform: translate3d(0, 112%, 0);
+  transition: transform 480ms var(--ease-out);
+}
+
+.hoja-t.is-abierta {
+  transform: none;
+}
+
+.hoja-t__foto {
+  position: relative;
+  flex: none;
+  height: 17rem;
+  margin: 0.7rem 0.7rem 0;
+  border-radius: calc(var(--r-hoja) - 0.7rem);
+  overflow: hidden;
+}
+
+.hoja-t__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hoja-t__foto .badge {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+}
+
+.hoja-t__cerrar {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  background: var(--blanco);
+  color: var(--tinta);
+  box-shadow: var(--sombra-2);
+}
+
+.hoja-t__cuerpo {
+  flex: 1;
+  min-height: 0;
+  padding: 1.3rem 1.5rem 1.2rem;
+}
+
+.hoja-t__nombre {
+  font-size: 3.1rem;
+}
+
+.hoja-t__desc {
+  margin-top: 0.6rem;
+  font-size: 1.08rem;
+  line-height: 1.45;
+  color: var(--tierra);
+}
+
+.hoja-t__base {
+  margin-top: 0.8rem;
+  font-size: 2.1rem;
+}
+
+.grupo {
+  margin-top: 1.5rem;
+}
+
+.grupo__cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.grupo__titulo {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.grupo__tipo {
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--r-pill);
+  background: var(--arena);
+  color: var(--tierra);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.grupo__tipo--req {
+  background: var(--rojo-08);
+  color: var(--rojo);
+}
+
+.grupo__opciones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.opt {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: var(--toque);
+  padding: 0.7rem 1rem;
+  border-radius: var(--r-md);
+  background: var(--blanco);
+  box-shadow: inset 0 0 0 2px var(--tinta-06), var(--sombra-1);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  text-align: left;
+  transition: box-shadow var(--t-medio) var(--ease-out), transform var(--t-rapido), background-color var(--t-medio);
+}
+
+.opt:active {
+  transform: scale(0.97);
+}
+
+.opt__marca {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px var(--tinta-10);
+  color: var(--blanco);
+  transition: background-color var(--t-medio), box-shadow var(--t-medio);
+}
+
+.opt--multi .opt__marca {
+  border-radius: var(--r-xs);
+}
+
+.opt__marca svg {
+  width: 70%;
+  height: 70%;
+  opacity: 0;
+  stroke-width: 3;
+  transform: scale(0.4);
+  transition: opacity var(--t-rapido), transform var(--t-medio) var(--ease-spring);
+}
+
+.opt__texto {
+  flex: 1;
+  min-width: 0;
+}
+
+.opt__precio {
+  flex: none;
+  color: var(--rojo);
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.opt.is-activo {
+  box-shadow: inset 0 0 0 3px var(--rojo), var(--sombra-1);
+}
+
+.opt.is-activo .opt__marca {
+  background: var(--rojo);
+  box-shadow: none;
+}
+
+.opt.is-activo .opt__marca svg {
+  opacity: 1;
+  transform: none;
+}
+
+.opt--sin.is-activo .opt__texto {
+  color: var(--rojo);
+}
+
+.hoja-t__pie {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.1rem 1.1rem;
+  background: var(--blanco);
+  box-shadow: 0 -10px 30px rgba(18, 18, 18, 0.06);
+}
+
+.kiosco .stepper {
+  padding: 0.3rem;
+  gap: 0.3rem;
+}
+
+.kiosco .stepper__n {
+  min-width: 2.6rem;
+  font-size: 2.2rem;
+}
+
+.hoja-t__pie .btn {
+  flex: 1;
+  --btn-alto: var(--toque-xl);
+  font-size: 1.3rem;
+}
+
+/* =====================================================================
+   4. TU PEDIDO
+   ===================================================================== */
+.pedido__cuerpo {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.2rem var(--margen) var(--margen);
+}
+
+.pedido__cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 0.4rem;
+}
+
+.pedido__titulo {
+  font-size: 3.8rem;
+}
+
+.pedido__lista {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 0.2rem;
+}
+
+.linea-t {
+  display: grid;
+  grid-template-columns: 5.8rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0.8rem 0.6rem 0.6rem;
+  border-radius: var(--r-xl);
+  background: var(--blanco);
+  box-shadow: var(--sombra-1);
+  animation: subir 360ms var(--ease-out) both;
+}
+
+.linea-t img {
+  width: 5.8rem;
+  height: 5.8rem;
+  object-fit: cover;
+  border-radius: var(--r-md);
+}
+
+.linea-t__nombre {
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.linea-t__notas {
+  margin-top: 0.25rem;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  color: var(--tierra);
+}
+
+.nota--sin {
+  color: var(--rojo);
+  font-weight: 700;
+}
+
+.linea-t__precio {
+  margin-top: 0.35rem;
+  font-size: 1.7rem;
+}
+
+.linea-t .stepper .btn-redondo {
+  width: max(60px, 3.3rem);
+  height: max(60px, 3.3rem);
+}
+
+.linea-t .stepper__n {
+  font-size: 1.8rem;
+  min-width: 2rem;
+}
+
+.sugerido {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0.7rem 0.6rem 0.6rem;
+  border-radius: var(--r-xl);
+  background: var(--oro-20);
+  box-shadow: inset 0 0 0 2px rgba(230, 161, 0, 0.45);
+  animation: subir 420ms 120ms var(--ease-out) both;
+}
+
+.sugerido img {
+  width: 4.6rem;
+  height: 4.6rem;
+  border-radius: var(--r-md);
+  object-fit: cover;
+}
+
+.sugerido__texto {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.sugerido__texto strong {
+  display: block;
+  font-size: 1.15rem;
+}
+
+.sugerido__texto span {
+  font-size: 0.95rem;
+  color: var(--tierra);
+}
+
+.elecciones {
+  flex: none;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.eleccion__titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0.4rem 0.55rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.eleccion__n {
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--tinta);
+  color: var(--blanco);
+  font-size: 0.9rem;
+}
+
+.eleccion.is-lista .eleccion__n {
+  background: var(--rojo);
+}
+
+.opciones-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.opcion-grande {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-height: 5.4rem;
+  padding: 0.7rem 1.1rem 0.7rem 0.8rem;
+  border-radius: var(--r-xl);
+  background: var(--blanco);
+  box-shadow: inset 0 0 0 2px var(--tinta-06), var(--sombra-1);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.15;
+  text-align: left;
+  transition: box-shadow var(--t-medio) var(--ease-out), transform var(--t-rapido), background-color var(--t-medio);
+}
+
+.opcion-grande:active {
+  transform: scale(0.97);
+}
+
+.opcion-grande__icono {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  background: var(--papel);
+  color: var(--rojo);
+  transition: background-color var(--t-medio), color var(--t-medio);
+}
+
+.opcion-grande__icono svg {
+  width: 52%;
+  height: 52%;
+}
+
+.opcion-grande small {
+  display: block;
+  margin-top: 0.2rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--tierra);
+}
+
+.opcion-grande.is-activo {
+  box-shadow: inset 0 0 0 3px var(--rojo), var(--sombra-roja);
+}
+
+.opcion-grande.is-activo .opcion-grande__icono {
+  background: var(--rojo);
+  color: var(--blanco);
+}
+
+.pedido__pie {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 0.7rem 0.7rem 1.6rem;
+  border-radius: var(--r-pill);
+  background: var(--blanco);
+  box-shadow: var(--sombra-3);
+}
+
+.pedido__total {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.pedido__total span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--tierra);
+}
+
+.pedido__total .precio {
+  font-size: 2.6rem;
+}
+
+.pedido__pie .btn {
+  flex: 1;
+}
+
+.pedido__aviso {
+  flex: none;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--tierra);
+  margin: -0.3rem 0 -0.2rem;
+}
+
+.pedido-vacio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.pedido-vacio__icono {
+  display: grid;
+  place-items: center;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  background: var(--rojo-08);
+  color: var(--rojo);
+}
+
+.pedido-vacio__icono svg {
+  width: 45%;
+  height: 45%;
+}
+
+.pedido-vacio h2 {
+  font-size: 3rem;
+}
+
+.pedido-vacio p {
+  font-size: 1.2rem;
+  color: var(--tierra);
+}
+
+/* =====================================================================
+   5. CONFIRMACIÓN
+   ===================================================================== */
+.pantalla--listo {
+  background: var(--grad-rojo);
+  color: var(--blanco);
+}
+
+.pantalla--listo.patron::before {
+  opacity: 0.08;
+  background-size: 96px 96px;
+}
+
+.listo__cuerpo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: 2rem 1.6rem;
+  text-align: center;
+}
+
+.listo__check {
+  display: grid;
+  place-items: center;
+  width: 7.4rem;
+  height: 7.4rem;
+  border-radius: 50%;
+  background: var(--blanco);
+  color: var(--rojo);
+  box-shadow: 0 0 0 0.9rem var(--blanco-14), 0 0 0 1.8rem rgba(255, 255, 255, 0.06);
+  animation: rebote 700ms var(--ease-out) both;
+}
+
+.listo__check svg {
+  width: 55%;
+  height: 55%;
+  stroke-width: 3;
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: trazar 600ms 250ms var(--ease-out) forwards;
+}
+
+@keyframes trazar {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.listo__titulo {
+  font-size: 4.6rem;
+}
+
+.listo__tarjeta {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 2rem 1.8rem 1.8rem;
+  border-radius: var(--r-hoja);
+  background: var(--blanco);
+  color: var(--tinta);
+  box-shadow: var(--sombra-3);
+  animation: subir 600ms 200ms var(--ease-out) both;
+}
+
+.listo__numero {
+  font-size: 10rem;
+  line-height: 0.85;
+  color: var(--rojo);
+}
+
+.listo__chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.listo__chips .badge {
+  background: var(--papel);
+  color: var(--tinta);
+  box-shadow: inset 0 0 0 1.5px var(--tinta-06);
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+}
+
+.listo__paso {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border-radius: var(--r-xl);
+  background: var(--rojo-08);
+  text-align: left;
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.listo__paso-icono {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  background: var(--rojo);
+  color: var(--blanco);
+}
+
+.listo__paso-icono svg {
+  width: 52%;
+  height: 52%;
+}
+
+.listo__total {
+  font-size: 1.1rem;
+  color: var(--tierra);
+}
+
+.listo__total strong {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: var(--tinta);
+  margin-left: 0.4rem;
+}
+
+.listo__foto {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--blanco-80);
+}
+
+.listo__pie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.listo__pie .btn {
+  width: 100%;
+}
+
+.listo__cuenta {
+  font-size: 1rem;
+  color: var(--blanco-80);
+}
+
+/* =====================================================================
+   MODALES
+   ===================================================================== */
+.modal-t {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: rgba(18, 18, 18, 0.58);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 280ms var(--ease-out);
+}
+
+.modal-t.is-abierto {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-t__caja {
+  width: min(100%, 36rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.4rem 2rem 2rem;
+  border-radius: var(--r-hoja);
+  background: var(--blanco);
+  text-align: center;
+  box-shadow: var(--sombra-3);
+  transform: translate3d(0, 1.5rem, 0) scale(0.96);
+  transition: transform 420ms var(--ease-spring);
+}
+
+.modal-t.is-abierto .modal-t__caja {
+  transform: none;
+}
+
+.modal-t__icono {
+  display: grid;
+  place-items: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  background: var(--rojo-08);
+  color: var(--rojo);
+}
+
+.modal-t__icono svg {
+  width: 48%;
+  height: 48%;
+}
+
+.modal-t__titulo {
+  font-size: 3.1rem;
+}
+
+.modal-t__texto {
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: var(--tierra);
+  margin-bottom: 0.4rem;
+}
+
+.modal-t__secundario {
+  color: var(--rojo);
+}
+
+/* Anillo de cuenta regresiva */
+.anillo {
+  position: relative;
+  width: 7.2rem;
+  height: 7.2rem;
+}
+
+.anillo svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.anillo circle {
+  fill: none;
+  stroke-width: 8;
+}
+
+.anillo__fondo {
+  stroke: var(--arena);
+}
+
+.anillo__progreso {
+  stroke: var(--rojo);
+  stroke-linecap: round;
+  stroke-dasharray: 276.46;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.anillo__n {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: var(--rojo);
+}
+
+/* Panel del personal */
+.staff {
+  width: min(100%, 46rem);
+  max-height: 90%;
+  align-items: stretch;
+  text-align: left;
+}
+
+.staff__cabeza {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.staff__red {
+  padding: 0.5rem 1rem;
+  border-radius: var(--r-pill);
+  background: var(--papel);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.staff__red.is-offline {
+  background: var(--rojo);
+  color: var(--blanco);
+}
+
+.staff__lista {
+  flex: 1;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ticket {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0.8rem 0.8rem 1.1rem;
+  border-radius: var(--r-lg);
+  background: var(--papel);
+}
+
+.ticket__n {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--rojo);
+  line-height: 1;
+}
+
+.ticket__detalle {
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.ticket__detalle strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.ticket .btn {
+  --btn-alto: var(--toque);
+  font-size: 0.95rem;
+  padding: 0 1.1rem;
+}
+
+.ticket[data-estado="listo"] .btn {
+  background: var(--listo);
+  color: var(--blanco);
+}
+
+.staff__vacio {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--tierra);
+}
+
+.staff__acciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+/* Toast del totem (vive dentro de #app para respetar la vista previa) */
+.toast-t {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--reserva-barra) + 0.8rem);
+  z-index: 70;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem 1.6rem;
+  border-radius: var(--r-pill);
+  background: var(--tinta);
+  color: var(--blanco);
+  font-weight: 600;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  box-shadow: var(--sombra-3);
+  opacity: 0;
+  transform: translate3d(-50%, 1.5rem, 0);
+  pointer-events: none;
+  transition: transform 360ms var(--ease-spring), opacity 260ms;
+}
+
+.toast-t svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  color: var(--oro);
+}
+
+.toast-t.is-visible {
+  opacity: 1;
+  transform: translate3d(-50%, 0, 0);
+}
+
+/* Al cambiar cantidades no se re-anima la lista (se siente más firme) */
+.sin-anim .linea-t,
+.sin-anim .sugerido {
+  animation: none;
+}
+
+/* =====================================================================
+   v3 · AJUSTES VISUALES DEL TOTEM
+   ===================================================================== */
+
+/* Textos legibles a la distancia de un totem */
+.kiosco .badge { font-size: 0.95rem; white-space: nowrap; }
+.kiosco .kicker { font-size: 0.95rem; }
+.barra-sup .brand__tag { font-size: 0.7rem; }
+.barra-sup__pasos { font-size: 1rem; }
+.paso__n { font-size: 0.95rem; }
+.bienvenida__modos { font-size: 1.15rem; }
+.menu__sub { font-size: 1.1rem; }
+.fav__nombre { font-size: 1.05rem; }
+.grupo__tipo { font-size: 0.85rem; white-space: nowrap; }
+.opt { font-size: 1.15rem; }
+.opt__precio { font-size: 1.05rem; }
+.linea-t__nombre { font-size: 1.35rem; }
+.linea-t__notas { font-size: 1.05rem; }
+.sugerido__texto strong { font-size: 1.25rem; }
+.sugerido__texto span { font-size: 1.05rem; }
+.eleccion__titulo { font-size: 1.3rem; }
+.opcion-grande { font-size: 1.35rem; }
+.opcion-grande small { font-size: 1rem; }
+.pedido__aviso { font-size: 1.1rem; }
+.listo__cuenta { font-size: 1.1rem; }
+
+/* Categorías: la columna ocupa todo el alto, sin hueco abajo */
+.riel__btn {
+  flex: 1 1 auto;
+  max-height: 15rem;
+  font-size: 1.2rem;
+}
+
+.riel__btn--volver {
+  flex: none;
+  font-size: 1.1rem;
+}
+
+.riel__icono {
+  width: 4.4rem;
+  height: 4.4rem;
+}
+
+/* Productos: una tarjeta por fila que llena la pantalla, con la descripción entera */
+.menu__grilla {
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: minmax(min-content, 1fr);
+  align-content: stretch;
+}
+
+.card--t {
+  flex-direction: row;
+}
+
+.card--t .card__media {
+  flex: 0 0 40%;
+  aspect-ratio: auto;
+  margin: 0.6rem 0 0.6rem 0.6rem;
+}
+
+.card--t .card__media img {
+  position: absolute;
+  inset: 0;
+}
+
+.card--t .card__media .badge {
+  top: 0.7rem;
+  left: 0.7rem;
+}
+
+.card--t .card__body {
+  min-width: 0;
+  padding: 1.1rem 1.2rem 1rem;
+  gap: 0.45rem;
+}
+
+.card--t .card__titulo {
+  font-size: 2.2rem;
+}
+
+.card--t .card__desc {
+  display: block;
+  overflow: visible;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.card--t .card__pie .precio {
+  font-size: 2.4rem;
+}
+
+/* Tu pedido: lista arriba; elecciones y total siempre al alcance de la mano */
+.pedido__lista {
+  flex: 0 1 auto;
+  min-height: 11rem;
+}
+
+.pedido__lista.hay-mas {
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 4rem), transparent);
+  mask-image: linear-gradient(180deg, #000 calc(100% - 4rem), transparent);
+}
+
+.elecciones {
+  flex: 1 0 auto;
+  max-height: 28rem;
+  margin-top: auto;
+  grid-auto-rows: 1fr;
+}
+
+.eleccion {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.opciones-2 {
+  flex: 1;
+}
+
+.opcion-grande__icono {
+  width: 4.2rem;
+  height: 4.2rem;
+}
+
+.pedido__pie .btn:disabled {
+  background: var(--arena);
+  color: var(--tierra);
+  box-shadow: none;
+  opacity: 1;
+}
+
+/* Confirmación */
+.listo__total strong {
+  font-size: 2.6rem;
+}
+
+.listo__foto {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.listo__foto svg {
+  width: 1.5em;
+  height: 1.5em;
+  color: var(--oro);
+}
+
+/* Fuera del formato totem (celular en vertical): tarjeta clásica con scroll */
+@media (max-width: 600px) {
+  html:not(.vista-previa) .menu__grilla {
+    grid-auto-rows: auto;
+    align-content: start;
+  }
+  html:not(.vista-previa) .card--t {
+    flex-direction: column;
+  }
+  html:not(.vista-previa) .card--t .card__media {
+    flex: none;
+    aspect-ratio: 4 / 3;
+    margin: 0.5rem 0.5rem 0;
+  }
+  html:not(.vista-previa) .card--t .card__titulo {
+    font-size: 1.6rem;
+  }
+  html:not(.vista-previa) .card--t .card__pie .precio {
+    font-size: 1.7rem;
+  }
+}

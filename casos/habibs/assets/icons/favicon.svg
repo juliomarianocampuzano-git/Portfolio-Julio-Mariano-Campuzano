@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon provisorio: reemplazar por el isotipo oficial cuando esté disponible -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a30d0d"/>
+      <stop offset="1" stop-color="#8b0000"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#g)"/>
+  <path d="M20 14h7v14h10V14h7v32h-7V34H27v12h-7z" fill="#fff"/>
+  <rect x="22" y="50" width="20" height="3" rx="1.5" fill="#e6a100"/>
+</svg>

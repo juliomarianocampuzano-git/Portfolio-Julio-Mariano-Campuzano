@@ -1,0 +1,152 @@
+/* =====================================================================
+   HABIB'S · CAPA DE MOVIMIENTO (v3)
+   Todo lo que oculta contenido depende de html.motion, que solo se pone
+   si el usuario NO pidió reducir movimiento. Sin JS o con reduced motion
+   la página se ve completa y estática.
+   Regla: solo se animan transform y opacity.
+   ===================================================================== */
+
+/* ---------- Intro: telón rojo con la marca (primera visita de la sesión) ---------- */
+.intro { display: none; }
+.motion .intro {
+  display: grid; place-items: center; position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none; overflow: hidden;
+  /* Red de seguridad: si el JS no llega, el telón se va solo */
+  animation: intro-fuera 0.01s 3.2s forwards;
+}
+.motion.sin-intro .intro,
+.motion .intro.is-fuera { display: none; }
+@keyframes intro-fuera { to { opacity: 0; visibility: hidden; } }
+.intro__panel { position: absolute; left: 0; right: 0; height: 50.5%; will-change: transform; }
+.intro__panel--a { top: 0; background: linear-gradient(180deg, var(--rojo-profundo), var(--rojo)); }
+.intro__panel--b { bottom: 0; background: linear-gradient(0deg, var(--rojo-profundo), var(--rojo)); }
+.intro__marca {
+  position: relative; display: flex; font-family: var(--font-display); color: var(--blanco);
+  font-size: clamp(4.5rem, 18vw, 13rem); line-height: 0.85; letter-spacing: 0.02em; overflow: hidden;
+}
+.intro__marca span { display: inline-block; }
+.intro__tag {
+  position: absolute; top: calc(50% + clamp(2.6rem, 9vw, 6.6rem)); color: var(--oro);
+  font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; font-size: 0.8rem;
+}
+
+/* ---------- Antes de que arranque el timeline: hero oculto para que no parpadee ---------- */
+.motion:not(.motion-listo) .hero__contenido,
+.motion:not(.motion-listo) .hero__destacado { opacity: 0; }
+
+/* GSAP controla estos transform: se apagan las animaciones CSS equivalentes */
+.motion .hero__foto,
+.motion .hero__destacado,
+.motion .anim-rebote,
+.motion .card--entra { animation: none !important; }
+.motion .hero__foto { will-change: transform; transform-origin: 50% 60%; }
+
+/* Botones que mueve GSAP: sin transición CSS de transform/opacity (se pelearían con el tween) */
+.motion .hero__ctas .btn,
+.motion .cabecera__pedir,
+.motion .btn-agregar,
+.motion .asador__pie .btn {
+  transition: box-shadow var(--t-medio) var(--ease-out), background-color var(--t-medio) var(--ease-out), color var(--t-medio) var(--ease-out);
+}
+
+/* ---------- Barra de progreso de scroll (rojo/dorado) ---------- */
+.progreso { position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 200; pointer-events: none; }
+.progreso span {
+  display: block; height: 100%; transform-origin: 0 50%; transform: scaleX(0);
+  background: linear-gradient(90deg, var(--oro), var(--rojo), var(--oro));
+}
+html:not(.motion) .progreso { display: none; }
+
+/* ---------- Lenis ---------- */
+html.con-lenis { scroll-behavior: auto; }
+html.con-lenis body { overscroll-behavior: none; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ---------- Hero ---------- */
+/* Los contadores heredan el estilo del dato que los contiene */
+.hero__datos [data-count] { font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; display: inline; margin: 0; opacity: 1; }
+.hero__brasas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+html:not(.motion) .hero__brasas { display: none; }
+.hero__contenido, .hero__destacado { z-index: 2; }
+.hero__titulo .word { display: inline-block; white-space: nowrap; }
+.hero__titulo .char { display: inline-block; will-change: transform; }
+.hero__titulo .whitespace { display: inline; }
+
+/* Botón "Pedir por WhatsApp": pulso de atención (solo con movimiento) */
+.motion .btn-wa-hero { overflow: visible; }
+.motion .btn-wa-hero::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  box-shadow: 0 0 0 3px var(--oro);
+  animation: pulso 2.4s var(--ease-out) 2.6s infinite;
+  opacity: 0;
+}
+@keyframes pulso {
+  0% { transform: scale(1); opacity: 0.9; }
+  70%, 100% { transform: scale(1.03, 1.14); opacity: 0; }
+}
+
+/* ---------- Cintas (marquees inclinados) ---------- */
+.marquee-zona { position: relative; padding: clamp(1.5rem, 4vw, 3rem) 0; overflow: hidden; }
+.marquee { overflow: hidden; white-space: nowrap; transform: rotate(-2deg); margin-inline: -2vw; }
+.marquee + .marquee { transform: rotate(1.5deg); margin-top: -0.4rem; }
+.marquee__pista { display: inline-flex; align-items: center; gap: clamp(1rem, 3vw, 2.2rem); padding: 0.9rem 0; will-change: transform; }
+.marquee--rojo { background: var(--rojo); color: var(--blanco); box-shadow: 0 18px 40px -18px rgba(139, 0, 0, 0.6); position: relative; z-index: 2; }
+.marquee--rojo span { font-family: var(--font-display); font-size: clamp(2rem, 5.5vw, 4.2rem); line-height: 1; letter-spacing: 0.02em; }
+/* Estrella árabe de 8 puntas dibujada con CSS (no depende de glifos de la fuente) */
+.mq-estrella {
+  display: inline-block; flex: none; width: clamp(1rem, 2.4vw, 1.6rem); aspect-ratio: 1; background: var(--oro);
+  clip-path: polygon(50% 0%, 61% 22%, 85% 15%, 78% 39%, 100% 50%, 78% 61%, 85% 85%, 61% 78%, 50% 100%, 39% 78%, 15% 85%, 22% 61%, 0% 50%, 22% 39%, 15% 15%, 39% 22%);
+}
+.marquee--tinta { background: var(--tinta); color: var(--blanco); }
+.mq-prod { display: inline-flex; align-items: center; gap: 0.8rem; padding: 0.35rem 1.1rem 0.35rem 0.35rem; border-radius: var(--r-pill); background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(230, 161, 0, 0.35); }
+.mq-prod img { width: 3.2rem; height: 3.2rem; border-radius: 50%; object-fit: cover; }
+.mq-prod b { font-weight: 600; }
+.mq-prod em { font-style: normal; color: var(--oro); font-family: var(--font-display); font-size: 1.35rem; letter-spacing: 0.03em; }
+/* Sin movimiento: las cintas se acomodan en varias líneas, sin loop */
+html:not(.motion) .marquee { white-space: normal; }
+html:not(.motion) .marquee__pista { flex-wrap: wrap; justify-content: center; padding-inline: 16px; }
+
+/* ---------- Tarjetas ---------- */
+.card { will-change: transform; }
+.card .js-tilt-glare { border-radius: inherit; }
+.card__media img { transition: transform 0.6s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .card__media img { transform: scale(1.06); }
+}
+
+/* ---------- Carrito: vuelo, chispas y +1 ---------- */
+.chispa { position: fixed; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; pointer-events: none; z-index: 9998; background: var(--rojo); }
+.chispa--oro { background: var(--oro); }
+.vuela { position: fixed; z-index: 9998; pointer-events: none; border-radius: 50%; object-fit: cover; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); border: 3px solid var(--blanco); will-change: transform; }
+.mas-uno { position: fixed; z-index: 9998; pointer-events: none; font-family: var(--font-display); font-size: 2rem; color: var(--oro); text-shadow: 0 2px 0 var(--rojo-profundo); }
+
+/* ---------- Cursor dorado (solo desktop con mouse) ---------- */
+.cursor {
+  position: fixed; top: 0; left: 0; z-index: 9997; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--oro); pointer-events: none; will-change: transform;
+  box-shadow: 0 0 14px rgba(230, 161, 0, 0.6);
+}
+.cursor--producto { background: rgba(230, 161, 0, 0.28); box-shadow: inset 0 0 0 1px rgba(230, 161, 0, 0.9); }
+
+/* ---------- Celulares: animación liviana ----------
+   Sin telón ni letras: el hero entra solo con CSS y se pinta sin esperar al JS. */
+@keyframes subir-liviano { from { opacity: 0; transform: translate3d(0, 16px, 0); } }
+@media (max-width: 767px) {
+  .motion .intro { display: none; }
+  .motion:not(.motion-listo) .hero__contenido { opacity: 1; }
+  .motion .hero__contenido > * { animation: subir-liviano 0.55s var(--ease-out) both; }
+  .motion .hero__contenido > :nth-child(2) { animation-delay: 0.06s; }
+  .motion .hero__contenido > :nth-child(3) { animation-delay: 0.12s; }
+  .motion .hero__contenido > :nth-child(4) { animation-delay: 0.18s; }
+  .motion .hero__contenido > :nth-child(5) { animation-delay: 0.24s; }
+}
+
+/* ---------- El asador ---------- */
+.motion .asador .capa { will-change: transform, opacity; }
+
+/* ---------- Red de seguridad para reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .intro, .progreso, .hero__brasas, .cursor { display: none !important; }
+  .marquee { white-space: normal; transform: none !important; }
+  .marquee__pista { flex-wrap: wrap; justify-content: center; }
+}

@@ -22,7 +22,7 @@ safe(function(){
 /* ---------- velocidad de scroll -> inclinacion (titulos, banda, capturas) ---------- */
 safe(function(){
   if(!FINE)return; /* en tactil el scroll nativo con inercia ya mueve suficiente */
-  var band=$$('.band-row'),heads=$$('.sechead .h2,.faq-l .h2,.contact h2'),shots=$$('.shots figure');
+  var band=$$('.band-row'),heads=$$('.sechead .h2,.faq-l .h2,.contact h2'),shots=[];
   var sb=band.map(function(el){return G.quickTo(el,'skewX',{duration:.45,ease:'power3.out'})});
   var sh=heads.concat(shots).map(function(el){return G.quickTo(el,'skewY',{duration:.6,ease:'power3.out'})});
   var idle=null;
@@ -77,18 +77,18 @@ safe(function(){
   if(!FINE)return;
   var CH='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*';
   $$('.nav a.l,.frow nav a').forEach(function(a){
-    var txt=a.textContent,run=0;
-    a.setAttribute('aria-label',txt);
+    var txt=a.textContent,run=0,busy=false;
     a.addEventListener('pointerenter',function(){
+      if(!busy)txt=a.textContent;busy=true; /* lee el texto en el idioma actual */
       var f=0,id=++run;
       (function step(){
         if(id!==run)return;
         var out='';for(var i=0;i<txt.length;i++){out+=i<f/2||txt[i]===' '?txt[i]:CH[(Math.random()*CH.length)|0]}
         a.textContent=out;f++;
-        if(f/2<txt.length)requestAnimationFrame(step);else a.textContent=txt;
+        if(f/2<txt.length)requestAnimationFrame(step);else{a.textContent=txt;busy=false}
       })();
     });
-    a.addEventListener('pointerleave',function(){run++;a.textContent=txt});
+    a.addEventListener('pointerleave',function(){run++;if(busy)a.textContent=txt;busy=false});
   });
 });
 

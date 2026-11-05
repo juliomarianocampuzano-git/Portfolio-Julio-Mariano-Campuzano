@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es-PY" class="kiosco">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Kiosco: sin zoom, sin rebote, ocupa también el área del notch/barras -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=overlays-content"
+    />
+    <title>Habib's · Totem de pedidos</title>
+    <meta name="theme-color" content="#a30d0d" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="robots" content="noindex" />
+
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+
+    <!-- Tipografías propias (assets/fonts): precacheadas por sw.js, funcionan sin internet -->
+    <link rel="preload" href="assets/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/outfit-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="preload" as="image" href="assets/fotos/hero-cheese.webp" />
+    <link rel="stylesheet" href="css/brand.css" />
+    <link rel="stylesheet" href="css/totem.css" />
+  </head>
+
+  <body>
+    <!-- Todo vive dentro de #app: en vista previa (pantalla horizontal) se
+         escala como un totem 1080x1920 real; en el Joog ocupa la pantalla. -->
+    <div class="escenario" id="escenario">
+      <p class="escenario__rotulo">Vista previa · Totem Joog 1080 × 1920</p>
+
+      <div id="app" class="app">
+        <!-- ===== 1. BIENVENIDA ===== -->
+        <section class="pantalla pantalla--bienvenida is-activa" id="s-bienvenida" data-pantalla="bienvenida" aria-label="Bienvenida">
+          <div class="bienvenida__fotos" aria-hidden="true">
+            <img src="assets/fotos/hero-cheese.webp" alt="" class="is-activa" />
+            <img src="assets/fotos/hero-spit.webp" alt="" />
+            <img src="assets/fotos/lomito-noche.webp" alt="" />
+          </div>
+          <div class="bienvenida__velo" aria-hidden="true"></div>
+
+          <header class="bienvenida__top">
+            <div class="brand brand--claro bienvenida__marca" data-brand="claro" id="marca-staff">
+              <span class="brand__word">HABIB'S</span><span class="brand__tag">LOMITOS ÁRABES</span>
+            </div>
+            <span class="badge badge--vidrio">
+              <svg class="ico" aria-hidden="true"><use href="#i-reloj"></use></svg>
+              <span id="bienvenida-estado">Abierto 18:00 – 01:00</span>
+            </span>
+          </header>
+
+          <div class="bienvenida__contenido">
+            <span class="badge badge--vidrio">
+              <svg class="ico" aria-hidden="true"><use href="#i-pin"></use></svg>
+              Encarnación · Zona Baja
+            </span>
+            <!-- Slogan oficial: textual, sin modificar -->
+            <h1 class="display bienvenida__slogan">Somos la lomitería más rica de Encarnación</h1>
+            <p class="bienvenida__sub">Invitame pues un lomito.</p>
+
+            <button class="btn btn--blanco bienvenida__cta" type="button" id="btn-empezar">
+              <svg class="ico" aria-hidden="true"><use href="#i-mano"></use></svg>
+              Tocá para pedir
+            </button>
+
+            <ul class="bienvenida__modos">
+              <li><svg class="ico" aria-hidden="true"><use href="#i-plato"></use></svg>Para comer aquí</li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-llevar"></use></svg>Para llevar</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ===== 2. CATEGORÍAS ===== -->
+        <section class="pantalla pantalla--inicio" id="s-inicio" data-pantalla="inicio" aria-label="Categorías">
+          <div class="barra-sup-slot"></div>
+          <div class="inicio__cuerpo" id="inicio-cuerpo"></div>
+        </section>
+
+        <!-- ===== 3. MENÚ POR CATEGORÍA ===== -->
+        <section class="pantalla pantalla--menu" id="s-menu" data-pantalla="menu" aria-label="Menú">
+          <div class="barra-sup-slot"></div>
+          <div class="menu__cuerpo">
+            <nav class="riel" id="riel" aria-label="Categorías"></nav>
+            <div class="menu__productos">
+              <div class="menu__cabeza" id="menu-cabeza"></div>
+              <div class="menu__grilla desliza" id="menu-grilla"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== 4. CARRITO / TU PEDIDO ===== -->
+        <section class="pantalla pantalla--pedido" id="s-pedido" data-pantalla="pedido" aria-label="Tu pedido">
+          <div class="barra-sup-slot"></div>
+          <div class="pedido__cuerpo" id="pedido-cuerpo"></div>
+        </section>
+
+        <!-- ===== 5. CONFIRMACIÓN ===== -->
+        <section class="pantalla pantalla--listo patron" id="s-listo" data-pantalla="listo" aria-label="Pedido confirmado">
+          <div class="listo__cuerpo" id="listo-cuerpo"></div>
+        </section>
+
+        <!-- Barra flotante del pedido (categorías y menú) -->
+        <div class="barra-pedido" id="barra-pedido" aria-hidden="true">
+          <span class="barra-pedido__icono">
+            <svg class="ico" aria-hidden="true"><use href="#i-bolsa"></use></svg>
+            <span class="barra-pedido__n" id="barra-n">0</span>
+          </span>
+          <span class="barra-pedido__texto">
+            <span>Tu pedido</span>
+            <strong id="barra-total">Gs. 0</strong>
+          </span>
+          <button class="btn btn--blanco barra-pedido__btn" type="button" data-ir="pedido">
+            Ver pedido
+            <svg class="ico" aria-hidden="true"><use href="#i-flecha-der"></use></svg>
+          </button>
+        </div>
+
+        <!-- ===== HOJA DE PRODUCTO (personalización) ===== -->
+        <div class="velo-t" id="velo-producto"></div>
+        <section class="hoja-t" id="hoja-producto" role="dialog" aria-modal="true" aria-label="Personalizá tu producto"></section>
+
+        <!-- ===== MODALES ===== -->
+        <div class="modal-t" id="modal-inactivo" role="alertdialog" aria-modal="true" aria-labelledby="inactivo-titulo">
+          <div class="modal-t__caja">
+            <div class="anillo" id="anillo-inactivo">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <circle class="anillo__fondo" cx="50" cy="50" r="44"></circle>
+                <circle class="anillo__progreso" cx="50" cy="50" r="44"></circle>
+              </svg>
+              <span class="anillo__n" id="inactivo-n">15</span>
+            </div>
+            <h2 class="display modal-t__titulo" id="inactivo-titulo">¿Seguís ahí?</h2>
+            <p class="modal-t__texto">Si no tocás la pantalla, empezamos de nuevo para el próximo cliente.</p>
+            <button class="btn btn--rojo btn--grande btn--bloque" type="button" data-accion="seguir">Sí, sigo pidiendo</button>
+            <button class="btn btn--contorno btn--grande btn--bloque modal-t__secundario" type="button" data-accion="reiniciar">
+              Empezar de nuevo
+            </button>
+          </div>
+        </div>
+
+        <div class="modal-t" id="modal-cancelar" role="alertdialog" aria-modal="true" aria-labelledby="cancelar-titulo">
+          <div class="modal-t__caja">
+            <span class="modal-t__icono"><svg class="ico" aria-hidden="true"><use href="#i-basura"></use></svg></span>
+            <h2 class="display modal-t__titulo" id="cancelar-titulo">¿Cancelar tu pedido?</h2>
+            <p class="modal-t__texto">Se borra todo lo que elegiste y volvés al inicio.</p>
+            <button class="btn btn--rojo btn--grande btn--bloque" type="button" data-accion="cancelar-si">Sí, cancelar</button>
+            <button class="btn btn--contorno btn--grande btn--bloque modal-t__secundario" type="button" data-accion="cancelar-no">
+              No, seguir pidiendo
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== PANEL DEL PERSONAL (mantener presionado el logo 3 s) ===== -->
+        <div class="modal-t modal-t--staff" id="panel-staff" role="dialog" aria-modal="true" aria-labelledby="staff-titulo">
+          <div class="modal-t__caja staff">
+            <div class="staff__cabeza">
+              <div>
+                <span class="kicker kicker--rojo">Solo personal</span>
+                <h2 class="display modal-t__titulo" id="staff-titulo">Pedidos del totem</h2>
+              </div>
+              <span class="staff__red" id="staff-red">En línea</span>
+            </div>
+            <div class="staff__lista desliza" id="staff-lista"></div>
+            <div class="staff__acciones">
+              <button class="btn btn--tinta" type="button" data-accion="pantalla-completa">Pantalla completa</button>
+              <button class="btn btn--tinta" type="button" data-accion="recargar">Recargar</button>
+              <button class="btn btn--contorno" type="button" data-accion="borrar-pedidos">Borrar pedidos de prueba</button>
+              <button class="btn btn--rojo" type="button" data-accion="cerrar-staff">Cerrar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="toast-t" id="toast-t" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <noscript>
+      <p style="padding: 24px; font: 600 20px system-ui; color: #a30d0d">Este totem necesita JavaScript activado.</p>
+    </noscript>
+
+    <script src="js/menu-data.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/totem.js"></script>
+  </body>
+</html>

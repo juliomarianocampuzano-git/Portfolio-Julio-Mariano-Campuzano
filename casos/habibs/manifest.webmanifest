@@ -1,0 +1,19 @@
+{
+  "id": "./totem.html",
+  "name": "Habib's · Totem de pedidos",
+  "short_name": "Habib's",
+  "description": "Totem de autoservicio de Habib's Lomitería, Encarnación.",
+  "lang": "es-PY",
+  "start_url": "./totem.html?vista=kiosco",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "portrait",
+  "background_color": "#8b0000",
+  "theme_color": "#a30d0d",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

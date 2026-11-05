@@ -224,7 +224,6 @@ if(G&&ST&&!RM){
 
 /* ---------- parallax + trazo del monograma (scroll scrub) ---------- */
 if(G&&ST&&!RM){
-  $$('.shots img').forEach(function(im){G.set(im,{scale:1.16});G.fromTo(im,{yPercent:-5},{yPercent:5,ease:'none',scrollTrigger:{trigger:im.parentElement,start:'top bottom',end:'bottom top',scrub:.6}})});
   var pth=$('.mono .pth');
   if(pth)G.fromTo(pth,{strokeDashoffset:1},{strokeDashoffset:0,ease:'none',scrollTrigger:{trigger:'.mono',start:'top 85%',end:'center 45%',scrub:.5}});
   $$('.sp-in h3').forEach(function(h){G.fromTo(h,{y:30},{y:-30,ease:'none',scrollTrigger:{trigger:h.closest('.stage-p'),start:'top bottom',end:'bottom top',scrub:.5}})});
@@ -354,8 +353,10 @@ setTimeout(function(){root.classList.add('ready')},1500);
 
 /* antes / despues: el rediseño se reproduce solo mientras esta en pantalla */
 (function(){
-  var v=document.getElementById('ba-vid');if(!v)return;
+  var vs=document.querySelectorAll('#ba-vid,video[data-auto]');if(!vs.length)return;
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  if(!('IntersectionObserver' in window)){v.play();return}
-  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})},{threshold:.25}).observe(v);
+  function go(v){v.preload='auto';var p=v.play();if(p&&p.catch)p.catch(function(){})}
+  if(!('IntersectionObserver' in window)){Array.prototype.forEach.call(vs,go);return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)go(e.target);else e.target.pause()})},{threshold:.25});
+  Array.prototype.forEach.call(vs,function(v){io.observe(v)});
 })();
