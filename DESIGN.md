@@ -15,11 +15,11 @@ Sitio de una página, en español rioplatense (voseo). Identidad: **grafito + co
 | 0 | Hero | Qué hago y cuál es el primer paso (diagnóstico gratis) | Campo topográfico WebGL (curvas de nivel animadas) + escena de wireframe → sitio → bot que agenda |
 | 1 | Banda | Alcance en 4 palabras | Marquee ligada al scroll (scrub) |
 | 2 | Servicios | Cuatro cosas, bien hechas | Revelado por clip-path, tarjetas con hover solo en puntero fino |
-| 3 | Diagnóstico | El primer paso es gratis | **Cotizador en vivo**: rango antes que precio; entrega a WhatsApp |
+| 3 | Diagnóstico | El primer paso es gratis | **Armá tu consulta**: rubro, necesidad y extras → resumen que se envía por WhatsApp (sin precios) |
 | 4 | Rubros | Armado para tu rubro | Pestañas con transición de contenido |
 | 5 | Trabajos | Un caso real: M3DINA | **Antes/después interactivo** + capítulos fijados (pin) con parallax |
 | 6 | Proceso | Tres pasos, en este orden | Capítulos fijados al scroll (≥901 px) |
-| 7 | Precios | Desde cuánto (escalera) | Banda cobalto de mantenimiento, números grandes |
+| 7 | Propuestas | A tu medida (escalera de servicios, sin precios) | Tarjetas con «para quién es»; la propuesta formal llega después del diagnóstico |
 | 8 | FAQ | Objeciones, respondidas | Acordeón accesible |
 | 9 | Sobre mí | Quién está del otro lado | Monograma M animado |
 | 10 | Contacto | Pedí tu diagnóstico | Topo WebGL (creado en diferido) + formulario con 4 estados |
@@ -69,7 +69,7 @@ Radios: `16px` (tarjetas, paneles), `0` (bandas, separadores), `999px` (botones,
 
 - **Botones**: `:active` con `scale(.97)`; magnéticos solo con puntero fino; foco visible.
 - **Cursor propio** (solo `hover:hover`+`pointer:fine`): anillo con `transform: scale` (sin animar layout).
-- **Cotizador**: 4 preguntas → rango (`rangeFactor` 1.6) → texto armado → botón a `wa.me`. Sin necesidad elegida: estado vacío honesto. Sin rubro claro: «A definir».
+- **Armá tu consulta**: 3 preguntas → resumen de lo elegido → texto armado → botón a `wa.me`. No muestra precios: cada proyecto se presupuesta a medida. Sin necesidad elegida: estado vacío; «No sé todavía» → «Lo definimos juntos».
 - **Formulario**: validación en JS con mensajes por campo (`aria-describedby`), 4 estados (vacío / enviando / error / éxito); sin servidor: el envío abre WhatsApp con el mensaje. Sin JS: `<form method="get" action="https://wa.me/…" target="_blank">`.
 - **Antes/después M3DINA**: un `<input type="range">` nativo con etiqueta (arrastre, teclado y lector de pantalla).
 - **Pestañas de rubro**: `role=tablist`, flechas, envuelven en ≤ 900 px.
@@ -77,7 +77,7 @@ Radios: `16px` (tarjetas, paneles), `0` (bandas, separadores), `999px` (botones,
 
 ## 8. Do's and Don'ts
 
-**Do**: un solo movimiento focal por vista; ease-out propio; solo `transform`/`opacity`/`clip-path` animados; textos concretos; «desde USD» como hipótesis editable; mostrar qué NO hago.
+**Do**: un solo movimiento focal por vista; ease-out propio; solo `transform`/`opacity`/`clip-path` animados; textos concretos; sin precios publicados (presupuesto a medida por escrito); mostrar qué NO hago.
 **Don't**: contadores, testimonios, logos de clientes, «+N webs», promesas de posicionamiento o ventas, `transition: all`, ease-in, rebotes en UI, hover en táctil, íconos decorativos en círculos, 3 tarjetas iguales.
 
 ## 9. Responsive Behavior
@@ -92,7 +92,7 @@ Radios: `16px` (tarjetas, paneles), `0` (bandas, separadores), `999px` (botones,
 
 ## 10. Iteration Guide & Known Gaps
 
-Cambiar marca, WhatsApp y precios: solo `<script id="config">`. Textos de precios visibles están en `#precios` (hay un `TODO` para mantenerlos en sync con el cotizador).
+Cambiar marca y WhatsApp: solo `<script id="config">`. El sitio no publica precios; los servicios están en `#propuestas`.
 
 **Brechas conocidas (honestas)**
 1. 10 tamaños de fuente frente a ≤ 5 de taste-skill (display fluido). 
@@ -137,10 +137,10 @@ Estado final: **impeccable (HTML renderizado) 0 · taste lint 0/0 · criterio 8/
 | Idea del método | Dónde se ve | Efecto / decisión |
 |---|---|---|
 | Diagnóstico gratis como primera puerta | Hero (CTA primario), #diagnostico, nav | «Pedir mi diagnóstico gratis» arriba de todo; abre WhatsApp con un mensaje ya armado |
-| Rango antes que precio | Cotizador | Muestra un rango orientativo con contador animado; sin dato real → «A definir» |
-| Propuesta irresistible de 3 opciones (base / recomendada / completa) | #precios, nota de precios | Siempre se promete una propuesta por escrito con tres alcances; la tarjeta recomendada va en cobalto |
-| Escalera de oferta: diagnóstico → web/bot → mantenimiento | #precios | Orden visual y de lectura; banda cobalto de mantenimiento |
-| Ingreso recurrente | Mantenimiento «desde USD 25/mes» + bot/app con mensual | Explicado como servicio opcional con revisión cada 3 meses |
+| Presupuesto a medida | Armá tu consulta | Arma el resumen de lo que necesita el cliente; el valor se define en la propuesta formal |
+| Propuesta irresistible de 3 opciones (base / recomendada / completa) | #propuestas, nota de propuestas | Siempre se promete una propuesta por escrito con tres alcances; la tarjeta recomendada va en cobalto |
+| Escalera de oferta: diagnóstico → web/bot → mantenimiento | #propuestas | Orden visual y de lectura; banda cobalto de mantenimiento |
+| Ingreso recurrente | Mantenimiento mensual + bot/app con abono (valores en la propuesta) | Explicado como servicio opcional con revisión cada 3 meses |
 | Manejo de objeciones | FAQ ×8, bloque «Qué hacemos / Qué no» | Respuestas concretas: precio, tiempo, dominio, «no entiendo de tecnología», resultados |
 | Claridad de propiedad y costos | #precios, #proceso | Dominio y cuentas a tu nombre; costos de terceros separados; pago 50/50 |
 | Garantía honesta | #proceso, FAQ | Garantía en horas de corrección, **nunca** promesa de ranking ni ventas |
@@ -186,7 +186,7 @@ Estado final: **impeccable (HTML renderizado) 0 · taste lint 0/0 · criterio 8/
 - `_headers`: CSP estricta (`script-src 'self'`, `style-src 'self'`, `form-action https://wa.me`, `frame-ancestors 'none'`), `nosniff`, `Referrer-Policy`, `Permissions-Policy`. Sin scripts ni estilos en línea; sin secretos; sin terceros.
 - Enlaces externos con `rel="noopener noreferrer"`.
 - Nada se guarda ni se envía a un servidor propio: el mensaje viaja por WhatsApp.
-- **Sin** testimonios, logos de clientes, cifras inventadas ni contadores. Los números visibles son precios-hipótesis editables y el rango del cotizador.
+- **Sin** testimonios, logos de clientes, cifras inventadas ni contadores. No se publican precios: cada proyecto se presupuesta a medida.
 - SEO: `<title>`, descripción, canonical y og:url pendientes del dominio real (TODO, README), Open Graph + Twitter, JSON-LD (`ProfessionalService`, `Person`, `FAQPage`), `sitemap.xml`, `robots.txt`, jerarquía h1 → h2 → h3, fuentes con `font-display: swap` y precarga, imágenes con `width/height`.
 
 ## 14. Licencias

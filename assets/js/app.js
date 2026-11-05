@@ -8,9 +8,7 @@ var RM=FX.rm,FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
 var $=function(s,c){return (c||D).querySelector(s)},$$=function(s,c){return Array.prototype.slice.call((c||D).querySelectorAll(s))};
 var G=window.gsap,ST=window.ScrollTrigger;
 var CFG={};try{CFG=JSON.parse($('#config').textContent)}catch(e){}
-var DEF={web1:300,web2:600,web3:1200,tienda:600,bot:250,app:1200,extraBot:250,extraCatalogo:150,extraAnim:600,mBot:40,mApp:80,mWeb:25,rangeFactor:1.6};
-var PH=/^\d{8,15}$/.test(CFG.whatsapp)?CFG.whatsapp:'5493764148342',P=CFG.prices||{};
-Object.keys(DEF).forEach(function(k){if(!(+P[k]>0))P[k]=DEF[k]});
+var PH=/^\d{8,15}$/.test(CFG.whatsapp)?CFG.whatsapp:'5493764148342';
 /* abre WhatsApp dentro del gesto del usuario (Safari bloquea ventanas abiertas despues de un setTimeout) */
 function openWA(t){var a=D.createElement('a');a.href=wa(t);a.target='_blank';a.rel='noopener noreferrer';D.body.appendChild(a);a.click();a.remove()}
 /* evita abrir varias pestanas con clics repetidos */
@@ -61,7 +59,7 @@ addEventListener('scroll',onScroll,{passive:true});onScroll();
 if('IntersectionObserver' in window){
   var links=$$('.nav a.l');
   var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id='#'+e.target.id;links.forEach(function(l){l.setAttribute('aria-current',l.getAttribute('href')===id?'true':'false')})}})},{rootMargin:'-45% 0px -50% 0px'});
-  ['servicios','diagnostico','trabajos','portfolio','precios','faq'].forEach(function(id){var s=D.getElementById(id);if(s)so.observe(s)});
+  ['servicios','diagnostico','trabajos','portfolio','propuestas','faq'].forEach(function(id){var s=D.getElementById(id);if(s)so.observe(s)});
   /* el fab se oculta en el hero (tapa la demo y ya hay boton de WhatsApp) y en contacto */
   var heroEl=$('.hero'),inHero=false,inContact=false;
   function fabSync(){fab.classList.toggle('hide',inHero||inContact)}
@@ -237,21 +235,13 @@ if(G&&ST&&!RM){
   var w=$('#word');if(!w)return;var cs=chars(w,0);kinetic(w,cs,{base:500,peak:800,sigma:170,color:true,host:w.parentElement});
 })();
 
-/* ---------- cotizador: rango + diagnostico ---------- */
+/* ---------- armá tu consulta: resumen para el diagnostico (sin precios) ---------- */
 (function(){
   var f=$('#rango');if(!f)return;
-  var res=$('#result'),txt=$('#rango-text'),cta=$('#rango-cta'),state={rubro:'',need:'',x:[]},busy=0,shown={lo:0,hi:0};
+  var res=$('#result'),txt=$('#rango-text'),cta=$('#rango-cta'),state={rubro:'',need:'',x:[]},busy=0;
   var LAB={web1:'Una web de una página',web2:'Un sitio de varias secciones',tienda:'Una tienda o catálogo',bot:'Un asistente de WhatsApp',app:'Automatizar procesos o un panel',nose:'Todavía no sé'};
   var XL={extraBot:'Asistente de WhatsApp',extraCatalogo:'Catálogo con carrito',extraAnim:'Animaciones a medida',mant:'Mantenimiento mensual'};
-  function fmt(n){return n.toLocaleString('es-AR')}
-  function calc(){
-    var n=state.need;if(!n||n==='nose')return null;
-    var base=P[n]||0,mo=0,x=state.x;
-    if(n==='bot')mo+=P.mBot||0;if(n==='app')mo+=P.mApp||0;
-    x.forEach(function(k){if(k==='mant'){if(n!=='bot'&&n!=='app')mo+=P.mWeb||0}else{base+=P[k]||0;if(k==='extraBot')mo+=P.mBot||0}});
-    var hi=Math.ceil(base*(P.rangeFactor||1.6)/50)*50;
-    return {lo:base,hi:hi,mo:mo,optMo:(n!=='bot'&&n!=='app'&&x.indexOf('mant')<0)}
-  }
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function rules(){
     var n=state.need;
     $$('input[name="x"]',f).forEach(function(i){var off=false;
@@ -261,25 +251,26 @@ if(G&&ST&&!RM){
       if(i.value==='mant'&&(n==='bot'||n==='app'))off=true;
       i.disabled=off;if(off&&i.checked){i.checked=false;state.x=state.x.filter(function(v){return v!==i.value})}});
   }
-  var tws=[];function tween(a,b,cb){if(RM||!G){cb(b);return}var o={v:a};tws.push(G.to(o,{v:b,duration:.6,ease:'power3.out',onUpdate:function(){cb(Math.round(o.v))}}))}
   function render(){
-    var r=calc();res.setAttribute('aria-busy','false');
+    res.setAttribute('aria-busy','false');
     var parts=['Hola Mariano, quiero el diagnóstico gratis.'];
     if(state.rubro)parts.push('Rubro: '+state.rubro);
     if(state.need)parts.push('Necesito: '+LAB[state.need]);
     if(state.x.length)parts.push('Sumaría: '+state.x.map(function(k){return XL[k]}).join(', '));
-    if(!state.need){res.innerHTML='<p class="empty">Elegí qué necesitás y te muestro un rango de referencia.</p>';cta.textContent='Pedir diagnóstico por WhatsApp';txt.value=parts.join('\n');return}
-    if(!r){res.innerHTML='<p class="rl">Rango orientativo</p><p class="big">A definir</p><p class="nt">Sin saber qué necesitás, cualquier número sería inventado. En el diagnóstico lo ordenamos juntos y recién ahí te paso un rango.</p>';cta.textContent='Pedir diagnóstico por WhatsApp';txt.value=parts.join('\n');return}
-    res.innerHTML='<p class="rl">Rango orientativo</p><p class="big"><small>USD</small><span id="q-lo">'+fmt(shown.lo)+'</span> – <span id="q-hi">'+fmt(shown.hi)+'</span></p>'+
-      '<p class="mo">'+(r.mo?'Abono mensual: USD '+fmt(r.mo):'Mantenimiento opcional: desde USD '+fmt(P.mWeb||25)+' por mes')+'</p>'+
-      '<p class="nt">El máximo depende de la cantidad de secciones, textos y fotos. Hosting, dominio y WhatsApp Business se cuentan aparte. El precio cerrado sale del diagnóstico.</p>';
-    tws.forEach(function(t){t.kill()});tws=[];
-    var big=$('.big',res);if(big&&G&&!RM)G.fromTo(big,{scale:1.14,y:-8},{scale:1,y:0,duration:.7,ease:'expo.out',transformOrigin:'0 100%'});
-    var lo=$('#q-lo'),hi=$('#q-hi');tween(shown.lo,r.lo,function(v){lo.textContent=fmt(v)});tween(shown.hi,r.hi,function(v){hi.textContent=fmt(v)});
-    shown={lo:r.lo,hi:r.hi};
-    parts.push('Rango que vi: USD '+fmt(r.lo)+' a '+fmt(r.hi)+' (orientativo)');
-    if(r.mo)parts.push('Abono mensual: USD '+fmt(r.mo));
-    txt.value=parts.join('\n');cta.textContent='Pedir diagnóstico con este resumen';
+    txt.value=parts.join('\n');
+    if(!state.need){res.innerHTML='<p class="empty">Elegí qué necesitás y armo el resumen para que me lo envíes.</p>';cta.textContent='Pedir diagnóstico por WhatsApp';return}
+    var html='<p class="rl">Tu consulta</p>';
+    if(state.need==='nose'){
+      html+='<p class="sum">Lo definimos juntos</p><p class="nt">No hace falta tenerlo claro: en el diagnóstico vemos cómo trabajás y qué conviene hacer primero.</p>';
+    }else{
+      html+='<p class="sum">'+esc(LAB[state.need])+'</p>';
+      if(state.x.length)html+='<p class="ex">Sumarías: '+esc(state.x.map(function(k){return XL[k]}).join(', '))+'</p>';
+      html+='<p class="nt">Con esto preparo una propuesta a medida, con alcance, plazos e inversión por escrito. Sin compromiso.</p>';
+    }
+    if(state.rubro)html+='<p class="rb">Rubro: '+esc(state.rubro)+'</p>';
+    res.innerHTML=html;
+    var sum=$('.sum',res);if(sum&&G&&!RM)G.fromTo(sum,{y:10,opacity:0},{y:0,opacity:1,duration:.5,ease:'expo.out'});
+    cta.textContent='Pedir diagnóstico con este resumen';
   }
   f.addEventListener('change',function(e){
     var t=e.target;

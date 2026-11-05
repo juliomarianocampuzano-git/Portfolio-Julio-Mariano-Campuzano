@@ -23,20 +23,14 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/schibsted.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=10">
+<link rel="stylesheet" href="assets/css/site.css?v=11">
 <script src="assets/js/boot.js?v=7"></script>
 
 <script type="application/json" id="config">
 {
   "whatsapp": "5493764148342",
   "brand": { "full": "Mariano Campuzano | Automatización con IA", "short": "Mariano Campuzano" },
-  "tz": "America/Argentina/Cordoba",
-  "_prices_note": "HIPOTESIS de Mariano: editá estos valores (USD). El cotizador del sitio los usa para dar un RANGO orientativo.",
-  "prices": {
-    "web1": 300, "web2": 600, "web3": 1200, "tienda": 600, "bot": 250, "app": 1200,
-    "extraBot": 250, "extraCatalogo": 150, "extraAnim": 600,
-    "mBot": 40, "mApp": 80, "mWeb": 25, "rangeFactor": 1.6
-  }
+  "tz": "America/Argentina/Cordoba"
 }
 </script>
 <script type="application/ld+json">
@@ -59,14 +53,14 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "¿Cuánto cuesta una web?", "acceptedAnswer": { "@type": "Answer", "text": "Depende del alcance. En el sitio hay valores «desde» como referencia y un cotizador que da un rango orientativo. El precio cerrado sale del diagnóstico gratis y te llega por escrito, con alcance y plazos." } },
+        { "@type": "Question", "name": "¿Cuánto cuesta un proyecto?", "acceptedAnswer": { "@type": "Answer", "text": "Cada proyecto se presupuesta a medida, según lo que tu negocio necesita. Después del diagnóstico gratis te envío una propuesta formal por escrito, con tres opciones de alcance, plazos e inversión, sin compromiso." } },
         { "@type": "Question", "name": "Ya tengo Instagram y WhatsApp, ¿para qué quiero una web?", "acceptedAnswer": { "@type": "Answer", "text": "Instagram y WhatsApp son canales que no controlás. Una web es tu dirección propia: junta en un lugar lo que hacés, tus precios y cómo contactarte, y la ven quienes te buscan. No prometo posiciones en Google ni cantidad de ventas; sí que quede claro, rápida y lista para convertir consultas." } },
         { "@type": "Question", "name": "No entiendo de tecnología, ¿puedo trabajar con vos?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Hablamos en simple y por WhatsApp. No te pido nada técnico: me alcanza con tu logo, algunas fotos y cómo te escriben hoy tus clientes." } },
         { "@type": "Question", "name": "No quiero pagar todos los meses, ¿se puede?", "acceptedAnswer": { "@type": "Answer", "text": "En una web, sí: pago único, y el dominio y las cuentas quedan a tu nombre. En asistentes de WhatsApp y apps el abono existe porque son sistemas vivos: cambian las plataformas y hay que ajustarlos. Sin abono, ese mantenimiento queda de tu lado." } },
         { "@type": "Question", "name": "¿Cuánto tarda?", "acceptedAnswer": { "@type": "Answer", "text": "Una landing puede estar en pocos días; un sitio completo suele llevar entre una y tres semanas; un asistente de WhatsApp, entre dos y cuatro. Son tiempos orientativos que dependen de los textos, las fotos y las respuestas." } },
         { "@type": "Question", "name": "¿Cómo se paga?", "acceptedAnswer": { "@type": "Answer", "text": "Habitualmente la mitad al empezar y la mitad al entregar, por transferencia o Mercado Pago. Para clientes del exterior, por Wise u otro medio que acordemos." } },
         { "@type": "Question", "name": "¿El asistente de WhatsApp reemplaza mi atención?", "acceptedAnswer": { "@type": "Answer", "text": "No. Responde lo repetitivo, toma datos y agenda; cuando la consulta lo necesita, te pasa la conversación. Según el uso, WhatsApp Business puede tener costos propios; te los explico antes de empezar." } },
-        { "@type": "Question", "name": "¿Trabajás con clientes de otros países?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, en español, italiano e inglés, desde Posadas (UTC−3). Cotizo en USD o EUR." } }
+        { "@type": "Question", "name": "¿Trabajás con clientes de otros países?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, en español, italiano e inglés, desde Posadas (UTC−3). Las propuestas pueden expresarse en USD o EUR." } }
       ]
     }
   ]
@@ -95,7 +89,7 @@
       <a class="l" href="#diagnostico">Diagnóstico</a>
       <a class="l" href="#trabajos">Trabajos</a>
       <a class="l" href="#portfolio">Portfolio</a>
-      <a class="l" href="#precios">Precios</a>
+      <a class="l" href="#propuestas">Propuestas</a>
       <a class="l" href="#faq">Dudas</a>
       <a class="btn btn--sm" href="#diagnostico">Diagnóstico gratis</a>
       <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><i></i></button>
@@ -107,7 +101,7 @@
   <a class="l" href="#diagnostico">Diagnóstico</a>
   <a class="l" href="#trabajos">Trabajos</a>
   <a class="l" href="#portfolio">Portfolio</a>
-  <a class="l" href="#precios">Precios</a>
+  <a class="l" href="#propuestas">Propuestas</a>
   <a class="l" href="#faq">Dudas</a>
   <a class="btn" href="#diagnostico">Pedir diagnóstico gratis</a>
 </div>
@@ -253,13 +247,13 @@
       </div>
       <dl class="promise">
         <div class="rv-l"><dt>Qué hacemos</dt><dd>Una charla corta por WhatsApp o videollamada. Me contás cómo te escriben tus clientes, qué respondés todo el día y qué se te escapa.</dd></div>
-        <div class="rv-l" data-d="1"><dt>Qué recibís</dt><dd>Un resumen por escrito: qué haría primero, qué dejaría para después y un rango de precio. Sin compromiso.</dd></div>
+        <div class="rv-l" data-d="1"><dt>Qué recibís</dt><dd>Un resumen por escrito: qué haría primero, qué dejaría para después y un presupuesto a medida. Sin compromiso.</dd></div>
         <div class="rv-l" data-d="2"><dt>Qué no hago</dt><dd>No prometo posiciones en Google ni cantidad de ventas. Te digo qué se puede mejorar y cómo lo vamos a medir.</dd></div>
       </dl>
     </div>
     <div class="tool rv" id="tool">
-      <h3>Armá tu rango.</h3>
-      <div class="nojs-note"><p>Con JavaScript activado acá aparece un cotizador de rango orientativo. Sin él, pedime el diagnóstico directo por WhatsApp.</p><p><a href="https://wa.me/5493764148342?text=Hola%20Mariano%2C%20quiero%20el%20diagn%C3%B3stico%20gratis.">Pedir el diagnóstico por WhatsApp</a></p></div>
+      <h3>Armá tu consulta.</h3>
+      <div class="nojs-note"><p>Con JavaScript activado acá podés armar tu consulta en tres pasos. Sin él, pedime el diagnóstico directo por WhatsApp.</p><p><a href="https://wa.me/5493764148342?text=Hola%20Mariano%2C%20quiero%20el%20diagn%C3%B3stico%20gratis.">Pedir el diagnóstico por WhatsApp</a></p></div>
       <form class="tool-ui" id="rango" novalidate action="https://wa.me/5493764148342" method="get" target="_blank" aria-describedby="rango-note">
         <fieldset><legend>1. ¿Cuál es tu rubro?</legend>
           <div class="opts" data-q="rubro">
@@ -290,11 +284,11 @@
           </div>
         </fieldset>
         <div class="result" id="result" role="status" aria-live="polite" aria-busy="false">
-          <p class="empty">Elegí qué necesitás y te muestro un rango de referencia.</p>
+          <p class="empty">Elegí qué necesitás y armo el resumen para que me lo envíes.</p>
         </div>
         <input type="hidden" name="text" id="rango-text" value="Hola Mariano, quiero el diagnóstico gratis.">
         <button class="btn" type="submit" data-mag><svg aria-hidden="true"><use href="#i-wa"/></svg><span id="rango-cta">Pedir diagnóstico por WhatsApp</span></button>
-        <p class="fnote" id="rango-note">Es una referencia para conversar, no un presupuesto. El número real sale del diagnóstico. Se abre WhatsApp con tu resumen; acá no se guarda nada.</p>
+        <p class="fnote" id="rango-note">Se abre WhatsApp con tu resumen; acá no se guarda nada. Con esa información preparo tu propuesta a medida.</p>
       </form>
     </div>
   </div>
@@ -471,25 +465,25 @@
   </div>
 </section>
 
-<!-- =============== PRECIOS =============== -->
-<section class="sec" id="precios" aria-labelledby="t-pre">
+<!-- =============== PROPUESTAS (servicios sin precios publicados) =============== -->
+<section class="sec" id="propuestas" aria-labelledby="t-pre">
   <div class="wrap">
     <div class="sechead">
-      <h2 class="h2" id="t-pre" data-fx="wipe">Desde cuánto.</h2>
-      <p class="lead rv">Valores «desde» en USD, como referencia. El precio cerrado sale del diagnóstico y te llega por escrito.</p>
-      <!-- TODO(Mariano): precios y planes son HIPÓTESIS. Editalos acá y en <script id="config"> para que coincida con el cotizador. -->
+      <h2 class="h2" id="t-pre" data-fx="wipe">A tu medida.</h2>
+      <p class="lead rv">No trabajo con paquetes cerrados: cada negocio es distinto y cada proyecto también. Primero escucho qué necesitás y después te envío una propuesta formal, por escrito, con alcance, plazos e inversión.</p>
     </div>
     <div class="pr">
-      <article class="pc feat rv-3d"><div><h3>Asistente de WhatsApp con IA</h3><p class="am"><small>desde USD</small>250<em>+ USD 40/mes</em></p></div><ul><li>Responde lo repetitivo, toma datos y agenda</li><li>Te pasa la conversación cuando hace falta</li><li>Ajustes con las preguntas reales de tus clientes</li></ul><a class="btn btn--ink btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para un asistente de WhatsApp." href="https://wa.me/5493764148342">Pedir diagnóstico</a></article>
-      <article class="pc rv-3d"><div><h3>Automatización y panel a medida</h3><p class="am"><small>etapa 1 desde USD</small>1.200<em>+ USD 80/mes</em></p></div><ul><li>Procesos y reportes que se hacen solos</li><li>Panel de pedidos, turnos o stock</li><li>Primera etapa que podés usar enseguida</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para automatizar procesos de mi negocio." href="https://wa.me/5493764148342">Pedir diagnóstico</a></article>
-      <article class="pc rv-3d"><div><h3>Web profesional</h3><p class="am"><small>desde USD</small>600</p></div><ul><li>Varias secciones, catálogo o servicios</li><li>Formulario que llega a tu WhatsApp</li><li>Textos orientados a que te escriban</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para una web profesional." href="https://wa.me/5493764148342">Pedir diagnóstico</a></article>
-      <article class="pc rv-3d"><div><h3>Web esencial</h3><p class="am"><small>desde USD</small>300</p></div><ul><li>Una página clara con tu oferta y contacto</li><li>Botón de WhatsApp y mapa</li><li>Pensada primero para el celular</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para una web esencial." href="https://wa.me/5493764148342">Pedir diagnóstico</a></article>
-      <article class="pc rv-3d"><div><h3>Web cinematográfica</h3><p class="am"><small>desde USD</small>1.200</p></div><ul><li>Animaciones a medida y escenas con scroll</li><li>Para marcas que quieren destacar</li><li>Ejemplo: el caso M3DINA</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para una web con animaciones a medida." href="https://wa.me/5493764148342">Pedir diagnóstico</a></article>
-      <article class="pc rv-3d"><div><h3>Mantenimiento</h3><p class="am"><small>desde USD</small>25<em>/mes</em></p></div><ul><li>Cambios menores y copias de seguridad</li><li>Soporte por WhatsApp</li><li>Revisión del alcance cada tres meses</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero consultar por el mantenimiento mensual." href="https://wa.me/5493764148342">Consultar</a></article>
+      <article class="pc feat rv-3d"><div><h3>Asistente de WhatsApp con IA</h3><p class="fit">Para negocios que reciben muchas consultas iguales todos los días.</p></div><ul><li>Responde lo repetitivo, toma datos y agenda</li><li>Te pasa la conversación cuando hace falta</li><li>Ajustes con las preguntas reales de tus clientes</li></ul><a class="btn btn--ink btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para un asistente de WhatsApp." href="https://wa.me/5493764148342">Pedir diagnóstico</a></article>
+      <article class="pc rv-3d"><div><h3>Automatización y panel a medida</h3><p class="fit">Para equipos que pierden horas en planillas, reportes y tareas repetidas.</p></div><ul><li>Procesos y reportes que se hacen solos</li><li>Panel de pedidos, turnos o stock</li><li>Primera etapa que podés usar enseguida</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para automatizar procesos de mi negocio." href="https://wa.me/5493764148342">Pedir diagnóstico</a></article>
+      <article class="pc rv-3d"><div><h3>Web profesional</h3><p class="fit">Para mostrar servicios o catálogo y recibir consultas todos los días.</p></div><ul><li>Varias secciones, catálogo o servicios</li><li>Formulario que llega a tu WhatsApp</li><li>Textos orientados a que te escriban</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para una web profesional." href="https://wa.me/5493764148342">Pedir diagnóstico</a></article>
+      <article class="pc rv-3d"><div><h3>Web esencial</h3><p class="fit">Para empezar con una presencia propia, clara y profesional.</p></div><ul><li>Una página clara con tu oferta y contacto</li><li>Botón de WhatsApp y mapa</li><li>Pensada primero para el celular</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para una web esencial." href="https://wa.me/5493764148342">Pedir diagnóstico</a></article>
+      <article class="pc rv-3d"><div><h3>Web cinematográfica</h3><p class="fit">Para marcas que quieren una experiencia que se recuerde.</p></div><ul><li>Animaciones a medida y escenas con scroll</li><li>Para marcas que quieren destacar</li><li>Ejemplo: el caso M3DINA</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero el diagnóstico gratis para una web con animaciones a medida." href="https://wa.me/5493764148342">Pedir diagnóstico</a></article>
+      <article class="pc rv-3d"><div><h3>Mantenimiento</h3><p class="fit">Para que tu web o tu asistente sigan al día, sin preocuparte.</p></div><ul><li>Cambios menores y copias de seguridad</li><li>Soporte por WhatsApp</li><li>Revisión del alcance cada tres meses</li></ul><a class="btn btn--soft btn--sm" data-wa data-text="Hola Mariano, quiero consultar por el mantenimiento mensual." href="https://wa.me/5493764148342">Consultar</a></article>
     </div>
     <div class="pnote rv">
-      <p>Los costos de terceros (hosting, dominio, WhatsApp Business, herramientas de IA) no están incluidos y se explican aparte antes de empezar.</p>
-      <p>Siempre recibís una propuesta con tres opciones: una base, una recomendada y una completa, cada una con alcance, plazo y precio.</p>
+      <p class="pnote-k">El valor de cada proyecto depende de lo que tu negocio necesita, no de una lista de precios.</p>
+      <p>Por eso, después del diagnóstico recibís una propuesta formal con tres opciones (una base, una recomendada y una completa), cada una con su alcance, plazo e inversión. Así elegís con todo claro y sin compromiso.</p>
+      <p>Los costos de terceros (hosting, dominio, WhatsApp Business, herramientas de IA) se detallan aparte antes de empezar.</p>
     </div>
   </div>
 </section>
@@ -503,7 +497,7 @@
       <a class="btn btn--wa rv" data-wa data-text="Hola Mariano, tengo una duda antes de empezar." href="https://wa.me/5493764148342"><svg aria-hidden="true"><use href="#i-wa"/></svg>Preguntarme</a>
     </div>
     <div class="rv">
-      <details name="faq" open><summary>¿Cuánto cuesta una web? <i aria-hidden="true"></i></summary><div class="ans"><p>Depende del alcance. Arriba tenés valores «desde» y un cotizador de rango. El precio cerrado sale del diagnóstico gratis y te llega por escrito, con alcance y plazos.</p></div></details>
+      <details name="faq" open><summary>¿Cuánto cuesta un proyecto? <i aria-hidden="true"></i></summary><div class="ans"><p>Depende de lo que necesites: no es lo mismo una página simple que un asistente conectado a tu stock. Por eso no publico precios fijos.</p><p>Después del diagnóstico gratis te envío una propuesta formal por escrito, con tres opciones de alcance, plazos e inversión, para que elijas con todo claro.</p></div></details>
       <details name="faq"><summary>Ya tengo Instagram y WhatsApp, ¿para qué una web? <i aria-hidden="true"></i></summary><div class="ans"><p>Instagram y WhatsApp son canales que no controlás: cambian las reglas y tu información queda repartida. Una web es tu dirección propia, junta lo que hacés, tus precios y cómo contactarte, y la encuentra quien te busca.</p><p>No prometo posiciones en Google ni cantidad de ventas. Sí que quede claro y listo para convertir consultas en conversaciones.</p></div></details>
       <details name="faq"><summary>No entiendo de tecnología. ¿Puedo trabajar con vos? <i aria-hidden="true"></i></summary><div class="ans"><p>Sí. Hablamos en simple y por WhatsApp. No te pido nada técnico: me alcanza con tu logo, algunas fotos y cómo te escriben hoy tus clientes. Lo demás lo resuelvo yo y te lo explico con ejemplos.</p></div></details>
       <details name="faq"><summary>No quiero pagar todos los meses. ¿Se puede? <i aria-hidden="true"></i></summary><div class="ans"><p>En una web, sí: pago único, y el dominio y las cuentas quedan a tu nombre. En asistentes de WhatsApp y apps el abono existe porque son sistemas vivos: cambian las plataformas, las herramientas de IA y tus propias respuestas. Sin abono, ese mantenimiento queda de tu lado.</p></div></details>
@@ -511,7 +505,7 @@
       <details name="faq"><summary>¿Cuánto tarda? <i aria-hidden="true"></i></summary><div class="ans"><p>Una landing puede estar en pocos días; un sitio completo suele llevar entre una y tres semanas; un asistente de WhatsApp, entre dos y cuatro. Son tiempos orientativos: dependen de qué tan rápido tengamos textos, fotos y respuestas.</p></div></details>
       <details name="faq"><summary>¿Cómo se paga? <i aria-hidden="true"></i></summary><div class="ans"><p>Habitualmente la mitad al empezar y la mitad al entregar, por transferencia o Mercado Pago. Para clientes del exterior, por Wise u otro medio que acordemos. Si necesitás factura, lo vemos según tu situación.</p></div></details>
       <details name="faq"><summary>¿El asistente de WhatsApp reemplaza mi atención? <i aria-hidden="true"></i></summary><div class="ans"><p>No. Responde lo repetitivo, toma datos y agenda; cuando la consulta lo necesita, te pasa la conversación para que sigas vos. Según el uso, WhatsApp Business puede tener costos propios; te los explico antes de empezar.</p></div></details>
-      <details name="faq"><summary>¿Trabajás con clientes de otros países? <i aria-hidden="true"></i></summary><div class="ans"><p>Sí. Trabajo en español, italiano e inglés, desde Posadas (UTC−3), y acuerdo horarios de reunión que te queden cómodos. Cotizo en USD o EUR.</p></div></details>
+      <details name="faq"><summary>¿Trabajás con clientes de otros países? <i aria-hidden="true"></i></summary><div class="ans"><p>Sí. Trabajo en español, italiano e inglés, desde Posadas (UTC−3), y acuerdo horarios de reunión que te queden cómodos. Las propuestas pueden expresarse en USD o EUR.</p></div></details>
     </div>
   </div>
 </section>
@@ -577,16 +571,16 @@
   <div class="wrap">
     <div class="frow">
       <div><h4>Mariano Campuzano</h4><p>Automatización con IA y diseño web.<br>Posadas, Misiones, Argentina.</p></div>
-      <nav aria-label="Pie"><h4>Secciones</h4><ul><li><a href="#servicios">Servicios</a></li><li><a href="#diagnostico">Diagnóstico</a></li><li><a href="#trabajos">Trabajos</a></li><li><a href="portfolio/">Portfolio completo</a></li><li><a href="portfolio/sitios/">Sitios web demo</a></li><li><a href="#precios">Precios</a></li><li><a href="#faq">Dudas</a></li></ul></nav>
+      <nav aria-label="Pie"><h4>Secciones</h4><ul><li><a href="#servicios">Servicios</a></li><li><a href="#diagnostico">Diagnóstico</a></li><li><a href="#trabajos">Trabajos</a></li><li><a href="portfolio/">Portfolio completo</a></li><li><a href="portfolio/sitios/">Sitios web demo</a></li><li><a href="#propuestas">Propuestas</a></li><li><a href="#faq">Dudas</a></li></ul></nav>
       <div><h4>Contacto</h4><ul><li><a data-wa href="https://wa.me/5493764148342">WhatsApp +54 9 376 530-6244</a></li><li>ES · IT · EN</li></ul></div>
     </div>
     <div class="word" aria-hidden="true" id="word">Mariano Campuzano</div>
     <div class="priv" id="privacidad">
       <h3>Privacidad</h3>
-      <p>Este sitio no usa cookies ni analítica, y no guarda lo que escribís en el formulario o en el cotizador. Al enviar, se abre WhatsApp con tu mensaje; desde ahí rige la política de WhatsApp.</p>
+      <p>Este sitio no usa cookies ni analítica, y no guarda lo que escribís en los formularios. Al enviar, se abre WhatsApp con tu mensaje; desde ahí rige la política de WhatsApp.</p>
       <p>Si me escribís, uso tus datos solo para responderte. Podés pedirme en cualquier momento que los borre (en Argentina, la Ley 25.326 reconoce los derechos de acceso, rectificación y supresión). Esto no es asesoramiento legal.</p>
     </div>
-    <div class="legal"><span>© <span id="yr">2026</span> Mariano Campuzano. Todos los derechos reservados.</span><span>Los precios publicados son orientativos. Tipografías: Bricolage Grotesque y Schibsted Grotesk (SIL OFL).</span></div>
+    <div class="legal"><span>© <span id="yr">2026</span> Mariano Campuzano. Todos los derechos reservados.</span><span>Tipografías: Bricolage Grotesque y Schibsted Grotesk (SIL OFL).</span></div>
   </div>
 </footer>
 
@@ -597,7 +591,7 @@
 <script src="assets/libs/ScrollTrigger.min.js" defer></script>
 <script src="assets/libs/lenis.min.js" defer></script>
 <script src="assets/js/topo.js?v=7" defer></script>
-<script src="assets/js/app.js?v=9" defer></script>
+<script src="assets/js/app.js?v=10" defer></script>
 <script src="assets/libs/confetti.min.js" defer></script>
 <script src="assets/js/fx.js?v=9" defer></script>
 <script src="assets/js/botdemo.js?v=7" defer></script>

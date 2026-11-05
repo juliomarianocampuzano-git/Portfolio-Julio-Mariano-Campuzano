@@ -26,9 +26,9 @@ DONDE ESTA PUBLICADO
   Si algun dia usas dominio propio: cambiar la URL en sitemap.xml, robots.txt y canonical/og de index.html y portfolio/.
 
 QUE EDITAR
-  - WhatsApp, marca y PRECIOS: bloque <script id="config"> en index.html.
-    Los precios son HIPOTESIS tuyas. Los numeros visibles en #precios estan escritos a mano:
-    si cambias el config, cambialos tambien ahi (hay un TODO).
+  - WhatsApp y marca: bloque <script id="config"> en index.html.
+  - El sitio NO publica precios: cada proyecto se presupuesta a medida despues del diagnostico.
+    Los servicios estan en la seccion #propuestas de index.html.
   - Textos: directo en index.html (voseo).
   - Si editas CSS o JS: subi el numero ?v=6 en index.html (si no, quien ya visito ve la version vieja).
 
