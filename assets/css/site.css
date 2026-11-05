@@ -294,7 +294,7 @@ html.js .panel[hidden]{display:none}
 /* ---------- caso M3DINA ---------- */
 .case{display:grid;gap:clamp(32px,4.5vw,64px)}
 .ba{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:1.6/1;background:var(--surface);--pos:50%;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba img,.ba video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ba .af{clip-path:inset(0 0 0 var(--pos))}
 .ba .lbl{position:absolute;top:16px;padding:8px 14px;border-radius:var(--r-pill);background:var(--bg-deep);color:var(--ink);font:600 .875rem/1 var(--f-b);z-index:3}
 .ba .l1{left:16px}.ba .l2{right:16px;background:var(--action);color:var(--on-action)}
@@ -530,7 +530,7 @@ html:not(.js) .intro,html.nofx .intro,html.seen .intro{display:none}
   .shots{grid-template-columns:1fr}
   .facts2 div{grid-template-columns:1fr;gap:4px}
   .ba{aspect-ratio:1.15/1}
-  .ba img{object-position:left center}
+  .ba img,.ba video{object-position:left center}
   .fab span{display:none}.fab{width:56px;padding:0;justify-content:center}
   .hero{padding-top:calc(var(--hh) + 32px)}
   .cta .btn{flex:1 1 100%}

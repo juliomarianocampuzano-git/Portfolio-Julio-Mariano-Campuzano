@@ -44,7 +44,7 @@ safe(function(){
 /* ---------- capturas del caso: zoom de camara con el scroll ---------- */
 safe(function(){
   var ba=$('#ba');if(!ba)return;
-  G.fromTo($$('img',ba),{scale:1.18},{scale:1,ease:'none',scrollTrigger:{trigger:ba,start:'top bottom',end:'center center',scrub:.5}});
+  G.fromTo($$('img,video',ba),{scale:1.18},{scale:1,ease:'none',scrollTrigger:{trigger:ba,start:'top bottom',end:'center center',scrub:.5}});
 });
 
 /* ---------- palabra final: las letras suben una por una con el scroll ---------- */

@@ -23,7 +23,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/schibsted.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=12">
+<link rel="stylesheet" href="assets/css/site.css?v=13">
 <script src="assets/js/boot.js?v=7"></script>
 
 <script type="application/json" id="config">
@@ -372,7 +372,7 @@
     <article class="case">
       <div class="ba rv-c" id="ba" data-cursor="Arrastrá">
         <img src="assets/img/m3dina-antes.jpg" width="1280" height="800" alt="Sitio original de M3DINA Impresiones: logo centrado y titular «Impresión 3D en Posadas»." loading="lazy" decoding="async">
-        <img class="af" src="assets/img/m3dina-despues.jpg" width="1280" height="800" alt="Rediseño de M3DINA Impresiones: hero con pieza 3D que se imprime capa por capa y fotos de productos." loading="lazy" decoding="async">
+        <video class="af" id="ba-vid" muted loop playsinline preload="none" poster="assets/img/m3dina-despues-poster.jpg" width="1280" height="800" aria-label="Rediseño de M3DINA Impresiones en movimiento: la pieza 3D se imprime capa por capa."><source src="assets/img/m3dina-despues.webm" type="video/webm"><source src="assets/img/m3dina-despues.mp4" type="video/mp4"></video>
         <span class="lbl l1">Antes: sitio original</span><span class="lbl l2">Después: rediseño</span>
         <div class="hd"></div>
         <input type="range" min="0" max="100" value="50" step="1" aria-label="Comparar el sitio original con el rediseño">
@@ -382,7 +382,8 @@
           <h3>M3DINA, capa por capa.</h3>
           <p class="lead">Mi propio taller de impresión 3D en Posadas. Rediseñé el sitio para que se vea el oficio: una pieza 3D que se construye sola, un proceso que avanza con el scroll y un catálogo que arma el pedido por WhatsApp.</p>
           <div class="cta">
-            <a class="btn btn--soft" href="https://m3dinaimpresiones.netlify.app" target="_blank" rel="noopener noreferrer">Ver el sitio actual <svg aria-hidden="true"><use href="#i-ar"/></svg></a>
+            <a class="btn" href="casos/m3dina/" target="_blank" rel="noopener">Ver el rediseño en vivo <svg aria-hidden="true"><use href="#i-ar"/></svg></a>
+            <a class="btn btn--soft" href="https://m3dinaimpresiones.netlify.app" target="_blank" rel="noopener noreferrer">Sitio original <svg aria-hidden="true"><use href="#i-ar"/></svg></a>
             <a class="btn btn--wa" data-wa data-text="Hola Mariano, vi el caso M3DINA y quiero algo así para mi negocio." href="https://wa.me/5493764148342"><svg aria-hidden="true"><use href="#i-wa"/></svg>Quiero algo así</a>
           </div>
         </div>
@@ -391,7 +392,7 @@
           <div><dt>Idea</dt><dd>Un solo gesto en todo el sitio: todo se imprime capa por capa. Hero, proceso y tipografía lo repiten.</dd></div>
           <div><dt>Qué incluye</dt><dd>Pieza 3D procedural en el hero, proceso de 5 pasos fijado al scroll, catálogo, calculadora de precio por mayor y pedido por WhatsApp.</dd></div>
           <div><dt>Herramientas</dt><dd>HTML, CSS, JavaScript, three.js, GSAP y Lenis.</dd></div>
-          <div><dt>Estado</dt><dd>Rediseño en versión de prueba. El sitio publicado es la versión original.</dd></div>
+          <div><dt>Estado</dt><dd>Rediseño publicado como demo en este portfolio. El sitio en línea del taller todavía es la versión original.</dd></div>
           <!-- TODO(Mariano): actualizá "Estado" cuando publiques el rediseño. No agregues resultados que no puedas respaldar. -->
         </dl>
       </div>
@@ -658,9 +659,9 @@ Movida: #1 Revisar facturas (hoy)<u></u></code></div>
 <script src="assets/libs/ScrollTrigger.min.js" defer></script>
 <script src="assets/libs/lenis.min.js" defer></script>
 <script src="assets/js/topo.js?v=7" defer></script>
-<script src="assets/js/app.js?v=11" defer></script>
+<script src="assets/js/app.js?v=12" defer></script>
 <script src="assets/libs/confetti.min.js" defer></script>
-<script src="assets/js/fx.js?v=9" defer></script>
+<script src="assets/js/fx.js?v=10" defer></script>
 <script src="assets/js/botdemo.js?v=7" defer></script>
 <script src="assets/js/ahorro.js?v=2" defer></script>
 </body>

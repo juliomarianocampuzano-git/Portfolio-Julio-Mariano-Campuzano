@@ -351,3 +351,11 @@ window.__appOk=true;
 /* seguridad: si algo tarda, el contenido igual aparece */
 setTimeout(function(){root.classList.add('ready')},1500);
 })();
+
+/* antes / despues: el rediseño se reproduce solo mientras esta en pantalla */
+(function(){
+  var v=document.getElementById('ba-vid');if(!v)return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  if(!('IntersectionObserver' in window)){v.play();return}
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})},{threshold:.25}).observe(v);
+})();
