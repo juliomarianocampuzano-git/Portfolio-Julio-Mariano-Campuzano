@@ -23,7 +23,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/schibsted.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=11">
+<link rel="stylesheet" href="assets/css/site.css?v=12">
 <script src="assets/js/boot.js?v=7"></script>
 
 <script type="application/json" id="config">
@@ -89,6 +89,7 @@
       <a class="l" href="#diagnostico">Diagnóstico</a>
       <a class="l" href="#trabajos">Trabajos</a>
       <a class="l" href="#portfolio">Portfolio</a>
+      <a class="l" href="#codigo">GitHub</a>
       <a class="l" href="#propuestas">Propuestas</a>
       <a class="l" href="#faq">Dudas</a>
       <a class="btn btn--sm" href="#diagnostico">Diagnóstico gratis</a>
@@ -101,6 +102,7 @@
   <a class="l" href="#diagnostico">Diagnóstico</a>
   <a class="l" href="#trabajos">Trabajos</a>
   <a class="l" href="#portfolio">Portfolio</a>
+  <a class="l" href="#codigo">GitHub</a>
   <a class="l" href="#propuestas">Propuestas</a>
   <a class="l" href="#faq">Dudas</a>
   <a class="btn" href="#diagnostico">Pedir diagnóstico gratis</a>
@@ -364,8 +366,8 @@
 <section class="sec deep" id="trabajos" aria-labelledby="t-trab">
   <div class="wrap">
     <div class="sechead">
-      <h2 class="h2" id="t-trab" data-fx="weight">Un caso real, el mío.</h2>
-      <p class="lead rv">Arrastrá para ver el antes y el después de mi taller de impresión 3D.</p>
+      <h2 class="h2" id="t-trab" data-fx="weight">Casos reales.</h2>
+      <p class="lead rv">Mi propio taller de impresión 3D y el sitio de una concesionaria de Posadas. Arrastrá para ver el antes y el después de M3DINA.</p>
     </div>
     <article class="case">
       <div class="ba rv-c" id="ba" data-cursor="Arrastrá">
@@ -398,6 +400,29 @@
         <figure><img src="assets/img/m3dina-movil.jpg" width="375" height="812" alt="El rediseño de M3DINA en un celular: pieza 3D, titular, botones y barra inferior de WhatsApp." loading="lazy" decoding="async"><figcaption>Versión celular</figcaption></figure>
       </div>
     </article>
+    <article class="case case--next">
+      <div class="case-body">
+        <div class="rv">
+          <span class="case-tag">Proyecto para cliente</span>
+          <h3>Multimarcas Daniel, a fondo.</h3>
+          <p class="lead">Sitio para una concesionaria de autos 0 km y usados en Posadas. Catálogo con filtros y una página por auto, financiación propia, una sección para vender o permutar el usado y consulta directa por WhatsApp desde cada unidad.</p>
+          <div class="cta">
+            <a class="btn btn--soft" href="https://multimarcas-daniel.pages.dev" target="_blank" rel="noopener noreferrer">Ver el sitio publicado <svg aria-hidden="true"><use href="#i-ar"/></svg></a>
+            <a class="btn btn--wa" data-wa data-text="Hola Mariano, vi el sitio de Multimarcas Daniel y quiero algo así para mi negocio." href="https://wa.me/5493764148342"><svg aria-hidden="true"><use href="#i-wa"/></svg>Quiero algo así</a>
+          </div>
+        </div>
+        <dl class="facts2 rv">
+          <div><dt>Desafío</dt><dd>Mostrar el stock de la playa y convertir visitas en consultas, sin depender solo de las redes.</dd></div>
+          <div><dt>Qué incluye</dt><dd>Catálogo filtrable, ficha por auto con fotos y equipamiento, financiación, permuta, preguntas frecuentes y WhatsApp en cada unidad.</dd></div>
+          <div><dt>Herramientas</dt><dd>Next.js, Tailwind CSS, GSAP, Lenis y Cloudflare Pages. Fotos optimizadas en AVIF y WebP.</dd></div>
+          <div><dt>Estado</dt><dd>Publicado como vista previa: los autos y testimonios son de ejemplo hasta que se cargue el stock real.</dd></div>
+        </dl>
+      </div>
+      <div class="shots rv">
+        <figure><img src="assets/img/multimarcas-desktop.jpg" width="1280" height="800" alt="Inicio del sitio de Multimarcas Daniel: titular «El auto que buscás, con financiación propia» y foto de la playa de autos." loading="lazy" decoding="async"><figcaption>Inicio en escritorio</figcaption></figure>
+        <figure><img src="assets/img/multimarcas-movil.jpg" width="375" height="812" alt="El sitio de Multimarcas Daniel en un celular." loading="lazy" decoding="async"><figcaption>Versión celular</figcaption></figure>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -411,14 +436,56 @@
     </div>
     <div class="pf-stats rv"><div><b>61</b><span>proyectos con demo</span></div><div><b>5</b><span>entregados a clientes</span></div><div><b>ES · EN</b><span>fichas en dos idiomas</span></div></div>
     <div class="pf-grid">
+      <a class="pf-card rv-3d" href="https://multimarcas-daniel.pages.dev" target="_blank" rel="noopener noreferrer"><span class="st">Proyecto para cliente</span><h3>Multimarcas Daniel</h3><p>Sitio de una concesionaria de Posadas: catálogo de autos, financiación, permuta y consulta por WhatsApp.</p><span class="go">Ver el sitio <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
       <a class="pf-card rv-3d" href="portfolio/projects/casa-amin.html"><span class="st">Entregado a cliente</span><h3>Casa Amin</h3><p>Catálogo digital y experiencia de consulta para una tienda de electrónica, con una base de más de 3.400 productos.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
       <a class="pf-card rv-3d" href="portfolio/projects/habibs.html"><span class="st">Entregado a cliente</span><h3>Habib’s · Web + tótem</h3><p>Experiencia web gastronómica y una interfaz de autoservicio pensada para usarse como tótem.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
       <a class="pf-card rv-3d" href="portfolio/projects/hotel1609.html"><span class="st">Entregado a cliente</span><h3>Hotel 1609</h3><p>Sitio hotelero con una experiencia de consulta y reservas apoyada en datos e integraciones configurables.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
       <a class="pf-card rv-3d" href="portfolio/projects/dashboard-facturacion.html"><span class="st">Entregado a cliente</span><h3>Dashboard de Facturación</h3><p>Tablero para visualizar datos de facturación reales y facilitar su análisis por un estudio o profesional contable.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
       <a class="pf-card rv-3d" href="portfolio/projects/knowbase.html"><span class="st">MVP funcionando</span><h3>KnowBase</h3><p>Base de conocimiento con búsqueda y conversación sobre documentos, diseñada para recuperar información con referencias a sus fuentes.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
-      <a class="pf-card rv-3d" href="portfolio/projects/whatsapp-crm.html"><span class="st">MVP funcionando</span><h3>WhatsApp CRM Startup</h3><p>MVP de gestión de contactos y seguimiento comercial conectado a conversaciones de WhatsApp.</p><span class="go">Ver ficha y demo <svg aria-hidden="true"><use href="#i-ar"/></svg></span></a>
     </div>
     <div class="pf-cta rv"><a class="btn" href="portfolio/" data-cursor="Ver">Ver los 61 proyectos <svg aria-hidden="true"><use href="#i-ar"/></svg></a><a class="btn btn--soft" href="portfolio/sitios/">20 sitios web por rubro</a><a class="btn btn--soft" href="portfolio/en/">English version</a></div>
+  </div>
+</section>
+
+<!-- =============== CÓDIGO ABIERTO · bento oscuro con brillo =============== -->
+<section class="lab" id="codigo" aria-labelledby="t-lab">
+  <div class="lab-aura" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="lab-net" aria-hidden="true"></div>
+  <div class="wrap sec">
+    <div class="sechead">
+      <p class="lab-kick"><span></span>Código abierto en GitHub</p>
+      <h2 class="h2" id="t-lab" data-fx="wipe">El código, a la vista.</h2>
+      <p class="lead rv">Proyectos públicos con instrucciones, datos de ejemplo y pruebas automáticas que corren en Linux y Windows en cada cambio. Se clonan y se prueban en minutos.</p>
+    </div>
+    <div class="bento">
+      <a class="bx glow bx--hero" href="https://github.com/juliomarianocampuzano-git/registro-gastos" target="_blank" rel="noopener noreferrer">
+        <figure><img src="assets/img/gh-registro-gastos.jpg" width="960" height="600" alt="Registro de gastos con el reparto del mes: Leo le debe 49,05 a Ana." loading="lazy" decoding="async"></figure>
+        <div class="bx-t"><span class="bx-k">Python · Flask · SQLite</span><h3>Registro de gastos</h3><p>Gastos del hogar por mes con reparto entre convivientes: calcula quién le debe a quién, al centavo, y exporta a CSV.</p><span class="go">Ver en GitHub <svg aria-hidden="true"><use href="#i-ar"/></svg></span></div>
+      </a>
+      <a class="bx glow " href="https://github.com/juliomarianocampuzano-git/busqueda-laboral" target="_blank" rel="noopener noreferrer">
+        <figure><img src="assets/img/gh-busqueda-laboral.jpg" width="960" height="600" alt="Búsqueda laboral: CV a la izquierda, avisos ficticios con coincidencias y la lista de postulaciones." loading="lazy" decoding="async"></figure>
+        <div class="bx-t"><span class="bx-k">Python · scikit-learn · Flask</span><h3>Búsqueda laboral</h3><p>Compara un CV con avisos de RemoteOK, ordena por coincidencia y sigue cada postulación.</p><span class="go">Ver en GitHub <svg aria-hidden="true"><use href="#i-ar"/></svg></span></div>
+      </a>
+      <a class="bx glow " href="https://github.com/juliomarianocampuzano-git/reportes-csv" target="_blank" rel="noopener noreferrer">
+        <figure><img src="assets/img/gh-reportes-csv.jpg" width="960" height="600" alt="Reporte HTML de facturas con totales por categoría, proveedor y mes." loading="lazy" decoding="async"></figure>
+        <div class="bx-t"><span class="bx-k">Python · SQL · HTML</span><h3>Reportes CSV</h3><p>Valida un CSV, suma con SQL y genera un reporte HTML por categoría, proveedor y mes.</p><span class="go">Ver en GitHub <svg aria-hidden="true"><use href="#i-ar"/></svg></span></div>
+      </a>
+      <a class="bx glow bx--term" href="https://github.com/juliomarianocampuzano-git/pendientes" target="_blank" rel="noopener noreferrer">
+        <div class="term" aria-hidden="true"><b><i></i><i></i><i></i></b><code><s>$</s> python main.py atrasadas
+Tareas atrasadas: 2
+  [ ] #1   2026-10-29  Revisar facturas
+  [ ] #3   2026-10-29  Enviar postulación
+<s>$</s> python main.py mover 1
+Movida: #1 Revisar facturas (hoy)<u></u></code></div>
+        <div class="bx-t"><span class="bx-k">Python · CLI · JSON</span><h3>Pendientes</h3><p>Tareas por fecha desde la terminal: atrasadas, mover a hoy y una lista HTML para el celular.</p><span class="go">Ver en GitHub <svg aria-hidden="true"><use href="#i-ar"/></svg></span></div>
+      </a>
+      <a class="bx glow bx--wide" href="https://github.com/juliomarianocampuzano-git/kestrel-showcase" target="_blank" rel="noopener noreferrer">
+        <figure><img src="assets/img/gh-kestrel.jpg" width="960" height="600" alt="Panel de Kestrel con herramientas de IA, revisiones y empleados capacitados (datos ficticios)." loading="lazy" decoding="async"></figure>
+        <div class="bx-t"><span class="bx-k">Next.js · TypeScript · Cloudflare</span><h3>Kestrel</h3><p>Landing y demo interactiva de un espacio de gobernanza de IA, con datos ficticios y demo publicada.</p><span class="go">Ver en GitHub <svg aria-hidden="true"><use href="#i-ar"/></svg></span></div>
+      </a>
+    </div>
+    <div class="marq" aria-label="Herramientas que uso"><div class="marq-t"><span>Python</span><span>SQL</span><span>Flask</span><span>FastAPI</span><span>Next.js</span><span>React</span><span>TypeScript</span><span>Tailwind</span><span>GSAP</span><span>three.js</span><span>n8n</span><span>Power BI</span><span>SQLite</span><span>PostgreSQL</span><span>Supabase</span><span>Cloudflare</span><span>Docker</span><span>RAG y LLMs</span><span>pytest</span><span>GitHub Actions</span><span aria-hidden="true" class="marq-dup"><span>Python</span><span>SQL</span><span>Flask</span><span>FastAPI</span><span>Next.js</span><span>React</span><span>TypeScript</span><span>Tailwind</span><span>GSAP</span><span>three.js</span><span>n8n</span><span>Power BI</span><span>SQLite</span><span>PostgreSQL</span><span>Supabase</span><span>Cloudflare</span><span>Docker</span><span>RAG y LLMs</span><span>pytest</span><span>GitHub Actions</span></span></div></div>
+    <div class="lab-cta rv"><a class="btn" href="https://github.com/juliomarianocampuzano-git" target="_blank" rel="noopener noreferrer">Ver mi perfil de GitHub <svg aria-hidden="true"><use href="#i-ar"/></svg></a></div>
   </div>
 </section>
 
@@ -591,7 +658,7 @@
 <script src="assets/libs/ScrollTrigger.min.js" defer></script>
 <script src="assets/libs/lenis.min.js" defer></script>
 <script src="assets/js/topo.js?v=7" defer></script>
-<script src="assets/js/app.js?v=10" defer></script>
+<script src="assets/js/app.js?v=11" defer></script>
 <script src="assets/libs/confetti.min.js" defer></script>
 <script src="assets/js/fx.js?v=9" defer></script>
 <script src="assets/js/botdemo.js?v=7" defer></script>

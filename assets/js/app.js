@@ -59,7 +59,7 @@ addEventListener('scroll',onScroll,{passive:true});onScroll();
 if('IntersectionObserver' in window){
   var links=$$('.nav a.l');
   var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id='#'+e.target.id;links.forEach(function(l){l.setAttribute('aria-current',l.getAttribute('href')===id?'true':'false')})}})},{rootMargin:'-45% 0px -50% 0px'});
-  ['servicios','diagnostico','trabajos','portfolio','propuestas','faq'].forEach(function(id){var s=D.getElementById(id);if(s)so.observe(s)});
+  ['servicios','diagnostico','trabajos','portfolio','codigo','propuestas','faq'].forEach(function(id){var s=D.getElementById(id);if(s)so.observe(s)});
   /* el fab se oculta en el hero (tapa la demo y ya hay boton de WhatsApp) y en contacto */
   var heroEl=$('.hero'),inHero=false,inContact=false;
   function fabSync(){fab.classList.toggle('hide',inHero||inContact)}
@@ -282,6 +282,19 @@ if(G&&ST&&!RM){
   var once=gate(1500);
   f.addEventListener('submit',function(e){e.preventDefault();clearTimeout(busy);render();if(once())openWA(txt.value)});
   render();
+})();
+
+/* ---------- bento: el borde y el fondo se iluminan donde esta el puntero ---------- */
+(function(){
+  var cards=$$('.glow');if(!cards.length)return;
+  cards.forEach(function(c){
+    c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')});
+  });
+  var lab=$('.lab');if(!lab||RM)return;
+  // el aura sigue al puntero con retardo dentro de la seccion
+  var aura=$('.lab-aura',lab),tx=0,ty=0,cx=0,cy=0,raf=0;
+  function step(){cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;aura.style.transform='translate3d('+cx.toFixed(1)+'px,'+cy.toFixed(1)+'px,0)';raf=Math.abs(tx-cx)+Math.abs(ty-cy)>.5?requestAnimationFrame(step):0}
+  lab.addEventListener('pointermove',function(e){var r=lab.getBoundingClientRect();tx=(e.clientX-r.left-r.width/2)*.12;ty=(e.clientY-r.top-r.height/2)*.12;if(!raf)raf=requestAnimationFrame(step)});
 })();
 
 /* ---------- formulario de contacto: validacion + 4 estados ---------- */
