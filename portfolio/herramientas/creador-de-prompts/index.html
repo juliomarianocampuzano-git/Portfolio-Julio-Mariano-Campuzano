@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>PromptPro · Creador de prompts con IA | Julio Mariano Campuzano</title>
+<meta name="description" content="Convertí una idea en un prompt profesional para ChatGPT, Claude, Gemini y más. Generador de texto e imágenes, auditor de prompts e historial. Funciona sin clave en modo demostración o con tu propia IA.">
+<meta property="og:title" content="PromptPro · Creador de prompts con IA">
+<meta property="og:description" content="Convertí ideas informales en instrucciones profesionales para IA. Probalo sin clave o conectá tu propia IA.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css?v=1">
+</head>
+<body class="min-h-dvh flex flex-col selection:bg-indigo-500 selection:text-white">
+<a href="#main" class="skip-link">Ir al contenido</a>
+
+<header class="border-b border-slate-800 bg-slate-900/90 sticky top-0 z-30 backdrop-blur-md">
+  <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+    <div class="flex items-center gap-3 min-w-0">
+      <div class="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/20" aria-hidden="true">
+        <i class="ph-bold ph-sparkle text-2xl text-white"></i>
+      </div>
+      <div class="min-w-0">
+        <h1 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+          <span>Prompt<span class="text-indigo-400">Pro</span></span>
+          <span id="providerBadge" class="hidden sm:inline-block max-w-[15rem] truncate text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Modo demostración</span>
+        </h1>
+        <p class="text-xs text-slate-400 hidden min-[420px]:block">Convertí ideas informales en instrucciones profesionales para IA</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <a href="../../projects/promptpro.html" class="no-embed hidden md:inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">
+        <i class="ph-bold ph-arrow-left" aria-hidden="true"></i> Ficha del proyecto
+      </a>
+      <button type="button" id="navConfigBtn" data-click="openApiKeyModal" class="min-h-[44px] sm:min-h-0 px-3 py-2 sm:py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 transition-colors flex items-center gap-1.5 text-xs font-medium">
+        <i class="ph-bold ph-cpu text-sm" aria-hidden="true"></i>
+        <span id="navConfigBtnLabel">Conectar IA</span>
+      </button>
+    </div>
+
+    <nav class="order-last w-full overflow-x-auto no-scrollbar -mx-1 px-1" aria-label="Secciones de la herramienta">
+      <div role="tablist" aria-label="Herramientas" class="inline-flex min-w-full sm:min-w-0 sm:w-auto items-center gap-1 bg-slate-800/80 p-1 rounded-xl border border-slate-700/60 text-xs font-medium">
+        <button type="button" role="tab" id="nav-tab-generator" aria-selected="true" aria-controls="tab-generator" data-click="switchTab" data-arg="tab-generator" class="tab-btn active flex-1 sm:flex-none shrink-0 min-h-[44px] sm:min-h-0 px-2 min-[400px]:px-3 py-1.5 rounded-lg transition-all flex items-center justify-center gap-1.5 whitespace-nowrap">
+          <i class="ph-bold ph-magic-wand text-sm max-[399px]:hidden" aria-hidden="true"></i><span>Generador</span>
+        </button>
+        <button type="button" role="tab" id="nav-tab-image" aria-selected="false" aria-controls="tab-image" tabindex="-1" data-click="switchTab" data-arg="tab-image" class="tab-btn flex-1 sm:flex-none shrink-0 min-h-[44px] sm:min-h-0 px-2 min-[400px]:px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center justify-center gap-1.5 whitespace-nowrap">
+          <i class="ph-bold ph-image text-sm max-[399px]:hidden" aria-hidden="true"></i><span>Imágenes</span>
+        </button>
+        <button type="button" role="tab" id="nav-tab-auditor" aria-selected="false" aria-controls="tab-auditor" tabindex="-1" data-click="switchTab" data-arg="tab-auditor" class="tab-btn flex-1 sm:flex-none shrink-0 min-h-[44px] sm:min-h-0 px-2 min-[400px]:px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center justify-center gap-1.5 whitespace-nowrap">
+          <i class="ph-bold ph-chart-line-up text-sm max-[399px]:hidden" aria-hidden="true"></i><span>Auditor</span>
+        </button>
+        <button type="button" role="tab" id="nav-tab-history" aria-selected="false" aria-controls="tab-history" tabindex="-1" data-click="switchTab" data-arg="tab-history" class="tab-btn flex-1 sm:flex-none shrink-0 min-h-[44px] sm:min-h-0 px-2 min-[400px]:px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center justify-center gap-1.5 whitespace-nowrap">
+          <i class="ph-bold ph-clock-counter-clockwise text-sm max-[399px]:hidden" aria-hidden="true"></i><span>Historial</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="flex-grow max-w-5xl w-full mx-auto px-4 py-5 sm:py-8">
+
+  <!-- Aviso de modo demostración -->
+  <div id="demoBanner" class="hidden mb-5 rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-xs text-amber-100 leading-relaxed">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+      <p class="flex-1">
+        <strong class="text-amber-300">Modo demostración, sin IA.</strong>
+        Armo la estructura del prompt directamente en tu navegador para que puedas probar la herramienta ahora.
+        Si conectás tu propia clave en <em>Conectar IA</em>, una IA redacta el prompt y se activan Probar, Traducir y Escuchar.
+        Tu clave nunca pasa por mi servidor: se usa solo desde tu navegador.
+      </p>
+      <button type="button" data-click="openApiKeyModal" class="shrink-0 min-h-[44px] sm:min-h-0 px-4 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 border border-amber-500/40 font-semibold transition-colors">Conectar mi IA</button>
+    </div>
+  </div>
+
+  <!-- TAB 1: GENERADOR DE PROMPTS DE TEXTO -->
+  <section id="tab-generator" role="tabpanel" aria-labelledby="nav-tab-generator" class="tab-content space-y-6">
+
+    <div class="glass-panel p-4 rounded-2xl">
+      <p class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2" id="presetsLabel">Categorías rápidas</p>
+      <div class="flex flex-wrap gap-2 text-xs" role="group" aria-labelledby="presetsLabel">
+        <button type="button" data-click="applyPreset" data-arg="marketing" class="min-h-[44px] sm:min-h-0 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/80 flex items-center gap-1.5 transition-colors">
+          <i class="ph-bold ph-megaphone text-indigo-400" aria-hidden="true"></i> Marketing y ventas
+        </button>
+        <button type="button" data-click="applyPreset" data-arg="coding" class="min-h-[44px] sm:min-h-0 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/80 flex items-center gap-1.5 transition-colors">
+          <i class="ph-bold ph-code text-emerald-400" aria-hidden="true"></i> Programación
+        </button>
+        <button type="button" data-click="applyPreset" data-arg="business" class="min-h-[44px] sm:min-h-0 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/80 flex items-center gap-1.5 transition-colors">
+          <i class="ph-bold ph-briefcase text-amber-400" aria-hidden="true"></i> Negocios
+        </button>
+        <button type="button" data-click="applyPreset" data-arg="creative" class="min-h-[44px] sm:min-h-0 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/80 flex items-center gap-1.5 transition-colors">
+          <i class="ph-bold ph-pencil-line text-pink-400" aria-hidden="true"></i> Redacción creativa
+        </button>
+        <button type="button" data-click="applyPreset" data-arg="study" class="min-h-[44px] sm:min-h-0 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/80 flex items-center gap-1.5 transition-colors">
+          <i class="ph-bold ph-student text-sky-400" aria-hidden="true"></i> Estudio y resúmenes
+        </button>
+      </div>
+    </div>
+
+    <div class="glass-panel p-4 sm:p-6 rounded-2xl shadow-xl">
+      <div class="flex justify-between items-center gap-2 mb-2">
+        <label for="textInput" class="text-sm font-semibold text-slate-200 flex items-center gap-2">
+          <i class="ph-bold ph-chat-circle-dots text-indigo-400 text-lg" aria-hidden="true"></i>
+          Escribí tu idea en lenguaje común
+        </label>
+        <button type="button" id="micBtn" data-click="toggleDictation" aria-pressed="false" class="shrink-0 min-h-[44px] sm:min-h-0 text-xs px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1 transition-colors">
+          <i id="micIcon" class="ph-bold ph-microphone text-slate-400" aria-hidden="true"></i>
+          <span id="micLabel">Dictar</span>
+        </button>
+      </div>
+
+      <textarea id="textInput" rows="4" maxlength="4000"
+        class="w-full rounded-xl border border-slate-700 bg-slate-900/90 p-4 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-base sm:text-sm resize-y"
+        placeholder="Ejemplo: Necesito un email para pedirle una reunión de ventas a un cliente potencial que vende zapatillas online. Quiero sonar profesional pero cercano, resaltando que podemos aumentar sus ventas un 20%..."></textarea>
+
+      <div class="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex flex-col min-[420px]:flex-row min-[420px]:items-center gap-2 text-xs text-slate-400 w-full sm:w-auto">
+          <label for="promptFormat" class="font-medium text-slate-300">Formato:</label>
+          <select id="promptFormat" class="w-full sm:w-auto min-h-[44px] sm:min-h-0 bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-2 sm:py-1.5 text-base sm:text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+            <option value="standard">Estructurado completo (rol, tarea, reglas)</option>
+            <option value="fewshot">Con ejemplos (few-shot)</option>
+            <option value="chain">Paso a paso (cadena de razonamiento)</option>
+            <option value="agent">Agente autónomo con verificación</option>
+          </select>
+        </div>
+
+        <button type="button" id="generateTextBtn" data-click="handleGenerateTextPrompt"
+          class="w-full sm:w-auto min-h-[48px] bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-indigo-600/30 transition-all flex items-center justify-center gap-2 active:scale-95">
+          <i class="ph-bold ph-sparkle text-lg" aria-hidden="true"></i>
+          <span>Generar prompt profesional</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="textResultCard" class="hidden glass-panel rounded-2xl overflow-hidden border border-indigo-500/30 shadow-2xl">
+      <div class="bg-slate-900/90 border-b border-slate-800 px-4 sm:px-5 py-3.5 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true"></span>
+          <h2 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Prompt profesional listo</h2>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 text-xs">
+          <button type="button" data-click="copyGeneratedPrompt" class="min-h-[44px] sm:min-h-0 bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-1.5 px-3 rounded-lg flex items-center gap-1.5 transition-colors shadow-md shadow-indigo-600/20">
+            <i class="ph-bold ph-copy" aria-hidden="true"></i> Copiar
+          </button>
+          <button type="button" data-click="testPromptWithAI" class="min-h-[44px] sm:min-h-0 bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-1.5 px-3 rounded-lg flex items-center gap-1.5 transition-colors shadow-md shadow-emerald-600/20">
+            <i class="ph-bold ph-play-circle" aria-hidden="true"></i> Probar con IA
+          </button>
+          <button type="button" data-click="speakPromptWithTTS" class="min-h-[44px] sm:min-h-0 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 py-1.5 px-3 rounded-lg flex items-center gap-1.5 transition-colors">
+            <i class="ph-bold ph-speaker-high text-indigo-400" aria-hidden="true"></i> Escuchar
+          </button>
+          <button type="button" data-click="translatePromptToEnglish" class="min-h-[44px] sm:min-h-0 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 py-1.5 px-3 rounded-lg flex items-center gap-1.5 transition-colors">
+            <i class="ph-bold ph-translate text-sky-400" aria-hidden="true"></i> Traducir (EN)
+          </button>
+        </div>
+      </div>
+
+      <div class="p-4 sm:p-5 bg-slate-950/90 text-slate-200 font-mono-code text-sm leading-relaxed whitespace-pre-wrap break-words select-all border-b border-slate-800" id="textPromptOutput" tabindex="0" aria-label="Prompt generado"></div>
+
+      <div class="p-3 bg-slate-900/50 flex flex-wrap items-center gap-2 text-xs border-b border-slate-800">
+        <span class="text-slate-400 text-[11px] font-medium mr-1">Ajustes rápidos:</span>
+        <button type="button" data-click="refinePrompt" data-arg="Hacerlo más estricto y conciso" class="min-h-[44px] sm:min-h-0 px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1 transition-colors">
+          <i class="ph-bold ph-shield-check text-amber-400" aria-hidden="true"></i> Más estricto
+        </button>
+        <button type="button" data-click="refinePrompt" data-arg="Agregar formato de tabla para la respuesta" class="min-h-[44px] sm:min-h-0 px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1 transition-colors">
+          <i class="ph-bold ph-table text-indigo-400" aria-hidden="true"></i> Formato tabla
+        </button>
+        <button type="button" data-click="refinePrompt" data-arg="Pedir que razone paso a paso" class="min-h-[44px] sm:min-h-0 px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1 transition-colors">
+          <i class="ph-bold ph-tree-structure text-emerald-400" aria-hidden="true"></i> Paso a paso
+        </button>
+      </div>
+
+      <div id="testArena" class="hidden p-4 sm:p-5 bg-slate-900 border-t border-slate-800">
+        <div class="flex items-center justify-between mb-3 gap-2">
+          <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+            <i class="ph-bold ph-robot" aria-hidden="true"></i> Resultado de la prueba
+          </h3>
+          <button type="button" data-click="closeTestArena" class="min-h-[44px] sm:min-h-0 px-2 text-slate-400 hover:text-slate-200 text-xs">Cerrar</button>
+        </div>
+        <div id="testLoadingState" class="hidden py-6 text-center text-slate-400 text-xs animate-pulse">
+          <i class="ph-bold ph-circle-notch animate-spin text-lg text-emerald-400 mb-1" aria-hidden="true"></i>
+          <p>Ejecutando tu prompt profesional…</p>
+        </div>
+        <div id="testOutputText" class="text-sm text-slate-300 whitespace-pre-wrap break-words bg-slate-950 p-4 rounded-xl border border-slate-800 max-h-80 overflow-y-auto"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 2: PROMPTS PARA IMÁGENES -->
+  <section id="tab-image" role="tabpanel" aria-labelledby="nav-tab-image" class="tab-content hidden space-y-6">
+    <div class="glass-panel p-4 sm:p-6 rounded-2xl shadow-xl">
+      <h2 class="text-base font-bold text-slate-100 mb-1 flex items-center gap-2">
+        <i class="ph-bold ph-paint-brush-broad text-pink-400" aria-hidden="true"></i> Prompts para imágenes (Midjourney, DALL·E, Flux)
+      </h2>
+      <p class="text-xs text-slate-400 mb-4">Transformá una idea visual simple en un prompt descriptivo con parámetros de cámara, iluminación y estilo.</p>
+
+      <label for="imageInput" class="sr-only">Idea visual</label>
+      <textarea id="imageInput" rows="3" maxlength="2000"
+        class="w-full rounded-xl border border-slate-700 bg-slate-900/90 p-4 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-500 text-base sm:text-sm resize-y"
+        placeholder="Ej: Un gato astronauta tomando café en la luna mirando la Tierra..."></textarea>
+
+      <div class="mt-4 grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+        <div>
+          <label for="imgStyle" class="block text-slate-400 mb-1">Estilo visual</label>
+          <select id="imgStyle" class="w-full min-h-[44px] sm:min-h-0 bg-slate-900 border border-slate-700 rounded-lg p-2 text-base sm:text-xs text-slate-200">
+            <option value="Photorealistic 8K, cinematic lighting, octane render">Fotorrealista / Cinematográfico</option>
+            <option value="Cyberpunk, neon lighting, highly detailed synthwave">Cyberpunk / Neón</option>
+            <option value="Digital Illustration, concept art, Trending on ArtStation">Ilustración digital / Concept art</option>
+            <option value="Studio Product Photography, soft box lighting, minimalist clean background">Fotografía de producto</option>
+            <option value="3D Pixar Disney style, vibrant colors, expressive characters">Estilo 3D animación</option>
+            <option value="Anime aesthetic, Makoto Shinkai style, highly detailed scenery">Anime / Manga</option>
+          </select>
+        </div>
+        <div>
+          <label for="imgCamera" class="block text-slate-400 mb-1">Cámara / lente</label>
+          <select id="imgCamera" class="w-full min-h-[44px] sm:min-h-0 bg-slate-900 border border-slate-700 rounded-lg p-2 text-base sm:text-xs text-slate-200">
+            <option value="35mm lens, f/1.8 aperture, bokeh background">35mm f/1.8 (retrato / bokeh)</option>
+            <option value="Wide-angle 16mm macro detail">Gran angular 16mm</option>
+            <option value="Drone aerial top-down view">Vista aérea / dron</option>
+            <option value="Macro lens, extreme close-up detail">Macro detalle</option>
+          </select>
+        </div>
+        <div>
+          <label for="imgLighting" class="block text-slate-400 mb-1">Iluminación</label>
+          <select id="imgLighting" class="w-full min-h-[44px] sm:min-h-0 bg-slate-900 border border-slate-700 rounded-lg p-2 text-base sm:text-xs text-slate-200">
+            <option value="Golden hour sunset light, warm atmospheric glow">Hora dorada / atardecer</option>
+            <option value="Dramatic moody volumetric studio lighting">Estudio dramático</option>
+            <option value="Bioluminescent glowing ambient light">Bioluminiscente</option>
+            <option value="Natural soft diffused window light">Luz natural suave</option>
+          </select>
+        </div>
+        <div>
+          <label for="imgAspect" class="block text-slate-400 mb-1">Proporción (Midjourney)</label>
+          <select id="imgAspect" class="w-full min-h-[44px] sm:min-h-0 bg-slate-900 border border-slate-700 rounded-lg p-2 text-base sm:text-xs text-slate-200">
+            <option value="--ar 16:9">16:9 (horizontal)</option>
+            <option value="--ar 9:16">9:16 (vertical / stories)</option>
+            <option value="--ar 1:1">1:1 (cuadrado)</option>
+            <option value="--ar 4:5">4:5 (feed de Instagram)</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="button" data-click="handleGenerateImagePrompt" class="mt-5 w-full min-h-[48px] bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-pink-600/30 transition-all flex items-center justify-center gap-2">
+        <i class="ph-bold ph-magic-wand text-lg" aria-hidden="true"></i>
+        <span>Crear prompt para imagen</span>
+      </button>
+    </div>
+
+    <div id="imageResultCard" class="hidden glass-panel rounded-2xl overflow-hidden border border-pink-500/30 shadow-2xl p-4 sm:p-5 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h3 class="text-xs font-bold text-pink-400 uppercase tracking-wider flex items-center gap-2">
+          <i class="ph-bold ph-check-circle" aria-hidden="true"></i> Prompt de imagen optimizado
+        </h3>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <button type="button" data-click="copyImagePrompt" class="min-h-[44px] sm:min-h-0 bg-pink-600 hover:bg-pink-500 text-white px-3 py-1.5 rounded-lg flex items-center gap-1">
+            <i class="ph-bold ph-copy" aria-hidden="true"></i> Copiar
+          </button>
+          <button type="button" data-click="generateImageSampleWithGemini" class="min-h-[44px] sm:min-h-0 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-md shadow-indigo-600/30">
+            <i class="ph-bold ph-image text-sm" aria-hidden="true"></i> Generar muestra con Gemini
+          </button>
+        </div>
+      </div>
+
+      <div id="imagePromptOutput" class="p-4 bg-slate-950 font-mono-code text-sm text-slate-200 rounded-xl border border-slate-800 whitespace-pre-wrap break-words select-all" tabindex="0" aria-label="Prompt de imagen generado"></div>
+
+      <div id="sampleImageContainer" class="hidden mt-4 p-4 bg-slate-900 rounded-xl border border-slate-800 text-center">
+        <h4 class="text-xs font-semibold text-slate-400 mb-3 uppercase tracking-wider">Vista previa generada por Gemini</h4>
+        <div id="sampleImageLoading" class="hidden py-8 flex-col items-center justify-center gap-2 text-slate-400 text-xs">
+          <i class="ph-bold ph-spinner animate-spin text-2xl text-pink-500" aria-hidden="true"></i>
+          <span>Renderizando la imagen…</span>
+        </div>
+        <img id="sampleImageElement" class="hidden mx-auto max-h-96 max-w-full rounded-xl shadow-2xl border border-slate-700 object-contain" alt="Muestra generada con IA" />
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: AUDITOR -->
+  <section id="tab-auditor" role="tabpanel" aria-labelledby="nav-tab-auditor" class="tab-content hidden space-y-6">
+    <div class="glass-panel p-4 sm:p-6 rounded-2xl shadow-xl">
+      <h2 class="text-base font-bold text-slate-100 mb-1 flex items-center gap-2">
+        <i class="ph-bold ph-chart-line-up text-amber-400" aria-hidden="true"></i> Auditoría y mejora de prompts
+      </h2>
+      <p class="text-xs text-slate-400 mb-4">Pegá un prompt que ya uses: se evalúa, se detectan fallas, se le da un puntaje de 1 a 10 y se arma una versión profesional mejorada.</p>
+
+      <label for="auditorInput" class="sr-only">Prompt a auditar</label>
+      <textarea id="auditorInput" rows="4" maxlength="6000"
+        class="w-full rounded-xl border border-slate-700 bg-slate-900/90 p-4 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 text-base sm:text-sm resize-y"
+        placeholder="Pegá tu prompt actual acá... Ej: Dame ideas para publicar en Instagram sobre nutrición..."></textarea>
+
+      <button type="button" data-click="handleAuditPrompt" class="mt-4 w-full min-h-[48px] bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-amber-600/30 transition-all flex items-center justify-center gap-2">
+        <i class="ph-bold ph-magnifying-glass-plus text-lg" aria-hidden="true"></i>
+        <span>Auditar y mejorar prompt</span>
+      </button>
+    </div>
+
+    <div id="auditResultCard" class="hidden glass-panel rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl p-4 sm:p-5 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+          <i class="ph-bold ph-clipboard-text" aria-hidden="true"></i> Reporte de auditoría
+        </h3>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-400">Puntaje:</span>
+          <span id="auditScore" class="text-base font-extrabold px-3 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40">8/10</span>
+        </div>
+      </div>
+
+      <div id="auditAnalysisText" class="text-xs text-slate-300 leading-relaxed whitespace-pre-wrap break-words"></div>
+
+      <div class="pt-2">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+          <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Versión reescrita recomendada</h4>
+          <button type="button" data-click="copyAuditedPrompt" class="min-h-[44px] sm:min-h-0 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1 rounded-lg flex items-center gap-1">
+            <i class="ph-bold ph-copy" aria-hidden="true"></i> Copiar mejorado
+          </button>
+        </div>
+        <div id="auditedPromptOutput" class="p-4 bg-slate-950 font-mono-code text-sm text-slate-200 rounded-xl border border-slate-800 whitespace-pre-wrap break-words select-all" tabindex="0" aria-label="Prompt mejorado"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 4: HISTORIAL -->
+  <section id="tab-history" role="tabpanel" aria-labelledby="nav-tab-history" class="tab-content hidden space-y-6">
+    <div class="glass-panel p-4 sm:p-6 rounded-2xl shadow-xl">
+      <div class="flex flex-wrap justify-between items-start gap-3 mb-4">
+        <div>
+          <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+            <i class="ph-bold ph-clock-counter-clockwise text-indigo-400" aria-hidden="true"></i> Biblioteca de prompts guardados
+          </h2>
+          <p class="text-xs text-slate-400">Tus últimos 20 prompts. Se guardan solo en este navegador.</p>
+        </div>
+        <button type="button" data-click="clearHistory" class="min-h-[44px] sm:min-h-0 text-xs text-rose-300 hover:text-rose-200 px-3 py-1.5 rounded-lg border border-rose-500/30 bg-rose-500/10">
+          Borrar historial
+        </button>
+      </div>
+      <div id="historyList" class="space-y-3"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="no-embed border-t border-slate-800 bg-slate-900/60">
+  <div class="max-w-5xl mx-auto px-4 py-4 text-xs text-slate-500 flex flex-wrap items-center justify-between gap-2">
+    <span>PromptPro · por Julio Mariano Campuzano</span>
+    <span>Tus textos y tu clave se envían solo al proveedor de IA que elijas, directo desde tu navegador.</span>
+  </div>
+</footer>
+
+<!-- Carga global -->
+<div id="globalLoading" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center gap-3 p-6" role="status" aria-live="polite">
+  <div class="w-14 h-14 rounded-2xl bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center loading-glow">
+    <i class="ph-bold ph-brain text-3xl text-indigo-400 animate-pulse" aria-hidden="true"></i>
+  </div>
+  <p id="loadingMsg" class="text-indigo-300 font-medium text-sm animate-pulse text-center">Procesando…</p>
+</div>
+
+<audio id="audioPlayer" class="hidden"></audio>
+
+<!-- Modal de configuración de IA -->
+<div id="apiKeyModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="apiModalTitle">
+  <div class="glass-panel max-w-md w-full max-h-[92dvh] overflow-y-auto p-5 sm:p-6 rounded-t-3xl sm:rounded-2xl border border-slate-700 space-y-4 shadow-2xl pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+    <div class="flex justify-between items-center">
+      <h2 id="apiModalTitle" class="text-sm font-bold text-white flex items-center gap-2">
+        <i class="ph-bold ph-sliders text-amber-400 text-lg" aria-hidden="true"></i> Conectar tu IA
+      </h2>
+      <button type="button" data-click="closeApiKeyModal" aria-label="Cerrar" class="min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center text-slate-400 hover:text-white text-sm">
+        <i class="ph-bold ph-x" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <p class="text-xs text-slate-300 leading-relaxed">
+      Elegí el proveedor e ingresá tu propia clave API. Se usa solo desde tu navegador: no pasa por ningún servidor mío.
+      Si no cargás una clave, la herramienta sigue funcionando en modo demostración.
+    </p>
+
+    <div class="space-y-3 text-xs">
+      <div>
+        <label for="providerSelect" class="block text-slate-300 font-medium mb-1">Proveedor de IA</label>
+        <select id="providerSelect" class="w-full min-h-[44px] bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-base sm:text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <option value="gemini">Google Gemini</option>
+          <option value="openai">OpenAI (ChatGPT)</option>
+          <option value="anthropic">Anthropic (Claude)</option>
+          <option value="deepseek">DeepSeek</option>
+          <option value="grok">Grok (xAI)</option>
+          <option value="kimi">Moonshot AI (Kimi)</option>
+          <option value="custom">Servidor propio / compatible con OpenAI</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="modelSelect" class="block text-slate-300 font-medium mb-1">Modelo</label>
+        <select id="modelSelect" class="w-full min-h-[44px] bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-base sm:text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"></select>
+        <input type="text" id="customModelInput" aria-label="Nombre del modelo" placeholder="Nombre del modelo (ej: llama-3.3-70b)" autocomplete="off" class="mt-2 w-full hidden min-h-[44px] bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-base sm:text-sm">
+      </div>
+
+      <div>
+        <label for="apiKeyInputModal" class="block text-slate-300 font-medium mb-1">Clave API</label>
+        <input type="password" id="apiKeyInputModal" placeholder="Pegá tu clave acá…" autocomplete="off" spellcheck="false" class="w-full min-h-[44px] bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      </div>
+
+      <label class="flex items-start gap-2 text-slate-300 cursor-pointer">
+        <input type="checkbox" id="rememberKey" class="mt-0.5 w-4 h-4 accent-indigo-500">
+        <span>Recordar mi clave en este navegador. <span class="text-slate-500">Si no lo tildás, se borra al cerrar la pestaña. No lo uses en una computadora compartida.</span></span>
+      </label>
+
+      <div id="baseUrlContainer" class="hidden">
+        <label for="baseUrlInputModal" class="block text-slate-300 font-medium mb-1">URL base del servidor</label>
+        <input type="text" id="baseUrlInputModal" placeholder="https://api.openai.com/v1" autocomplete="off" class="w-full min-h-[44px] bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      </div>
+    </div>
+
+    <div class="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
+      <button type="button" data-click="forgetKey" class="min-h-[44px] sm:min-h-0 px-2 text-xs text-rose-300 hover:text-rose-200 underline underline-offset-2 text-left">Olvidar mi clave</button>
+      <div class="flex gap-2 justify-end">
+        <button type="button" data-click="closeApiKeyModal" class="flex-1 sm:flex-none min-h-[44px] px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs hover:bg-slate-700 transition-colors">Cancelar</button>
+        <button type="button" data-click="saveApiKeyFromUI" class="flex-1 sm:flex-none min-h-[44px] px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs shadow-md shadow-indigo-600/30 transition-all">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Aviso -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 max-w-[92vw] bg-slate-800 text-slate-100 px-4 py-2.5 rounded-xl border border-slate-700 shadow-2xl flex items-center gap-2 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 z-[60] text-xs font-medium" role="status" aria-live="polite">
+  <i id="toastIcon" class="ph-bold ph-check-circle text-emerald-400 text-base shrink-0" aria-hidden="true"></i>
+  <span id="toastMsg">Listo</span>
+</div>
+
+<script src="app.js?v=1" defer></script>
+</body>
+</html>

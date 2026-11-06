@@ -1,0 +1,55 @@
+/* Fichas de herramientas: marco de la herramienta embebida, galería de capturas y visor.
+   Usa los colores y variables de ../styles.css (grafito, mango, bordes gruesos y sombra "pop"). */
+
+/* ---------- herramienta embebida ---------- */
+.tool-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.tool-frame{position:relative;border:var(--bd);border-radius:22px;background:#0f172a;box-shadow:10px 10px 0 var(--ink);overflow:hidden}
+.tool-frame iframe{display:block;width:100%;height:760px;height:min(820px,84svh);min-height:540px;border:0;background:#0f172a}
+.tool-hint{margin:16px 0 0}
+
+/* ---------- galería de capturas ---------- */
+.shots{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:26px 22px}
+.shots figure{margin:0;display:grid;gap:12px;align-content:start}
+.shot{position:relative;display:block;width:100%;padding:0;border:var(--bd);border-radius:var(--radius);background:#fff;box-shadow:var(--pop-s);overflow:hidden;cursor:zoom-in;transition:transform .25s var(--out),box-shadow .25s var(--out)}
+.shot img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;object-position:top left;background:var(--bg-deep)}
+.shot-n{position:absolute;left:10px;top:10px;font:800 13px/1 var(--f-d);padding:7px 10px;border-radius:999px;border:2px solid var(--ink);background:var(--sun)}
+.shot:focus-visible{outline:3px solid var(--grape);outline-offset:3px}
+@media (hover:hover) and (pointer:fine){.shot:hover{transform:translate(-3px,-3px);box-shadow:var(--pop)}}
+.shots figcaption{display:grid;gap:4px;font-size:15px;line-height:1.5}
+.shots figcaption b{font:700 18px/1.2 var(--f-d);color:var(--ink)}
+.shots figcaption span{color:var(--text)}
+
+.priv-note{margin:30px 0 0;padding:22px 24px;background:#fff;border:var(--bd);border-radius:var(--radius);box-shadow:var(--pop-s)}
+.priv-note h3{margin:0 0 8px;font-size:21px}
+.priv-note p{margin:0;max-width:760px}
+.badge-guia{font:700 12px/1.2 var(--f-b);color:var(--ink);background:var(--sun-50);border:2px solid var(--ink);padding:6px 11px;border-radius:999px}
+
+/* ---------- visor de capturas ---------- */
+.shot-dlg{width:min(1180px,calc(100vw - 20px));max-width:none;max-height:calc(100dvh - 20px);padding:0;border:var(--bd);border-radius:var(--radius);background:#fff;color:var(--ink);box-shadow:var(--pop);overflow:hidden}
+.shot-dlg::backdrop{background:rgba(28,20,51,.82)}
+.shot-dlg[open]{display:flex;flex-direction:column}
+.shot-dlg__in{position:relative;display:flex;flex-direction:column;min-height:0;flex:1}
+.shot-dlg__img{flex:1;min-height:0;overflow:auto;background:var(--bg-deep);text-align:center;padding:14px}
+.shot-dlg__img img{max-width:100%;height:auto;border:2px solid var(--ink);border-radius:12px;background:#fff}
+.shot-dlg__bar{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:var(--bd);background:#fff}
+.shot-dlg__cap{flex:1;margin:0;font-size:15px;line-height:1.45}
+.shot-dlg__count{font:700 13px/1 var(--f-m);color:var(--muted);white-space:nowrap}
+.shot-btn{flex:none;width:46px;height:46px;border:var(--bd);border-radius:50%;background:var(--sun);font:800 22px/1 var(--f-d);color:var(--ink);cursor:pointer;display:grid;place-items:center;padding:0;box-shadow:var(--pop-s);transition:transform .15s var(--out)}
+.shot-btn:active{transform:translate(2px,2px);box-shadow:none}
+.shot-btn svg{width:22px;height:22px;display:block}
+.shot-btn.x{position:absolute;right:12px;top:12px;z-index:2;background:#fff}
+
+@media (max-width:620px){
+  .tool-frame{border-radius:16px;box-shadow:6px 6px 0 var(--ink)}
+  .tool-frame iframe{height:80svh;min-height:520px}
+  .tool-bar .btn{flex:1 1 100%;justify-content:center;text-align:center}
+  .shots{gap:22px 0}
+  .shot-dlg{width:100vw;height:100dvh;max-height:100dvh;margin:0;border-radius:0;border-width:0}
+  .shot-dlg__img{display:grid;align-content:center;padding:10px}
+  .shot-dlg__bar{flex-wrap:wrap;gap:10px}
+  .shot-dlg__cap{flex:1 1 100%;order:3}
+  .shot-btn{width:50px;height:50px}
+  .priv-note{padding:18px}
+}
+@media (prefers-reduced-motion:reduce){.shot,.shot-btn{transition:none}}
+@media print{.tool-frame,.shot-dlg{display:none!important}}

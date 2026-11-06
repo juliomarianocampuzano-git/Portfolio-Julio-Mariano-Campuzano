@@ -7,7 +7,7 @@ Uso: python portfolio/build-portfolio.py"""
 import os,re,shutil,json,html
 here=os.path.dirname(os.path.abspath(__file__))
 SRC=os.path.normpath(os.path.join(here,'..','..','portfolio-original'))
-KEEP={'styles.css','portfolio.js','build-portfolio.py','contenido.py','__pycache__'}
+KEEP={'styles.css','portfolio.js','build-portfolio.py','contenido.py','__pycache__','herramientas'}
 import sys;sys.path.insert(0,here);import contenido as C
 
 ICON='<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M16 8h34a9 9 0 0 1 9 9v25a9 9 0 0 1-9 9H30l-11 9v-9h-3a9 9 0 0 1-9-9V17a9 9 0 0 1 9-9z" fill="#1C1433"/><path d="M13 5h34a9 9 0 0 1 9 9v25a9 9 0 0 1-9 9H27l-11 9v-9h-3a9 9 0 0 1-9-9V14a9 9 0 0 1 9-9z" fill="#FF6B2C" stroke="#1C1433" stroke-width="3" stroke-linejoin="round"/><path d="M18 39V20l12 13 12-13v19" fill="none" stroke="#fff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="52" cy="11" r="7" fill="#FFC53D" stroke="#1C1433" stroke-width="3"/></svg>'

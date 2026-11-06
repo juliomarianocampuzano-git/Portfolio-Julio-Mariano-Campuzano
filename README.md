@@ -21,7 +21,9 @@ Todo lo que está en este repo se ve y se usa bien en el celular.
 | 🏠 | [Web principal](https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/) | Servicios, diagnóstico, trabajos y contacto. |
 | 🌐 | [20 sitios web por rubro](https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/portfolio/sitios/) | Una web completa por tipo de negocio, cada una con su diseño y funciones que se pueden probar. |
 | 🩺 | [Panel de gestión](https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/portfolio/sitios/panel-alba/) | Lo que usa el consultorio detrás de la web: agenda, pacientes, recetas en PDF y recordatorios. |
-| 🗂️ | [Portfolio de proyectos](https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/portfolio/) | 61 proyectos de automatización, datos e IA con ficha y demo (ES / [EN](https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/portfolio/en/)). |
+| 🗂️ | [Portfolio de proyectos](https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/portfolio/) | 62 proyectos de automatización, datos e IA con ficha y demo (o capturas) (ES / [EN](https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/portfolio/en/)). |
+| 🪄 | [PromptPro · creador de prompts](https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/portfolio/herramientas/creador-de-prompts/index.html) | Herramienta real para convertir una idea en un prompt profesional. Se prueba sin clave (modo demostración) o con tu propia IA. |
+| 🧾 | [Contador LIGHT](https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/portfolio/projects/contador-light.html) | Mesa contable local con IA para estudios: extractos, asientos y Excel por ejercicio. Ficha con capturas reales. |
 
 ## 📱 Hecho para celulares
 

@@ -18,6 +18,22 @@ QUE HAY
                                    (no usar para publicar: tiene scripts en linea y la CSP no los permite)
   build-standalone.py              regenera el standalone: python build-standalone.py
 
+HERRAMIENTAS PROPIAS (portfolio/herramientas/)
+  creador-de-prompts/   PromptPro: herramienta real (HTML + app.js + app.css + fonts/). Funciona sin servidor.
+                        Sin clave = modo demostracion (arma el prompt en el navegador). Con clave = llama directo al proveedor.
+                        Ficha: portfolio/projects/promptpro.html (la embebe en un iframe) y su version en/.
+                        app.css es Tailwind compilado + iconos Phosphor + fuentes Inter y Fira Code locales (sin CDN).
+                        Si cambias clases de Tailwind en index.html o app.js hay que recompilar app.css (Tailwind 3.4 CLI).
+                        Si lo editas: subi el ?v= de app.css/app.js en index.html.
+  contador-light/img/   Capturas de la guia del programa Contador LIGHT (datos de una empresa ficticia, sin datos de clientes).
+                        Ficha: portfolio/projects/contador-light.html (y en/). NO se publica el programa ni su codigo:
+                        el ZIP pesa ~540 MB y trae extractos reales de un cliente; la ficha muestra que hace, no como esta hecho.
+  herramientas.css, galeria.js   estilos y visor de capturas de esas fichas (sin codigo en linea, respetan la CSP).
+  OJO CSP en Netlify: _headers tiene connect-src 'self', asi que PromptPro no podria llamar a las IA desde Netlify (en GitHub
+  Pages no hay CSP y funciona). Si algun dia pasas a Netlify, hay que dar a esa ruta su propia CSP con los dominios de las IA.
+  OJO build-portfolio.py: necesita la carpeta fuente ../../portfolio-original (no existe en esta copia). Si se ejecuta sin ella,
+  borra las fichas de portfolio/projects. Las dos fichas nuevas y los cambios en promptpro.html se hicieron a mano.
+
 DONDE ESTA PUBLICADO
   Web:  https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/
   Repo: https://github.com/juliomarianocampuzano-git/Portfolio-Julio-Mariano-Campuzano (GitHub Pages, rama main)
