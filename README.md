@@ -25,6 +25,12 @@ Todo lo que está en este repo se ve y se usa bien en el celular.
 | 🪄 | [PromptPro · creador de prompts](https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/portfolio/herramientas/creador-de-prompts/index.html) | Herramienta real para convertir una idea en un prompt profesional. Se prueba sin clave (modo demostración) o con tu propia IA. |
 | 🧾 | [Contador LIGHT](https://juliomarianocampuzano-git.github.io/Portfolio-Julio-Mariano-Campuzano/portfolio/projects/contador-light.html) | Mesa contable local con IA para estudios: extractos, asientos y Excel por ejercicio. Ficha con capturas reales. |
 
+## 🎬 11 sitios con animación cinematográfica
+
+En `portfolio/cinematicos/` hay 11 sitios de muestra con negocios ficticios (forja, paisajismo, café, viajes, casas de madera, relojería, iluminación, panadería, estudio de sonido, galería de arte y marroquinería). Cada uno usa un efecto distinto hecho con GSAP: chispas con física, un portón 3D, un reloj con la hora real, haces de luz en WebGL, audio sintetizado en el navegador. Se abren desde la sección **Sitios web** de la home, que reúne los 31 sitios de muestra.
+
+La home también tiene una sección **Perfil y CV** pensada para reclutadores, con los datos del CV publicado.
+
 ## 📱 Hecho para celulares
 
 La mayoría de los clientes de un negocio llega desde el teléfono (Instagram, Google Maps, WhatsApp). Por eso cada página se diseñó **primero para celular** y después se amplió a la compu.

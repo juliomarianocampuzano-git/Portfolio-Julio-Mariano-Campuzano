@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex, follow" />
+<meta name="author" content="Julio Mariano Campuzano" />
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+<title>Taller de Hierro — Forja y diseño industrial</title>
+<meta name="description" content="Forja artesanal y diseño industrial en hierro. Rejas, escaleras, mobiliario y piezas únicas hechas a martillo." />
+<style>
+@font-face{font-family:"Big Shoulders Display";src:url(fonts/big-shoulders-display-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap}
+</style>
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1766940973188-598a6bd59ad6?auto=format&fit=crop&w=2000&q=80" />
+<style>
+:root{--coal:#0c0c0d;--iron:#1d1e21;--steel:#8d8f94;--ash:#d9d4cc;--hot:#ff4a17;--glow:#ffb347;--white-hot:#fff3d6;
+  --display:"Big Shoulders Display",Impact,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{background:var(--coal);color:var(--ash);font-family:var(--mono);font-size:15px;line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+.k{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+/* grano de hollín */
+body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;opacity:.09;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}50%{transform:translate(-4%,3%)}100%{transform:translate(3%,-2%)}}
+
+/* ===== PRELOADER: tres martillazos ===== */
+.pre{position:fixed;inset:0;z-index:100;background:var(--coal);display:grid;place-items:center;overflow:hidden}
+.pre-word{font-family:var(--display);font-weight:900;font-size:clamp(64px,16vw,220px);line-height:.85;color:var(--iron);letter-spacing:-.01em;text-transform:uppercase}
+.pre-count{position:absolute;bottom:32px;left:32px;font-size:12px;color:var(--steel)}
+.pre-split{position:absolute;left:0;width:100%;height:50%;background:var(--coal)}
+.pre-split.t{top:0}.pre-split.b{bottom:0}
+.spark{position:fixed;width:4px;height:4px;border-radius:50%;background:var(--white-hot);box-shadow:0 0 8px 2px var(--glow);pointer-events:none;z-index:110}
+
+/* ===== HEADER ===== */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(16px,4vw,48px);mix-blend-mode:difference;color:#fff}
+.logo{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
+.burger{background:none;border:0;color:inherit;font:inherit;cursor:pointer;display:flex;gap:10px;align-items:center}
+.burger i{width:28px;height:2px;background:currentColor;box-shadow:0 7px 0 currentColor}
+.menu{position:fixed;inset:0;z-index:70;background:var(--hot);color:var(--coal);clip-path:inset(0 0 100% 0);display:grid;grid-template-rows:auto 1fr auto;padding:20px clamp(16px,4vw,48px)}
+.menu .x{justify-self:end;background:none;border:0;font:inherit;cursor:pointer;color:inherit}
+.menu ul{list-style:none;align-self:center}
+.menu li{overflow:hidden}
+.menu a{display:block;font-family:var(--display);font-weight:900;font-size:clamp(48px,11vw,140px);line-height:.9;text-transform:uppercase}
+.menu a:hover{color:var(--white-hot)}
+
+/* ===== HERO ===== */
+.hero{position:relative;height:100svh;min-height:560px;overflow:hidden;display:flex;align-items:flex-end;padding:0 clamp(16px,4vw,48px) 6vh}
+.hero-bg{position:absolute;inset:-8% 0 0;will-change:transform}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.1)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,13,.2),rgba(12,12,13,.35) 50%,var(--coal))}
+.hero-in{position:relative;width:100%}
+.hot-text{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.8;letter-spacing:-.02em;
+  font-size:clamp(88px,24vw,380px);
+  /* degradé de temperatura: el background-position lo mueve el scroll (blanco → rojo → acero) */
+  background:linear-gradient(90deg,var(--white-hot) 0%,var(--glow) 18%,var(--hot) 36%,#7a1d0a 54%,#3b3d42 72%,var(--steel) 100%);
+  background-size:400% 100%;background-position:0% 0;-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 30px rgba(255,74,23,.35))}
+.hero-row{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-top:20px;flex-wrap:wrap}
+.hero-row p{max-width:420px;color:var(--ash)}
+.temp{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,48px);color:var(--glow)}
+.temp small{font-family:var(--mono);font-size:11px;color:var(--steel);display:block;letter-spacing:.18em}
+
+/* ===== MANIFIESTO ===== */
+.mani{padding:22vh clamp(16px,4vw,48px);max-width:1300px}
+.mani h2{font-family:var(--display);font-weight:800;font-size:clamp(36px,6vw,92px);line-height:.95;text-transform:uppercase;color:var(--ash)}
+.mani h2 .ch{display:inline-block}
+.mani p{max-width:520px;margin-top:40px;color:var(--steel)}
+
+/* ===== LA BARRA (pin + MorphSVG) ===== */
+.bar-sec{position:relative;height:100svh;overflow:hidden;background:radial-gradient(ellipse at 50% 70%,#1a0f0b,var(--coal) 70%)}
+.bar-svg{position:absolute;inset:0;width:100%;height:100%}
+#bar{fill:none;stroke-width:26;stroke-linecap:round}
+.bar-steps{position:absolute;left:clamp(16px,4vw,48px);top:clamp(80px,14vh,140px);z-index:2}
+.bar-steps li{list-style:none;font-family:var(--display);font-weight:800;font-size:clamp(28px,4.5vw,64px);text-transform:uppercase;line-height:1;color:#2a2b2f;transition:color .3s}
+.bar-steps li.on{color:var(--ash)}
+.bar-steps li span{font-family:var(--mono);font-size:12px;font-weight:400;margin-right:12px;vertical-align:middle}
+.bar-meter{position:absolute;right:clamp(16px,4vw,48px);bottom:6vh;text-align:right}
+.bar-meter b{font-family:var(--display);font-size:clamp(56px,9vw,140px);font-weight:900;line-height:.9;display:block;color:var(--glow)}
+
+/* ===== OBRAS ===== */
+.works{padding:18vh clamp(16px,4vw,48px)}
+.works-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:8vh;gap:24px;flex-wrap:wrap}
+.works-head h2{font-family:var(--display);font-weight:900;font-size:clamp(56px,10vw,160px);text-transform:uppercase;line-height:.85}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(12px,2vw,28px)}
+.w{position:relative;overflow:hidden;background:var(--iron)}
+.w img{width:100%;height:100%;object-fit:cover;transform:scale(1.25)}
+.w .heat{position:absolute;inset:0;background:linear-gradient(0deg,var(--hot),var(--glow));mix-blend-mode:color;pointer-events:none}
+.w figcaption{position:absolute;left:16px;bottom:14px;right:16px;display:flex;justify-content:space-between;color:#fff;font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 1px 8px #000}
+.w1{grid-column:1/8;aspect-ratio:4/3}.w2{grid-column:8/13;aspect-ratio:3/4;margin-top:20vh}
+.w3{grid-column:2/7;aspect-ratio:3/4}.w4{grid-column:7/13;aspect-ratio:4/3;margin-top:12vh}
+@media(max-width:760px){.w1,.w2,.w3,.w4{grid-column:1/-1;margin-top:0;aspect-ratio:4/5}}
+
+/* ===== PROCESO / NÚMEROS ===== */
+.nums{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #2a2b2f;border-bottom:1px solid #2a2b2f}
+.num{padding:7vh clamp(16px,3vw,40px);border-right:1px solid #2a2b2f}
+.num:last-child{border:0}
+.num b{font-family:var(--display);font-weight:900;font-size:clamp(64px,10vw,150px);line-height:.9;display:block;color:var(--ash)}
+@media(max-width:760px){.nums{grid-template-columns:1fr}.num{border-right:0;border-bottom:1px solid #2a2b2f}}
+
+/* ===== YUNQUE interactivo ===== */
+.anvil{position:relative;padding:22vh clamp(16px,4vw,48px);text-align:center;overflow:hidden}
+.anvil h2{font-family:var(--display);font-weight:900;font-size:clamp(48px,9vw,140px);text-transform:uppercase;line-height:.85}
+.anvil p{max-width:460px;margin:24px auto 48px;color:var(--steel)}
+.strike{position:relative;display:inline-grid;place-items:center;width:clamp(160px,22vw,220px);aspect-ratio:1;border-radius:50%;border:1px solid var(--hot);background:transparent;color:var(--ash);font:inherit;font-size:13px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+.strike::before{content:"";position:absolute;inset:10px;border-radius:50%;background:radial-gradient(circle,var(--hot),#7a1d0a 70%);transform:scale(.0);transition:transform .5s cubic-bezier(.2,1.4,.4,1)}
+.strike:hover::before{transform:scale(1)}
+.strike span{position:relative}
+
+/* ===== CONTACTO ===== */
+.contact{padding:16vh clamp(16px,4vw,48px) 6vh;background:var(--hot);color:var(--coal)}
+.contact h2{font-family:var(--display);font-weight:900;font-size:clamp(64px,16vw,260px);line-height:.8;text-transform:uppercase}
+.c-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:10vh;border-top:1px solid rgba(12,12,13,.3);padding-top:24px}
+.c-row a{font-family:var(--display);font-weight:800;font-size:clamp(20px,2.4vw,32px);text-transform:uppercase}
+@media(max-width:760px){.c-row{grid-template-columns:1fr}}
+footer{display:flex;justify-content:space-between;padding:20px clamp(16px,4vw,48px);font-size:12px;color:var(--steel)}
+
+@media (prefers-reduced-motion:reduce){
+  body::after{animation:none}.pre{display:none}
+  .w img{transform:none}.w .heat{display:none}.hot-text{background-position:60% 0}
+}
+</style>
+</head>
+<body>
+<div class="pre" aria-hidden="true">
+  <div class="pre-word">Hierro</div>
+  <span class="pre-count k">Golpe <b id="hit">0</b>/3</span>
+  <div class="pre-split t"></div><div class="pre-split b"></div>
+</div>
+
+<header class="hdr">
+  <a href="#top" class="logo">Taller de Hierro</a>
+  <button class="burger k" data-open aria-expanded="false" aria-controls="menu"><i></i>Menú</button>
+</header>
+<nav class="menu" id="menu" aria-hidden="true">
+  <button class="x k" data-close>Cerrar ✕</button>
+  <ul>
+    <li><a href="#oficio" data-ml>Oficio</a></li>
+    <li><a href="#barra" data-ml>La barra</a></li>
+    <li><a href="#obras" data-ml>Obras</a></li>
+    <li><a href="#contacto" data-ml>Encargos</a></li>
+  </ul>
+  <p class="k">Parque industrial · Posadas · Lun a Sáb 7–16 h</p>
+</nav>
+
+<main>
+  <section class="hero" id="top">
+    <div class="hero-bg"><img src="https://images.unsplash.com/photo-1766940973188-598a6bd59ad6?auto=format&fit=crop&w=2000&q=80" alt="Herrero trabajando frente a una fragua incandescente con chispas" width="2000" height="1333" fetchpriority="high" /></div>
+    <div class="hero-in">
+      <p class="k" style="color:var(--glow)">Forja · Diseño industrial · Desde 1987</p>
+      <h1 class="hot-text">Hierro</h1>
+      <div class="hero-row">
+        <p>Rejas, escaleras, mobiliario y piezas únicas forjadas a martillo. Hacé clic en cualquier lugar: saltan chispas.</p>
+        <div class="temp"><small>Temperatura de la pieza</small><span id="tempv">1250</span>°C</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mani" id="oficio">
+    <p class="k" style="color:var(--hot)">El oficio</p>
+    <h2 class="split">El hierro no se dobla por voluntad. Se dobla a 1100 grados, con paciencia y un golpe exacto.</h2>
+    <p>Somos tres generaciones de herreros. Trabajamos el metal en caliente, como hace cien años, y lo terminamos con precisión de taller industrial: corte láser, soldadura TIG y pintura electrostática.</p>
+  </section>
+
+  <!-- La barra: una pieza recta se transforma en voluta mientras se scrollea -->
+  <section class="bar-sec" id="barra" aria-label="Del lingote a la voluta">
+    <svg class="bar-svg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <defs>
+        <linearGradient id="g-hot" x1="0" x2="1"><stop offset="0" stop-color="#3b3d42"/><stop offset=".5" stop-color="#ff4a17"/><stop offset="1" stop-color="#fff3d6"/></linearGradient>
+        <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <path id="bar" stroke="#3b3d42" filter="url(#glow)" d="M120 360 C 250 360 380 360 500 360 C 620 360 740 360 860 360 C 870 360 880 360 890 360 C 900 360 910 360 920 360"/>
+      <path id="bar-end" style="display:none" d="M120 360 C 250 360 380 360 500 360 C 640 360 760 300 750 200 C 740 110 620 100 600 180 C 585 240 660 260 690 215"/>
+    </svg>
+    <ol class="bar-steps">
+      <li><span>01</span>Calentar</li>
+      <li><span>02</span>Golpear</li>
+      <li><span>03</span>Torcer</li>
+      <li><span>04</span>Templar</li>
+    </ol>
+    <div class="bar-meter"><span class="k">Temperatura</span><b><span id="bart">20</span>°</b></div>
+  </section>
+
+  <section class="works" id="obras">
+    <div class="works-head">
+      <h2>Obras<br/>recientes</h2>
+      <p class="k" style="max-width:280px">Cada pieza sale de la fragua al rojo y se enfría frente a vos.</p>
+    </div>
+    <div class="grid">
+      <figure class="w w1"><img src="https://images.unsplash.com/photo-1777521562087-a9838a435e48?auto=format&fit=crop&w=1400&q=80" alt="Baranda de balcón de hierro forjado con espirales" loading="lazy" width="1400" height="1050"/><span class="heat"></span><figcaption><span>Balcón Rivadavia</span><span>2025</span></figcaption></figure>
+      <figure class="w w2"><img src="https://images.unsplash.com/photo-1782105702203-4320f46c1a61?auto=format&fit=crop&w=1000&q=80" alt="Ornamento metálico con cuatro espirales" loading="lazy" width="1000" height="1333"/><span class="heat"></span><figcaption><span>Volutas</span><span>Serie I</span></figcaption></figure>
+      <figure class="w w3"><img src="https://images.unsplash.com/photo-1767976768943-8cf305ef6585?auto=format&fit=crop&w=1000&q=80" alt="Puertas de madera con rejas decorativas de metal" loading="lazy" width="1000" height="1333"/><span class="heat"></span><figcaption><span>Portón Itaembé</span><span>2024</span></figcaption></figure>
+      <figure class="w w4"><img src="https://images.unsplash.com/photo-1758763267882-56f786885b3c?auto=format&fit=crop&w=1400&q=80" alt="Rejilla circular de metal ornamentada sobre muro texturado" loading="lazy" width="1400" height="1050"/><span class="heat"></span><figcaption><span>Óculo de patio</span><span>2025</span></figcaption></figure>
+    </div>
+  </section>
+
+  <div class="nums">
+    <div class="num"><b data-count="38">0</b><span class="k">Años de fragua</span></div>
+    <div class="num"><b data-count="1420">0</b><span class="k">Piezas entregadas</span></div>
+    <div class="num"><b data-count="1250">0</b><span class="k">°C en la fragua</span></div>
+  </div>
+
+  <section class="anvil">
+    <p class="k" style="color:var(--hot)">Probalo</p>
+    <h2>Golpeá<br/>el yunque</h2>
+    <p>Cada golpe libera chispas reales de física: velocidad, ángulo y gravedad.</p>
+    <button class="strike" id="strike"><span>Golpear</span></button>
+  </section>
+
+  <section class="contact" id="contacto">
+    <p class="k">Encargos a medida</p>
+    <h2>Forjemos<br/>algo.</h2>
+    <div class="c-row">
+      <a href="https://wa.me/5493764148342?text=Hola%20Mariano%2C%20vi%20el%20sitio%20de%20muestra%20%C2%ABTaller%20de%20Hierro%C2%BB%20y%20quiero%20uno%20as%C3%AD%20para%20mi%20negocio." target="_blank" rel="noopener">hola@tallerdehierro.com.ar</a>
+      <a href="https://wa.me/5493764148342?text=Hola%20Mariano%2C%20vi%20el%20sitio%20de%20muestra%20%C2%ABTaller%20de%20Hierro%C2%BB%20y%20quiero%20uno%20as%C3%AD%20para%20mi%20negocio." target="_blank" rel="noopener">WhatsApp →</a>
+      <a href="#top" data-ml>Volver arriba ↑</a>
+    </div>
+  </section>
+</main>
+<footer><span>© 2026 Taller de Hierro</span><span>Fotos: Unsplash</span></footer>
+
+<script src="libs/gsap.min.js"></script>
+<script src="libs/ScrollTrigger.min.js"></script>
+<script src="libs/MorphSVGPlugin.min.js"></script>
+<script src="libs/Physics2DPlugin.min.js"></script>
+<script src="libs/CustomEase.min.js"></script>
+<script src="libs/CustomWiggle.min.js"></script>
+<script src="libs/SplitText.min.js"></script>
+<script src="libs/lenis.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin, Physics2DPlugin, CustomEase, CustomWiggle, SplitText);
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+CustomWiggle.create("golpe", { wiggles: 7, type: "easeOut" });
+
+/* ---------- Chispas con Physics2D (reutilizable) ---------- */
+function sparks(x, y, n = 26, spread = 70) {
+  if (RM) return;
+  for (let i = 0; i < n; i++) {
+    const s = document.createElement("i");
+    s.className = "spark";
+    s.style.left = x + "px"; s.style.top = y + "px";
+    document.body.appendChild(s);
+    gsap.to(s, {
+      duration: gsap.utils.random(0.7, 1.5),
+      physics2D: { velocity: gsap.utils.random(300, 900), angle: gsap.utils.random(-90 - spread, -90 + spread), gravity: 1400 },
+      scale: 0, ease: "none", onComplete: () => s.remove()
+    });
+  }
+}
+
+/* ---------- Scroll suave (Lenis) ---------- */
+let lenis = null;
+if (!RM) {
+  lenis = new Lenis({ lerp: 0.09 });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
+const goTo = (h) => { const el = document.querySelector(h); if (!el) return; lenis ? lenis.scrollTo(el, { offset: 0, duration: 1.6 }) : el.scrollIntoView(); };
+
+/* ---------- Menú ---------- */
+const menu = document.querySelector(".menu"), openBtn = document.querySelector("[data-open]");
+const menuTl = gsap.timeline({ paused: true })
+  .to(menu, { clipPath: "inset(0 0 0% 0)", duration: 0.8, ease: "expo.inOut" })
+  .from(".menu li a", { yPercent: 110, stagger: 0.06, duration: 0.7, ease: "expo.out" }, "-=0.35");
+function toggleMenu(open) {
+  menu.setAttribute("aria-hidden", !open); openBtn.setAttribute("aria-expanded", open);
+  open ? (lenis && lenis.stop(), menuTl.play()) : (lenis && lenis.start(), menuTl.reverse());
+}
+openBtn.addEventListener("click", () => toggleMenu(true));
+document.querySelector("[data-close]").addEventListener("click", () => toggleMenu(false));
+document.querySelectorAll("[data-ml], .hdr .logo").forEach(a => a.addEventListener("click", e => {
+  e.preventDefault(); const h = a.getAttribute("href");
+  if (menu.getAttribute("aria-hidden") === "false") { toggleMenu(false); setTimeout(() => goTo(h), 500); } else goTo(h);
+}));
+
+/* ---------- Preloader: 3 martillazos + chispas + corte ---------- */
+function preloader(done) {
+  if (RM) { document.querySelector(".pre").remove(); return done(); }
+  const word = ".pre-word", hit = document.getElementById("hit");
+  const tl = gsap.timeline({ onComplete: () => { document.querySelector(".pre").remove(); done(); } });
+  for (let i = 1; i <= 3; i++) {
+    tl.to(word, { color: i === 3 ? "#ff4a17" : (i === 2 ? "#7a1d0a" : "#3b3d42"), duration: 0.05 })
+      .to(word, { scaleY: 0.86, scaleX: 1.06, duration: 0.06, ease: "power4.in" })
+      .add(() => { hit.textContent = i; sparks(innerWidth / 2, innerHeight / 2 + 40, 18 + i * 8, 80); })
+      .to(word, { scale: 1, duration: 0.6, ease: "elastic.out(1,0.35)" })
+      .to(".pre", { x: 14, duration: 0.5, ease: "golpe" }, "<")
+      .to({}, { duration: 0.15 });
+  }
+  tl.to(word, { color: "#fff3d6", textShadow: "0 0 60px #ff4a17", duration: 0.2 })
+    .to(".pre-word,.pre-count", { autoAlpha: 0, duration: 0.25 })
+    .to(".pre", { backgroundColor: "transparent", duration: 0.01 })
+    .to(".pre-split.t", { yPercent: -100, duration: 0.9, ease: "expo.inOut" }, "<")
+    .to(".pre-split.b", { yPercent: 100, duration: 0.9, ease: "expo.inOut" }, "<");
+}
+
+/* ---------- Animaciones del sitio ---------- */
+function intro() {
+  // El título cae como un golpe (la intro usa scale; el scroll usa background-position → no chocan)
+  gsap.fromTo(".hot-text", { yPercent: 40, scaleY: 1.4, autoAlpha: 0 }, { yPercent: 0, scaleY: 1, autoAlpha: 1, duration: 1.1, ease: "expo.out" });
+  gsap.from(".hero-row > *, .hero .k", { y: 30, autoAlpha: 0, stagger: 0.08, duration: 0.9, ease: "power3.out", delay: 0.25 });
+}
+
+function build() {
+  if (RM) {
+    document.querySelectorAll("[data-count]").forEach(el => el.textContent = el.dataset.count);
+    gsap.set("#bar", { morphSVG: "#bar-end", stroke: "#8d8f94" });
+    document.querySelectorAll(".bar-steps li").forEach(li => li.classList.add("on"));
+    return;
+  }
+
+  // Hero: parallax + la palabra se ENFRÍA (gradiente de temperatura recorre el texto)
+  const tempv = document.getElementById("tempv");
+  gsap.to(".hero-bg", { yPercent: 18, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  gsap.to(".hot-text", {
+    backgroundPosition: "100% 0", ease: "none",
+    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6,
+      onUpdate: s => tempv.textContent = Math.round(1250 - s.progress * 1230) }
+  });
+
+  // Manifiesto: caracteres que se "forjan" (rotación + blur a nítido)
+  const split = SplitText.create(".mani .split", { type: "words,chars", charsClass: "ch" });
+  gsap.from(split.chars, {
+    yPercent: 60, rotateX: -80, filter: "blur(8px)", color: "#ff4a17", stagger: 0.012, ease: "power2.out",
+    scrollTrigger: { trigger: ".mani", start: "top 75%", end: "center 45%", scrub: 1 }
+  });
+
+  // La barra: pin + morph recto → voluta, con temperatura
+  const steps = gsap.utils.toArray(".bar-steps li"), bart = document.getElementById("bart");
+  const temp = { v: 20 };
+  const barTl = gsap.timeline({
+    scrollTrigger: { trigger: ".bar-sec", start: "top top", end: "+=260%", pin: true, scrub: 1,
+      onUpdate: s => steps.forEach((li, i) => li.classList.toggle("on", s.progress >= i * 0.25)) }
+  });
+  barTl
+    .to("#bar", { stroke: "#ff4a17", duration: 1 })
+    .to(temp, { v: 1100, duration: 1, onUpdate: () => bart.textContent = Math.round(temp.v) }, "<")
+    .to("#bar", { stroke: "#fff3d6", strokeWidth: 34, duration: 0.6 })
+    .to("#bar", { strokeWidth: 26, duration: 0.4, ease: "golpe" })
+    .to("#bar", { morphSVG: { shape: "#bar-end", type: "rotational" }, stroke: "#ff4a17", duration: 2, ease: "power2.inOut" })
+    .to("#bar", { stroke: "#8d8f94", duration: 1.2 })
+    .to(temp, { v: 40, duration: 1.2, onUpdate: () => bart.textContent = Math.round(temp.v) }, "<")
+    .to(".bar-meter b", { color: "#8d8f94", duration: 1.2 }, "<");
+
+  // Obras: salen calientes (capa naranja + desenfoque) y se enfrían al entrar
+  gsap.utils.toArray(".w").forEach(w => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: w, start: "top 85%", end: "top 25%", scrub: 1 } });
+    tl.fromTo(w, { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "power3.out", duration: 1 })
+      .fromTo(w.querySelector("img"), { scale: 1.35, filter: "brightness(2.2) blur(6px)" }, { scale: 1.05, filter: "brightness(1) blur(0px)", duration: 1.4 }, 0)
+      .fromTo(w.querySelector(".heat"), { opacity: 0.95 }, { opacity: 0, duration: 1.4 }, 0.2);
+  });
+
+  // Contadores
+  gsap.utils.toArray("[data-count]").forEach(el => {
+    const o = { v: 0 };
+    gsap.to(o, { v: +el.dataset.count, duration: 2, ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 85%", once: true },
+      onUpdate: () => el.textContent = Math.round(o.v).toLocaleString("es-AR") });
+  });
+
+  // Contacto: el título entra con golpe
+  gsap.from(".contact h2", { yPercent: 30, scaleY: 1.5, transformOrigin: "50% 100%", ease: "power4.out",
+    scrollTrigger: { trigger: ".contact", start: "top 80%", end: "top 30%", scrub: 1 } });
+}
+
+/* ---------- Interacción: chispas al hacer clic / yunque ---------- */
+addEventListener("pointerdown", e => { if (!e.target.closest("a,button,.menu")) sparks(e.clientX, e.clientY, 16, 60); });
+document.getElementById("strike").addEventListener("click", e => {
+  const r = e.currentTarget.getBoundingClientRect();
+  sparks(r.left + r.width / 2, r.top + r.height / 2, 46, 85);
+  gsap.fromTo(".anvil h2", { x: 0 }, { x: 18, duration: 0.6, ease: "golpe" });
+  gsap.fromTo(e.currentTarget, { scale: 0.88 }, { scale: 1, duration: 0.7, ease: "elastic.out(1,.3)" });
+});
+
+/* ---------- Arranque (una sola vez) ---------- */
+let booted = false;
+document.fonts.ready.then(() => {
+  if (booted) return; booted = true;
+  build();
+  lenis && lenis.stop();
+  preloader(() => { lenis && lenis.start(); intro(); ScrollTrigger.refresh(); });
+});
+</script>
+<style>
+#jmc-pill{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));translate:-50% 0;z-index:9999;display:flex;gap:10px;align-items:center;white-space:nowrap;background:#16110e;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:7px 7px 7px 14px;font:600 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:0;text-transform:none;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:opacity .3s}
+#jmc-pill b{background:#FF6B2C;color:#fff;border-radius:99px;padding:7px 11px;font-weight:700}
+#jmc-pill:hover b{background:#ff8a55}
+#jmc-pill i{font-style:normal}
+@media(max-width:520px){#jmc-pill i{display:none}}
+@media print{#jmc-pill{display:none}}
+</style>
+<a id="jmc-pill" href="../../index.html#sitios" aria-label="Sitio de muestra con negocio ficticio, hecho por Mariano Campuzano. Volver al portfolio y pedir uno así."><span><i>Sitio de muestra · </i>negocio ficticio<i> · por Mariano Campuzano</i></span><b>Quiero uno así →</b></a>
+</body>
+</html>

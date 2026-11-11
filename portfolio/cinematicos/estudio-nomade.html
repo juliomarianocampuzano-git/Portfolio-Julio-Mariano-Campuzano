@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex, follow" />
+<meta name="author" content="Julio Mariano Campuzano" />
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+<title>Estudio Nómade — Viajes de autor</title>
+<meta name="description" content="Agencia de viajes de autor. Itinerarios a medida por Patagonia, los Andes y los Alpes, diseñados por viajeros." />
+<style>
+@font-face{font-family:"Anton";src:url(fonts/anton-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"DM Mono";src:url(fonts/dm-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"DM Mono";src:url(fonts/dm-mono-latin-500-normal.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-latin-wght-normal.woff2) format("woff2");font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-latin-wght-italic.woff2) format("woff2");font-weight:200 800;font-style:italic;font-display:swap}
+</style>
+<style>
+:root{--ink:#0e0f11;--snow:#f4f2ec;--sun:#ffb000;--sky:#9ec7d9;
+  --cond:"Anton",Impact,sans-serif;--mono:"DM Mono",ui-monospace,monospace;--serif:"Newsreader",Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--ink);color:var(--snow);font-family:var(--mono);font-size:14px;line-height:1.6;overflow:hidden;overscroll-behavior:none}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+.k{font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.it{font-family:var(--serif);font-style:italic;font-weight:300;text-transform:none}
+
+/* ===== PRELOADER: tablero de partidas (split-flap) ===== */
+.pre{position:fixed;inset:0;z-index:100;background:#090a0b;display:grid;place-items:center;align-content:center;gap:24px}
+.board{display:grid;grid-template-columns:repeat(7,auto);gap:6px;perspective:600px}
+.flap{position:relative;width:clamp(34px,7vw,74px);height:clamp(48px,10vw,104px);background:#1b1d21;border-radius:6px;display:grid;place-items:center;
+  font-family:var(--cond);font-size:clamp(30px,6.4vw,70px);color:var(--sun);overflow:hidden;box-shadow:inset 0 -2px 0 #000}
+.flap::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:#090a0b}
+.pre-row{display:flex;justify-content:space-between;width:min(92vw,560px);color:#6b6f77}
+.pre-row b{color:var(--snow);font-weight:500}
+
+/* ===== UI fija ===== */
+.hdr{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(16px,3vw,40px)}
+.logo{font-family:var(--cond);font-size:22px;letter-spacing:.02em;text-transform:uppercase}
+.logo span{color:var(--sun)}
+.burger{background:var(--snow);color:var(--ink);border:0;border-radius:99px;padding:10px 20px;font:inherit;font-size:11px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
+.rail{position:fixed;right:clamp(16px,3vw,40px);top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:18px;align-items:flex-end}
+.rail button{background:none;border:0;color:var(--snow);font:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;gap:10px;align-items:center;opacity:.45;transition:opacity .3s}
+.rail button i{width:8px;height:8px;border-radius:50%;border:1px solid currentColor;transition:background .3s,transform .3s}
+.rail button.on{opacity:1}.rail button.on i{background:var(--sun);border-color:var(--sun);transform:scale(1.5)}
+.rail button span{max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .4s}
+.rail button.on span,.rail:hover button span{max-width:140px}
+.counter{position:fixed;left:clamp(16px,3vw,40px);bottom:20px;z-index:50;font-family:var(--cond);font-size:28px}
+.counter small{font-family:var(--mono);font-size:11px;color:#9a9ea6}
+.hint{position:fixed;right:clamp(16px,3vw,40px);bottom:22px;z-index:50;color:#c8ccd2}
+@media(max-width:760px){.rail{display:none}.hint{bottom:62px}.counter{bottom:54px}}
+
+/* ===== CAPÍTULOS (Observer) ===== */
+.slide{position:fixed;inset:0;visibility:hidden}
+.outer,.inner{width:100%;height:100%;overflow:hidden}
+.bg{position:absolute;inset:0}
+.bg img{width:100%;height:100%;object-fit:cover}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,15,17,.45),rgba(14,15,17,.05) 40%,rgba(14,15,17,.75))}
+.content{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(16px,4vw,64px) 12vh}
+.content h2{font-family:var(--cond);font-weight:400;font-size:clamp(72px,15vw,240px);line-height:.86;text-transform:uppercase;letter-spacing:.005em}
+.content h2 .line{overflow:hidden;display:block;padding-top:.04em;white-space:nowrap}
+.content h2 .line.it{white-space:normal}
+.content h2 .it{display:block;font-size:.34em;color:var(--sun);margin-top:6px}
+.c-row{display:flex;gap:clamp(20px,5vw,80px);margin-top:28px;flex-wrap:wrap;align-items:end}
+.c-row p{max-width:380px;color:#e3e1da}
+.facts{display:flex;gap:28px}
+.facts b{display:block;font-family:var(--cond);font-weight:400;font-size:32px;line-height:1;color:var(--snow)}
+.facts span{color:#bfc3c9}
+.go{display:inline-flex;gap:10px;align-items:center;border:1px solid var(--snow);border-radius:99px;padding:14px 22px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;transition:background .3s,color .3s}
+.go:hover{background:var(--sun);color:var(--ink);border-color:var(--sun)}
+
+/* Último capítulo: pase de abordar */
+.pass{position:absolute;z-index:2;left:50%;top:54%;translate:-50% -50%;width:min(92vw,880px);display:grid;grid-template-columns:1fr 240px;background:var(--snow);color:var(--ink);border-radius:18px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.pass-l{padding:clamp(20px,3vw,36px)}
+.pass-l h2{font-family:var(--cond);font-weight:400;font-size:clamp(40px,6vw,76px);line-height:.9;text-transform:uppercase}
+.route{display:flex;align-items:center;gap:16px;margin:22px 0;font-family:var(--cond);font-size:clamp(28px,4vw,44px)}
+.route i{flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--ink) 0 6px,transparent 6px 12px);position:relative}
+.route i::after{content:"✈";position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);font-style:normal;font-size:18px;background:var(--snow);padding:0 6px}
+.pass form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pass input,.pass select{font:inherit;padding:12px 14px;border:1px solid #c9c6bd;border-radius:10px;background:#fff;color:var(--ink)}
+.pass button{grid-column:1/-1;background:var(--ink);color:var(--snow);border:0;border-radius:10px;padding:14px;font:inherit;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.pass-r{border-left:2px dashed #c9c6bd;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background:var(--sun)}
+.pass-r b{display:block;font-family:var(--cond);font-weight:400;font-size:40px;line-height:1}
+.barcode{height:70px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 7px,transparent 7px 9px,var(--ink) 9px 10px,transparent 10px 14px)}
+@media(max-width:760px){.pass{grid-template-columns:1fr;top:56%}.pass-r{display:none}.pass form{grid-template-columns:1fr}}
+
+/* ===== MENÚ ===== */
+.menu{position:fixed;inset:0;z-index:80;background:var(--sun);color:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:0 clamp(16px,4vw,64px);clip-path:inset(0 0 0 100%)}
+.menu .x{position:absolute;top:20px;right:clamp(16px,3vw,40px);background:var(--ink);color:var(--sun);border:0;border-radius:99px;padding:10px 20px;font:inherit;font-size:11px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
+.menu button.m{display:flex;gap:24px;align-items:baseline;background:none;border:0;font:inherit;color:inherit;cursor:pointer;text-align:left;overflow:hidden}
+.menu button.m b{font-family:var(--cond);font-weight:400;font-size:clamp(48px,9vw,120px);line-height:1;text-transform:uppercase;transition:transform .4s}
+.menu button.m:hover b{transform:translateX(16px)}
+
+/* ===== Reduced motion: capítulos apilados con scroll normal ===== */
+@media (prefers-reduced-motion:reduce){
+  body{overflow:auto;height:auto}.pre,.rail,.counter,.hint{display:none}
+  .slide{position:relative;visibility:visible;height:100svh}
+}
+</style>
+</head>
+<body>
+<div class="pre" aria-hidden="true">
+  <p class="k" style="color:#6b6f77">Partidas · Departures</p>
+  <div class="board" id="board"></div>
+  <div class="pre-row k"><span>Puerta <b>N7</b></span><span>Estado <b id="status">Embarcando</b></span></div>
+</div>
+
+<header class="hdr">
+  <button class="logo" style="background:none;border:0;color:inherit;cursor:pointer" data-go="0">Estudio <span>Nómade</span></button>
+  <button class="burger" data-open aria-expanded="false" aria-controls="menu">Destinos</button>
+</header>
+<nav class="rail" aria-label="Capítulos">
+  <button data-go="0" class="on"><span>Inicio</span><i></i></button>
+  <button data-go="1"><span>Patagonia</span><i></i></button>
+  <button data-go="2"><span>Andes</span><i></i></button>
+  <button data-go="3"><span>Dolomitas</span><i></i></button>
+  <button data-go="4"><span>Tu viaje</span><i></i></button>
+</nav>
+<div class="counter" aria-hidden="true"><span id="cnum">01</span> <small>/ 05</small></div>
+<p class="hint k">Scroll · ↑↓ · Deslizá</p>
+
+<nav class="menu" id="menu" aria-hidden="true">
+  <button class="x" data-close>Cerrar</button>
+  <button class="m" data-go="1"><span class="k">01</span><b>Patagonia</b></button>
+  <button class="m" data-go="2"><span class="k">02</span><b>Andes</b></button>
+  <button class="m" data-go="3"><span class="k">03</span><b>Dolomitas</b></button>
+  <button class="m" data-go="4"><span class="k">04</span><b>Diseñá tu viaje</b></button>
+</nav>
+
+<main>
+  <section class="slide" aria-label="Inicio">
+    <div class="outer"><div class="inner">
+      <div class="bg"><img src="https://images.unsplash.com/photo-1536048810607-3dc7f86981cb?auto=format&fit=crop&w=2200&q=80" alt="Vista aérea de un río entre montañas" fetchpriority="high" /></div>
+      <div class="content">
+        <p class="k">Viajes de autor · desde 2012</p>
+        <h2><span class="line">Perderse</span><span class="line">bien.</span><span class="line it">itinerarios diseñados por viajeros, no por algoritmos</span></h2>
+        <div class="c-row"><p>Armamos viajes a medida para grupos de hasta 8 personas. Cada ruta la hicimos antes nosotros.</p></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="slide" aria-label="Patagonia">
+    <div class="outer"><div class="inner">
+      <div class="bg"><img src="https://images.unsplash.com/photo-1552751753-0fc84ae5b6c8?auto=format&fit=crop&w=2200&q=80" alt="Glaciar en el Parque Nacional Los Glaciares, Santa Cruz, Patagonia" loading="lazy" /></div>
+      <div class="content">
+        <p class="k">01 · Santa Cruz, Argentina · 50°S</p>
+        <h2><span class="line">Patagonia</span><span class="line it">el hielo que todavía cruje</span></h2>
+        <div class="c-row"><p>Trekking al Fitz Roy, navegación entre témpanos y noches en estancias de la estepa.</p>
+          <div class="facts"><div><b>12</b><span>días</span></div><div><b>4</b><span>estancias</span></div><div><b>Nov–Mar</b><span>temporada</span></div></div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="slide" aria-label="Andes">
+    <div class="outer"><div class="inner">
+      <div class="bg"><img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=2200&q=80" alt="Ruinas de Machu Picchu entre montañas con niebla" loading="lazy" /></div>
+      <div class="content">
+        <p class="k">02 · Cusco, Perú · 13°S</p>
+        <h2><span class="line">Andes</span><span class="line it">caminar hasta las nubes</span></h2>
+        <div class="c-row"><p>El Camino Inca por la ruta menos transitada, con guías quechuas y llegada al amanecer.</p>
+          <div class="facts"><div><b>9</b><span>días</span></div><div><b>4.215</b><span>msnm</span></div><div><b>May–Sep</b><span>temporada</span></div></div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="slide" aria-label="Dolomitas">
+    <div class="outer"><div class="inner">
+      <div class="bg"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2200&q=80" alt="Bote de madera en el agua turquesa del Lago di Braies con picos" loading="lazy" /></div>
+      <div class="content">
+        <p class="k">03 · Tirol del Sur, Italia · 46°N</p>
+        <h2><span class="line">Dolomitas</span><span class="line it">refugio en refugio</span></h2>
+        <div class="c-row"><p>Alta Via 1 con equipaje transportado, cenas tirolesas y un día de lago para no hacer nada.</p>
+          <div class="facts"><div><b>10</b><span>días</span></div><div><b>120</b><span>km</span></div><div><b>Jun–Sep</b><span>temporada</span></div></div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="slide" aria-label="Diseñá tu viaje">
+    <div class="outer"><div class="inner">
+      <div class="bg"><img src="https://images.unsplash.com/photo-1530115443702-c801f3e9937d?auto=format&fit=crop&w=2200&q=80" alt="Persona sentada en una piedra mirando una montaña" loading="lazy" /></div>
+      <div class="pass">
+        <div class="pass-l">
+          <p class="k">Pase de abordar · Viaje a medida</p>
+          <h2>Diseñá<br/>tu viaje</h2>
+          <div class="route"><span>POS</span><i></i><span id="dest">FTE</span></div>
+          <form onsubmit="event.preventDefault();this.querySelector('button').textContent='¡Listo! Te escribimos en 24 h'">
+            <input required placeholder="Tu nombre" aria-label="Tu nombre" />
+            <input required type="email" placeholder="Tu email" aria-label="Tu email" />
+            <select aria-label="Destino" id="dsel"><option value="FTE">Patagonia</option><option value="CUZ">Andes</option><option value="VCE">Dolomitas</option><option value="???">Sorprendeme</option></select>
+            <select aria-label="Viajeros"><option>2 viajeros</option><option>3–4 viajeros</option><option>5–8 viajeros</option></select>
+            <button type="submit">Emitir pase →</button>
+          </form>
+        </div>
+        <div class="pass-r"><div><span class="k">Asiento</span><b>1A</b></div><div><span class="k">Clase</span><b>Autor</b></div><div class="barcode"></div></div>
+      </div>
+    </div></div>
+  </section>
+</main>
+
+<script src="libs/gsap.min.js"></script>
+<script src="libs/Observer.min.js"></script>
+<script src="libs/SplitText.min.js"></script>
+<script src="libs/ScrambleTextPlugin.min.js"></script>
+<script>
+gsap.registerPlugin(Observer, SplitText, ScrambleTextPlugin);
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const slides = gsap.utils.toArray(".slide");
+const outers = slides.map(s => s.querySelector(".outer"));
+const inners = slides.map(s => s.querySelector(".inner"));
+const imgs = slides.map(s => s.querySelector(".bg img"));
+const heads = slides.map(s => s.querySelector("h2"));
+const extras = slides.map(s => s.querySelectorAll(".k, .c-row > *, .pass"));
+const railBtns = gsap.utils.toArray(".rail button");
+const cnum = document.getElementById("cnum");
+let current = -1, animating = false;
+
+/* SplitText por capítulo: cada línea se divide en caracteres */
+let splits = []; // se crean cuando cargan las fuentes (medidas correctas)
+
+gsap.set(outers, { yPercent: 100 });
+gsap.set(inners, { yPercent: -100 });
+
+/* ---------- Transición entre capítulos ---------- */
+function gotoSlide(index, dir) {
+  index = gsap.utils.wrap(0, slides.length, index);
+  if (index === current) return;
+  animating = true;
+  const fromTop = dir === -1, d = fromTop ? -1 : 1;
+  const tl = gsap.timeline({ defaults: { duration: 1.25, ease: "power3.inOut" }, onComplete: () => animating = false });
+  if (current >= 0) {
+    gsap.set(slides[current], { zIndex: 0 });
+    tl.to(imgs[current], { yPercent: -15 * d, scale: 1.1 })
+      .set(slides[current], { autoAlpha: 0 });
+  }
+  gsap.set(slides[index], { autoAlpha: 1, zIndex: 1 });
+  tl.fromTo([outers[index], inners[index]], { yPercent: i => i ? -100 * d : 100 * d }, { yPercent: 0 }, 0)
+    .fromTo(imgs[index], { yPercent: 15 * d, scale: 1.3 }, { yPercent: 0, scale: 1 }, 0)
+    .fromTo(splits[index].chars, { autoAlpha: 0, yPercent: 120 * d, rotateX: -90 * d },
+      { autoAlpha: 1, yPercent: 0, rotateX: 0, duration: 1, ease: "power3.out", stagger: { each: 0.025, from: "random" } }, 0.25)
+    .fromTo(extras[index], { autoAlpha: 0, y: 30 * d }, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.06, ease: "power2.out" }, 0.5);
+  current = index;
+  railBtns.forEach((b, i) => b.classList.toggle("on", i === index));
+  gsap.to(cnum, { duration: 0.6, scrambleText: { text: String(index + 1).padStart(2, "0"), chars: "0123456789" } });
+}
+
+/* ---------- Observer: rueda, touch y puntero ---------- */
+let obs = null;
+if (!RM) {
+  obs = Observer.create({
+    type: "wheel,touch,pointer", wheelSpeed: -1, tolerance: 12, preventDefault: true,
+    onDown: () => !animating && current > 0 && gotoSlide(current - 1, -1),
+    onUp: () => !animating && current < slides.length - 1 && gotoSlide(current + 1, 1),
+    ignore: "input, select, button, .menu"
+  });
+  obs.disable();
+  addEventListener("keydown", e => {
+    if (animating || document.getElementById("menu").getAttribute("aria-hidden") === "false") return;
+    if (["ArrowDown", "PageDown", " "].includes(e.key) && current < slides.length - 1) { e.preventDefault(); gotoSlide(current + 1, 1); }
+    if (["ArrowUp", "PageUp"].includes(e.key) && current > 0) { e.preventDefault(); gotoSlide(current - 1, -1); }
+  });
+}
+const jump = (i) => { if (RM) { slides[i].scrollIntoView(); return; } if (!animating) gotoSlide(i, i > current ? 1 : -1); };
+
+/* ---------- Menú ---------- */
+const menu = document.getElementById("menu"), openBtn = document.querySelector("[data-open]");
+const mTl = gsap.timeline({ paused: true })
+  .to(menu, { clipPath: "inset(0 0 0 0%)", duration: 0.8, ease: "expo.inOut" })
+  .from(".menu .m b", { yPercent: 110, stagger: 0.06, duration: 0.6, ease: "expo.out" }, "-=0.3");
+const toggle = (o) => { menu.setAttribute("aria-hidden", !o); openBtn.setAttribute("aria-expanded", o); o ? (obs && obs.disable(), mTl.play()) : (obs && obs.enable(), mTl.reverse()); };
+openBtn.addEventListener("click", () => toggle(true));
+document.querySelector("[data-close]").addEventListener("click", () => toggle(false));
+document.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => {
+  const i = +b.dataset.go;
+  if (menu.getAttribute("aria-hidden") === "false") { toggle(false); setTimeout(() => jump(i), 500); } else jump(i);
+}));
+
+/* Código de destino del pase */
+document.getElementById("dsel").addEventListener("change", e => gsap.to("#dest", { duration: 0.7, scrambleText: { text: e.target.value, chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ" } }));
+
+/* ---------- Preloader: tablero split-flap ---------- */
+function preloader(done) {
+  const pre = document.querySelector(".pre");
+  if (RM) { pre.remove(); return done(); }
+  const word = "NOMADE ", board = document.getElementById("board"), AZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const cells = [...word].map(() => { const f = document.createElement("span"); f.className = "flap"; f.textContent = " "; board.appendChild(f); return f; });
+  const tl = gsap.timeline({ onComplete: () => { pre.remove(); done(); } });
+  cells.forEach((cell, i) => {
+    const flips = 8 + i * 3;
+    for (let n = 0; n < flips; n++) {
+      tl.call(() => cell.textContent = n === flips - 1 ? word[i] : AZ[(Math.random() * AZ.length) | 0], null, n * 0.06 + i * 0.05)
+        .fromTo(cell, { rotateX: 0 }, { rotateX: -18, duration: 0.03, yoyo: true, repeat: 1 }, n * 0.06 + i * 0.05);
+    }
+  });
+  tl.to("#status", { duration: 0.6, scrambleText: { text: "A horario", chars: "upperCase" } }, ">")
+    .to(".flap", { yPercent: -120, autoAlpha: 0, stagger: 0.04, duration: 0.5, ease: "power3.in" }, "+=0.3")
+    .to(".pre .k, .pre-row", { autoAlpha: 0, duration: 0.3 }, "<")
+    .to(pre, { clipPath: "inset(0 0 100% 0)", duration: 0.9, ease: "expo.inOut" }, "-=0.2");
+}
+
+let booted = false;
+document.fonts.ready.then(() => {
+  if (booted) return; booted = true;
+  if (RM) { gsap.set([outers, inners], { yPercent: 0 }); document.querySelector(".pre").remove(); return; }
+  splits = heads.map(h => SplitText.create(h.querySelectorAll(".line:not(.it)"), { type: "chars", charsClass: "ch" }));
+  preloader(() => { gotoSlide(0, 1); obs.enable(); });
+});
+</script>
+<style>
+#jmc-pill{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));translate:-50% 0;z-index:9999;display:flex;gap:10px;align-items:center;white-space:nowrap;background:#16110e;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:7px 7px 7px 14px;font:600 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:0;text-transform:none;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:opacity .3s}
+#jmc-pill b{background:#FF6B2C;color:#fff;border-radius:99px;padding:7px 11px;font-weight:700}
+#jmc-pill:hover b{background:#ff8a55}
+#jmc-pill i{font-style:normal}
+@media(max-width:520px){#jmc-pill i{display:none}}
+@media print{#jmc-pill{display:none}}
+</style>
+<a id="jmc-pill" href="../../index.html#sitios" aria-label="Sitio de muestra con negocio ficticio, hecho por Mariano Campuzano. Volver al portfolio y pedir uno así."><span><i>Sitio de muestra · </i>negocio ficticio<i> · por Mariano Campuzano</i></span><b>Quiero uno así →</b></a>
+</body>
+</html>

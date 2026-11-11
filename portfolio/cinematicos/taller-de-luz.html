@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex, follow" />
+<meta name="author" content="Julio Mariano Campuzano" />
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+<title>Taller de Luz — Iluminación arquitectónica</title>
+<meta name="description" content="Estudio de iluminación arquitectónica. Proyectos lumínicos para casas, hoteles, fachadas y espacios públicos." />
+<style>
+@font-face{font-family:"Unbounded";src:url(fonts/unbounded-latin-wght-normal.woff2) format("woff2");font-weight:200 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Figtree";src:url(fonts/figtree-latin-wght-normal.woff2) format("woff2");font-weight:300 900;font-style:normal;font-display:swap}
+</style>
+<style>
+:root{--bg:#07070a;--fg:#ece8df;--dim:#77736b;--amber:#ffb84d;--line:rgba(236,232,223,.14);
+  --wide:"Unbounded",system-ui,sans-serif;--sans:"Figtree",system-ui,sans-serif}
+/* Interruptor general: "luces encendidas" invierte la paleta */
+html.on{--bg:#f4efe4;--fg:#15130f;--dim:#6d675c;--line:rgba(21,19,15,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html.lenis,html.lenis body{height:auto}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.65;overflow-x:hidden;transition:background .7s,color .7s}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+.k{font-family:var(--wide);font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
+
+/* ===== PRELOADER: tubo fluorescente ===== */
+.pre{position:fixed;inset:0;z-index:100;background:#040405;display:grid;place-items:center}
+.tube{width:min(60vw,520px);height:10px;border-radius:10px;background:#1c1c20;position:relative}
+.tube::after{content:"";position:absolute;inset:-30px -10px;border-radius:40px;background:radial-gradient(ellipse,rgba(255,250,235,.5),transparent 70%);opacity:var(--g,0)}
+.pre-k{position:absolute;bottom:32px;color:#4b4a48}
+
+/* ===== HEADER ===== */
+.hdr{position:fixed;inset:0 0 auto;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(16px,4vw,48px);mix-blend-mode:difference;color:#fff}
+.logo{font-family:var(--wide);font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.nav{display:flex;gap:28px;font-size:13px}
+.nav a{opacity:.75}.nav a:hover{opacity:1}
+.burger{display:none;background:none;border:0;color:inherit;font-family:var(--wide);font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+.mnav{position:fixed;inset:0;z-index:70;background:#0d0d10;color:#ece8df;display:flex;flex-direction:column;justify-content:center;padding:0 24px;visibility:hidden;opacity:0}
+.mnav a{font-family:var(--wide);font-weight:800;font-size:36px;line-height:1.35;text-transform:uppercase}
+.mnav .x{position:absolute;top:18px;right:16px;background:none;border:0;color:inherit;font-family:var(--wide);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+@media(max-width:760px){.nav{display:none}.burger{display:block}}
+
+/* ===== HERO: haces de luz en WebGL ===== */
+.hero{position:relative;height:100svh;min-height:560px;overflow:hidden;background:#000}
+#rays{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-in{position:absolute;inset:auto clamp(16px,4vw,48px) 7vh;z-index:2;color:#ece8df;pointer-events:none}
+.hero h1{font-family:var(--wide);font-weight:800;font-size:clamp(34px,11vw,200px);line-height:.86;letter-spacing:-.04em;text-transform:uppercase;mix-blend-mode:screen}
+.hero h1 .glow{color:transparent;-webkit-text-stroke:1.5px rgba(255,220,170,.85)}
+.hero-row{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-top:22px;flex-wrap:wrap}
+.hero-row p{max-width:420px;color:#bdb8ad}
+
+/* ===== DIMMER (pin) ===== */
+.dimmer{position:relative;height:100svh;overflow:hidden;background:#000}
+.dimmer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.06) saturate(.6)}
+.tint{position:absolute;inset:0;mix-blend-mode:soft-light;background:#ff8a2a;opacity:.0}
+.dim-ui{position:absolute;inset:0;z-index:2;display:grid;grid-template-columns:1fr auto;align-items:end;padding:0 clamp(16px,4vw,48px) 7vh;color:#ece8df}
+.dim-ui h2{font-family:var(--wide);font-weight:300;font-size:clamp(30px,4.6vw,70px);line-height:1;max-width:760px}
+.dim-ui h2 b{font-weight:800}
+.readout{text-align:right;font-family:var(--wide)}
+.readout b{display:block;font-weight:800;font-size:clamp(46px,7vw,110px);line-height:1}
+@media(max-width:760px){.dim-ui{grid-template-columns:1fr;gap:16px}.readout{text-align:left}}
+.slider{position:absolute;right:clamp(16px,4vw,48px);top:16vh;bottom:30vh;width:4px;background:rgba(236,232,223,.18);border-radius:4px}
+.slider i{position:absolute;left:50%;bottom:0;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:#ece8df;box-shadow:0 0 30px 6px rgba(255,190,90,.7)}
+
+/* ===== MANIFIESTO + INTERRUPTOR ===== */
+.switch-sec{padding:20vh clamp(16px,4vw,48px);display:grid;grid-template-columns:1fr auto;gap:5vw;align-items:center}
+.switch-sec h2{font-family:var(--wide);font-weight:300;font-size:clamp(28px,4vw,60px);line-height:1.12}
+.switch-sec h2 b{font-weight:800}
+.switch{width:110px;height:200px;border-radius:24px;border:1px solid var(--line);background:transparent;position:relative;cursor:pointer;justify-self:center}
+.switch .knob{position:absolute;left:14px;right:14px;top:14px;height:84px;border-radius:14px;background:var(--fg);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.switch small{position:absolute;left:0;right:0;bottom:-34px;text-align:center}
+@media(max-width:760px){.switch-sec{grid-template-columns:1fr}}
+
+/* ===== CONFIGURADOR DE TEMPERATURA ===== */
+.kelvin{padding:0 clamp(16px,4vw,48px) 18vh;display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(24px,5vw,80px);align-items:center}
+.k-photo{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#000}
+.k-photo img{width:100%;height:100%;object-fit:cover}
+.k-photo .kc{position:absolute;inset:0;mix-blend-mode:color;opacity:.55;background:#ffb057}
+.k-photo .kg{position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,var(--kcol,#ffb057),transparent 60%);mix-blend-mode:screen;opacity:.45}
+.kelvin h2{font-family:var(--wide);font-weight:800;font-size:clamp(30px,4vw,58px);line-height:1;text-transform:uppercase;letter-spacing:-.02em}
+.kelvin p{color:var(--dim);margin:18px 0 34px}
+.kv{font-family:var(--wide);font-weight:800;font-size:clamp(56px,8vw,120px);line-height:1}
+.kv small{font-size:.3em;font-weight:300}
+input[type=range].kr{-webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:10px;background:linear-gradient(90deg,#ff8a2a,#ffd5a0,#fff6ea,#cfe2ff);margin-top:20px;cursor:pointer}
+input[type=range].kr::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--fg);border:4px solid var(--bg)}
+input[type=range].kr::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--fg);border:4px solid var(--bg)}
+.presets{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.presets button{border:1px solid var(--line);background:none;color:var(--fg);border-radius:99px;padding:8px 14px;font:inherit;font-size:13px;cursor:pointer}
+@media(max-width:860px){.kelvin{grid-template-columns:1fr}}
+
+/* ===== PROYECTOS: barrido de luz con máscara ===== */
+.projects{padding:12vh clamp(16px,4vw,48px)}
+.projects h2{font-family:var(--wide);font-weight:800;font-size:clamp(44px,8vw,130px);line-height:.9;text-transform:uppercase;letter-spacing:-.04em}
+.pr{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(12px,2vw,24px);margin-top:10vh}
+.p{position:relative}
+.p .m{position:relative;overflow:hidden;border-radius:6px;background:#000;
+  -webkit-mask-image:linear-gradient(100deg,#000 42%,rgba(0,0,0,.06) 58%);mask-image:linear-gradient(100deg,#000 42%,rgba(0,0,0,.06) 58%);
+  -webkit-mask-size:300% 100%;mask-size:300% 100%;-webkit-mask-position:var(--m,100%) 0;mask-position:var(--m,100%) 0}
+.p img{width:100%;height:100%;object-fit:cover}
+.p h3{font-family:var(--wide);font-weight:600;font-size:15px;margin-top:14px;text-transform:uppercase;letter-spacing:.04em}
+.p span{color:var(--dim);font-size:14px}
+.p1{grid-column:1/8}.p1 .m{aspect-ratio:16/10}
+.p2{grid-column:9/13;margin-top:18vh}.p2 .m{aspect-ratio:3/4}
+.p3{grid-column:2/6}.p3 .m{aspect-ratio:3/4}
+.p4{grid-column:7/13;margin-top:10vh}.p4 .m{aspect-ratio:4/3}
+@media(max-width:760px){.p1,.p2,.p3,.p4{grid-column:1/-1;margin-top:0}}
+
+/* ===== CONTACTO ===== */
+.contact{padding:20vh clamp(16px,4vw,48px) 8vh;border-top:1px solid var(--line);position:relative;overflow:hidden}
+.contact h2{font-family:var(--wide);font-weight:800;font-size:clamp(52px,12vw,200px);line-height:.85;text-transform:uppercase;letter-spacing:-.05em}
+.contact h2 span{display:block;color:transparent;-webkit-text-stroke:1.5px var(--fg)}
+.cbtn{display:inline-flex;margin-top:8vh;align-items:center;gap:14px;padding:22px 34px;border-radius:99px;background:var(--amber);color:#111;font-family:var(--wide);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.08em}
+.spot{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,184,77,.35),transparent 65%);pointer-events:none;left:0;top:0;transform:translate(-50%,-50%);mix-blend-mode:screen}
+html.on .spot{mix-blend-mode:multiply;background:radial-gradient(circle,rgba(255,150,40,.25),transparent 65%)}
+footer{display:flex;justify-content:space-between;padding:18px clamp(16px,4vw,48px);font-size:12px;color:var(--dim);border-top:1px solid var(--line)}
+
+@media (prefers-reduced-motion:reduce){
+  .pre{display:none}.dimmer img{filter:brightness(.9)}.p .m{-webkit-mask-image:none;mask-image:none}.spot{display:none}
+}
+</style>
+</head>
+<body>
+<div class="pre" aria-hidden="true"><div class="tube"></div><p class="pre-k k">Encendiendo</p></div>
+
+<header class="hdr">
+  <a href="#top" class="logo" data-ml>Taller de Luz</a>
+  <nav class="nav"><a href="#dimmer" data-ml>Dimmer</a><a href="#temperatura" data-ml>Temperatura</a><a href="#proyectos" data-ml>Proyectos</a><a href="#contacto" data-ml>Contacto</a></nav>
+  <button class="burger" data-open aria-expanded="false" aria-controls="mnav">Menú</button>
+</header>
+<nav class="mnav" id="mnav" aria-hidden="true">
+  <button class="x" data-close>Cerrar</button>
+  <a href="#dimmer" data-ml>Dimmer</a><a href="#temperatura" data-ml>Temperatura</a><a href="#proyectos" data-ml>Proyectos</a><a href="#contacto" data-ml>Contacto</a>
+</nav>
+
+<main>
+  <section class="hero" id="top">
+    <canvas id="rays" aria-hidden="true"></canvas>
+    <div class="hero-in">
+      <p class="k" style="color:#ffb84d;margin-bottom:18px">Iluminación arquitectónica · Mové el cursor</p>
+      <h1>Diseñamos<br/><span class="glow">la sombra</span></h1>
+      <div class="hero-row"><p>La luz se ve. La buena iluminación, además, se siente. Proyectos lumínicos para casas, hoteles y fachadas.</p></div>
+    </div>
+  </section>
+
+  <section class="dimmer" id="dimmer">
+    <img src="https://images.unsplash.com/photo-1703289773827-7f838dbd5558?auto=format&fit=crop&w=2200&q=80" alt="Ambiente en penumbra con tres luminarias redondas" loading="lazy" />
+    <div class="tint"></div>
+    <div class="slider" aria-hidden="true"><i></i></div>
+    <div class="dim-ui">
+      <div><p class="k" style="color:#ffb84d;margin-bottom:16px">Escena 01 · Living</p><h2>Una misma sala, <b>cinco escenas</b>. Bajá para subir el dimmer.</h2></div>
+      <div class="readout"><span class="k">Intensidad</span><b><span id="lux">0</span>%</b><span class="k"><span id="kk">1800</span> K</span></div>
+    </div>
+  </section>
+
+  <section class="switch-sec">
+    <h2>Trabajamos con <b>sensores, escenas y temperatura de color</b> para que cada ambiente cambie con la hora del día. Probá el interruptor.</h2>
+    <button class="switch" id="switch" aria-pressed="false" aria-label="Encender las luces del sitio"><span class="knob"></span><small class="k">Off</small></button>
+  </section>
+
+  <section class="kelvin" id="temperatura">
+    <div class="k-photo"><img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=1200&q=80" alt="Lámparas colgantes encendidas" loading="lazy" /><span class="kc"></span><span class="kg"></span></div>
+    <div>
+      <p class="k" style="color:var(--amber);margin-bottom:16px">Temperatura de color</p>
+      <h2>Elegí el clima<br/>de tu casa</h2>
+      <p>De la calidez de una vela a la luz de mediodía. Movelo y mirá cómo cambia la escena.</p>
+      <div class="kv"><span id="kval">2700</span><small> K</small></div>
+      <input type="range" class="kr" id="kr" min="1800" max="6500" step="50" value="2700" aria-label="Temperatura de color en Kelvin" />
+      <div class="presets"><button data-k="1800">Vela</button><button data-k="2700">Cálida</button><button data-k="4000">Neutra</button><button data-k="6500">Día</button></div>
+    </div>
+  </section>
+
+  <section class="projects" id="proyectos">
+    <p class="k" style="color:var(--amber);margin-bottom:16px">Proyectos</p>
+    <h2>Luz que<br/>cuenta algo</h2>
+    <div class="pr">
+      <article class="p p1"><div class="m"><img src="https://images.unsplash.com/photo-1758413354881-3499004c0b8d?auto=format&fit=crop&w=1600&q=80" alt="Edificio ornamentado con columnas iluminadas de noche" loading="lazy" /></div><h3>Fachada Teatro Lírico</h3><span>Bañadores RGBW · 2025</span></article>
+      <article class="p p2"><div class="m"><img src="https://images.unsplash.com/photo-1568482224714-7843360d588a?auto=format&fit=crop&w=1000&q=80" alt="Tres lámparas colgantes doradas" loading="lazy" /></div><h3>Bar Cobre</h3><span>Colgantes a medida · 2024</span></article>
+      <article class="p p3"><div class="m"><img src="https://images.unsplash.com/photo-1560257084-d568f6eb7b29?auto=format&fit=crop&w=1000&q=80" alt="Pasillo vacío con luces en el piso" loading="lazy" /></div><h3>Galería Costanera</h3><span>Balizado lineal · 2025</span></article>
+      <article class="p p4"><div class="m"><img src="https://images.unsplash.com/photo-1790877362689-4b4651bc7b68?auto=format&fit=crop&w=1600&q=80" alt="Escalinata de piedra iluminada con pequeñas luces de noche" loading="lazy" /></div><h3>Escalinata Municipal</h3><span>Luz rasante · 2026</span></article>
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <span class="spot" aria-hidden="true"></span>
+    <p class="k" style="color:var(--amber);margin-bottom:18px">Proyecto lumínico</p>
+    <h2>Encendamos<span>tu espacio</span></h2>
+    <a href="https://wa.me/5493764148342?text=Hola%20Mariano%2C%20vi%20el%20sitio%20de%20muestra%20%C2%ABTaller%20de%20Luz%C2%BB%20y%20quiero%20uno%20as%C3%AD%20para%20mi%20negocio." target="_blank" rel="noopener" class="cbtn">Pedir una visita →</a>
+  </section>
+</main>
+<footer><span>© 2026 Taller de Luz</span><span>Fotos: Unsplash</span></footer>
+
+<script src="libs/gsap.min.js"></script>
+<script src="libs/ScrollTrigger.min.js"></script>
+<script src="libs/SplitText.min.js"></script>
+<script src="libs/lenis.min.js"></script>
+<script src="libs/motion.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger, SplitText);
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const { animate, hover, press } = Motion;
+
+let lenis = null;
+if (!RM) {
+  lenis = new Lenis({ lerp: 0.09 });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+}
+const goTo = (h) => { const el = document.querySelector(h); if (!el) return; lenis ? lenis.scrollTo(el, { duration: 1.6 }) : el.scrollIntoView(); };
+
+/* ---------- Menú ---------- */
+const mnav = document.getElementById("mnav"), openBtn = document.querySelector("[data-open]");
+const mTl = gsap.timeline({ paused: true }).to(mnav, { autoAlpha: 1, duration: 0.4 }).from(".mnav a", { y: 30, autoAlpha: 0, filter: "blur(8px)", stagger: 0.06, duration: 0.5 }, "-=0.1");
+const toggle = (o) => { mnav.setAttribute("aria-hidden", !o); openBtn.setAttribute("aria-expanded", o); o ? (lenis && lenis.stop(), mTl.play()) : (lenis && lenis.start(), mTl.reverse()); };
+openBtn.addEventListener("click", () => toggle(true));
+document.querySelector("[data-close]").addEventListener("click", () => toggle(false));
+document.querySelectorAll("[data-ml]").forEach(a => a.addEventListener("click", e => {
+  e.preventDefault(); const h = a.getAttribute("href");
+  if (mnav.getAttribute("aria-hidden") === "false") { toggle(false); setTimeout(() => goTo(h), 400); } else goTo(h);
+}));
+
+/* ---------- WebGL crudo: haces de luz volumétricos (sin Three.js) ---------- */
+const rays = (() => {
+  const c = document.getElementById("rays"), gl = c.getContext("webgl", { antialias: false, alpha: false });
+  if (!gl) { c.style.background = "radial-gradient(ellipse at 50% 0%,#5a4020,#000 70%)"; return { set() {}, start() {} }; }
+  const vs = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+  const fs = `precision mediump float;
+  uniform vec2 uRes;uniform vec2 uLight;uniform float uTime;uniform float uI;
+  float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+  float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+  void main(){
+    float a=uRes.x/uRes.y;vec2 p=gl_FragCoord.xy/uRes;p.x*=a;vec2 l=uLight;l.x*=a;
+    vec2 d=p-l;float ang=atan(d.y,d.x);float r=length(d);
+    float rr=n(vec2(ang*9.,uTime*.12))*.6+n(vec2(ang*27.,uTime*.25))*.4; rr=pow(rr,2.4);
+    float fall=exp(-r*1.5);float core=.015/(r*r+.015);
+    vec3 warm=vec3(1.,.76,.42);
+    vec3 col=warm*(rr*fall*1.6+core*.7)*uI;
+    float dust=step(.996,h(floor(gl_FragCoord.xy/2.)+floor(uTime*3.)))*fall*rr*2.;
+    col+=vec3(dust)*uI;
+    col+=vec3(.012,.01,.02);
+    gl_FragColor=vec4(col,1.);
+  }`;
+  const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; };
+  const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr); gl.useProgram(pr);
+  const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const U = (n) => gl.getUniformLocation(pr, n), uRes = U("uRes"), uLight = U("uLight"), uTime = U("uTime"), uI = U("uI");
+  const st = { lx: 0.5, ly: 1.05, tx: 0.5, ty: 1.05, i: 0 };
+  let visible = true, running = false;
+  const DPR = Math.min(devicePixelRatio, 1.5);
+  const resize = () => { c.width = c.clientWidth * DPR * 0.6; c.height = c.clientHeight * DPR * 0.6; gl.viewport(0, 0, c.width, c.height); };
+  addEventListener("resize", resize); resize();
+  // el foco persigue al cursor (suavizado)
+  c.parentElement.addEventListener("pointermove", e => { const r = c.getBoundingClientRect(); st.tx = (e.clientX - r.left) / r.width; st.ty = 1 - (e.clientY - r.top) / r.height; });
+  new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(c);
+  const frame = (t) => {
+    if (visible) {
+      st.lx += (st.tx - st.lx) * 0.06; st.ly += (st.ty - st.ly) * 0.06;
+      gl.uniform2f(uRes, c.width, c.height); gl.uniform2f(uLight, st.lx, st.ly); gl.uniform1f(uTime, t / 1000); gl.uniform1f(uI, st.i);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    if (!RM) requestAnimationFrame(frame);
+  };
+  return { set: (k, v) => st[k] = v, st, start() { if (running) return; running = true; requestAnimationFrame(frame); } };
+})();
+
+/* ---------- Preloader: tubo que titila y prende ---------- */
+function preloader(done) {
+  const pre = document.querySelector(".pre"), tube = document.querySelector(".tube");
+  if (RM) { pre.remove(); return done(); }
+  const tl = gsap.timeline({ onComplete: () => { pre.remove(); done(); } });
+  [0.08, 0.05, 0.12, 0.04, 0.2, 0.06, 0.03].forEach((d, i) => {
+    tl.set(tube, { background: "#fffaf0", "--g": 1, boxShadow: "0 0 40px 8px rgba(255,240,210,.8)" }).to({}, { duration: d })
+      .set(tube, { background: "#1c1c20", "--g": 0, boxShadow: "none" }).to({}, { duration: d * (i % 2 ? 2.5 : 1.2) });
+  });
+  tl.set(tube, { background: "#fffaf0", "--g": 1, boxShadow: "0 0 60px 14px rgba(255,240,210,.9)" })
+    .to(".pre-k", { autoAlpha: 0, duration: 0.3 })
+    .to(tube, { scaleY: 120, scaleX: 3, duration: 0.7, ease: "expo.in" })
+    .to(pre, { autoAlpha: 0, duration: 0.6 });
+}
+
+function intro() {
+  rays.start();
+  if (RM) { rays.set("i", 1); return; }
+  gsap.to(rays.st, { i: 1, duration: 2.2, ease: "power2.out" });
+  gsap.to(rays.st, { ty: 0.8, duration: 2.5, ease: "power3.out" });
+  const sp = SplitText.create(".hero h1", { type: "lines,chars", charsClass: "c" });
+  gsap.from(sp.chars, { autoAlpha: 0, filter: "blur(12px)", duration: 1.2, stagger: { each: 0.03, from: "random" }, ease: "power2.out" });
+  gsap.from(".hero-row, .hero .k", { y: 30, autoAlpha: 0, duration: 1, delay: 0.6 });
+}
+
+function build() {
+  if (RM) return;
+  // El hero se apaga al bajar (intensidad del shader ligada al scroll)
+  ScrollTrigger.create({ trigger: ".hero", start: "top top", end: "bottom top", onUpdate: s => rays.set("i", 1 - s.progress * 0.9) });
+
+  // Dimmer: brillo + temperatura + lectura numérica
+  const lux = document.getElementById("lux"), kk = document.getElementById("kk"), v = { b: 0 };
+  gsap.timeline({ scrollTrigger: { trigger: ".dimmer", start: "top top", end: "+=200%", pin: true, scrub: 1 } })
+    .to(v, { b: 1, ease: "none", duration: 1, onUpdate() {
+      const b = v.b;
+      lux.textContent = Math.round(b * 100);
+      kk.textContent = Math.round(1800 + b * 1200);
+      gsap.set(".dimmer img", { filter: `brightness(${0.06 + b * 1.05}) saturate(${0.6 + b * 0.5})` });
+      gsap.set(".tint", { opacity: 0.55 * (1 - b * 0.6) });
+    } })
+    .to(".slider i", { bottom: "100%", ease: "none", duration: 1 }, 0)
+    .to(".slider i", { boxShadow: "0 0 70px 20px rgba(255,190,90,.9)", duration: 1 }, 0);
+
+  // Manifiesto
+  gsap.from(".switch-sec h2", { opacity: 0.15, ease: "none", scrollTrigger: { trigger: ".switch-sec", start: "top 80%", end: "center 55%", scrub: true } });
+
+  // Proyectos: barrido de luz con mask-position (variable CSS animada)
+  gsap.utils.toArray(".p .m").forEach(m => gsap.fromTo(m, { "--m": "100%" }, { "--m": "0%", ease: "none",
+    scrollTrigger: { trigger: m, start: "top 90%", end: "center 45%", scrub: 1 } }));
+  gsap.utils.toArray(".p img").forEach(img => gsap.fromTo(img, { scale: 1.25 }, { scale: 1, ease: "none", scrollTrigger: { trigger: img, start: "top bottom", end: "bottom top", scrub: true } }));
+
+  // Contacto: foco que sigue al cursor
+  const spot = document.querySelector(".spot"), sx = gsap.quickTo(spot, "x", { duration: 0.6 }), sy = gsap.quickTo(spot, "y", { duration: 0.6 });
+  document.querySelector(".contact").addEventListener("pointermove", e => { const r = e.currentTarget.getBoundingClientRect(); sx(e.clientX - r.left); sy(e.clientY - r.top); });
+}
+
+/* ---------- Interruptor general (Motion: resorte físico) ---------- */
+const sw = document.getElementById("switch"), knob = sw.querySelector(".knob");
+sw.addEventListener("click", () => {
+  const on = document.documentElement.classList.toggle("on");
+  sw.setAttribute("aria-pressed", on); sw.querySelector("small").textContent = on ? "On" : "Off";
+  animate(knob, { y: on ? 72 : 0 }, RM ? { duration: 0 } : { type: "spring", stiffness: 520, damping: 18 });
+});
+press(sw, (el) => { animate(el, { scale: 0.94 }, { type: "spring", stiffness: 600, damping: 20 }); return () => animate(el, { scale: 1 }, { type: "spring", stiffness: 400, damping: 12 }); });
+document.querySelectorAll(".cbtn, .presets button").forEach(b => hover(b, (el) => { animate(el, { scale: 1.06 }, { type: "spring", stiffness: 400, damping: 14 }); return () => animate(el, { scale: 1 }, { type: "spring", stiffness: 400, damping: 14 }); }));
+
+/* ---------- Configurador Kelvin → color (aprox. de Tanner Helland) ---------- */
+function kelvinRGB(k) {
+  const t = k / 100; let r, g, b;
+  r = t <= 66 ? 255 : 329.7 * Math.pow(t - 60, -0.1332);
+  g = t <= 66 ? 99.47 * Math.log(t) - 161.12 : 288.12 * Math.pow(t - 60, -0.0755);
+  b = t >= 66 ? 255 : (t <= 19 ? 0 : 138.52 * Math.log(t - 10) - 305.04);
+  const c = (x) => Math.max(0, Math.min(255, Math.round(x)));
+  return `rgb(${c(r)},${c(g)},${c(b)})`;
+}
+const kr = document.getElementById("kr"), kval = document.getElementById("kval"), kc = document.querySelector(".kc"), kphoto = document.querySelector(".k-photo");
+function setK(k, smooth = true) {
+  const col = kelvinRGB(k);
+  kval.textContent = k; kr.value = k;
+  animate(kc, { backgroundColor: col }, { duration: smooth && !RM ? 0.5 : 0 });
+  kphoto.style.setProperty("--kcol", col);
+}
+kr.addEventListener("input", e => setK(+e.target.value, false));
+document.querySelectorAll("[data-k]").forEach(b => b.addEventListener("click", () => {
+  const from = +kr.value, to = +b.dataset.k;
+  animate(from, to, { duration: RM ? 0 : 0.8, ease: [0.2, 0.8, 0.2, 1], onUpdate: v => setK(Math.round(v / 50) * 50, false) });
+}));
+setK(2700, false);
+
+let booted = false;
+document.fonts.ready.then(() => {
+  if (booted) return; booted = true;
+  build();
+  lenis && lenis.stop();
+  preloader(() => { lenis && lenis.start(); intro(); ScrollTrigger.refresh(); });
+});
+</script>
+<style>
+#jmc-pill{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));translate:-50% 0;z-index:9999;display:flex;gap:10px;align-items:center;white-space:nowrap;background:#16110e;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:7px 7px 7px 14px;font:600 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:0;text-transform:none;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:opacity .3s}
+#jmc-pill b{background:#FF6B2C;color:#fff;border-radius:99px;padding:7px 11px;font-weight:700}
+#jmc-pill:hover b{background:#ff8a55}
+#jmc-pill i{font-style:normal}
+@media(max-width:520px){#jmc-pill i{display:none}}
+@media print{#jmc-pill{display:none}}
+</style>
+<a id="jmc-pill" href="../../index.html#sitios" aria-label="Sitio de muestra con negocio ficticio, hecho por Mariano Campuzano. Volver al portfolio y pedir uno así."><span><i>Sitio de muestra · </i>negocio ficticio<i> · por Mariano Campuzano</i></span><b>Quiero uno así →</b></a>
+</body>
+</html>

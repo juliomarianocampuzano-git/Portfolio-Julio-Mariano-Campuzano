@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex, follow" />
+<meta name="author" content="Julio Mariano Campuzano" />
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+<title>Galería Sur — Arte contemporáneo</title>
+<meta name="description" content="Galería de arte contemporáneo. Muestras, artistas representados y acervo de obras disponibles." />
+<style>
+@font-face{font-family:"Bodoni Moda";src:url(fonts/bodoni-moda-latin-wght-normal.woff2) format("woff2");font-weight:400 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Bodoni Moda";src:url(fonts/bodoni-moda-latin-wght-italic.woff2) format("woff2");font-weight:400 900;font-style:italic;font-display:swap}
+@font-face{font-family:"Familjen Grotesk";src:url(fonts/familjen-grotesk-latin-wght-normal.woff2) format("woff2");font-weight:400 700;font-style:normal;font-display:swap}
+</style>
+<style>
+:root{--wall:#f3f1ec;--ink:#111;--red:#e1261c;--gray:#8c8a85;--line:rgba(17,17,17,.14);
+  --serif:"Bodoni Moda",Didot,serif;--sans:"Familjen Grotesk",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--wall);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+.k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+.it{font-family:var(--serif);font-style:italic;font-weight:400}
+
+/* ===== PRELOADER: un cuadro que se cuelga ===== */
+.pre{position:fixed;inset:0;z-index:100;background:var(--wall);display:grid;place-items:center}
+.nail{position:absolute;left:50%;top:22vh;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--ink)}
+.hang{position:absolute;left:50%;top:calc(22vh + 5px);width:min(46vw,260px);margin-left:calc(min(46vw,260px) / -2);transform-origin:50% 0}
+.hang svg{width:100%;overflow:visible}
+.hang .frame{aspect-ratio:3/4;border:12px solid var(--ink);background:var(--red);display:grid;place-items:center;color:var(--wall);font-family:var(--serif);font-style:italic;font-size:30px;margin-top:-4px}
+.pre-k{position:absolute;bottom:32px}
+
+/* ===== HEADER ===== */
+.hdr{position:fixed;inset:0 0 auto;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(16px,4vw,48px);mix-blend-mode:difference;color:#fff}
+.logo{font-weight:700;font-size:18px;letter-spacing:-.01em}
+.logo .it{font-size:20px}
+.nav{display:flex;gap:28px;font-weight:600;font-size:14px}
+.burger{display:none;background:none;border:0;color:inherit;font:inherit;font-weight:700;cursor:pointer}
+.mnav{position:fixed;inset:0;z-index:70;background:var(--red);color:var(--wall);display:flex;flex-direction:column;justify-content:center;padding:0 24px;visibility:hidden}
+.mnav a{font-family:var(--serif);font-size:50px;line-height:1.15}
+.mnav .x{position:absolute;top:18px;right:16px;background:none;border:0;color:inherit;font:inherit;font-weight:700}
+@media(max-width:760px){.nav{display:none}.burger{display:block}}
+
+/* ===== HERO: cuadros colgados que se balancean ===== */
+.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4vw;padding:110px clamp(16px,4vw,48px) 8vh;overflow:hidden}
+.hero h1{font-weight:700;font-size:clamp(64px,11vw,190px);line-height:.84;letter-spacing:-.05em}
+.hero h1 .it{display:block;font-weight:400;letter-spacing:-.02em;color:var(--red)}
+.now{margin-top:44px;display:flex;gap:28px;align-items:center;border-top:1px solid var(--line);padding-top:20px;max-width:540px}
+.now b{display:block;font-family:var(--serif);font-weight:500;font-size:26px;line-height:1.1}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 0 rgba(225,38,28,.5);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 14px rgba(225,38,28,0)}}
+.wall{position:relative;height:min(70svh,680px)}
+.hf{position:absolute;transform-origin:50% -40px;cursor:grab}
+.hf::before{content:"";position:absolute;left:50%;top:-40px;width:1px;height:40px;background:#555}
+.hf::after{content:"";position:absolute;left:50%;top:-44px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--ink)}
+.hf img{width:100%;height:100%;object-fit:cover;border:10px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.hf1{left:4%;top:8%;width:46%;aspect-ratio:3/4}
+.hf2{left:56%;top:2%;width:38%;aspect-ratio:1}
+.hf3{left:40%;top:52%;width:34%;aspect-ratio:4/3}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.wall{height:56svh;order:-1;margin-top:30px}}
+
+/* ===== PASILLO 3D (pin) ===== */
+.corridor{position:relative;height:100svh;overflow:hidden;background:linear-gradient(180deg,#e9e6df 0%,#f3f1ec 50%,#d9d5cc 50%,#c9c4b9 100%);perspective:700px;perspective-origin:50% 45%}
+.world{position:absolute;left:50%;top:45%;transform-style:preserve-3d}
+.fr3{position:absolute;width:300px;height:380px;margin:-190px 0 0 -150px;backface-visibility:hidden}
+.fr3 img{width:100%;height:100%;object-fit:cover;border:12px solid #fff;box-shadow:0 20px 40px rgba(0,0,0,.25)}
+.fr3 figcaption{position:absolute;left:0;right:0;top:100%;margin-top:14px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.corr-ui{position:absolute;left:clamp(16px,4vw,48px);bottom:6vh;z-index:3;max-width:520px}
+.corr-ui h2{font-family:var(--serif);font-weight:500;font-size:clamp(36px,5vw,76px);line-height:1}
+.corr-ui h2 .it{color:var(--red)}
+.corr-n{position:absolute;right:clamp(16px,4vw,48px);bottom:6vh;z-index:3;font-family:var(--serif);font-size:clamp(48px,7vw,110px);line-height:1}
+.corr-end{position:absolute;inset:0;display:grid;place-items:center;text-align:center;z-index:2;pointer-events:none;opacity:0}
+.corr-end p{font-family:var(--serif);font-style:italic;font-size:clamp(40px,7vw,120px);line-height:1;color:var(--red)}
+
+/* ===== ACERVO: lienzo infinito arrastrable ===== */
+.archive{position:relative;height:100svh;overflow:hidden;background:var(--ink);color:var(--wall);cursor:grab;touch-action:pan-y;user-select:none}
+.archive:active{cursor:grabbing}
+.tiles{position:absolute;inset:0}
+.tile{position:absolute;left:0;top:0;padding:14px;will-change:transform}
+.tile figure{position:relative;width:100%;height:100%;overflow:hidden;background:#222}
+.tile img{width:100%;height:100%;object-fit:cover;pointer-events:none;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .5s;filter:grayscale(.6)}
+.tile:hover img{transform:scale(1.07);filter:grayscale(0)}
+.tile figcaption{position:absolute;left:10px;bottom:10px;right:10px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
+.tile:hover figcaption{opacity:1;transform:none}
+.arch-ui{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;text-align:center;pointer-events:none;mix-blend-mode:difference;color:#fff}
+.arch-ui h2{font-weight:700;font-size:clamp(56px,11vw,180px);line-height:.85;letter-spacing:-.05em}
+.arch-ui p{margin-top:16px}
+
+/* ===== ARTISTAS ===== */
+.artists{padding:18vh clamp(16px,4vw,48px)}
+.artists h2{font-family:var(--serif);font-weight:500;font-size:clamp(44px,7vw,110px);line-height:1;margin-bottom:8vh}
+.ar{display:grid;grid-template-columns:1fr auto auto;gap:24px;align-items:baseline;padding:20px 0;border-top:1px solid var(--line);overflow:hidden;position:relative}
+.ar:last-child{border-bottom:1px solid var(--line)}
+.ar h3{font-weight:700;font-size:clamp(28px,5vw,72px);line-height:1;letter-spacing:-.03em;position:relative;z-index:1;transition:color .4s}
+.ar::before{content:"";position:absolute;inset:0;background:var(--red);transform:scaleY(0);transform-origin:50% 100%;transition:transform .45s cubic-bezier(.7,0,.2,1)}
+.ar:hover::before{transform:scaleY(1)}
+.ar:hover h3,.ar:hover span{color:var(--wall)}
+.ar span{position:relative;z-index:1;font-size:13px;color:var(--gray);transition:color .4s}
+@media(max-width:700px){.ar{grid-template-columns:1fr}}
+
+/* ===== VISITA ===== */
+.visit{background:var(--red);color:var(--wall);padding:16vh clamp(16px,4vw,48px) 6vh}
+.visit h2{font-weight:700;font-size:clamp(64px,14vw,240px);line-height:.82;letter-spacing:-.06em}
+.visit h2 .it{font-weight:400;letter-spacing:-.02em}
+.v-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:10vh;padding-top:20px;border-top:1px solid rgba(243,241,236,.4)}
+.v-row p{font-size:18px}
+@media(max-width:760px){.v-row{grid-template-columns:1fr}}
+footer{background:var(--ink);color:var(--gray);display:flex;justify-content:space-between;padding:18px clamp(16px,4vw,48px);font-size:12px}
+
+@media (prefers-reduced-motion:reduce){
+  .pre{display:none}.dot{animation:none}
+  .corridor{height:auto;perspective:none;background:var(--wall);padding:10vh clamp(16px,4vw,48px)}
+  .world{position:static;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:40px;transform:none}
+  .fr3{position:relative;margin:0;transform:none!important;width:auto;height:320px}
+  .corr-ui,.corr-n{position:relative;left:auto;right:auto;bottom:auto;margin-top:40px}
+}
+</style>
+</head>
+<body>
+<div class="pre" aria-hidden="true">
+  <span class="nail"></span>
+  <div class="hang"><svg viewBox="0 0 100 30" preserveAspectRatio="none" height="40"><path d="M50 0 L 6 30 M50 0 L 94 30" stroke="#111" stroke-width="1" fill="none"/></svg><div class="frame">Sur</div></div>
+  <p class="pre-k k">Inauguración · Viernes 19 h</p>
+</div>
+
+<header class="hdr">
+  <a href="#top" class="logo">Galería <span class="it">Sur</span></a>
+  <nav class="nav"><a href="#muestra" data-ml>Muestra</a><a href="#acervo" data-ml>Acervo</a><a href="#artistas" data-ml>Artistas</a><a href="#visita" data-ml>Visitá</a></nav>
+  <button class="burger" data-open aria-expanded="false" aria-controls="mnav">Menú</button>
+</header>
+<nav class="mnav" id="mnav" aria-hidden="true">
+  <button class="x" data-close>Cerrar</button>
+  <a href="#muestra" data-ml>Muestra</a><a href="#acervo" data-ml>Acervo</a><a href="#artistas" data-ml>Artistas</a><a href="#visita" data-ml>Visitá</a>
+</nav>
+
+<main>
+  <section class="hero" id="top">
+    <div>
+      <p class="k" style="color:var(--red);margin-bottom:18px">Arte contemporáneo · desde 2009</p>
+      <h1>Galería<span class="it">del Sur</span></h1>
+      <div class="now"><span class="dot"></span><div><span class="k">Ahora en sala</span><b>“Sur profundo” · colectiva</b><span style="color:var(--gray);font-size:14px">Hasta el 20 de diciembre</span></div></div>
+    </div>
+    <div class="wall" aria-label="Obras colgadas en la pared">
+      <div class="hf hf1"><img src="https://images.unsplash.com/photo-1569084024058-1632922a4e1d?auto=format&fit=crop&w=900&q=80" alt="Conjunto de pinturas" /></div>
+      <div class="hf hf2"><img src="https://images.unsplash.com/photo-1565876427310-0695a4ff03b7?auto=format&fit=crop&w=800&q=80" alt="Pintura de nubes blancas" /></div>
+      <div class="hf hf3"><img src="https://images.unsplash.com/photo-1582481426757-274f94eecb72?auto=format&fit=crop&w=800&q=80" alt="Textil blanco y negro sobre fondo negro" /></div>
+    </div>
+  </section>
+
+  <!-- Pasillo 3D: la cámara avanza entre las obras -->
+  <section class="corridor" id="muestra">
+    <div class="world" aria-label="Recorrido por la muestra"></div>
+    <div class="corr-end"><p>Fin del recorrido</p></div>
+    <div class="corr-ui"><p class="k" style="color:var(--red);margin-bottom:12px">Recorré la sala</p><h2>Sur profundo,<br/><span class="it">nueve miradas</span></h2></div>
+    <div class="corr-n"><span id="cn">01</span><span style="font-size:.4em;color:var(--gray)"> / 09</span></div>
+  </section>
+
+  <section class="archive" id="acervo" aria-label="Acervo: arrastrá en cualquier dirección">
+    <div class="tiles"></div>
+    <div class="arch-ui"><p class="k">Acervo · 240 obras</p><h2>Arrastrá</h2><p class="k">en cualquier dirección</p></div>
+  </section>
+
+  <section class="artists" id="artistas">
+    <p class="k" style="color:var(--red);margin-bottom:16px">Artistas representados</p>
+    <h2>Doce voces<br/><span class="it">del sur</span></h2>
+    <div class="ar"><h3>Inés Aranda</h3><span>Pintura</span><span>Posadas, 1984</span></div>
+    <div class="ar"><h3>Tomás Ledesma</h3><span>Escultura</span><span>Corrientes, 1979</span></div>
+    <div class="ar"><h3>Ñandutí Colectivo</h3><span>Textil</span><span>Asunción, 2015</span></div>
+    <div class="ar"><h3>Valeria Kuhn</h3><span>Fotografía</span><span>Oberá, 1991</span></div>
+    <div class="ar"><h3>Ramiro Báez</h3><span>Instalación</span><span>Resistencia, 1987</span></div>
+  </section>
+
+  <section class="visit" id="visita">
+    <p class="k" style="margin-bottom:18px">Visitá la galería</p>
+    <h2>Entrada<br/><span class="it">libre.</span></h2>
+    <div class="v-row">
+      <div><span class="k">Dirección</span><p>Av. Costanera 3100, Posadas</p></div>
+      <div><span class="k">Horario</span><p>Mar a Dom · 16 – 21 h</p></div>
+      <div><span class="k">Ventas y prensa</span><p><a href="https://wa.me/5493764148342?text=Hola%20Mariano%2C%20vi%20el%20sitio%20de%20muestra%20%C2%ABGaler%C3%ADa%20Sur%C2%BB%20y%20quiero%20uno%20as%C3%AD%20para%20mi%20negocio." target="_blank" rel="noopener">hola@galeriasur.com.ar</a></p></div>
+    </div>
+  </section>
+</main>
+<footer><span>© 2026 Galería Sur</span><span>Fotos: Unsplash</span></footer>
+
+<script src="libs/gsap.min.js"></script>
+<script src="libs/ScrollTrigger.min.js"></script>
+<script src="libs/Observer.min.js"></script>
+<script src="libs/CustomEase.min.js"></script>
+<script src="libs/CustomWiggle.min.js"></script>
+<script>
+/* Scroll nativo: el protagonismo es del pasillo 3D y del lienzo infinito. */
+gsap.registerPlugin(ScrollTrigger, Observer, CustomEase, CustomWiggle);
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+CustomWiggle.create("pendulo", { wiggles: 5, type: "easeOut" });
+const goTo = (h) => { const el = document.querySelector(h); el && el.scrollIntoView({ behavior: RM ? "auto" : "smooth" }); };
+
+/* Fotos de obras y salas (Unsplash) */
+const ART = [
+  ["photo-1565876427310-0695a4ff03b7", "Nubes", "Inés Aranda"], ["photo-1569084024058-1632922a4e1d", "Inventario", "Colectiva"],
+  ["photo-1572620645236-854a94b83040", "Taller abierto", "Ramiro Báez"], ["photo-1582481426757-274f94eecb72", "Trama", "Ñandutí Colectivo"],
+  ["photo-1572947650440-e8a97ef053b2", "Pasillo", "Valeria Kuhn"], ["photo-1553644446-9f8f2762ea42", "Figura", "Tomás Ledesma"],
+  ["photo-1605429523419-d828acb941d9", "Muro blanco", "Inés Aranda"], ["photo-1743119638006-a01d4625745d", "Sala 2", "Colectiva"],
+  ["photo-1565041054083-45a0d4b25229", "Gris", "Valeria Kuhn"], ["photo-1594794312433-05a69a98b7a0", "Visitante", "Valeria Kuhn"],
+  ["photo-1735605917461-4c1b77a6616f", "Salón", "Colectiva"], ["photo-1606291623245-238bf2020b5c", "Serie I", "Ramiro Báez"]
+];
+const src = (id, w) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=75`;
+
+/* ---------- Menú ---------- */
+const mnav = document.getElementById("mnav"), openBtn = document.querySelector("[data-open]");
+const mTl = gsap.timeline({ paused: true }).set(mnav, { visibility: "visible" })
+  .fromTo(mnav, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.7, ease: "expo.inOut" })
+  .from(".mnav a", { y: 40, autoAlpha: 0, stagger: 0.06, duration: 0.5 }, "-=0.3");
+const toggle = (o) => { mnav.setAttribute("aria-hidden", !o); openBtn.setAttribute("aria-expanded", o); o ? mTl.play() : mTl.reverse(); };
+openBtn.addEventListener("click", () => toggle(true));
+document.querySelector("[data-close]").addEventListener("click", () => toggle(false));
+document.querySelectorAll("[data-ml]").forEach(a => a.addEventListener("click", e => {
+  e.preventDefault(); const h = a.getAttribute("href");
+  if (mnav.getAttribute("aria-hidden") === "false") { toggle(false); setTimeout(() => goTo(h), 450); } else goTo(h);
+}));
+
+/* ---------- Pasillo 3D: construir las obras en las paredes ---------- */
+const world = document.querySelector(".world"), GAP = 520, N = 9;
+const wallX = () => Math.min(innerWidth * 0.38, 520);
+const frames = [];
+for (let i = 0; i < N; i++) {
+  const [id, t, a] = ART[i], f = document.createElement("figure");
+  f.className = "fr3"; f.innerHTML = `<img src="${src(id, 700)}" alt="${t}, de ${a}" loading="lazy" /><figcaption>${t} · ${a}</figcaption>`;
+  world.appendChild(f); frames.push(f);
+}
+const layout = () => frames.forEach((f, i) => {
+  const side = i % 2 ? 1 : -1;
+  gsap.set(f, { x: side * wallX(), z: -i * GAP - 400, rotationY: -side * 62 });
+});
+layout(); addEventListener("resize", layout);
+
+/* ---------- Acervo: lienzo infinito (Observer + wrap) ---------- */
+const archive = (() => {
+  const box = document.querySelector(".tiles"), sec = document.querySelector(".archive");
+  const COLS = 6, ROWS = 4;
+  let tw, th, W, H, tiles = [];
+  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
+    const [id, t, a] = ART[(r * COLS + c + r * 2) % ART.length], el = document.createElement("div");
+    el.className = "tile"; el.innerHTML = `<figure><img src="${src(id, 500)}" alt="${t}, de ${a}" loading="lazy" draggable="false" /><figcaption><span>${t}</span><span>${a}</span></figcaption></figure>`;
+    box.appendChild(el); tiles.push({ el, c, r, off: (c % 2) * 0.35 });
+  }
+  const size = () => { tw = innerWidth < 760 ? 210 : 320; th = tw * 1.25; W = tw * COLS; H = th * ROWS; tiles.forEach(t => gsap.set(t.el, { width: tw, height: th })); };
+  size(); addEventListener("resize", size);
+  const pos = { x: 0, y: 0 }, vel = { x: -0.35, y: -0.2 }; // deriva lenta
+  let dragging = false;
+  const render = () => tiles.forEach(t => {
+    const x = gsap.utils.wrap(-tw, W - tw, t.c * tw + pos.x);
+    const y = gsap.utils.wrap(-th, H - th, t.r * th + t.off * th + pos.y);
+    t.el.style.transform = `translate3d(${x}px,${y}px,0)`;
+  });
+  let visible = false;
+  new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(sec);
+  gsap.ticker.add(() => {
+    if (!visible) return;
+    if (!dragging) { pos.x += vel.x; pos.y += vel.y; vel.x += (-0.35 - vel.x) * 0.02; vel.y += (-0.2 - vel.y) * 0.02; }
+    render();
+  });
+  render();
+  if (!RM) Observer.create({
+    target: sec, type: "pointer,touch", dragMinimum: 3,
+    onPress: () => dragging = true,
+    onDrag: s => { pos.x += s.deltaX; pos.y += (s.event.pointerType === "touch" ? 0 : s.deltaY); vel.x = s.deltaX; vel.y = s.event.pointerType === "touch" ? vel.y : s.deltaY; },
+    onRelease: () => dragging = false
+  });
+  else { vel.x = vel.y = 0; }
+})();
+
+/* ---------- Cuadros del hero: balanceo con la velocidad del mouse ---------- */
+function heroSwing() {
+  if (RM) return;
+  const hfs = gsap.utils.toArray(".hf");
+  let lastX = 0;
+  addEventListener("pointermove", e => {
+    const v = gsap.utils.clamp(-30, 30, e.clientX - lastX); lastX = e.clientX;
+    if (Math.abs(v) < 4) return;
+    hfs.forEach((f, i) => gsap.to(f, { rotation: -v * (0.25 + i * 0.08), duration: 0.25, overwrite: "auto",
+      onComplete: () => gsap.to(f, { rotation: 0, duration: 1.8, ease: "elastic.out(1,.25)" }) }));
+  });
+}
+
+/* ---------- Preloader: el cuadro se cuelga y se endereza ---------- */
+function preloader(done) {
+  const pre = document.querySelector(".pre");
+  if (RM) { pre.remove(); return done(); }
+  gsap.timeline({ onComplete: () => { pre.remove(); done(); } })
+    .from(".hang", { y: -innerHeight, duration: 0.9, ease: "power3.out" })
+    .fromTo(".hang", { rotation: 0 }, { rotation: 14, duration: 1.6, ease: "pendulo" }, "-=0.1")
+    .from(".pre-k", { autoAlpha: 0, y: 20, duration: 0.5 }, "<")
+    .to(".hang", { yPercent: 160, scale: 0.3, duration: 0.8, ease: "expo.in" }, "+=0.1")
+    .to(".nail, .pre-k", { autoAlpha: 0, duration: 0.3 }, "<")
+    .to(pre, { clipPath: "inset(0 0 100% 0)", duration: 0.8, ease: "expo.inOut" }, "-=0.2");
+}
+
+function intro() {
+  if (RM) return;
+  // los cuadros llegan colgando y quedan oscilando
+  gsap.from(".hf", { y: -innerHeight * 0.8, duration: 1.2, stagger: 0.12, ease: "bounce.out" });
+  gsap.fromTo(".hf", { rotation: 0 }, { rotation: (i) => [8, -10, 6][i], duration: 2.4, ease: "pendulo", stagger: 0.12, delay: 0.9 });
+  gsap.from(".hero h1, .now, .hero .k", { x: -60, autoAlpha: 0, stagger: 0.1, duration: 1, ease: "power3.out" });
+  heroSwing();
+}
+
+function build() {
+  if (RM) return;
+  // Pasillo: la cámara avanza (translateZ del mundo) mientras la sección está fijada
+  const cn = document.getElementById("cn"), depth = (N - 1) * GAP + 400;
+  gsap.timeline({ scrollTrigger: { trigger: ".corridor", start: "top top", end: "+=" + N * 60 + "%", pin: true, scrub: 1,
+      onUpdate: s => cn.textContent = String(Math.min(N, 1 + Math.floor(s.progress * N))).padStart(2, "0") } })
+    .fromTo(world, { z: -200 }, { z: depth, ease: "none", duration: 1 })
+    .to(".corr-end", { opacity: 1, duration: 0.12 }, 0.88)
+    .to(".corr-ui", { autoAlpha: 0, duration: 0.1 }, 0.85);
+
+  // Artistas: entran desde la izquierda con un corte
+  gsap.utils.toArray(".ar").forEach(ar => gsap.from(ar.querySelector("h3"), { xPercent: -30, autoAlpha: 0, ease: "power3.out",
+    scrollTrigger: { trigger: ar, start: "top 90%", end: "top 60%", scrub: 1 } }));
+
+  gsap.from(".visit h2", { yPercent: 30, skewY: 6, ease: "power3.out", scrollTrigger: { trigger: ".visit", start: "top 85%", end: "top 30%", scrub: 1 } });
+}
+
+let booted = false;
+document.fonts.ready.then(() => {
+  if (booted) return; booted = true;
+  build();
+  document.documentElement.style.overflow = "hidden";
+  preloader(() => { document.documentElement.style.overflow = ""; intro(); ScrollTrigger.refresh(); });
+});
+</script>
+<style>
+#jmc-pill{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));translate:-50% 0;z-index:9999;display:flex;gap:10px;align-items:center;white-space:nowrap;background:#16110e;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:7px 7px 7px 14px;font:600 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:0;text-transform:none;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:opacity .3s}
+#jmc-pill b{background:#FF6B2C;color:#fff;border-radius:99px;padding:7px 11px;font-weight:700}
+#jmc-pill:hover b{background:#ff8a55}
+#jmc-pill i{font-style:normal}
+@media(max-width:520px){#jmc-pill i{display:none}}
+@media print{#jmc-pill{display:none}}
+</style>
+<a id="jmc-pill" href="../../index.html#sitios" aria-label="Sitio de muestra con negocio ficticio, hecho por Mariano Campuzano. Volver al portfolio y pedir uno así."><span><i>Sitio de muestra · </i>negocio ficticio<i> · por Mariano Campuzano</i></span><b>Quiero uno así →</b></a>
+</body>
+</html>

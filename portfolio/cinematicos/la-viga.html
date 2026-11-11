@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex, follow" />
+<meta name="author" content="Julio Mariano Campuzano" />
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+<title>La Viga — Casas de madera</title>
+<meta name="description" content="Constructora de casas de madera. Diseño, cálculo y construcción en seco con maderas certificadas." />
+<style>
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/bricolage-grotesque-latin-wght-normal.woff2) format("woff2");font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(fonts/jetbrains-mono-latin-wght-normal.woff2) format("woff2");font-weight:100 800;font-style:normal;font-display:swap}
+</style>
+<style>
+:root{--wood:#ead9bf;--pine:#c4924f;--bark:#1e1a15;--blue:#16324d;--line:#d9ecff;--forest:#2e4a39;
+  --sans:"Bricolage Grotesque",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html.lenis,html.lenis body{height:auto}
+body{background:var(--wood);color:var(--bark);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+.k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+/* veta de madera sutil de fondo */
+.grain{background-image:repeating-radial-gradient(ellipse at -20% 50%,transparent 0 14px,rgba(120,80,30,.06) 15px 16px)}
+
+/* ===== PRELOADER: anillos de crecimiento ===== */
+.pre{position:fixed;inset:0;z-index:100;background:var(--pine);display:grid;place-items:center}
+.rings{width:min(70vmin,460px);height:min(70vmin,460px)}
+.rings circle{fill:none;stroke:#7a5226;stroke-width:1.6}
+.pre-y{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:13px;color:var(--bark)}
+
+/* ===== HEADER ===== */
+.hdr{position:fixed;inset:0 0 auto;z-index:60;color:var(--wood);transition:color .4s;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px clamp(16px,4vw,48px)}
+.logo{justify-self:center;font-weight:800;font-size:22px;letter-spacing:-.02em;display:flex;gap:6px;align-items:center}
+.logo b{display:inline-block;width:26px;height:8px;background:var(--bark);border-radius:2px}
+.hdr .l,.hdr .r{display:flex;gap:22px;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+.hdr .r{justify-self:end}
+.hdr.solid{color:var(--bark)}
+.hdr .logo b{background:currentColor}
+.hdr a{position:relative}
+.hdr a::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .4s}
+.hdr a:hover::after{transform:scaleX(1);transform-origin:left}
+.burger{display:none;justify-self:end;background:var(--bark);color:var(--wood);border:0;border-radius:6px;padding:10px 14px;font:inherit;font-family:var(--mono);font-size:12px;cursor:pointer}
+.hdr-bg{position:fixed;inset:0 0 auto;height:72px;z-index:59;background:rgba(234,217,191,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transform:translateY(-100%)}
+.mnav{position:fixed;inset:0;z-index:70;background:var(--bark);color:var(--wood);display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 24px;visibility:hidden}
+.mnav a{font-size:46px;font-weight:800;line-height:1.15}
+.mnav .x{position:absolute;top:18px;right:16px;background:var(--wood);color:var(--bark);border:0;border-radius:6px;padding:10px 14px;font-family:var(--mono)}
+@media(max-width:760px){.hdr{grid-template-columns:auto 1fr}.hdr .l,.hdr .r{display:none}.logo{justify-self:start}.burger{display:block}}
+
+/* ===== HERO: paneles que se levantan como tablas ===== */
+.hero{position:relative;height:100svh;min-height:600px;overflow:hidden;color:var(--wood)}
+.hero-img{position:absolute;inset:0}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(30,26,21,.75),rgba(30,26,21,.1) 55%)}
+.planks{position:absolute;inset:0;display:flex;flex-direction:column;z-index:2;pointer-events:none}
+.planks i{flex:1;background:var(--pine);border-bottom:2px solid rgba(30,26,21,.25);background-image:repeating-linear-gradient(90deg,transparent 0 60px,rgba(30,26,21,.07) 61px 62px)}
+.hero-in{position:absolute;z-index:1;left:clamp(16px,4vw,48px);right:clamp(16px,4vw,48px);bottom:7vh}
+.hero h1{font-weight:800;font-size:clamp(76px,16vw,250px);line-height:.82;letter-spacing:-.05em}
+.hero h1 .w{display:inline-block}
+.hero-row{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-top:22px;flex-wrap:wrap}
+.hero-row p{max-width:420px}
+.spec{font-family:var(--mono);font-size:12px;border:1px solid rgba(234,217,191,.5);padding:12px 16px;border-radius:6px;line-height:1.8}
+
+/* ===== PLANO → CASA (pin) ===== */
+.build{position:relative;height:100svh;background:var(--blue);color:var(--line);overflow:hidden}
+.build-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(217,236,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(217,236,255,.08) 1px,transparent 1px);background-size:40px 40px}
+.build svg{position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);width:min(94vw,1000px);height:auto}
+.bp{fill:none;stroke:var(--line);stroke-width:2;stroke-linejoin:round}
+.bp.thin{stroke-width:1;stroke-dasharray:4 6;opacity:.7}
+.dim{font-family:var(--mono);font-size:13px;fill:var(--line)}
+.beam{fill:var(--pine);stroke:#7a5226;stroke-width:1.5}
+.build-photo{position:absolute;inset:0;clip-path:polygon(50% 50%,50% 50%,50% 50%,50% 50%,50% 50%)}
+.build-photo img{width:100%;height:100%;object-fit:cover}
+.build-cap{position:absolute;left:clamp(16px,4vw,48px);top:96px;z-index:3}
+.build-cap h2{font-weight:800;font-size:clamp(36px,5.4vw,80px);line-height:.95;letter-spacing:-.03em;max-width:620px}
+.stage{position:absolute;right:clamp(16px,4vw,48px);top:100px;z-index:3;font-family:var(--mono);font-size:12px;text-align:right;line-height:2}
+.stage span{display:block;opacity:.35;transition:opacity .3s}.stage span.on{opacity:1}
+
+/* ===== MADERAS ===== */
+.woods{padding:18vh clamp(16px,4vw,48px)}
+.woods h2{font-weight:800;font-size:clamp(48px,8vw,128px);line-height:.88;letter-spacing:-.04em}
+.w-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:10vh}
+.sp{aspect-ratio:3/4;border-radius:10px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;color:var(--wood);position:relative;overflow:hidden;cursor:default;will-change:transform}
+.sp::before{content:"";position:absolute;inset:-20%;background:repeating-radial-gradient(ellipse at 30% 120%,transparent 0 10px,rgba(0,0,0,.12) 11px 13px);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.sp:hover::before{transform:scale(1.15) rotate(3deg)}
+.sp > *{position:relative}
+.sp h3{font-size:clamp(26px,2.6vw,38px);font-weight:800;line-height:1}
+.sp dl{font-family:var(--mono);font-size:11px;display:grid;grid-template-columns:auto 1fr;gap:2px 12px}
+.sp dt{opacity:.7}
+@media(max-width:860px){.w-grid{grid-template-columns:1fr 1fr}}
+
+/* ===== MODELOS: comparador plano / foto ===== */
+.models{padding:6vh clamp(16px,4vw,48px) 18vh}
+.model{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(20px,4vw,60px);align-items:center;margin-top:12vh}
+.cmp{position:relative;aspect-ratio:16/10;border-radius:14px;overflow:hidden;--x:50%}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cmp .plan{position:absolute;inset:0;background:var(--blue);clip-path:inset(0 calc(100% - var(--x)) 0 0)}
+.cmp .plan svg{width:100%;height:100%}
+.cmp .handle{position:absolute;top:0;bottom:0;left:var(--x);width:2px;background:var(--wood);pointer-events:none}
+.cmp .handle::after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:var(--wood);color:var(--bark);display:grid;place-items:center;font-size:18px}
+.cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.model h3{font-weight:800;font-size:clamp(36px,4.4vw,64px);line-height:.95;letter-spacing:-.03em}
+.model table{width:100%;border-collapse:collapse;margin-top:24px;font-family:var(--mono);font-size:13px}
+.model td{padding:10px 0;border-bottom:1px solid rgba(30,26,21,.18)}
+.model td:last-child{text-align:right;font-weight:500}
+.model.rev{grid-template-columns:1fr 1.4fr}.model.rev .cmp{order:2}
+@media(max-width:860px){.model,.model.rev{grid-template-columns:1fr}.model.rev .cmp{order:0}}
+
+/* ===== CIFRAS + CONTACTO ===== */
+.cta{position:relative;background:var(--forest);color:var(--wood);padding:18vh clamp(16px,4vw,48px) 8vh;overflow:hidden}
+.cta h2{font-weight:800;font-size:clamp(64px,13vw,210px);line-height:.85;letter-spacing:-.05em}
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:10vh 0}
+.figs b{display:block;font-size:clamp(48px,6vw,96px);font-weight:800;line-height:1;letter-spacing:-.03em}
+.btn{display:inline-flex;align-items:center;gap:14px;background:var(--pine);color:var(--bark);padding:20px 30px;border-radius:8px;font-weight:700;font-size:18px}
+@media(max-width:760px){.figs{grid-template-columns:1fr}}
+footer{background:var(--bark);color:var(--wood);display:flex;justify-content:space-between;padding:18px clamp(16px,4vw,48px);font-family:var(--mono);font-size:11px}
+
+@media(max-width:760px){.stage{top:auto;bottom:24px;right:auto;left:16px;text-align:left;display:flex;gap:12px}.stage span{display:inline}}
+@media (prefers-reduced-motion:reduce){
+  .pre,.planks{display:none}.build-photo{clip-path:none;opacity:.25}
+}
+</style>
+</head>
+<body>
+<div class="pre" aria-hidden="true">
+  <svg class="rings" viewBox="-100 -100 200 200" id="rings"></svg>
+  <p class="pre-y">Año <span id="yr">1</span> · pino elliottii</p>
+</div>
+
+<div class="hdr-bg" aria-hidden="true"></div>
+<header class="hdr">
+  <nav class="l"><a href="#plano" data-ml>Cómo construimos</a><a href="#maderas" data-ml>Maderas</a></nav>
+  <a href="#top" class="logo" data-ml><b></b>La Viga</a>
+  <nav class="r"><a href="#modelos" data-ml>Modelos</a><a href="#contacto" data-ml>Presupuesto</a></nav>
+  <button class="burger" data-open aria-expanded="false" aria-controls="mnav">Menú</button>
+</header>
+<nav class="mnav" id="mnav" aria-hidden="true">
+  <button class="x" data-close>Cerrar</button>
+  <a href="#plano" data-ml>Cómo construimos</a><a href="#maderas" data-ml>Maderas</a><a href="#modelos" data-ml>Modelos</a><a href="#contacto" data-ml>Presupuesto</a>
+</nav>
+
+<main>
+  <section class="hero" id="top">
+    <div class="hero-img"><img src="https://images.unsplash.com/photo-1595877244574-e90ce41ce089?auto=format&fit=crop&w=2200&q=80" alt="Casa de madera rodeada de árboles verdes" width="2200" height="1467" fetchpriority="high" /></div>
+    <div class="planks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="hero-in">
+      <p class="k" style="margin-bottom:16px">Constructora · Construcción en seco</p>
+      <h1 class="split">Casas que respiran</h1>
+      <div class="hero-row">
+        <p>Diseñamos y construimos casas de madera en 120 días. Calculadas por ingenieros, armadas por carpinteros.</p>
+        <div class="spec">Estructura: pino CCA<br/>Aislación: lana de oveja<br/>Huella: −68% CO₂</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Del plano a la casa: DrawSVG + vigas que caen + revelado en forma de casa -->
+  <section class="build" id="plano">
+    <div class="build-grid"></div>
+    <div class="build-cap"><p class="k" style="margin-bottom:12px">Cómo construimos</p><h2>Primero el plano.<br/>Después, viga por viga.</h2></div>
+    <div class="stage"><span class="on">01 · Plano</span><span>02 · Estructura</span><span>03 · Techo</span><span>04 · Casa</span></div>
+    <svg viewBox="0 0 1000 600" aria-hidden="true">
+      <!-- plano -->
+      <path class="bp" d="M200 520 L 200 260 L 500 90 L 800 260 L 800 520 Z"/>
+      <path class="bp" d="M120 520 L 880 520"/>
+      <path class="bp" d="M300 520 L 300 380 L 400 380 L 400 520"/>
+      <path class="bp" d="M560 330 L 700 330 L 700 430 L 560 430 Z"/>
+      <path class="bp thin" d="M200 560 L 800 560 M200 550 L 200 570 M800 550 L 800 570"/>
+      <path class="bp thin" d="M840 260 L 840 520 M830 260 L 850 260 M830 520 L 850 520"/>
+      <text class="dim" x="470" y="585">9,60 m</text><text class="dim" x="852" y="395">4,20 m</text>
+      <!-- vigas (caen desde arriba) -->
+      <g id="beams">
+        <rect class="beam" x="196" y="250" width="14" height="270"/><rect class="beam" x="342" y="250" width="14" height="270"/>
+        <rect class="beam" x="493" y="250" width="14" height="270"/><rect class="beam" x="644" y="250" width="14" height="270"/>
+        <rect class="beam" x="790" y="250" width="14" height="270"/>
+        <rect class="beam" x="190" y="248" width="620" height="16"/>
+      </g>
+      <g id="roof">
+        <path class="beam" d="M180 268 L 500 84 L 520 96 L 200 280 Z"/><path class="beam" d="M820 268 L 500 84 L 480 96 L 800 280 Z"/>
+        <path class="beam" d="M340 186 L 352 180 L 352 260 L 340 260 Z"/><path class="beam" d="M648 180 L 660 186 L 660 260 L 648 260 Z"/>
+      </g>
+    </svg>
+    <div class="build-photo"><img src="https://images.unsplash.com/photo-1605272058466-5988743ff1db?auto=format&fit=crop&w=2200&q=80" alt="Casa de madera en un campo verde junto a montañas" loading="lazy" /></div>
+  </section>
+
+  <section class="woods grain" id="maderas">
+    <p class="k" style="margin-bottom:18px">Maderas certificadas FSC</p>
+    <h2>Cuatro maderas.<br/>Cuatro caracteres.</h2>
+    <div class="w-grid">
+      <article class="sp" style="background:#c99a5b"><span class="k">01 · Estructura</span><div><h3>Pino elliottii</h3><dl><dt>Densidad</dt><dd>520 kg/m³</dd><dt>Origen</dt><dd>Misiones</dd></dl></div></article>
+      <article class="sp" style="background:#8a4f2a"><span class="k">02 · Pisos</span><div><h3>Incienso</h3><dl><dt>Densidad</dt><dd>880 kg/m³</dd><dt>Origen</dt><dd>Misiones</dd></dl></div></article>
+      <article class="sp" style="background:#b7865a"><span class="k">03 · Aberturas</span><div><h3>Eucalipto grandis</h3><dl><dt>Densidad</dt><dd>560 kg/m³</dd><dt>Origen</dt><dd>Corrientes</dd></dl></div></article>
+      <article class="sp" style="background:#5e3a22"><span class="k">04 · Deck</span><div><h3>Lapacho</h3><dl><dt>Densidad</dt><dd>1.050 kg/m³</dd><dt>Origen</dt><dd>Chaco</dd></dl></div></article>
+    </div>
+  </section>
+
+  <section class="models" id="modelos">
+    <p class="k">Modelos · arrastrá para ver el plano</p>
+    <article class="model">
+      <div class="cmp">
+        <img src="https://images.unsplash.com/photo-1622968422538-efb01b75d5e8?auto=format&fit=crop&w=1600&q=80" alt="Casa de madera junto a un lago y árboles" loading="lazy" />
+        <div class="plan"><svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#d9ecff" stroke-width="1.5"><rect x="60" y="50" width="280" height="160"/><path d="M60 130 H 200 V 210 M200 50 V 100 M260 130 H 340"/><path d="M120 210 a 20 20 0 0 1 20 -20" stroke-dasharray="3 3"/></g><text x="70" y="70" fill="#d9ecff" font-family="monospace" font-size="9">ESTAR 32 m²</text><text x="210" y="70" fill="#d9ecff" font-family="monospace" font-size="9">DORM. 12 m²</text></svg></div>
+        <span class="handle"></span><input type="range" min="0" max="100" value="50" aria-label="Comparar plano y foto" />
+      </div>
+      <div><span class="k">Modelo Lago</span><h3>Una planta,<br/>vista al agua</h3>
+        <table><tr><td>Superficie</td><td>86 m²</td></tr><tr><td>Dormitorios</td><td>2</td></tr><tr><td>Plazo de obra</td><td>110 días</td></tr></table></div>
+    </article>
+    <article class="model rev">
+      <div class="cmp">
+        <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1600&q=80" alt="Casa de madera entre pinos y un estanque con nieve" loading="lazy" />
+        <div class="plan"><svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#d9ecff" stroke-width="1.5"><rect x="50" y="40" width="300" height="180"/><path d="M50 120 H 350 M170 40 V 120 M270 120 V 220"/></g><text x="60" y="60" fill="#d9ecff" font-family="monospace" font-size="9">COCINA 18 m²</text><text x="60" y="140" fill="#d9ecff" font-family="monospace" font-size="9">ESTAR 40 m²</text></svg></div>
+        <span class="handle"></span><input type="range" min="0" max="100" value="50" aria-label="Comparar plano y foto" />
+      </div>
+      <div><span class="k">Modelo Bosque</span><h3>Dos plantas,<br/>altillo y hogar</h3>
+        <table><tr><td>Superficie</td><td>142 m²</td></tr><tr><td>Dormitorios</td><td>3</td></tr><tr><td>Plazo de obra</td><td>150 días</td></tr></table></div>
+    </article>
+  </section>
+
+  <section class="cta" id="contacto">
+    <p class="k" style="margin-bottom:18px">Presupuesto en 72 h</p>
+    <h2>Tu casa<br/>empieza<br/>con una viga.</h2>
+    <div class="figs">
+      <div><b data-count="214">0</b><span class="k">Casas entregadas</span></div>
+      <div><b data-count="120">0</b><span class="k">Días promedio de obra</span></div>
+      <div><b data-count="50">0</b><span class="k">Años de garantía estructural</span></div>
+    </div>
+    <a class="btn" href="https://wa.me/5493764148342?text=Hola%20Mariano%2C%20vi%20el%20sitio%20de%20muestra%20%C2%ABLa%20Viga%C2%BB%20y%20quiero%20uno%20as%C3%AD%20para%20mi%20negocio." target="_blank" rel="noopener">Pedir presupuesto <span>→</span></a>
+  </section>
+</main>
+<footer><span>© 2026 La Viga Construcciones</span><span>Fotos: Unsplash</span></footer>
+
+<script src="libs/gsap.min.js"></script>
+<script src="libs/ScrollTrigger.min.js"></script>
+<script src="libs/DrawSVGPlugin.min.js"></script>
+<script src="libs/CustomEase.min.js"></script>
+<script src="libs/CustomBounce.min.js"></script>
+<script src="libs/SplitText.min.js"></script>
+<script src="libs/lenis.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, CustomEase, CustomBounce, SplitText);
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+CustomBounce.create("viga", { strength: 0.45, squash: 2, squashID: "viga-squash" });
+
+let lenis = null;
+if (!RM) {
+  lenis = new Lenis({ lerp: 0.1 });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+}
+const goTo = (h) => { const el = document.querySelector(h); if (!el) return; lenis ? lenis.scrollTo(el, { duration: 1.6 }) : el.scrollIntoView(); };
+
+/* ---------- Menú móvil ---------- */
+const mnav = document.getElementById("mnav"), openBtn = document.querySelector("[data-open]");
+const mTl = gsap.timeline({ paused: true }).set(mnav, { visibility: "visible" })
+  .fromTo(mnav, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.7, ease: "expo.inOut" })
+  .from(".mnav a", { y: 40, autoAlpha: 0, stagger: 0.06, duration: 0.5 }, "-=0.3");
+const toggle = (o) => { mnav.setAttribute("aria-hidden", !o); openBtn.setAttribute("aria-expanded", o); o ? (lenis && lenis.stop(), mTl.play()) : (lenis && lenis.start(), mTl.reverse()); };
+openBtn.addEventListener("click", () => toggle(true));
+document.querySelector("[data-close]").addEventListener("click", () => toggle(false));
+document.querySelectorAll("[data-ml]").forEach(a => a.addEventListener("click", e => {
+  e.preventDefault(); const h = a.getAttribute("href");
+  if (mnav.getAttribute("aria-hidden") === "false") { toggle(false); setTimeout(() => goTo(h), 500); } else goTo(h);
+}));
+
+/* ---------- Comparadores plano / foto (input range accesible) ---------- */
+document.querySelectorAll(".cmp").forEach(c => c.querySelector("input").addEventListener("input", e => c.style.setProperty("--x", e.target.value + "%")));
+
+/* ---------- Preloader: anillos de crecimiento ---------- */
+function preloader(done) {
+  const pre = document.querySelector(".pre");
+  if (RM) { pre.remove(); return done(); }
+  const svg = document.getElementById("rings"), NS = "http://www.w3.org/2000/svg", yr = document.getElementById("yr");
+  const rings = [];
+  for (let i = 1; i <= 26; i++) {
+    const c = document.createElementNS(NS, "circle");
+    // anillos levemente irregulares, como un tronco real
+    c.setAttribute("r", i * 3.6 + Math.random() * 1.4); c.setAttribute("cx", Math.random() * 2 - 1); c.setAttribute("cy", Math.random() * 2 - 1);
+    if (i % 4 === 0) c.style.strokeWidth = 3;
+    svg.appendChild(c); rings.push(c);
+  }
+  const y = { v: 1 };
+  gsap.timeline({ onComplete: () => { pre.remove(); done(); } })
+    .fromTo(rings, { drawSVG: "50% 50%" }, { drawSVG: "0% 100%", duration: 0.5, stagger: 0.06, ease: "power2.out" })
+    .to(y, { v: 40, duration: 1.8, ease: "none", onUpdate: () => yr.textContent = Math.round(y.v) }, 0)
+    .to("#rings", { scale: 6, rotation: 25, duration: 1, ease: "expo.in" }, "+=0.15")
+    .to(pre, { autoAlpha: 0, duration: 0.4 }, "-=0.3");
+}
+
+function intro() {
+  if (RM) { gsap.set(".planks", { display: "none" }); return; }
+  // Las tablas del hero se levantan de a una (efecto persiana de madera)
+  gsap.timeline()
+    .to(".planks i", { scaleY: 0, transformOrigin: "50% 0%", duration: 0.9, ease: "power4.inOut", stagger: { each: 0.06, from: "end" } })
+    .set(".planks", { display: "none" })
+    .from(".hero h1 .w", { yPercent: 110, rotate: 4, duration: 1, stagger: 0.08, ease: "expo.out" }, 0.4)
+    .from(".hero-row > *, .hero .k", { y: 30, autoAlpha: 0, stagger: 0.08, duration: 0.8 }, 0.7);
+}
+
+function build() {
+  SplitText.create(".hero .split", { type: "words", wordsClass: "w", mask: "words" });
+  if (RM) { document.querySelectorAll("[data-count]").forEach(el => el.textContent = el.dataset.count); document.querySelector(".hdr").classList.add("solid"); gsap.set(".hdr-bg", { yPercent: 100 }); return; }
+
+  // Header con fondo al bajar
+  ScrollTrigger.create({ start: 80, end: "max", onToggle: s => { gsap.to(".hdr-bg", { yPercent: s.isActive ? 100 : 0, duration: 0.4 }); document.querySelector(".hdr").classList.toggle("solid", s.isActive); } });
+  gsap.to(".hero-img img", { scale: 1.15, yPercent: 8, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+  // Plano → estructura → techo → casa real
+  const stages = gsap.utils.toArray(".stage span");
+  gsap.set("#beams rect", { y: -700 });
+  gsap.set("#roof path", { y: -700, rotation: () => gsap.utils.random(-10, 10), transformOrigin: "50% 50%" });
+  gsap.timeline({ scrollTrigger: { trigger: ".build", start: "top top", end: "+=300%", pin: true, scrub: 1,
+      onUpdate: s => stages.forEach((st, i) => st.classList.toggle("on", s.progress >= i * 0.25)) } })
+    .fromTo(".bp", { drawSVG: "0%" }, { drawSVG: "100%", duration: 1.5, stagger: 0.12 })
+    .from(".dim", { autoAlpha: 0, duration: 0.3 }, ">-0.3")
+    .to("#beams rect", { y: 0, duration: 1, stagger: 0.18, ease: "viga" })
+    .to("#roof path", { y: 0, rotation: 0, duration: 1, stagger: 0.15, ease: "viga" })
+    // la foto se abre con la silueta de la casa y luego se expande a pantalla completa
+    .to(".build-photo", { clipPath: "polygon(20% 86%, 20% 43%, 50% 15%, 80% 43%, 80% 86%)", duration: 1, ease: "power2.inOut" })
+    .to(".build-photo", { clipPath: "polygon(0% 100%, 0% 0%, 50% 0%, 100% 0%, 100% 100%)", duration: 1, ease: "power3.inOut" })
+    .to(".build-cap, .stage", { color: "#fff", textShadow: "0 2px 18px rgba(0,0,0,.6)", duration: 0.5 }, "<");
+
+  // Maderas: entran como tablas que se apilan y se inclinan apenas
+  gsap.from(".sp", { y: 160, rotation: (i) => (i % 2 ? 6 : -6), autoAlpha: 0, stagger: 0.12, ease: "power3.out",
+    scrollTrigger: { trigger: ".w-grid", start: "top 85%", end: "top 35%", scrub: 1 } });
+  // Tilt magnético en cada muestra
+  document.querySelectorAll(".sp").forEach(sp => {
+    const rx = gsap.quickTo(sp, "rotationX", { duration: 0.5 }), ry = gsap.quickTo(sp, "rotationY", { duration: 0.5 });
+    gsap.set(sp, { transformPerspective: 700 });
+    sp.addEventListener("pointermove", e => { const r = sp.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - 0.5) * 16); rx(-((e.clientY - r.top) / r.height - 0.5) * 16); });
+    sp.addEventListener("pointerleave", () => { rx(0); ry(0); });
+  });
+
+  // Comparadores: el plano "barre" la foto al entrar (demuestra la interacción)
+  document.querySelectorAll(".cmp").forEach(c => {
+    const st = { x: 100 };
+    gsap.to(st, { x: 50, duration: 1.6, ease: "power3.inOut", scrollTrigger: { trigger: c, start: "top 70%", once: true },
+      onUpdate: () => { c.style.setProperty("--x", st.x + "%"); c.querySelector("input").value = st.x; } });
+  });
+
+  // Cifras
+  gsap.utils.toArray("[data-count]").forEach(el => { const o = { v: 0 };
+    gsap.to(o, { v: +el.dataset.count, duration: 2, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 85%", once: true }, onUpdate: () => el.textContent = Math.round(o.v) }); });
+  gsap.from(".cta h2", { yPercent: 25, ease: "power3.out", scrollTrigger: { trigger: ".cta", start: "top 85%", end: "top 30%", scrub: 1 } });
+}
+
+let booted = false;
+document.fonts.ready.then(() => {
+  if (booted) return; booted = true;
+  build();
+  lenis && lenis.stop();
+  preloader(() => { lenis && lenis.start(); intro(); ScrollTrigger.refresh(); });
+});
+</script>
+<style>
+#jmc-pill{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));translate:-50% 0;z-index:9999;display:flex;gap:10px;align-items:center;white-space:nowrap;background:#16110e;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:7px 7px 7px 14px;font:600 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:0;text-transform:none;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:opacity .3s}
+#jmc-pill b{background:#FF6B2C;color:#fff;border-radius:99px;padding:7px 11px;font-weight:700}
+#jmc-pill:hover b{background:#ff8a55}
+#jmc-pill i{font-style:normal}
+@media(max-width:520px){#jmc-pill i{display:none}}
+@media print{#jmc-pill{display:none}}
+</style>
+<a id="jmc-pill" href="../../index.html#sitios" aria-label="Sitio de muestra con negocio ficticio, hecho por Mariano Campuzano. Volver al portfolio y pedir uno así."><span><i>Sitio de muestra · </i>negocio ficticio<i> · por Mariano Campuzano</i></span><b>Quiero uno así →</b></a>
+</body>
+</html>

@@ -65,3 +65,22 @@ MODOS DE PRUEBA
 
 LICENCIAS
   GSAP (gratis uso comercial), Lenis (MIT), canvas-confetti (ISC), base del portfolio bchiang7/v4 (MIT), fuentes SIL OFL. Ver DESIGN.md.
+
+
+SITIOS CINEMATOGRÁFICOS (portfolio/cinematicos/) — agregado 2026-11-11
+-----------------------------------------------------------------------
+- 11 HTML autónomos. Librerías en portfolio/cinematicos/libs/ (GSAP 3.15.1 y plugins,
+  Lenis, Locomotive Scroll, Motion) y tipografías en portfolio/cinematicos/fonts/.
+- Las FOTOS se cargan desde images.unsplash.com (no están en el repo). Si alguna deja
+  de verse, se cambia la URL dentro del HTML del sitio.
+- Cada sitio lleva <meta name="robots" content="noindex, follow"> y un cartel fijo
+  "negocio ficticio · Quiero uno así" que vuelve a la home (#sitios).
+- Los mails y WhatsApp ficticios de cada demo apuntan al WhatsApp de Mariano.
+- En NETLIFY/CLOUDFLARE estos sitios NO funcionan con el _headers actual: usan
+  scripts y estilos dentro del HTML y fotos externas, y la CSP ('self') los bloquea.
+  En GitHub Pages funcionan porque _headers no se aplica.
+- La sección de la home (#sitios) y el perfil (#perfil) están escritos a mano en
+  index.html; sus estilos están al final de assets/css/site.css (bloque v18) y sus
+  traducciones en assets/js/i18n.js (bloque "sitios web + perfil (v8)").
+- Los datos de #perfil salen del CV (portfolio/CV_Julio_Campuzano_ES.pdf): si cambia
+  el CV, actualizar también esa sección y el bloque Person del JSON-LD.
