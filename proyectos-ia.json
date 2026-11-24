@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "obercell",
+    "titulo": "Obercell, tienda online completa",
+    "tag": "Proyecto para cliente",
+    "lead": "Tienda online de celulares y electrónica para un local de Oberá, Misiones. Catálogo con filtros, carrito con pago por Mercado Pago o transferencia, envíos a todo el país, asistente virtual con IA y un panel para que el dueño maneje todo desde el celular.",
+    "desafio": "Vender online sin pagar una plataforma mensual y que el dueño pudiera cargar productos, precios y ofertas solo, sin depender de un programador.",
+    "incluye": "Portada animada, catálogo por categorías y marcas, ficha por producto, carrito con cupones, pago con Mercado Pago, cotizador de envíos, asistente virtual, botón de arrepentimiento y páginas legales. Panel para cargar productos y fotos, importar listas de precios en PDF o Excel con margen de ganancia, organizar categorías y publicar al instante.",
+    "herramientas": "HTML, CSS, JavaScript, GSAP, Lenis, Cloudflare Pages, Functions y KV, Mercado Pago, Workers AI y pdf.js.",
+    "estado": "Publicado y en uso por el local.",
+    "url": "https://obercell.com.ar",
+    "texto_boton": "Ver la tienda en vivo",
+    "visibilidad": "private",
+    "repo_url": "https://github.com/juliomarianocampuzano-git/obercell-web",
+    "fecha": "2026-11-23",
+    "origen": "Claude Code",
+    "img_web": "assets/img/proyectos/obercell-web.jpg",
+    "img_movil": "assets/img/proyectos/obercell-movil.jpg"
+  }
+]

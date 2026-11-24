@@ -14,6 +14,14 @@ Todo lo que está en este repo se ve y se usa bien en el celular.
 
 ![Galería de los 20 sitios web demo](docs/img/galeria.jpg)
 
+<!--TUNEL-IA-README-->
+## 🆕 Últimos proyectos
+
+| Proyecto | En línea | Qué es |
+| --- | --- | --- |
+| Obercell, tienda online completa | [Ver](https://obercell.com.ar) | Tienda online de celulares y electrónica para un local de Oberá, Misiones. Catálogo con filtros, carrito con pago por Mercado Pago o transferencia, envíos a todo el país, asistente virtual con IA y un panel para que el dueño maneje todo desde el celular. |
+<!--/TUNEL-IA-README-->
+
 ## Qué vas a encontrar
 
 | | Link | Qué es |
