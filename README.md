@@ -19,6 +19,7 @@ Todo lo que está en este repo se ve y se usa bien en el celular.
 
 | Proyecto | En línea | Qué es |
 | --- | --- | --- |
+| AI CyberGuard Pro | [Ver](https://github.com/juliomarianocampuzano-git/ai-cyberguard-pro) | Un detector de actividad rara en servidores y equipos. Aprende cómo es un día normal en la red y avisa cuando algo se sale de lo común y se sostiene en el tiempo, sin llenarte de falsas alarmas. |
 | Obercell, tienda online completa | [Ver](https://obercell.com.ar) | Tienda online de celulares y electrónica para un local de Oberá, Misiones. Catálogo con filtros, carrito con pago por Mercado Pago o transferencia, envíos a todo el país, asistente virtual con IA y un panel para que el dueño maneje todo desde el celular. |
 <!--/TUNEL-IA-README-->
 

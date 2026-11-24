@@ -1,5 +1,23 @@
 [
   {
+    "slug": "ai-cyberguard-pro",
+    "titulo": "AI CyberGuard Pro",
+    "tag": "Proyecto propio",
+    "lead": "Un detector de actividad rara en servidores y equipos. Aprende cómo es un día normal en la red y avisa cuando algo se sale de lo común y se sostiene en el tiempo, sin llenarte de falsas alarmas.",
+    "desafio": "Las reglas fijas solas se quedan cortas y un modelo solo tira demasiados avisos. Necesitaba algo que combine las dos cosas y solo alerte cuando vale la pena mirar.",
+    "incluye": "Entrenamiento con un período limpio, evaluación contra incidentes etiquetados comparando modelo, reglas y combinado, revisión de lotes con alertas en JSONL, memoria entre archivos y huella de cada modelo para rastrear qué generó cada alerta.",
+    "herramientas": "Python, scikit-learn (Isolation Forest), pandas, NumPy y skops.",
+    "estado": "Funcionando en mi compu, con 22 pruebas automáticas. En la demo con datos sintéticos detectó 19 de 19 incidentes sin falsas alarmas.",
+    "url": "https://github.com/juliomarianocampuzano-git/ai-cyberguard-pro",
+    "texto_boton": "Ver en GitHub",
+    "visibilidad": "public",
+    "repo_url": "https://github.com/juliomarianocampuzano-git/ai-cyberguard-pro",
+    "fecha": "2026-11-23",
+    "origen": "Grok + Claude Code",
+    "img_web": "assets/img/proyectos/ai-cyberguard-pro-web.jpg",
+    "img_movil": "assets/img/proyectos/ai-cyberguard-pro-movil.jpg"
+  },
+  {
     "slug": "obercell",
     "titulo": "Obercell, tienda online completa",
     "tag": "Proyecto para cliente",
