@@ -13,7 +13,6 @@
     "visibilidad": "public",
     "repo_url": "https://github.com/juliomarianocampuzano-git/ai-cyberguard-pro",
     "fecha": "2026-11-23",
-    "origen": "Grok + Claude Code",
     "img_web": "assets/img/proyectos/ai-cyberguard-pro-web.jpg",
     "img_movil": "assets/img/proyectos/ai-cyberguard-pro-movil.jpg"
   },
@@ -31,7 +30,6 @@
     "visibilidad": "private",
     "repo_url": "https://github.com/juliomarianocampuzano-git/obercell-web",
     "fecha": "2026-11-23",
-    "origen": "Claude Code",
     "img_web": "assets/img/proyectos/obercell-web.jpg",
     "img_movil": "assets/img/proyectos/obercell-movil.jpg"
   }
