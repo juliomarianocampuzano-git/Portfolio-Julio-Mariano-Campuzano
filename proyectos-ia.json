@@ -1,5 +1,22 @@
 [
   {
+    "slug": "bot-amin",
+    "titulo": "Bot Amin, asistente de ventas por chat",
+    "tag": "Proyecto para cliente",
+    "lead": "Asistente de chat para la web de Electrónica Amin, una tienda de tecnología de Encarnación (Paraguay). Atiende al cliente al instante, le recomienda productos reales del catálogo con precio y cuotas, y lo pasa a WhatsApp con el pedido ya escrito.",
+    "desafio": "Los clientes escriben como hablan: con errores, abreviaturas y jerga, en español o en portugués («tenés la plei 5?», «una tele de 55», «algo barato para regalar»). La tienda necesitaba contestar en el momento y a cualquier hora, sin inventar precios ni stock y sin pagar una IA por cada mensaje.",
+    "incluye": "Entiende mensajes escritos a la ligera, con faltas de ortografía, en español y portugués. Busca entre más de 3.500 productos y muestra 2 o 3 opciones reales con precio, 12 cuotas sin interés y disponibilidad. Hace preguntas de seguimiento (presupuesto, pulgadas, marca) y afina la búsqueda. Compara productos y los agrega al carrito desde el chat. Responde horario (también de un día puntual), dirección, envíos, garantía, factura, monedas aceptadas y venta mayorista. Deriva a un vendedor por WhatsApp con el mensaje armado. Avatar animado con ojos que parpadean y siguen el cursor, globo de bienvenida y versión a pantalla completa en el celular. No aparece en el tótem del local.",
+    "herramientas": "JavaScript y React. Comprensión de lenguaje por reglas hecha a medida, sin IA: tolerancia a errores de tipeo, clave fonética y diccionario de jerga. Vitest, con 37 pruebas del bot. Cloudflare Pages. Hecho con Claude Code.",
+    "estado": "Publicado y en uso en www.amin.com.py desde noviembre de 2026. Próximo paso: sumar IA como capa extra, con el catálogo siempre decidiendo precios y stock.",
+    "url": "https://www.amin.com.py",
+    "texto_boton": "Probar el bot en la web",
+    "visibilidad": "private",
+    "repo_url": "https://github.com/juliomarianocampuzano-git/bot-amin",
+    "fecha": "2026-11-25",
+    "img_web": "assets/img/proyectos/bot-amin-web.jpg",
+    "img_movil": "assets/img/proyectos/bot-amin-movil.jpg"
+  },
+  {
     "slug": "ai-cyberguard-pro",
     "titulo": "AI CyberGuard Pro",
     "tag": "Proyecto propio",
