@@ -1,5 +1,22 @@
 [
   {
+    "slug": "m3dina-impresiones-web-con-panel-de-administracion",
+    "titulo": "M3DINA Impresiones · web con panel de administración",
+    "tag": "Proyecto para cliente",
+    "lead": "Sitio web para un emprendimiento de impresión 3D multicolor, con galería de trabajos, pedidos por WhatsApp y un panel para que la dueña cargue y edite sus productos sin tocar código.",
+    "desafio": "El emprendimiento mostraba sus trabajos solo por Instagram y los pedidos llegaban desordenados. Necesitaba una vitrina propia, con precios y fotos al día, que pudiera actualizar sola desde la compu o el celular.",
+    "incluye": "Galería por categorías con colecciones, visor de fotos y videos, simulador para armar un llavero con los colores de la impresora, pedidos por WhatsApp con el mensaje ya escrito y un panel con contraseña para subir muchas fotos a la vez, ponerles precio y descripción, ordenarlas y ocultarlas.",
+    "herramientas": "HTML, CSS, JavaScript, Netlify",
+    "estado": "Publicado en línea. El panel de administración está listo para que la dueña cargue sus productos.",
+    "url": "https://med3d.netlify.app",
+    "texto_boton": "Ver el sitio publicado",
+    "visibilidad": "private",
+    "repo_url": "https://github.com/juliomarianocampuzano-git/m3dina-impresiones-web",
+    "fecha": "2026-11-27",
+    "img_web": "assets/img/proyectos/m3dina-impresiones-web-con-panel-de-administracion-web.jpg",
+    "img_movil": "assets/img/proyectos/m3dina-impresiones-web-con-panel-de-administracion-movil.jpg"
+  },
+  {
     "slug": "bot-amin",
     "titulo": "Bot Amin, asistente de ventas por chat",
     "tag": "Proyecto para cliente",
